@@ -23,7 +23,7 @@ public class Test04술집계산기 {
 		System.out.println("소주 " + sojuCount + "병 가격은 " + sojuTotal + "입니다.");
 		System.out.println("맥주 " + beerCount + "병 가격은 " + beerTotal + "입니다.");
 		System.out.println("콜라" +colaCount + "병 가격은 " + colaTotal + "입니다.");
-		
+		System.out.println( );
 		System.out.println("총 금액은 " + totalPrice + "입니다.");
 	}
 
