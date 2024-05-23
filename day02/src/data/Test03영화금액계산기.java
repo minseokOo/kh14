@@ -4,16 +4,18 @@ public class Test03영화금액계산기 {
 
 	public static void main(String[] args) {
 		
+		//입력
 		int adult = 15000;
 		int student = 8000;
 		int adultCount = 2;
 		int studentCount = 4;
 		
+		//계산
 		int adultTotal = (adult * adultCount);
 		int studentTotal = (student * studentCount);
 		int total = (adultTotal + studentTotal);
 		
-
+		//출력
 		System.out.println("성인요금 : " + adult + "원");
 		System.out.println("학생요금 : " + student + "원");
 		System.out.println( );
