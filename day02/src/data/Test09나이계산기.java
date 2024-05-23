@@ -14,15 +14,15 @@ public class Test09나이계산기 {
 		//한국나이 계산
 		int kBirth = birth / 10000;
 		int kToday = today / 10000;
-		int krAge = kToday - kBirth; //한국 나이
+		int krAge = (kToday - kBirth) + 1; //한국 나이
 		
 		System.out.println("한국 나이는 " + krAge + "살 입니다.");
 		
 		//만 나이 계산
 		int yDay = today - birth;
-		int yBirth = yDay / 10000; //만나이
+		int yAge = yDay / 10000; //만나이
 		
-		System.out.println("만 나이는 " + yBirth + "살 입니다.");
+		System.out.println("만 나이는 " + yAge + "살 입니다.");
 				
 		
 	}
