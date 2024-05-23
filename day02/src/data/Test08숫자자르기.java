@@ -22,6 +22,8 @@ public class Test08숫자자르기 {
 		int number2 = number / 1000;
 		int number3 = number % 1000;
 		
+		System.out.println(number2 + "," + number3 + "원 입니다.");
+		
 		//(Q) birth의 연, 월, 일을 각각 출력
 		int birth = 20050315;
 		int year = birth / 10000;
