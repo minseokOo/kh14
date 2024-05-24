@@ -1,9 +1,10 @@
 package data03;
 
-public class Test06윤년판정계산기 {
+public class Test06윤년판정계산기2 {
 
 	public static void main(String[] args) {
 
+		
 //		- 년이 정확하게 365.24xx 일 입니다.
 //		- 4년마다 하루를 더 부여하고,
 //		- 100년마다 하루를 덜 부여하고,
@@ -13,8 +14,8 @@ public class Test06윤년판정계산기 {
 //		- 2024년은 윤년입니다. (400의 배수가 아니고 100의 배수는
 //		아니지만 4의 배수이기 때문.)
 		
-		//입력
-		int year = 2024; //입력 년도
+        
+		int year = 2040;
 		
 		//조건 1 : 400의 배수인가.
 		boolean y400 = year % 400 == 0;
@@ -43,9 +44,7 @@ public class Test06윤년판정계산기 {
 		
 		boolean answer = case1 || case2 || case3;
 		
-		System.out.println(year + "년도는 윤년인가요?");
 		System.out.println(answer);
-		
 		
 		
 	}
