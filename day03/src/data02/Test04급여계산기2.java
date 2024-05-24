@@ -1,20 +1,25 @@
 package data02;
 
-public class Test04급여계산기 {
+public class Test04급여계산기2 {
 
 	public static void main(String[] args) {
 
 		int money = 3000000; //급여
-		double gmyg = 0.045; //국민연금
-		double ggbh = 0.0709; //건강보험료
+		double gmyg = 4.5; //국민연금
+		double ggbh = 7.09; //건강보험료
+		double gmyg2 = gmyg / 100;
+		double ggbh2 = ggbh / 100;
 		
-		double gmygP = money * gmyg; //국민연금 납부액
-		double ggbhP = money * ggbh; //건강보험 납부액
+		double gmygP = money * gmyg2; //국민연금 납부액
+		double ggbhP = money * ggbh2; //건강보험 납부액
 		
-		double yybh = 0.1281; //요양보험
-		double gybh = 0.009; //고용보험
-		double yybhP = ggbhP * yybh; //요양보험 납부액
-		double gybhP = money * gybh; //고용보험 납부액
+		double yybh = 12.81; //요양보험
+		double gybh = 0.9; //고용보험
+		double yybh2 = yybh / 100;
+		double gybh2 = gybh / 100;
+		
+		double yybhP = ggbhP * yybh2; //요양보험 납부액
+		double gybhP = money * gybh2; //고용보험 납부액
 		
 		
 		
