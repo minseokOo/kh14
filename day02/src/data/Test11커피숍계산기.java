@@ -17,6 +17,7 @@ public class Test11커피숍계산기 {
 		int totalAme = 14; //아메리카노 개수
 		int totalMocca = 14; //카페모카 개수
 		
+		
 		int freeAme = totalAme / 6;
 		int pAme = totalAme - freeAme;
 		int freeMocca = totalMocca / 5;
