@@ -4,7 +4,7 @@ public class Practice02 {
 
 	public static void main(String[] args) {
 
-//		복리 계산기1
+//		복리 계산기
 
 		
 		//입력
