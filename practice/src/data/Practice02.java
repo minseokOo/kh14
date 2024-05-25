@@ -5,10 +5,7 @@ public class Practice02 {
 	public static void main(String[] args) {
 
 //		복리 계산기
-//		- 한달에 20프로씩 이자로 주는 금융 상품이 있습니다.
-//		- 오늘을 기준으로 시작하고 100원을 넣었습니다. 
-//		- 2024년 6월 26일에 얼마가 되는지 구하시오.
-		
+
 		
 		//입력
 		int amout = 1600000; //투자 금액
@@ -16,10 +13,12 @@ public class Practice02 {
 		int interestRate = 20; //이자율
 		double interestRate2 = 1+(double)interestRate * 0.01;
 		
+			//시작
 		int sYear = 2024; //년
 		int sMonth = 5; //월
 		int sDay = 25; //일
-		
+			
+			//종료
 		int eYear = 2024; //년
 		int eMonth = 7; //월
 		int eDay = 26; //일
@@ -48,7 +47,7 @@ public class Practice02 {
 		
 		
 		//결과
-		if (startDay > endDay) {
+		if (startDay > endDay) { //시작일이 끝나는 일보다 클때
 			double finalMoney = amout * finalRate2;
 			int finalMoney2 = (int) finalMoney;
 			System.out.println("총 금액 : " + finalMoney2 + "원" );
