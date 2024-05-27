@@ -1,5 +1,6 @@
-package data4;
+package io;
 
+//자동 import 단축키 - ctrl+shift+O
 import java.util.Scanner;
 
 public class Test03평균계산기 {
