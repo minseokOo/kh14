@@ -28,7 +28,7 @@ public class Test04나이계산기 {
 		
 		System.out.println("만나이 : " + Age2);
 		
-		int krAge = todayYear - birthYear + 1;
+		int krAge = diffYear + 1;
 		
 		System.out.println("한국 나이 : " + krAge);
 		
