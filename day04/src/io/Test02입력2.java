@@ -18,7 +18,7 @@ public class Test02입력2 {
 		System.out.println("주문하실 짜장면 수량을 입력하세요");
 		int jjaCount = sc.nextInt();//사용자가 키보드로 입력하라.
 		//int - nextInt, double - nextDouble, float - nextFloat
-		
+		 
 		//처리
 		int total = jjaPrice * jjaCount;
 		
