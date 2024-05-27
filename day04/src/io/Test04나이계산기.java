@@ -23,10 +23,10 @@ public class Test04나이계산기 {
 		int diffMonth = monthToday - monthBirth;
 		
 		int difference = diffYear * 12 + diffMonth;
-		double Age = (double)difference / 12;
-		int Age2 = (int )Age;
+		int Age = difference / 12;
 		
-		System.out.println("만나이 : " + Age2);
+		
+		System.out.println("만나이 : " + Age);
 		
 		int krAge = diffYear + 1;
 		
