@@ -22,7 +22,7 @@ public class Test07비만판정기2 {
 			result = "저체중";}
 		else if (bmi < 23f) {
 			result = "정상";}
-			else if (bmi < 25f) {
+		else if (bmi < 25f) {
 			result = "과체중";}
 		else if (bmi < 30f) {
 			result = "경도비만";}
