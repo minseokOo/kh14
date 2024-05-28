@@ -33,10 +33,8 @@ public class Test03학점계산기 {
 		default : 
 			System.out.println("F 학점");
 		break;
-		
-		
-		
 		}
+
 		
 	}
 }
