@@ -2,7 +2,7 @@ package condition;
 
 import java.util.Scanner;
 
-public class Test06여행사프로모션 {
+public class Test06여행사프로모션2 {
 
 	public static void main(String[] args) {
 		
@@ -27,16 +27,21 @@ public class Test06여행사프로모션 {
 		float wDiscount = ((float) (100 - winterDiscount) / 100);
 		
 		float price;
-		
+		System.out.print("할인율은 ");
 		if (month >= 12|| month<3) {
+			System.out.print(winterDiscount);
 			price = oneDay * wDiscount;}
 		else if (month >= 9) {
+			System.out.print(fallDiscount);
 			price = oneDay * fDiscount;}
 		else if (month >= 6) {
+			System.out.print(summerDiscount);
 			price = oneDay * sumDiscount;}
 		else {
+			System.out.print(springDiscount);
 			price = oneDay * spDiscount;
 		}
+		System.out.println("% 입니다.");
 		int price2 = (int)price;
 		System.out.println("할인가는 " + price2 + "원(일) 입니다.");
 		int total = price2 * guest * day;
