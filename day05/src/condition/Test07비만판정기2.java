@@ -2,7 +2,7 @@ package condition;
 
 import java.util.Scanner;
 
-public class Test07비만판정기 {
+public class Test07비만판정기2 {
 
 	public static void main(String[] args) {
 		
@@ -17,18 +17,19 @@ public class Test07비만판정기 {
 		float bmi = weight / (mHeight * mHeight);
 		System.out.println("BMI지수는 " + bmi + "입니다.");
 		
+		String result;
 		if (bmi < 18.5f) {
-			System.out.println("저체중 입니다.");}
+			result = "저체중";}
 		else if (bmi < 23f) {
-			System.out.println("정상 입니다.");}
-		else if (bmi < 25f) {
-			System.out.println("과체중 입니다.");}
+			result = "정상";}
+			else if (bmi < 25f) {
+			result = "과체중";}
 		else if (bmi < 30f) {
-			System.out.println("경도비만 입니다.");}
+			result = "경도비만";}
 		else {
-			System.out.println("중등도비만 입니다.");}
+			result = "중등도비만";}
 		
-		
+		System.out.println("결과는 " + result + " 입니다.");
 		
 	}
 }
