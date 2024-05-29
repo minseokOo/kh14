@@ -16,7 +16,7 @@ public class Test04구구단게임 {
 		for(int i = 0; i < 10; i++) {
 		
 		int gugu = r.nextInt(8) + 2;
-		int gugu2 = r.nextInt(8) + 2;
+		int gugu2 = r.nextInt(9) + 1;
 		int question = gugu * gugu2;
 		System.out.print(gugu +" * " + gugu2 + " = ");
 		int answer = sc.nextInt();
