@@ -38,18 +38,18 @@ public class Test05배스킨라빈스312 {
 			}
 			int com = r.nextInt(3) + 1;
 			count += com;
-			if (count == 29 && com > 2) {
+			System.out.println("Computer : " + com);
+			System.out.println("현재 숫자 : " + count);
+			if (count >= 29 && com >= 2) {
 				System.out.println("승리했습니다");
 				break;
-			} else if (count == 30 && com > 1) {
+			} else if (count >= 30 && com >= 1) {
 				System.out.println("승리했습니다");
 				break;
 			} else if (count == 31) {
 				System.out.println("승리했습니다");
 				break;
 			}
-			System.out.println("Computer : " + com);
-			System.out.println("현재 숫자 : " + count);
 
 		}
 
