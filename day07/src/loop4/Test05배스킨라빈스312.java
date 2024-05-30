@@ -13,10 +13,11 @@ public class Test05배스킨라빈스312 {
 
 		System.out.println("현재 숫자 : " + count);
 		while (true) {
+			
 			if (count < 31) {
 				System.out.print("숫자를 입력하세요 : ");
 				int a = sc.nextInt();
-				if (a > 3) {
+				if (a > 3) { //이상한 값 계산 
 					System.out.println("입력 할 수 있는 숫자 : 1, 2, 3");
 					continue;
 				} else if (a <= 0) {
@@ -29,12 +30,13 @@ public class Test05배스킨라빈스312 {
 				} else if (count == 30 && a > 1) {
 					System.out.println("입력 할 수 있는 숫자 : 1");
 					continue;
-				}
+				} //이상한 값 계산
 				count += a;
 				System.out.println("현재 숫자 : " + count);
-			} else if (count == 31) {
-				System.out.println("패배하셨습니다");
-				break;
+				if(count >= 31) {
+					System.out.println("패배했습니다");
+					break;
+				}
 			}
 			int com = r.nextInt(3) + 1;
 			count += com;
