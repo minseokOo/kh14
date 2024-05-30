@@ -16,17 +16,16 @@ public class Test04업다운게임 {
 		while (true) {
 			System.out.print("숫자 입력 : ");
 			int answer = sc.nextInt();
+			count++;
+			
 			if (question > answer) {
 				System.out.println("업!");
-				count++;
 			}
 			if (question < answer) {
 				System.out.println("다운!");
-				count++;
 			}
 			if (question == answer) {
 				System.out.println("정답");
-				count++;
 				break;
 			}
 			
