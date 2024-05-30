@@ -13,15 +13,15 @@ public class Test03합계평균 {
 		while (true) {
 			System.out.print("숫자 입력 : ");
 			int a = sc.nextInt();
-			total += a;
-			count++;
 
 			if (a == 0) {
 				break;
 			}
-
+				total += a;
+				count++;
+				
 		}
-		float average = (float) total / (count - 1);
+		float average = (float) total / (count);
 		System.out.println("여태까지 입력한 숫자의 합계 : " + total);
 		System.out.println("여태까지 입력한 숫자의 평균 : " + average);
 	}
