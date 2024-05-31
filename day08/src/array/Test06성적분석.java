@@ -1,12 +1,8 @@
 package array;
 
-import java.util.Scanner;
-
 public class Test06성적분석 {
 
 	public static void main(String[] args) {
-
-		Scanner sc = new Scanner(System.in);
 
 		int[] score = new int[] { 70, 85, 82, 96, 77, 64, 48, 55, 90, 82 };
 		int nScore = 80;
@@ -15,8 +11,12 @@ public class Test06성적분석 {
 
 		System.out.println("모든 학생의 점수 : ");
 		for (int i = 0; i < score.length; i++) {
-			System.out.println(score[i] + "점");
+			System.out.print(score[i] + "점");
+			if (i < score.length - 1) {
+				System.out.print(", ");
+			}
 		}
+		System.out.println();
 		System.out.println("재평가 대상자 점수 : ");
 		for (int i = 0; i < score.length; i++) {
 			if (score[i] < 60) {
@@ -42,5 +42,7 @@ public class Test06성적분석 {
 		System.out.println("평균 : " + average + "점");
 		System.out.println("전학생의 점수 : " + nScore + "점");
 		System.out.println("전학생의 등수는 " + count + "등 입니다.");
+		
+		
 	}
 }
