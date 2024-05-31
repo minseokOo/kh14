@@ -51,6 +51,10 @@ public class Test07구구단게임3 {
 				combo = 0;
 				System.out.println("틀렸습니다! 현재 점수 : " + score);
 				System.out.println("남은 목숨 : " + life);
+				if (life == 0) {
+					System.out.println("GAME OVER");
+					break;
+				}
 			}
 			
 			
@@ -63,10 +67,6 @@ public class Test07구구단게임3 {
 			}
 
 			
-			if (life == 0) {
-				System.out.println("GAME OVER");
-				break;
-			}
 		}
 		System.out.println("총 점수 : " + score + "점");
 
