@@ -11,12 +11,12 @@ public class Test07점심메뉴추천기 {
 		Random r = new Random();
 		
 		String foodCounts[] = new String[5];
-		int random = r.nextInt(foodCounts.length)+1;
+		int random = r.nextInt(foodCounts.length-1)+0;
 		
 		for (int i = 0; i < foodCounts.length; i++) {
 			System.out.print("입력 : ");
 			foodCounts[i] = sc.next();
 		}
-		System.out.println("오늘은 " + foodCounts[random] + "을(를) 드시죠!");
+		System.out.println("오늘은 " + foodCounts[0] + "을(를) 드시죠!");
 	}
 }
