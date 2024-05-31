@@ -12,6 +12,7 @@ public class Test07구구단게임3 {
 		int life = 3;
 		int combo = 0;
 
+		long start = System.currentTimeMillis();
 		while (true) {
 			int gugu = r.nextInt(18) + 2;
 			int guguOne = gugu % 10;
@@ -68,7 +69,12 @@ public class Test07구구단게임3 {
 
 			
 		}
+		long finish = System.currentTimeMillis();
+		
+		
 		System.out.println("총 점수 : " + score + "점");
-
+		double time = (double)(finish - start) / 1000;
+		System.out.println("걸린 시간 : " + time +"초");
+		
 	}
 }
