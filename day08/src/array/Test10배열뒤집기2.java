@@ -4,7 +4,7 @@ public class Test10배열뒤집기2 {
 
 	public static void main(String[] args) {
 
-		int[] data = new int[] { 1, 2, 3, 4, 5 };
+		int[] data = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
 		int backUp = 0;
 		int count = 0; // 양옆 count 번째 숫자 교환
 
