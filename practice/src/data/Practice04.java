@@ -13,7 +13,7 @@ public class Practice04 {
 //		- 2024년은 윤년입니다. (400의 배수가 아니고 100의 배수는
 //		아니지만 4의 배수이기 때문.)
 		
-		int now = 2000;
+		int now = 52;
 		boolean fourHundred = now % 400 == 0;
 		boolean one = now % 100 != 0;
 		boolean four = now % 4 == 0;
