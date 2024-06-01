@@ -10,9 +10,10 @@ public class Test01선택정렬 {
 		for(int i = 0; i < numbers.length; i++) {
 			if (numbers[first] < numbers[first+1]) {
 			}
-			System.out.println(numbers[first]);
+			
 			
 		}
+		System.out.println(numbers[first]);
 		
 	}
 
