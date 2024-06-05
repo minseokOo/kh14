@@ -7,5 +7,7 @@ public class Test01삼각형넓이구하기 {
 
 
 		System.out.println(Calculator.getArea(5, 7));
+		System.out.println(Calculator.rect(5, 7));
+		
 	}
 }
