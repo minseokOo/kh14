@@ -1,4 +1,4 @@
-package oop.method3;
+package oop.method03;
 
 public class cafe {
 	String menu;
