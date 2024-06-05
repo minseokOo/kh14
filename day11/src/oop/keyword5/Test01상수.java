@@ -1,6 +1,5 @@
 package oop.keyword5;
 
-import java.util.Random;
 
 public class Test01상수 {
 
