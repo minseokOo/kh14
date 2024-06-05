@@ -10,7 +10,7 @@ public class Test01게임캐릭터 {
 		
 		System.out.println("캐릭터 이름을 입력하세요. : ");
 		String name = sc.next();
-		System.out.println("캐릭터 직업을 입력하세요. : ");
+		System.out.println("직업을 입력하세요. : ");
 		String job = sc.next();
 		
 		Game g1 = new Game(name, job);
