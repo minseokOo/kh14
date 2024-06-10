@@ -3,7 +3,7 @@ package oop.inherit06;
 public class File {
 
 	protected String fileName;
-	protected long fileSize;
+	private long fileSize;
 	
 	public String getFileName() {
 		return fileName;
@@ -14,13 +14,20 @@ public class File {
 	public long getFileSize() {
 		return fileSize;
 	}
-	public void setFileSize(int fileSize) {
-		if (fileSize < 0) return;
+	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
+	}
+
+	public File(String filename) {
+		this(filename, 0L);
+	}
+	public File(String filename, long filesize) {
+		this.setFileName(filename);
+		this.setFileSize(filesize);
 	}
 	
 	public void execute() {
-		System.out.println("실행");
+		System.out.println(this.getFileName() + "실행");
 	}
 	public void information() {
 		System.out.println("정보 출력");
