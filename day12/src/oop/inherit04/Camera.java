@@ -3,7 +3,7 @@ package oop.inherit04;
 public class Camera {
 
 	private String name;
-	private String pixel;
+	private int pixel;
 	
 	public void setName(String name) {
 		this.name = name;
@@ -13,10 +13,11 @@ public class Camera {
 		return name;
 	}
 	
-	public void setPixel(String pixel) {
+	public void setPixel(int pixel) {
+		if(pixel < 0) return;
 		this.pixel = pixel;
 	}
-	public String getPixel() {
+	public int getPixel() {
 		return pixel;
 	}
 	

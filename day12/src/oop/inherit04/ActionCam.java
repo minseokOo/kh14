@@ -1,5 +1,6 @@
 package oop.inherit04;
 
+//클래스에 final 을 추가하면 이 클래스는 상속불가
 public class ActionCam extends Camera {
 
 	public void slowMotion() {
