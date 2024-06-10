@@ -2,8 +2,13 @@ package oop.inherit03;
 
 public class Browser {
 
-	public void save() {
-		System.out.println("주소 저장 실행");
+	private String url; 
+	
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getUrl() {
+		return url;
 	}
 	public void refresh() {
 		System.out.println("새로고침 실행");
