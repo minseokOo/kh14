@@ -1,4 +1,6 @@
 package oop.inner01;
+//일반 중첩 클래스
+
 //경찰
 public class Police {
 	private Gun gun;
