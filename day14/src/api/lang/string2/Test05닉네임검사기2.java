@@ -8,6 +8,10 @@ public static void main(String[] args) {
 	// - 특정 패턴을 배제하는 조건식
 	// - (?!글자) 형태로 작성하며 검사식과 별개로 작성
 	// - (.*?) 표현을 통해 "통과"의 의미를 표현 할 수 있음
+	
+//	긍정 탐색(positive lookahead)
+//	- 특정 패턴을 강제하는 조건식
+//	- (?=글자) 형태로 작성
 	Scanner sc = new Scanner(System.in);
 	System.out.print("사용 할 닉네임을 입력하세요 : ");
 	String name = sc.next();
