@@ -4,7 +4,10 @@ import java.util.Scanner;
 
 public class Test05닉네임검사기2 {
 public static void main(String[] args) {
-	
+	//부정 탐색 (negative lookahead)
+	// - 특정 패턴을 배제하는 조건식
+	// - (?!글자) 형태로 작성하며 검사식과 별개로 작성
+	// - (.*?) 표현을 통해 "통과"의 의미를 표현 할 수 있음
 	Scanner sc = new Scanner(System.in);
 	System.out.print("사용 할 닉네임을 입력하세요 : ");
 	String name = sc.next();
