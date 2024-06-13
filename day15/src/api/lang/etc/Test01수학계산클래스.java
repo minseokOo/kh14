@@ -47,7 +47,7 @@ public class Test01수학계산클래스 {
 		
 		if(r1>r2) {
 		System.out.println("큰 주사위 = " + r1);
-		System.out.println("작은 주사위 = " + r2);
+		System.out.println("작은 주사위 = " + r2); 
 		}
 		else {
 			System.out.println("큰 주사위 = " + r2);
