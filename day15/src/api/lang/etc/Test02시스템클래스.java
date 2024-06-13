@@ -33,7 +33,7 @@ public class Test02시스템클래스 {
 		
 		String dir = System.getProperty("user.dir");
 		System.out.println("실행 위치 : " + dir);
-		
+		 
 		//프로그램 종료
 		// - 종료 시 정수로 상태를 알려준다
 		// - 0은 정상종료이고, 나머지는 비정상종료로 간주
