@@ -8,10 +8,10 @@ public class Test03캘린더생성 {
 
 		int year = c.get(Calendar.YEAR);
 		//System.out.println(year);
-		int month = c.get(Calendar.MONTH) +1;
+		int month = c.get(Calendar.MONTH) +1; //month 는 0부터 11로 나타남
 		//System.out.println(month);
-		int day = c.get(Calendar.DAY_OF_MONTH);
-		int hour = c.get(Calendar.HOUR_OF_DAY);
+		int day = c.get(Calendar.DAY_OF_MONTH); // == Calendar.DATE
+		int hour = c.get(Calendar.HOUR_OF_DAY); // HOUR 는 12시간 방식
 		int minute = c.get(Calendar.MINUTE);
 		//System.out.println(minute);
 		int second = c.get(Calendar.SECOND);
