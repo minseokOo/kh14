@@ -10,8 +10,8 @@ public class Test02예약날짜선택기 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("예약 희망하시는 날짜를 YYYY-MM-DD 형태로 입력해주세요");
-		String input = sc.next();
-		//String input = "2024-07-01";
+		//String input = sc.next();
+		String input = "2024-07-01";
 		
 //		int year = Integer.valueOf(input.substring(0, 4));
 //		int month = Integer.valueOf(input.substring(5, 7));
@@ -19,7 +19,7 @@ public class Test02예약날짜선택기 {
 		//System.out.println(month);
 		//LocalDate inputDate = LocalDate.of(year, month, date);
 		LocalDate inputDate = LocalDate.parse(input);
-		//System.out.println(inputDate);
+		System.out.println(inputDate);
 		LocalDate now = LocalDate.now();
 		//System.out.println(now);
 //		int nowYear = now.getYear();
