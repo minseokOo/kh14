@@ -26,7 +26,7 @@ public class Test05길일추첨 {
 				System.out.println(fmt.format(d));
 				break;
 			}
-
+		
 		}
 	}
 }
