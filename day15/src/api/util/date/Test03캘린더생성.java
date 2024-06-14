@@ -8,7 +8,7 @@ public class Test03캘린더생성 {
 
 		int year = c.get(Calendar.YEAR);
 		//System.out.println(year);
-		int month = c.get(Calendar.MONTH);
+		int month = c.get(Calendar.MONTH) +1;
 		//System.out.println(month);
 		int day = c.get(Calendar.DAY_OF_MONTH);
 		int hour = c.get(Calendar.HOUR_OF_DAY);
