@@ -32,6 +32,5 @@ public class Test03투표하기 {
 			System.out.println(key + " : " + name.get(key) + "표");
 		}
 		
-		
 	}
 }
