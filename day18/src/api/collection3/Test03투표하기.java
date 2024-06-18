@@ -11,6 +11,7 @@ public class Test03투표하기 {
 		String input;
 		
 		while(true) {
+			System.out.print("투표할 이름 : ");
 			input = sc.nextLine();
 			
 			if(input.equals("종료")) {
@@ -28,7 +29,7 @@ public class Test03투표하기 {
 			}
 			}
 		for(String key : name.keySet()) {
-			System.out.println(key + ": " + name.get(key) + "표");
+			System.out.println(key + " : " + name.get(key) + "표");
 		}
 		
 		
