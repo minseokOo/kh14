@@ -18,6 +18,7 @@ public class Test02팔로우처리 {
 			if (id.equals(exit)) {
 				System.out.println("프로그램을 종료합니다");
 				sc.close();
+				System.out.println("팔로우 목록 : " + data);
 				break;
 			} else if (!data.contains(id)) {
 				data.add(id);
