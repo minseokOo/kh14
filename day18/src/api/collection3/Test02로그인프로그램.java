@@ -22,7 +22,6 @@ public class Test02로그인프로그램 {
 		sc.close();
 		
 		
-		
 		if(data.containsKey(account) && password.equals(data.containsValue(account))) {
 			System.out.println("**로그인 성공**");
 		}
