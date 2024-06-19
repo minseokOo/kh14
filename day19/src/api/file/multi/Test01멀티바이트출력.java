@@ -17,8 +17,8 @@ public class Test01멀티바이트출력 {
 		
 		File target = new File("sample", "multi.txt");
 		FileOutputStream stream = new FileOutputStream(target);// 2
-		BufferedOutputStream buffer = new BufferedOutputStream(stream);// 3
-//		BufferedOutputStream buffer = new BufferedOutputStream(stream, 10);// 3
+		//BufferedOutputStream buffer = new BufferedOutputStream(stream);// 3
+		BufferedOutputStream buffer = new BufferedOutputStream(stream, 10);// 3
 		DataOutputStream mixer = new DataOutputStream(buffer); // 4
 		
 		//[프로그램] -> [mixer] -> [buffer] -> [stream] -> [target] -> [실제파일]
@@ -31,7 +31,7 @@ public class Test01멀티바이트출력 {
 		mixer.writeDouble(100); // 100을 double에 맞게 출력 (8조각)
 		
 		//버퍼에 남은 내용을 모두 전송시켜야 한다
-		mixer.flush(); //전송
+		//mixer.flush(); //전송
 		mixer.close(); //전송 + 닫기
 		
 	}
