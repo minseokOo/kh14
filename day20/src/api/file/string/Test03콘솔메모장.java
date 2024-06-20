@@ -36,6 +36,14 @@ public class Test03콘솔메모장 {
 		FileInputStream in = new FileInputStream(temp);
 		FileOutputStream out = new FileOutputStream(target);
 		byte[] buffer = new byte[8192];
+		while(true) {
+			int size = in.read(buffer);
+			if(size == -1) break;
+			out.write(buffer, 0, size);
+		}
+		in.close();
+		out.close();
 		
+		temp.delete();
 	}
 }
