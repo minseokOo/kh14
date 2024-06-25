@@ -5,7 +5,7 @@ import java.util.Scanner;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-public class Test03입력받아등록 {
+public class Test03입력받아등록2 {
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
@@ -25,7 +25,8 @@ public class Test03입력받아등록 {
 		sc.close();
 		
 		String sql = "insert into poketmon(poketmon_no, poketmon_name, poketmon_type) values(poketmon_seq.nextval, ? , ?)";
-		jdbcTemplate.update(sql, name, type);
+		Object[] data = new Object[] {name, type};
+		jdbcTemplate.update(sql, data);
 		System.out.println("등록 완료!");
 	}
 }
