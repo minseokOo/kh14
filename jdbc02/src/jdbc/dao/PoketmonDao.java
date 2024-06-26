@@ -67,5 +67,15 @@ public class PoketmonDao {
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, mapper, data);
 	}
+	
+//	상세 메소드
+//	- 상세조회를 위한 Mapper는 따로 존재한다(ResultSetExtractor)
+//	- 따로 만들지 않고 목록/검색용 Mapper 를 활용한다.
+	public PoketmonDto selectOne(int poketmonNo) {
+		String sql = "select * from poketmon where poketmon_no = ?";
+		Object[] data = {poketmonNo};
+		List<PoketmonDto> list = jdbcTemplate.query(sql, mapper, data);
+		return list.isEmpty() ? null : list.get(0); //비어있으면 ? null : 맨 앞에 거;
+	}
 
 }
