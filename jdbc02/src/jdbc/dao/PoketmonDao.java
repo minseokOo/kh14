@@ -1,8 +1,11 @@
 package jdbc.dao;
 
+import java.util.List;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import jdbc.dto.PoketmonDto;
+import jdbc.mapper.poketmonMapper;
 import jdbc.util.JdbcHelper;
 
 // DAO
@@ -10,6 +13,10 @@ import jdbc.util.JdbcHelper;
 // - DB 처리 대행 클래스
 public class PoketmonDao {
 
+	private JdbcTemplate jdbcTemplate = JdbcHelper.getJdbcTemplate();
+	
+	private poketmonMapper mapper = new poketmonMapper();
+	
 	// 등록 메소드
 	//public void insert(String poketmonName, String poketmonType) {
 	public void insert(PoketmonDto dto) {
@@ -42,4 +49,10 @@ public class PoketmonDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
+//	조회 메소드
+	public List<PoketmonDto> selectList(){
+		String sql = "select * from poketmon order by poketmon_no asc";
+		//Object[] data = {};
+		return jdbcTemplate.query(sql, mapper);
+	}
 }
