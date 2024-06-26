@@ -50,4 +50,16 @@ public class EmpDao {
 			return jdbcTemplate.query(sql, mapper);
 		}
 	
+		public List<EmpDto> selectList(String column, String keyword){
+			String sql = "select * from emp "
+					+ "where instr("+column+", ?) > 0 "
+					+ "order by "+column+" asc, emp_no asc";
+//			String sql = "select * from emp "
+//					+ "where instr("+###+", ?) > 0 "
+//					+ "order by "+###+" asc, emp_no asc";
+//			sql = sql.replace("#1", column);
+			Object[] data = {keyword};
+			return jdbcTemplate.query(sql, mapper, data);
+		}
+		
 }

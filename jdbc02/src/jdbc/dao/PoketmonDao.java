@@ -55,4 +55,17 @@ public class PoketmonDao {
 		//Object[] data = {};
 		return jdbcTemplate.query(sql, mapper);
 	}
+	
+//	검색 메소드
+//	select * from piketmon 
+//	where instr(항목, 키워드) > 0
+//	order by 항목 asc, poketmon_no asc
+	public List<PoketmonDto> selectList(String column, String keyword){
+		String sql = "select * from poketmon "
+				+ "where instr("+column+", ?) > 0 "
+				+ "order by "+column+" asc, poketmon_no asc";
+		Object[] data = {keyword};
+		return jdbcTemplate.query(sql, mapper, data);
+	}
+
 }
