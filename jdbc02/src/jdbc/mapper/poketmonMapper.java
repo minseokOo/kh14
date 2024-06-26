@@ -1,9 +1,11 @@
-package jdbc.dto;
+package jdbc.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+
+import jdbc.dto.PoketmonDto;
 
 public class poketmonMapper implements RowMapper<PoketmonDto> {
 
