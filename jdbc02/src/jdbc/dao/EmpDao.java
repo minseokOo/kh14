@@ -1,11 +1,18 @@
 package jdbc.dao;
 
+import java.util.List;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import jdbc.dto.EmpDto;
+import jdbc.mapper.EmpMapper;
 import jdbc.util.JdbcHelper;
 
 public class EmpDao {
+	
+	private JdbcTemplate jdbcTemplate = JdbcHelper.getJdbcTemplate();
+	private EmpMapper mapper = new EmpMapper();
+	
 	public void insert(EmpDto dto) {
 		JdbcTemplate jdbcTemplate = JdbcHelper.getJdbcTemplate();
 		String sql = "insert into emp "
@@ -38,5 +45,9 @@ public class EmpDao {
 			return jdbcTemplate.update(sql, data) > 0;
 		
 	}
+		public List<EmpDto> selectList(){
+			String sql = "select * from emp order by emp_no asc";
+			return jdbcTemplate.query(sql, mapper);
+		}
 	
 }
