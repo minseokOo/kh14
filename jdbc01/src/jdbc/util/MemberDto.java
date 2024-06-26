@@ -40,11 +40,7 @@ public class MemberDto {
 		this.nickname = nickname;
 	}
 	public String getBirth() {
-		if (birth.equals(null)) {
-			return null;
-		}
-		else {return birth;
-		}
+			return birth;
 	}
 	public void setBirth(String birth) {
 		this.birth = birth;
