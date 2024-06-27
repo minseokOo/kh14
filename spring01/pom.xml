@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	
+<!--	Maven 모델 버전(변경될 일 아예 없음)-->
+	<modelVersion>4.0.0</modelVersion>
+	
+<!--	어느 기술을 기반으로 하는지에 대한 정보-->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.3.1</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	
+<!--	우리 프로젝트 정보(생성시 입력한 정보)-->
+	<groupId>com.kh</groupId>
+	<artifactId>spring01</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>spring01</name>
+	<description>Demo project for Spring Boot</description>
+	
+	<url/>
+
+<!--라이센스 정보-->
+	<licenses>
+		<license/>
+	</licenses>
+<!--개발자 정보-->
+	<developers>
+		<developer/>
+	</developers>
+<!--	버전 관리 시스템 정보(svn, git)-->
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	
+<!--	문서 내에서 사용할 변수 정의-->
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+<!--	프로젝트에서 사용할 라이브러리 명단-->
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+<!--프로젝트를 만들기 위한 기술 정의-->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
