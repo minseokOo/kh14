@@ -1,5 +1,7 @@
 package com.kh.spring03.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -42,5 +44,21 @@ public class PoketmonDao {
 		String sql = "delete poketmon where poketmon_no = ?";
 		Object[] data = {poketmonNo};
 		return jdbcTemplate.update(sql,data) > 0;
+	}
+	
+	// 조회
+	public List<PoketmonDto> selectList(){
+		String sql = "select * from poketmon order by poketmon_no asc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	
+	
+	//검색
+	public List<PoketmonDto> selectList(String column, String keyword){
+		String sql = "select * from poketmon "
+				+ "where instr("+column+", ?) > 0 "
+				+ "order by "+column+" poketmon_no asc";
+		Object[] data = {keyword};
+		return jdbcTemplate.query(sql, mapper, data);
 	}
 }

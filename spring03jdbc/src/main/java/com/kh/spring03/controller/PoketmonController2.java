@@ -1,5 +1,7 @@
 package com.kh.spring03.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +45,27 @@ public class PoketmonController2 {
 		else {
 			return "존재하지 않는 포켓몬스터 번호";
 		}
+	}
+	
+	//조회, 검색 페이지
+	@RequestMapping("/list")
+	public String list(
+			@RequestParam(required = false) String column,
+			@RequestParam(required = false) String keyword) {
+		//boolean isList = column == null || keyword == null;
+		boolean isSearch = column != null && keyword != null;
+		
+		//List<poketmonDto> list = 목록결과 or 검색결과;
+		List<PoketmonDto> list = isSearch ?
+				dao.selectList(column, keyword) : dao.selectList();
+		
+		//출력할 문자열 생성
+		StringBuffer buffer = new StringBuffer();
+		for(PoketmonDto dto : list) {
+			buffer.append(dto.toString());
+			buffer.append("<br>"); //줄바꿈
+		}
+		return buffer.toString();
 	}
 
 }

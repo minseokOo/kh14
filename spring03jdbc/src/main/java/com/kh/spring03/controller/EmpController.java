@@ -1,5 +1,7 @@
 package com.kh.spring03.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,5 +39,22 @@ public class EmpController {
 		else {
 			return "존재하지 않는 번호";
 		}
+	}
+	
+	@RequestMapping("/list")
+	public String list(
+			@RequestParam(required = false) String column,
+			@RequestParam(required = false) String keyword) {
+		boolean isSearch = column != null && keyword != null;
+		
+		List<EmpDto> list = isSearch ?
+				dao.selectList(column, keyword) : dao.selectList();
+		
+		StringBuffer buffer = new StringBuffer();
+		for(EmpDto dto : list) {
+			buffer.append(dto.toString());
+			buffer.append("<br>");
+		}
+		return buffer.toString();
 	}
 }
