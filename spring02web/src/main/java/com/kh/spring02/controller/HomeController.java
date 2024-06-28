@@ -104,5 +104,14 @@ public class HomeController {
 		return a + " 지하철 요금 : " + price + "원";
 	}
 	
-	
+	// (Q) 보여줄 내용이 많으면?
+	// (ex) /repeat 라는 Hello Spring 10번 출력
+	@RequestMapping("/repeat")
+	public String repeat(@RequestParam(required = false, defaultValue = "1") int count) {
+		StringBuffer buffer = new StringBuffer();
+		for(int i=0; i < count; i++) {
+		buffer.append("Hello Spring <br>");
+		}
+		return buffer.toString();
+	}
 }
