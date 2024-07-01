@@ -30,4 +30,40 @@
   <input name = "keyword">
   <button>검색</button>
   </form>
+  
+<!--   poketmon_no, poketmon_name, poketmon_type -->
+  <h2>포켓몬 등록</h2>
+  <form action= "/poketmon/insert">
+  <input name= "poketmon_name">
+  <input name= "poketmon_type">
+  <button>등록</button>
+  </form>
+  
+  <h2>사원 등록</h2>
+  <form action= "/emp/add">
+  <input name= "emp_name">
+  <select name= "emp_dept">
+  	<option value= "영업팀">영업팀</option>
+  	<option value= "기획팀">기획팀</option>
+  	<option value= "총무팀">총무팀</option>
+  	<option value= "개발팀">개발팀</option>
+  	<option value= "운영팀">운영팀</option>
+  </select>
+  
+  <input name= "emp_date">
+  
+  <select name= "emp_rank">
+  	<option value= "인턴">인턴</option>
+  	<option value= "사원">사원</option>
+  	<option value= "주임">주임</option>
+  	<option value= "대리">대리</option>
+  	<option value= "과장">과장</option>
+  	<option value= "부장">부장</option>
+  	<option value= "이사">이사</option>
+  	<option value= "사장">사장</option>
+  </select>
+  <input name= "emp_sal">
+  <button>등록</button>
+  </form>
+  
    
