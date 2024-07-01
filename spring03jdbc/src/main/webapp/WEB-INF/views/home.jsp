@@ -7,3 +7,27 @@
  <br><br>
  
    <a href= "./emp/list?column=emp_dept&keyword=%EA%B0%9C%EB%B0%9C">개발팀 사원 목록</a>
+
+   
+  <hr>
+  
+  <h2>포켓몬스터 검색</h2>
+  <form action= "/poketmon/list">
+  	<input name= "column">
+  	<input name= "keyword">
+  	<button>검색</button>
+  </form> 
+  
+  <hr>
+  
+  <h2>사원 검색</h2>
+  <form action= "/emp/list">
+  <select name= "column">
+  	<option value= "emp_name">사원명</option>
+  	<option value= "emp_dept">부서명</option>
+  	<option value= "emp_rank">직급</option>
+  </select>
+  <input name = "keyword">
+  <button>검색</button>
+  </form>
+   
