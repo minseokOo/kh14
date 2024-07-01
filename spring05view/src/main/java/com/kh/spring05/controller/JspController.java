@@ -26,4 +26,10 @@ public class JspController {
 	public String test03() {
 		return "WEB-INF/views/test03.jsp";
 	}
+	
+	@RequestMapping("/test04img")
+	public String test04() {
+		return "/WEB-INF/views/test04img.jsp";
+	}
+	
 }
