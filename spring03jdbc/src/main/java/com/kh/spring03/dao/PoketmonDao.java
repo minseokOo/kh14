@@ -46,19 +46,26 @@ public class PoketmonDao {
 		return jdbcTemplate.update(sql,data) > 0;
 	}
 	
-	// 조회
-	public List<PoketmonDto> selectList(){
-		String sql = "select * from poketmon order by poketmon_no asc";
-		return jdbcTemplate.query(sql, mapper);
-	}
-	
-	
-	//검색
-	public List<PoketmonDto> selectList(String column, String keyword){
-		String sql = "select * from poketmon "
-				+ "where instr("+column+", ?) > 0 "
-				+ "order by "+column+" poketmon_no asc";
-		Object[] data = {keyword};
-		return jdbcTemplate.query(sql, mapper, data);
-	}
+	//조회
+		public List<PoketmonDto> selectList() {
+			String sql = "select * from poketmon order by poketmon_no asc";
+			return jdbcTemplate.query(sql, mapper);
+		}
+		
+		//검색
+		public List<PoketmonDto> selectList(String column, String keyword) {
+			String sql = "select * from poketmon "
+							+ "where instr("+column+", ?) > 0 "
+							+ "order by "+column+" asc, poketmon_no asc";
+			Object[] data = {keyword};
+			return jdbcTemplate.query(sql, mapper, data);
+		}
+
+		//상세
+		public PoketmonDto selectOne(int poketmonNo) {
+			String sql = "select * from poketmon where poketmon_no = ?";
+			Object[] data = {poketmonNo};
+			List<PoketmonDto> list = jdbcTemplate.query(sql, mapper, data);
+			return list.isEmpty() ? null : list.get(0);
+		}
 }

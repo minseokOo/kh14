@@ -32,4 +32,5 @@ public class JspController {
 		return "/WEB-INF/views/test04img.jsp";
 	}
 	
+	
 }
