@@ -11,4 +11,10 @@ public class JspController {
 	public String hello() {
 		return "/WEB-INF/views/hello.jsp"; // 사용자가 받을 화면의 경로
 	}
+	
+	@RequestMapping("/test01")
+	public String test01() {
+		return "/WEB-INF/views/test01.jsp";
+	}
+	
 }
