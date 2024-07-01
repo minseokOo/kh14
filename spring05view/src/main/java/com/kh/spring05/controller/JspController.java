@@ -17,4 +17,13 @@ public class JspController {
 		return "/WEB-INF/views/test01.jsp";
 	}
 	
+	@RequestMapping("/test02")
+	public String test02() {
+		return "WEB-INF/views/test02.jsp";
+	}
+	
+	@RequestMapping("/test03")
+	public String test03() {
+		return "WEB-INF/views/test03.jsp";
+	}
 }
