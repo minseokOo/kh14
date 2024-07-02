@@ -37,4 +37,9 @@ public class JspController {
 		return "/WEB-INF/views/test05form.jsp";
 	}
 	
+	@RequestMapping("/test06table")
+	public String test06table() {
+		return "/WEB-INF/views/test06table.jsp";
+	}
+	
 }
