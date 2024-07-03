@@ -42,4 +42,9 @@ public class JspController {
 		return "/WEB-INF/views/test06table.jsp";
 	}
 	
+	@RequestMapping("/test07medalist")
+	public String test07medalist() {
+		return "/WEB-INF/views/test07medalist.jsp";
+	}
+	
 }
