@@ -38,15 +38,26 @@ public class EmpDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
-	public List<EmpDto> selectList(){
-		String sql = "select * from emp order by emp_no asc";
-		return jdbcTemplate.query(sql, mapper);
+	public List<EmpDto> selectList() {
+        String sql = "select * from emp order by emp_no asc";
+        return jdbcTemplate.query(sql, mapper);
+    }
+    public List<EmpDto> selectList(String column, String keyword) {
+        String sql = "select * from emp "
+                        + "where instr(#1, ?) > 0 "
+                        + "order by #1 asc, emp_no asc";
+        sql = sql.replace("#1", column);
+        Object[] data = {keyword};
+        return jdbcTemplate.query(sql, mapper, data);
+    }
+	//상세 메소드
+	public EmpDto selectOne(int empNo) {
+		String sql = "select * from emp where emp_no = ?";
+		Object[] data = {empNo};
+		List<EmpDto> list = jdbcTemplate.query(sql, mapper, data);
+		return list.isEmpty() ? null : list.get(0);
+//		EmpExtractor extractor = new EmpExtractor();
+//		return jdbcTemplate.query(sql, extractor, data);
 	}
-	public List<EmpDto> selectList(String column, String keyword){
-		String sql = "select * from emp "
-				+ "where instr("+column+", ?) > 0 "
-						+ "order by " + column + " asc, emp_no asc";
-		Object[] data = {keyword};
-		return jdbcTemplate.query(sql, mapper, data);
-	}
+	
 }
