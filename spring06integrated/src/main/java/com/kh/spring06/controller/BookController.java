@@ -3,15 +3,18 @@ package com.kh.spring06.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.spring06.dao.BookDao;
 import com.kh.spring06.dto.BookDto;
 
-@RestController
+@Controller
 @RequestMapping("/book")
 public class BookController {
 	
@@ -19,15 +22,26 @@ public class BookController {
 	private BookDao dao;
 	
 //	등록 - 파라미터에 있는 도서정보를 받아서 DAO에게 전달
-	@RequestMapping("/save")
+	@GetMapping("/save")
+	public String save() {
+		return "/WEB-INF/views/book/save.jsp";
+	}
+	
+	@PostMapping("/save")
 	public String save(@ModelAttribute BookDto dto) {
 		dao.insert(dto);
-		return "도서 등록 완료";
+		return "redirect:saveComplete";
+	}
+	
+	@RequestMapping("/saveComplete")
+	public String saveComplete() {
+		return "WEB-INF/views/book/save2.jsp";
 	}
 	
 //	목록 - 파라미터에 존재하는 검색데이터(column, keyword)를 받아 목록or검색
 	@RequestMapping("/list")
-	public String list(@RequestParam(required = false) String column,
+	public String list(Model model,
+			@RequestParam(required = false) String column,
 								@RequestParam(required = false) String keyword) {
 		boolean isSearch = column != null && keyword != null;
 		List<BookDto> list = isSearch ?
@@ -44,13 +58,17 @@ public class BookController {
 				buffer.append("<br>");
 			}
 		}
-		return buffer.toString();
+		model.addAttribute("list", list);
+		model.addAttribute("column", column);
+		model.addAttribute("keyword", keyword);
+		return "/WEB-INF/views/book/list.jsp";
 	}
 	
 	@RequestMapping("/detail")
-	public String detail(@RequestParam int bookId) {
+	public String detail(Model model,
+			@RequestParam int bookId) {
 		BookDto dto = dao.selectOne(bookId);
-
+		model.addAttribute("dto", dto);
 		if(dto == null) {
 			return "존재하지 않는 도서 번호";
 		}
@@ -64,29 +82,24 @@ public class BookController {
 		buffer.append("출판사 : " + dto.getBookPublisher() + "<br>");
 		buffer.append("페이지 : " + dto.getBookPageCount() + "<br>");
 		buffer.append("장르 : " + dto.getBookGenre() + "<br>");
-		return buffer.toString();
+		return "/WEB-INF/views/book/detail.jsp";
 	}
 	
 	@RequestMapping("/edit")
 	public String edit(@ModelAttribute BookDto dto) {
 		boolean result = dao.update(dto);
 		if(result) {
-			return "도서 정보 변경 완료";
+			return "/WEB-INF/views/book/edit.jsp";
 		}
 		else {
-			return "존재하지 않는 도서 번호";
+			return "/WEB-INF/views/book/noBookId.jsp";
 		}
 	}
 	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam int bookId) {
 		boolean result = dao.delete(bookId);
-		if(result) {
-			return "도서 정보 삭제 완료";
-		}
-		else {
-			return "존재하지 않는 도서 번호";
-		}
+		return "redirect:list";
 	}
 	
 }
