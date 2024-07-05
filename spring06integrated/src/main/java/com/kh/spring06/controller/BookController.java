@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.spring06.dao.BookDao;
 import com.kh.spring06.dto.BookDto;
+import com.kh.spring06.error.TargetNotFoundException;
 
 @Controller
 @RequestMapping("/book")
@@ -68,20 +69,11 @@ public class BookController {
 	public String detail(Model model,
 			@RequestParam int bookId) {
 		BookDto dto = dao.selectOne(bookId);
-		model.addAttribute("dto", dto);
 		if(dto == null) {
-			return "존재하지 않는 도서 번호";
+			throw new TargetNotFoundException();
 		}
+		model.addAttribute("dto", dto);
 		
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("도서번호 : " + dto.getBookId() + "<br>");
-		buffer.append("도서명 : " + dto.getBookTitle() + "<br>");
-		buffer.append("지은이 : " + dto.getBookAuthor() + "<br>");
-		buffer.append("출판일 : " + dto.getBookPublicationDate() + "<br>");
-		buffer.append("판매가 : " + dto.getBookPrice() + "<br>");
-		buffer.append("출판사 : " + dto.getBookPublisher() + "<br>");
-		buffer.append("페이지 : " + dto.getBookPageCount() + "<br>");
-		buffer.append("장르 : " + dto.getBookGenre() + "<br>");
 		return "/WEB-INF/views/book/detail.jsp";
 	}
 	
@@ -89,10 +81,10 @@ public class BookController {
 	public String edit(@ModelAttribute BookDto dto) {
 		boolean result = dao.update(dto);
 		if(result) {
-			return "/WEB-INF/views/book/edit.jsp";
+			return "/WEB-INF/views/book/noBookId.jsp";
 		}
 		else {
-			return "/WEB-INF/views/book/noBookId.jsp";
+			return "/WEB-INF/views/book/edit.jsp";
 		}
 	}
 	

@@ -43,3 +43,4 @@
     
     <h2><a href= "list">목록보기</a></h2>
     <h2><a href="delete?bookId=${dto.bookId}">삭제하기</a></h2>
+    <h2><a href= "edit">수정하기</a></h2>
