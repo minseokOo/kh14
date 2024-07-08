@@ -2,6 +2,7 @@ package com.kh.spring06.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,13 +74,25 @@ public class MemberController {
 		
 	}
 	
-	//로그아웃
+	//로그아웃(회원 전용 기능)
 	// - HttpSession에 로그인 시 저장한 값을 삭제하면 끝
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("createdUser");
 		//session.invalidate();//세션 만료(소멸) 명령 - 권장하지 않음
 		return "redirect:/";
+	}
+	
+	//마이페이지(로그인 회원 기능)
+	// - 현재 사용자의 정보를 HttpSession에서 얻어내야 구현할 수 있는 기능
+	// - 정보가 없는 상황(비회원)에 대한 처리는 여기서 하지 않는다(일괄처리)
+	// - 꺼낼 때 원래 형태로 다운캐스팅이 필요하다
+	@RequestMapping("/mypage")
+	public String mypage(HttpSession session, Model model) {
+		String createdUser = (String) session.getAttribute("createdUser");
+		MemberDto memberDto = memberDao.selectOne(createdUser);
+		model.addAttribute("memberDto", memberDto);
+		return "/WEB-INF/views/member/mypage.jsp";
 	}
 	
 	
