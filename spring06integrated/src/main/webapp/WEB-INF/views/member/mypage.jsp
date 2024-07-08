@@ -10,7 +10,7 @@
 <table border="1" width="400">
 	<tr>
 		<th width= "25">닉네임</th>
-		<td>${memberDto.memberNick}</td>
+		<td>${memberDto.memberNickname}</td>
 	</tr>
 	<tr>
 		<th>이메일</th>
@@ -59,7 +59,7 @@
 	
 </table>
 
-
+<h4><a href= "/pwChange">비밀번호 변경</a></h4>
 
 
 

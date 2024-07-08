@@ -39,6 +39,7 @@
 					<a href= "/book/list">도서정보</a>
 					<a href= "/member/mypage">내정보</a>
 					<a href= "#">게시판</a>
+					<a href= "/member/logout">로그아웃</a>
 				</c:when>
 				<c:otherwise>
 					<a href= "/">홈으로</a>
