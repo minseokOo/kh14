@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.spring06.dao.EmpDao;
 import com.kh.spring06.dto.EmpDto;
 
-
+ 
 @Controller
 @RequestMapping("/emp")
 public class EmpController {
