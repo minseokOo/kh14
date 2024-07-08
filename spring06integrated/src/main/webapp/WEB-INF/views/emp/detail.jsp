@@ -3,6 +3,7 @@
 <%@taglib prefix= "c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix= "fmt" uri= "http://java.sun.com/jsp/jstl/fmt" %>
 
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <h1>상세 사원 정보</h1>
 <c:choose>
 	<c:when test="${dto == null}">
@@ -49,3 +50,4 @@
 <h2><a href= "edit?empNo=${dto.empNo}">사원 수정하기</a></h2>
 <h2><a href= "delete?empNo=${dto.empNo}">사원 삭제하기</a></h2>
 </c:if>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

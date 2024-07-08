@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri= "http://java.sun.com/jsp/jstl/fmt" %>
-
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <h1>도서 상세 정보</h1>
 
     <table border= "1">
@@ -44,3 +44,5 @@
     <h2><a href= "list">목록보기</a></h2>
     <h2><a href="delete?bookId=${dto.bookId}">삭제하기</a></h2>
     <h2><a href= "edit">수정하기</a></h2>
+    
+    <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

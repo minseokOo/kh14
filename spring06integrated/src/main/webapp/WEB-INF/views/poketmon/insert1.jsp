@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
    <h2>포켓몬 입력기</h2>
 <!--    <a href="http://localhost:8080/poketmon/list"><button>포켓몬 리스트</button></a> -->
 <!--   <br> -->
@@ -14,3 +14,5 @@
    
    <button>등록</button>
    </form>
+   
+   <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
