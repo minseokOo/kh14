@@ -82,4 +82,16 @@ public class MemberDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
+	public List<MemberDto> selectList() {
+        String sql = "select * from member order by member_id asc";
+        return jdbcTemplate.query(sql, memberMapper);
+    }
+	public List<MemberDto> selectList(String column, String keyword) {
+	    String sql = "select * from member " +
+	                 "where instr(" + column + ", ?) > 0 " +
+	                 "order by " + column + " asc, member_id asc";
+	    Object[] data = {keyword};
+	    return jdbcTemplate.query(sql, memberMapper, data);
+	}
+	
 }

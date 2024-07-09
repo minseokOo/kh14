@@ -11,4 +11,5 @@ public class AdminController {
 	public String home() {
 		return "/WEB-INF/views/admin/home.jsp";
 	}
+	
 }

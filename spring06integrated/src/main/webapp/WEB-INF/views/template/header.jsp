@@ -20,7 +20,7 @@
 		<!-- 정보 확인용 공간 -->
 		<div>
 			session id = ${pageContext.session.id} , 
-			createdUser = ${sessionScope.createUser} ,
+			createdUser = ${sessionScope.createdUser} ,
 			createdLevel = ${sessionScope.createdLevel}
 		</div>
 		

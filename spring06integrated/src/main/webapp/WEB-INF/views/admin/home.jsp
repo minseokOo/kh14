@@ -5,7 +5,7 @@
     <h1>관리자 페이지</h1>
     
     
-    <h2><a href= "#">회원검색</a></h2>
+    <h2><a href= "/admin/member/list">회원검색</a></h2>
     <h2><a href= "#">포켓몬현황</a></h2>
     
     
