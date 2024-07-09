@@ -13,10 +13,6 @@
 		<td>${memberDto.memberNickname}</td>
 	</tr>
 	<tr>
-		<th>이메일</th>
-		<td>${memberDto.memberEmail}</td>
-	</tr>
-	<tr>
 		<th>생년월일</th>
 		<td>${memberDto.memberBirth}</td>
 	</tr>
@@ -59,7 +55,9 @@
 	
 </table>
 
-<h4><a href= "/pwChange">비밀번호 변경</a></h4>
+<!-- 각종 메뉴를 배치 -->
+<h4><a href= "change">개인정보 수정</a></h4>
+<h4><a href= "password">비밀번호 변경</a></h4>
 
 
 

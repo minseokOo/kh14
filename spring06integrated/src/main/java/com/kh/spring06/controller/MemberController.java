@@ -69,6 +69,7 @@ public class MemberController {
 		//3
 		//session.setAttribute("이름", 값);
 		session.setAttribute("createdUser", memberId);
+		memberDao.updateMemberLogin(memberId);
 		return "redirect:/";//홈으로 이동
 	}
 	
@@ -91,6 +92,61 @@ public class MemberController {
 		MemberDto memberDto = memberDao.selectOne(createdUser);
 		model.addAttribute("memberDto", memberDto);
 		return "/WEB-INF/views/member/mypage.jsp";
+	}
+	
+	//비밀번호 변경
+	
+	@GetMapping("/password")
+	public String password() {
+		return "/WEB-INF/views/member/password.jsp";
+	}
+	@PostMapping("/password")
+	public String password(@RequestParam String currentPw,
+												@RequestParam String changePw,
+												HttpSession session) {
+		//아이디 추출
+		String memberId = (String)session.getAttribute("createdUser");
+		//현재 사용자의 정보 추출
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		//비밀번호 비교
+		boolean isValid = memberDto.getMemberPw().equals(currentPw);
+		if(!isValid) return "redirect:password?error";
+		//비밀번호 변경
+		memberDao.updateMemberPw(memberId, changePw);
+		//(+추가) 만약 비밀번호 변경 시 로그아웃 처리를 하려면
+		//session.removeAttribute("createdUser");
+		//완료 페이지로 추방
+		return "redirect:passwordFinish";
+		
+	}
+	@RequestMapping("/passwordFinish")
+	public String passwordFinish() {
+		return "/WEB-INF/views/member/passwordFinish.jsp";
+	}
+	
+	//개인정보 변경
+	@GetMapping("/change")
+	public String change(HttpSession session, Model model) {
+		//아이디 추출
+		String memberId = (String)session.getAttribute("createdUser");
+		//회원 정보 추출
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		//화면에 전달
+		model.addAttribute("memberDto", memberDto);
+		return "/WEB-INF/views/member/change.jsp";
+	}
+	@PostMapping("/change")
+	public String change(HttpSession session, @ModelAttribute MemberDto inputDto) {
+		//기존 정보를 조회 
+		String memberId = (String)session.getAttribute("createdUser");
+		MemberDto findDto = memberDao.selectOne(memberId);
+		//비밀번호 검사
+		boolean isValid = inputDto.getMemberPw().equals(findDto.getMemberPw());
+		if(!isValid) return "redirect:change?error";
+		//변경 처리
+		inputDto.setMemberId(memberId);//아이디 추가
+		memberDao.updateMember(inputDto);
+		return "redirect:mypage";
 	}
 	
 }

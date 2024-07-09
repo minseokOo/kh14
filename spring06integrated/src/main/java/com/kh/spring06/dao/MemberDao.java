@@ -1,6 +1,5 @@
 package com.kh.spring06.dao;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,16 +44,36 @@ public class MemberDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
-//	public MemberDto LoginTime(String memberLogin) {
-//		LocalDate now = LocalDate.now();
-//		String sql = "insert into member_id = ? (member_login) values("+ now +
-//				")";
-//		Object[] data = {
-//				memberDto.getL
-//		}
-//		
-//		return null;
-//		
-//	}
+	//회원 비밀번호 변경
+	public boolean updateMemberPw(String memberId, String memberPw) {
+		String sql = "update member "
+				+ "set member_pw = ?"
+				+ "where member_id = ?";
+		Object[] data = {memberPw, memberId};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	//최종 로그인 시각 갱신(U)
+	public boolean updateMemberLogin(String memberId) {
+		String sql = "update member set member_login=sysdate "
+				+ "where member_id = ?";
+		Object[] data = {memberId};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	//개인정보 변경 구현
+	public boolean updateMember(MemberDto memberDto) {
+		String sql = "update member "
+				+ "set member_nickname = ?, member_email = ?, member_birth = ?, "
+				+ "member_contact = ?, member_post = ?, "
+				+ "member_address1 = ?, member_address2 = ? "
+				+ "where member_id = ?";
+		Object[] data = {memberDto.getMemberNickname(), memberDto.getMemberEmail(), memberDto.getMemberBirth(),
+				memberDto.getMemberContact(), memberDto.getMemberPost(),
+				memberDto.getMemberAddress1(), memberDto.getMemberAddress2(),
+				memberDto.getMemberId()};
+		return jdbcTemplate.update(sql, data) > 0;
+				
+	}
 	
 }
