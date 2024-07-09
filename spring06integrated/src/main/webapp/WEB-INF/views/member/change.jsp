@@ -18,7 +18,7 @@
 <button>변경하기</button>
 </form>
 
-<c:if test= "${param.error !=null}">
+<c:if test= "${param.error != null}">
 	<h3 style="color:red">비밀번호가 틀렸습니다.</h3>
 </c:if>
 

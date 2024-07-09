@@ -148,6 +148,36 @@ public class MemberController {
 		memberDao.updateMember(inputDto);
 		return "redirect:mypage";
 	}
+	@GetMapping("/exit")
+	public String exit(HttpSession session, Model model) {
+		String memberId = (String)session.getAttribute("createdUser");
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		model.addAttribute("memberDto", memberDto);
+		return "/WEB-INF/views/member/exit.jsp";
+	}
+	
+	@PostMapping("/exit")
+	public String exit(@ModelAttribute MemberDto inputDto, HttpSession session) {
+	String memberId = (String)session.getAttribute("createdUser");
+	MemberDto findDto = memberDao.selectOne(memberId);
+	boolean isValid = inputDto.getMemberPw().equals(findDto.getMemberPw());
+	if(!isValid) return "redirect:exit?error";
+	inputDto.setMemberId(memberId);
+	memberDao.deleteMember(inputDto);
+	session.removeAttribute("createdUser");
+	return "redirect:goodbye";
+	}
+	
+	@RequestMapping("/goodbye")
+	public String goodbye() {
+		return "/WEB-INF/views/member/goodbye.jsp";
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }
-

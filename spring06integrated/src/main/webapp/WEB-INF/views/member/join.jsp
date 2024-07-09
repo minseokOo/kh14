@@ -8,7 +8,7 @@
 <form action= "join" method= "post">
 	아이디* <input type= "text" name="memberId" required><br><br>
 	비밀번호* <input type="password" name= "memberPw" required><br><br>
-	닉네임* <input type= "text" name= "memberNick" required><br><br>
+	닉네임* <input type= "text" name= "memberNickname" required><br><br>
 	이메일* <input type= "email" name= "memberEmail" required><br><br>
 	생년월일 <input type= "date" name= "memberBirth"><br><br>
 	연락처 <input type= "tel" name= "memberContact"><br><br>

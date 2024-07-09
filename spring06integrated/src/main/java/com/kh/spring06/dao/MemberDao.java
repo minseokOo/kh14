@@ -75,5 +75,11 @@ public class MemberDao {
 		return jdbcTemplate.update(sql, data) > 0;
 				
 	}
+	//회원 탈퇴 구현
+	public boolean deleteMember(MemberDto memberDto) {
+		String sql = "delete member where member_id = ?";
+		Object[] data = {memberDto.getMemberId()};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
 	
 }
