@@ -20,7 +20,8 @@
 		<!-- 정보 확인용 공간 -->
 		<div>
 			session id = ${pageContext.session.id} , 
-			createUser = ${sessionScope.createUser}
+			createdUser = ${sessionScope.createUser} ,
+			createdLevel = ${sessionScope.createdLevel}
 		</div>
 		
 		<!-- 
@@ -40,7 +41,13 @@
 					<a href= "/member/mypage">내정보</a>
 					<a href= "#">게시판</a>
 					<a href= "/member/logout">로그아웃</a>
+					
+					<c:if test= "${sessionScope.createdLevel == '관리자' }">
+					<!-- 관리자 메뉴 -->
+					<a href= "/admin/home">[관리메뉴]</a>
+					</c:if>
 				</c:when>
+				
 				<c:otherwise>
 					<a href= "/">홈으로</a>
 					<a href= "/poketmon/list">포켓몬스터</a>

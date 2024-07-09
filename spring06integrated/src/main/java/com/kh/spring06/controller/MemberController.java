@@ -69,6 +69,7 @@ public class MemberController {
 		//3
 		//session.setAttribute("이름", 값);
 		session.setAttribute("createdUser", memberId);
+		session.setAttribute("createdLevel", memberDto.getMemberLevel());
 		memberDao.updateMemberLogin(memberId);
 		return "redirect:/";//홈으로 이동
 	}
@@ -78,6 +79,7 @@ public class MemberController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("createdUser");
+		session.removeAttribute("createdLevel");
 		//session.invalidate();//세션 만료(소멸) 명령 - 권장하지 않음
 		return "redirect:/";
 	}
@@ -165,6 +167,7 @@ public class MemberController {
 	inputDto.setMemberId(memberId);
 	memberDao.deleteMember(inputDto);
 	session.removeAttribute("createdUser");
+	session.removeAttribute("createdLevel");
 	return "redirect:goodbye";
 	}
 	
