@@ -2,6 +2,7 @@ package com.kh.spring06.interceptor;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,9 +19,9 @@ AOP는 OOP보다 상위 개념 (관점에 의한 간섭)
  - HandlerInterceptor
 2. 스프링에 등록
 3. 필요한 메소드를 재정의
- - preHandle - 요청 처리 시작 전
- - postHandle - 요청 처리 진행 중
- - afterCompletion - 요청 처리 진행 완료
+ - preHandle - 요청 처리 시작 전 (컨트롤러 실행 전)
+ - postHandle - 요청 처리 진행 중 (컨트롤러 실행 후 JSP 생성 전)
+ - afterCompletion - 요청 처리 진행 완료 (JSP 생성 후)
  4. 설정파일을 만들어서 특정 주소를 간섭하도록 코드를 작성
 */
 @Service
@@ -55,4 +56,24 @@ public class TestInterceptor implements HandlerInterceptor {
 //		return false; //차단
 	}
 
+	@Override
+	public void postHandle(
+			HttpServletRequest request, //요청 객체
+			HttpServletResponse response, //응답 객체
+			Object handler, //매핑정보
+			ModelAndView modelAndView //화면(View)과 모델의 정보
+			) throws Exception {
+			System.out.println(handler);
+			System.out.println(modelAndView);
+	}
+	
+	@Override
+	public void afterCompletion(HttpServletRequest request, 
+			HttpServletResponse response, 
+			Object handler, 
+			Exception ex
+			) throws Exception {
+		System.out.println("<afterCompletion>");
+		System.out.println("ex = " + ex);
+	}
 }
