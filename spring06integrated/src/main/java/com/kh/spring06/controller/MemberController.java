@@ -165,7 +165,7 @@ public class MemberController {
 	boolean isValid = inputDto.getMemberPw().equals(findDto.getMemberPw());
 	if(!isValid) return "redirect:exit?error";
 	inputDto.setMemberId(memberId);
-	memberDao.deleteMember(inputDto);
+	memberDao.delete(memberId);
 	session.removeAttribute("createdUser");
 	session.removeAttribute("createdLevel");
 	return "redirect:goodbye";

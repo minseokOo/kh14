@@ -73,19 +73,35 @@ public class MemberDao {
 				memberDto.getMemberAddress1(), memberDto.getMemberAddress2(),
 				memberDto.getMemberId()};
 		return jdbcTemplate.update(sql, data) > 0;
-				
+	}
+	//관리자 전용 정보변경 구현
+	public boolean updateMemberAdmin(MemberDto memberDto) {
+		String sql = "update member "
+				+ "set member_nickname = ?, member_email = ?, member_birth = ?, "
+				+ "member_level = ?, member_point = ?, "
+				+ "member_contact = ?, member_post = ?, "
+				+ "member_address1 = ?, member_address2 = ? "
+				+ "where member_id = ?";
+		Object[] data = {memberDto.getMemberNickname(), memberDto.getMemberEmail(), memberDto.getMemberBirth(), 
+				memberDto.getMemberLevel(), memberDto.getMemberPoint(),
+				memberDto.getMemberContact(), memberDto.getMemberPost(),
+				memberDto.getMemberAddress1(), memberDto.getMemberAddress2(),
+				memberDto.getMemberId()};
+		return jdbcTemplate.update(sql, data) > 0;
 	}
 	//회원 탈퇴 구현
-	public boolean deleteMember(MemberDto memberDto) {
+	public boolean delete(String memberId) {
 		String sql = "delete member where member_id = ?";
-		Object[] data = {memberDto.getMemberId()};
+		Object[] data = {memberId};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
+	//회원 목록
 	public List<MemberDto> selectList() {
         String sql = "select * from member order by member_id asc";
         return jdbcTemplate.query(sql, memberMapper);
     }
+	//회원 검색
 	public List<MemberDto> selectList(String column, String keyword) {
 	    String sql = "select * from member " +
 	                 "where instr(" + column + ", ?) > 0 " +
@@ -93,5 +109,4 @@ public class MemberDao {
 	    Object[] data = {keyword};
 	    return jdbcTemplate.query(sql, memberMapper, data);
 	}
-	
 }

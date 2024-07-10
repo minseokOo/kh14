@@ -27,7 +27,7 @@ public class EmpDao {
 	}
 	public boolean edit(EmpDto dto) {
 		String sql = "update emp "
-				+ "set emp_name = ?, emp_dept = ?, emp_date = ?, emp_rank = ?, emp_sal = ?"
+				+ "set emp_name = ?, emp_dept = ?, emp_date = ?, emp_rank = ?, emp_sal = ? "
 				+ "where emp_no = ?";
 		Object[] data = {dto.getEmpName(), dto.getEmpDept(), dto.getEmpDate(), dto.getEmpRank(), dto.getEmpSal(), dto.getEmpNo()};
 		return jdbcTemplate.update(sql, data) > 0;
