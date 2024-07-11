@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring06.dto.EmpDto;
 import com.kh.spring06.mapper.EmpMapper;
+import com.kh.spring06.mapper.StatusMapper;
+import com.kh.spring06.vo.StatusVO;
 
 @Repository
 public class EmpDao {
@@ -15,7 +17,9 @@ public class EmpDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
-	private EmpMapper mapper;
+	private EmpMapper empMapper;
+	@Autowired
+	private StatusMapper statusMapper;
 	
 	public void insert(EmpDto dto) {
 		String sql = "insert into emp("
@@ -40,7 +44,7 @@ public class EmpDao {
 	
 	public List<EmpDto> selectList() {
         String sql = "select * from emp order by emp_no asc";
-        return jdbcTemplate.query(sql, mapper);
+        return jdbcTemplate.query(sql, empMapper);
     }
     public List<EmpDto> selectList(String column, String keyword) {
         String sql = "select * from emp "
@@ -48,16 +52,25 @@ public class EmpDao {
                         + "order by #1 asc, emp_no asc";
         sql = sql.replace("#1", column);
         Object[] data = {keyword};
-        return jdbcTemplate.query(sql, mapper, data);
+        return jdbcTemplate.query(sql, empMapper, data);
     }
 	//상세 메소드
 	public EmpDto selectOne(int empNo) {
 		String sql = "select * from emp where emp_no = ?";
 		Object[] data = {empNo};
-		List<EmpDto> list = jdbcTemplate.query(sql, mapper, data);
+		List<EmpDto> list = jdbcTemplate.query(sql, empMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 //		EmpExtractor extractor = new EmpExtractor();
 //		return jdbcTemplate.query(sql, extractor, data);
 	}
-	
+	public List<StatusVO> statusByEmpDept(){
+		String sql = "select emp_dept title, count(*) cnt from emp group by emp_dept "
+				+ "order by cnt desc, title asc";
+		return jdbcTemplate.query(sql, statusMapper);
+	}
+	public List<StatusVO> statusByEmpRank(){
+		String sql = "select emp_rank title, count(*) cnt from emp group by emp_rank "
+				+ "order by cnt desc, title asc";
+		return jdbcTemplate.query(sql, statusMapper);
+	}
 }

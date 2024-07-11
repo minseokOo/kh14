@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring06.dto.MemberDto;
 import com.kh.spring06.mapper.MemberMapper;
+import com.kh.spring06.mapper.StatusMapper;
+import com.kh.spring06.vo.StatusVO;
 @Repository
 public class MemberDao {
 	@Autowired
@@ -16,6 +18,8 @@ public class MemberDao {
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	@Autowired
+	private StatusMapper statusMapper;
 	//필요한 데이터베이스 기능들을 메소드로 구현
 	
 	//회원 등록(C)
@@ -108,5 +112,10 @@ public class MemberDao {
 	                 "order by " + column + " asc, member_id asc";
 	    Object[] data = {keyword};
 	    return jdbcTemplate.query(sql, memberMapper, data);
+	}
+	public List<StatusVO> statusByMemberLevel(){
+		String sql = "select member_level title, count(*) cnt from member group by member_level "
+				+ "order by cnt desc, title asc";
+		return jdbcTemplate.query(sql, statusMapper);
 	}
 }

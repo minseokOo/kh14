@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring06.dto.PoketmonDto;
 import com.kh.spring06.mapper.PoketmonMapper;
+import com.kh.spring06.mapper.StatusMapper;
+import com.kh.spring06.vo.StatusVO;
 
 @Repository //저장관리도구를 등록하는 방법 (영속성 제어도구)
 public class PoketmonDao {
@@ -15,7 +17,9 @@ public class PoketmonDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
-	private PoketmonMapper mapper;
+	private PoketmonMapper poketmonMapper;
+	@Autowired
+	private StatusMapper statusMapper;
 
 	//입력
 	public void insert(PoketmonDto dto) {
@@ -49,7 +53,7 @@ public class PoketmonDao {
 	//조회
 		public List<PoketmonDto> selectList() {
 			String sql = "select * from poketmon order by poketmon_no asc";
-			return jdbcTemplate.query(sql, mapper);
+			return jdbcTemplate.query(sql, poketmonMapper);
 		}
 		
 		//검색
@@ -58,14 +62,24 @@ public class PoketmonDao {
 							+ "where instr("+column+", ?) > 0 "
 							+ "order by "+column+" asc, poketmon_no asc";
 			Object[] data = {keyword};
-			return jdbcTemplate.query(sql, mapper, data);
+			return jdbcTemplate.query(sql, poketmonMapper, data);
 		}
 
 		//상세
 		public PoketmonDto selectOne(int poketmonNo) {
 			String sql = "select * from poketmon where poketmon_no = ?";
 			Object[] data = {poketmonNo};
-			List<PoketmonDto> list = jdbcTemplate.query(sql, mapper, data);
+			List<PoketmonDto> list = jdbcTemplate.query(sql, poketmonMapper, data);
 			return list.isEmpty() ? null : list.get(0);
 		}
+		
+		//포켓몬 통계 현황 조회 기능
+		public List<StatusVO> status() {
+			String sql = "select poketmon_type title, count(*) cnt from poketmon "
+							+ "group by poketmon_type "
+							+ "order by cnt desc, poketmon_type asc";
+			return jdbcTemplate.query(sql, statusMapper);
+			
+		}
+		
 }
