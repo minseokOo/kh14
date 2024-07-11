@@ -5,7 +5,8 @@
     <h1>차단 해제</h1>
     <form action= "cancel" method= "post">
     	<input type= "hidden" name= "blockTarget" value= "${param.blockTarget}">
-    	<input type= "text" name= "blockMemo"  required>
+    	<textarea type= "text" name= "blockMemo"  required placeholder= "사유 입력" 
+    	 rows= "10" cols= "60"></textarea><br><br>
     	<button>해제</button>
     
     

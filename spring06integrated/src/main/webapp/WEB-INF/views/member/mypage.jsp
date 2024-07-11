@@ -60,8 +60,25 @@
 <h4><a href= "password">비밀번호 변경</a></h4>
 <h4><a href= "exit">회원 탈퇴</a></h4>
 
+<h2>차단 이력</h2>
 
-
+<table border= "1">
+	<thead>
+		<tr>
+		<th>차단 이력</th>
+		<th>차단/해제 이유</th>
+		<th>차단 일시</th>
+		</tr>
+	</thead>
+	<tbody>
+			<tr>
+			
+		<th>${blockDto.blockType}</th>
+		<th>${blockDto.blockMemo}</th>
+		<th>${blockDto.blockTime}</th>
+	</tr>
+	</tbody>
+	</table>
 
 
 

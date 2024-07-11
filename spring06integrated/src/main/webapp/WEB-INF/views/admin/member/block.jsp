@@ -6,7 +6,8 @@
 
 <form action= "block" method= "post">
 	<input type="hidden" name= "blockTarget" value= "${param.blockTarget}">
-	<input type="text" name= "blockMemo" required placeholder= "사유입력"><br><br>
+	<textarea type= "text" name= "blockMemo"  required placeholder= "사유 입력" 
+    	 rows= "10" cols= "60"></textarea><br><br>
 	<button>차단</button>
 
 </form>

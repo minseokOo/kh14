@@ -1,5 +1,7 @@
 package com.kh.spring06.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -34,6 +36,22 @@ public class BlockDao {
 				+ "values(block_seq.nextval, '해제', ?, ?)";
 		Object[] data = {blockDto.getBlockMemo(), blockDto.getBlockTarget()};
 		jdbcTemplate.update(sql, data);
+	}
+	
+	//차단 목록
+	public List<BlockDto> blockList(){
+		String sql = "select * from block order by block_target asc";
+		return jdbcTemplate.query(sql, blockMapper);
+	}
+	
+	//스페셜 기능
+	// - 주어진 아이디의 마지막 block 정보를 상세 조회하는 기능 (서브쿼리 사용)
+	public BlockDto selectLastOne(String blockTarget) {
+		String sql = "select * from block where block_no = ("
+				+ "select max(block_no) from block where block_target = ?)";
+		Object[] data = {blockTarget};
+		List<BlockDto> list = jdbcTemplate.query(sql, blockMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
 	
 }

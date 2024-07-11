@@ -47,7 +47,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 								"/member/join*", //가입페이지
 //								"/member/joinFinish", //가입 완료 페이지
 								"/member/login", //로그인 페이지
-								"/member/goodbye" //탈퇴완료 페이지
+								"/member/goodbye", //탈퇴완료 페이지
+								"/member/block"
 								);
 		//관리자 검사 인터셉터 설정
 		registry.addInterceptor(adminInterceptor).addPathPatterns(

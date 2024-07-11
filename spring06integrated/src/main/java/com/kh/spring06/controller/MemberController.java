@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.spring06.dao.BlockDao;
 import com.kh.spring06.dao.MemberDao;
+import com.kh.spring06.dto.BlockDto;
 import com.kh.spring06.dto.MemberDto;
 
 import jakarta.servlet.http.HttpSession;
@@ -20,7 +22,8 @@ public class MemberController {
 
 	@Autowired
 	private MemberDao memberDao;
-	
+	@Autowired
+	private BlockDao blockDao;
 	//회원가입
 	@GetMapping("/join")
 	public String join() {
@@ -56,7 +59,9 @@ public class MemberController {
 		// -> 없으면 나가! (실패)
 		//2. 1번에서 불러온 정보(MemberDto)와 비밀번호를 비교한다
 		// -> 안맞으면 나가! (실패)
-		//3. 1,2번에서 쫓겨나지 않았다면 성공으로 간주
+		//3. 1,2번에서 쫓겨나지 않았다면 차단 여부를 검사
+		// -> 차단된 상태면 로그인 불가 페이지로 추방
+		//4. 1, 2, 3번에서 쫓겨나지 않았다면 성공으로 간주
 		
 		//1
 		MemberDto memberDto = memberDao.selectOne(memberId);
@@ -65,8 +70,13 @@ public class MemberController {
 		//2
 		boolean isValid = memberPw.equals(memberDto.getMemberPw());
 		if(isValid == false) return "redirect:login?error";
-		
 		//3
+		//차단 확인
+		BlockDto blockDto = blockDao.selectLastOne(memberId);
+		boolean isBlock = blockDto != null && blockDto.getBlockType().equals("차단");
+		if(isBlock) return "redirect:block";
+				
+		//4
 		//session.setAttribute("이름", 값);
 		session.setAttribute("createdUser", memberId);
 		session.setAttribute("createdLevel", memberDto.getMemberLevel());
@@ -93,6 +103,7 @@ public class MemberController {
 		String createdUser = (String) session.getAttribute("createdUser");
 		MemberDto memberDto = memberDao.selectOne(createdUser);
 		model.addAttribute("memberDto", memberDto);
+//		BlockDto blockDto = blockDao.
 		return "/WEB-INF/views/member/mypage.jsp";
 	}
 	
@@ -176,6 +187,11 @@ public class MemberController {
 		return "/WEB-INF/views/member/goodbye.jsp";
 	}
 	
+	@RequestMapping("/block")
+	public String block() {
+		
+		return "/WEB-INF/views/member/block.jsp";
+	}
 	
 	
 	

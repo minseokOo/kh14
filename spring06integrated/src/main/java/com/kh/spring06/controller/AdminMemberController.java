@@ -99,10 +99,14 @@ public class AdminMemberController {
 	}
 	@PostMapping("/block")
 	public String block(@ModelAttribute BlockDto blockDto) {
+		BlockDto lastDto = blockDao.selectLastOne(blockDto.getBlockTarget());
+		if(lastDto == null || lastDto.getBlockType().equals("해제")) {
 		blockDao.insertBlock(blockDto);//차단 등록
+		}
 		return "redirect:list";//상대
 	}
 	
+	//해제 기능
 	@GetMapping("/cancel")
 	public String cancel(@RequestParam String blockTarget) {
 		MemberDto memberDto = memberDao.selectOne(blockTarget);
@@ -112,7 +116,10 @@ public class AdminMemberController {
 	}
 	@PostMapping("/cancel")
 	public String cancel(@ModelAttribute BlockDto blockDto) {
+		BlockDto lastDto = blockDao.selectLastOne(blockDto.getBlockTarget());
+		if(lastDto.getBlockType().equals("차단")) {
 		blockDao.cancel(blockDto);
+		}
 		return "redirect:list";
 	}
 }
