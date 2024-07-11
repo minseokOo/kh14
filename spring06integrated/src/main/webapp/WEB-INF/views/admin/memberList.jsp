@@ -57,7 +57,8 @@
 			<td>
 				<a href= "detail?memberId=${dto.memberId}">상세</a>
 				<a href= "edit?memberId=${dto.memberId}">수정</a>
-				<a href= "#">차단</a>
+				<a href= "block?blockTarget=${dto.memberId}">차단</a>
+				<a href= "cancel?blockTarget=${dto.memberId}">해제</a>
 				<a href= "delete?memberId=${dto.memberId}">삭제</a>
 			</td>
 		</tr>
