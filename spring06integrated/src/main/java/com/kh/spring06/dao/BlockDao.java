@@ -39,10 +39,14 @@ public class BlockDao {
 	}
 	
 	//차단 목록
-	public List<BlockDto> blockList(){
-		String sql = "select * from block order by block_target asc";
-		return jdbcTemplate.query(sql, blockMapper);
+	public List<BlockDto> blockList(String blockTarget){
+		String sql = "select * from block where block_target = ? order by block_no desc";
+		Object[] data = {blockTarget};
+		return jdbcTemplate.query(sql, blockMapper, data);
 	}
+	
+	//차단 상태 확인
+	
 	
 	//스페셜 기능
 	// - 주어진 아이디의 마지막 block 정보를 상세 조회하는 기능 (서브쿼리 사용)

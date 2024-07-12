@@ -38,7 +38,7 @@ public class AdminMemberController {
 		boolean isSearch = this.checkSearch(column, keyword); //다른 매핑은 못부름
 		List<MemberDto> list = isSearch? 
 				memberDao.selectList(column, keyword) : memberDao.selectList();
-		model.addAttribute("list", list);
+		model.addAttribute("list", memberDao.selectListWithBlock(column, keyword));
 		model.addAttribute("column", column);
 		model.addAttribute("keyword", keyword);
 		return "/WEB-INF/views/admin/memberList.jsp";

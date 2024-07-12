@@ -103,7 +103,7 @@ public class MemberController {
 		String createdUser = (String) session.getAttribute("createdUser");
 		MemberDto memberDto = memberDao.selectOne(createdUser);
 		model.addAttribute("memberDto", memberDto);
-//		BlockDto blockDto = blockDao.
+		model.addAttribute("blockList", blockDao.blockList(createdUser));
 		return "/WEB-INF/views/member/mypage.jsp";
 	}
 	

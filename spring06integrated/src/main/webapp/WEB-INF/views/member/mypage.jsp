@@ -9,33 +9,33 @@
 
 <table border="1" width="400">
 	<tr>
-		<th width= "25">닉네임</th>
+		<th height= "50">닉네임</th>
 		<td>${memberDto.memberNickname}</td>
 	</tr>
 	<tr>
-		<th>생년월일</th>
+		<th height= "50">생년월일</th>
 		<td>${memberDto.memberBirth}</td>
 	</tr>
 	<tr>
-		<th>연락처</th>
+		<th height= "50">연락처</th>
 		<td>${memberDto.memberContact}</td>
 	</tr>
 	<tr>
-		<th>이메일</th>
+		<th height= "50">이메일</th>
 		<td>${memberDto.memberEmail}</td>
 	</tr>
 	<tr>
-		<th>등급</th>
+		<th height= "50">등급</th>
 		<td>${memberDto.memberLevel}</td>
 	</tr>
 	<tr>
-		<th>포인트</th>
+		<th height= "50">포인트</th>
 		<td>
 		<fmt:formatNumber value= "${memberDto.memberPoint}" pattern= "#,##0"></fmt:formatNumber>
 		 p</td>
 	</tr>
 	<tr>
-		<th>주소</th>
+		<th height= "50">주소</th>
 		<td>
 		[${memberDto.memberPost}]
 		${memberDto.memberAddress1}
@@ -43,13 +43,13 @@
 		</td>
 	</tr>
 	<tr>
-		<th>가입일</th>
+		<th height= "50">가입일</th>
 		<td>
 		<fmt:formatDate value="${memberDto.memberJoin}"  pattern="y년-M월-d일 E H시 m분 s초"/>
 		 </td>
 	</tr>
 	<tr>
-		<th>최종로그인</th>
+		<th height= "50">최종로그인</th>
 		<td><fmt:formatDate value="${memberDto.memberLogin}"  pattern="y년-M월-d일 E H시 m분 s초"/> </td>
 	</tr>
 	
@@ -62,23 +62,34 @@
 
 <h2>차단 이력</h2>
 
-<table border= "1">
+<c:choose>
+	<c:when test= "${blockList.isEmpty()}">
+		<p>차단 이력이 존재하지 않습니다</p>
+	</c:when>
+
+<c:otherwise>
+<table border= "1" width= "700">
 	<thead>
 		<tr>
-		<th>차단 이력</th>
-		<th>차단/해제 이유</th>
-		<th>차단 일시</th>
+			<th>차단 이력</th>
+			<th>차단/해제 사유</th>
+			<th>차단 일시</th>
 		</tr>
 	</thead>
 	<tbody>
+		<c:forEach var= "blockDto" items= "${blockList}">
 			<tr>
-			
-		<th>${blockDto.blockType}</th>
-		<th>${blockDto.blockMemo}</th>
-		<th>${blockDto.blockTime}</th>
-	</tr>
+				<td>${blockDto.blockType}</td>
+				<td>${blockDto.blockMemo}</td>
+				<td>
+				<fmt:formatDate value="${blockDto.blockTime}"  pattern="y년-M월-d일 E H시 m분 s초"/>
+				</td>
+			</tr>
+		</c:forEach>
 	</tbody>
-	</table>
+</table>
+</c:otherwise>
+</c:choose>
 
 
 

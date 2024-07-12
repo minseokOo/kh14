@@ -7,8 +7,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring06.dto.MemberDto;
+import com.kh.spring06.mapper.MemberBlockMapper;
 import com.kh.spring06.mapper.MemberMapper;
 import com.kh.spring06.mapper.StatusMapper;
+import com.kh.spring06.vo.MemberBlockVO;
 import com.kh.spring06.vo.StatusVO;
 @Repository
 public class MemberDao {
@@ -20,6 +22,10 @@ public class MemberDao {
 	
 	@Autowired
 	private StatusMapper statusMapper;
+	
+	@Autowired
+	private MemberBlockMapper memberBlockMapper;
+	
 	//필요한 데이터베이스 기능들을 메소드로 구현
 	
 	//회원 등록(C)
@@ -118,4 +124,18 @@ public class MemberDao {
 				+ "order by cnt desc, title asc";
 		return jdbcTemplate.query(sql, statusMapper);
 	}
+	
+	//회원 목록에 차단을 합쳐서 조회
+	public List<MemberBlockVO> selectListWithBlock(String column, String keyword){
+		String sql="select "
+                + "M.*, B.block_no, B.block_time, B.block_memo,"
+                + "B.block_target, nvl(B.block_type, '해제') block_type "
+                + "from member M left outer join block_latest B "
+                + "on M.member_id=B.block_target "
+                + "where instr("+column+",?)>0 "
+                        + "order by "+column+" asc, member_id asc";
+		Object[] data = {keyword};
+		return jdbcTemplate.query(sql, memberBlockMapper, data);
+	}
+	
 }

@@ -39,7 +39,7 @@
 					<a href= "/emp/list">사원정보</a>	
 					<a href= "/book/list">도서정보</a>
 					<a href= "/member/mypage">내정보</a>
-					<a href= "#">게시판</a>
+					<a href= "/board/list">게시판</a>
 					<a href= "/member/logout">로그아웃</a>
 					
 					<c:if test= "${sessionScope.createdLevel == '관리자' }">
@@ -53,7 +53,7 @@
 					<a href= "/poketmon/list">포켓몬스터</a>
 					<a href= "/member/join">회원가입</a>
 					<a href= "/member/login">로그인</a>
-					<a href= "#">게시판</a>
+					<a href= "/board/list">게시판</a>
 				</c:otherwise>
 			
 			</c:choose>

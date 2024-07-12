@@ -12,24 +12,9 @@
     		<option value= "member_email">이메일</option>
     		<option value= "member_level">등급</option>
     	</select>
-<!--     </form> -->
-<%--     	<c:choose> --%>
-<!--     <form action= "list" method= "get"> -->
-<%--     		<c:when test= "${column == 'member_level'}"> --%>
-<!--     			<select name= "keyword"> -->
-<!--     				<option value= "일반회원">일반회원</option> -->
-<!--     				<option value= "우수회원">우수회원</option> -->
-<!--     				<option value= "관리자">관리자</option> -->
-<!--     			</select> -->
-<%--     		</c:when> --%>
-<%--     		<c:otherwise> --%>
     			<input type= "text" name= "keyword">
-<%--     		</c:otherwise> --%>
     	<button>검색</button>
     </form>
-<%--     	</c:choose> --%>
-    
-<%--     <h2>데이터 개수 : ${list.size()}</h2> --%>
     
     <c:if test= "${list.isEmpty()}">
     	<h3>검색 결과가 존재하지 않습니다</h3>
@@ -43,22 +28,30 @@
 		<th>이메일</th>
 		<th>등급</th>
 		<th>가입일</th>
+		<th>상태</th>
 		</tr>
 	</thead>
     <tbody>
-	<c:forEach var= "dto" items="${list}">
+	<c:forEach var= "memberBlockVO" items="${list}">
 		<tr>
 		
-			  <td>${dto.memberId}</td>
-			<td>${dto.memberNickname}</td>
-			<td>${dto.memberEmail}</td>
-			<td>${dto.memberLevel}</td>
-			<td>${dto.memberJoin}</td>
+			  <td>${memberBlockVO.memberId}</td>
+			<td>${memberBlockVO.memberNickname}</td>
+			<td>${memberBlockVO.memberEmail}</td>
+			<td>${memberBlockVO.memberLevel}</td>
+			<td>${memberBlockVO.memberJoin}</td>
+			<td>${memberBlockVO.blockType}</td>
 			<td>
 				<a href= "detail?memberId=${dto.memberId}">상세</a>
 				<a href= "edit?memberId=${dto.memberId}">수정</a>
-				<a href= "block?blockTarget=${dto.memberId}">차단</a>
-				<a href= "cancel?blockTarget=${dto.memberId}">해제</a>
+				<c:choose>
+					<c:when test= "${memberBlockVo.blockType == '해제'}">
+				<a href= "block?blockTarget=${memberBlockVO.memberId}">차단</a>
+					</c:when>
+					<c:otherwise>
+				<a href= "cancel?blockTarget=${memberBlockVO.memberId}">해제</a>
+				</c:otherwise>				
+				</c:choose>
 				<a href= "delete?memberId=${dto.memberId}">삭제</a>
 			</td>
 		</tr>
