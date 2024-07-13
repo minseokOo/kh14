@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,6 +20,7 @@ public class BoardController {
 
 	@Autowired
 	private BoardDao boardDao;
+	
 	
 	//글 목록
 	@RequestMapping("/list")
@@ -35,5 +39,26 @@ public class BoardController {
 	
 	
 	//글 작성
+	@GetMapping("/write")
+	public String write() {
+		return "/WEB-INF/views/board/write.jsp";
+	}
+	@PostMapping("/write")
+	public String write(@ModelAttribute BoardDto boardDto) {
+		boardDao.write(boardDto);
+		return "redirect:writeFinish";
+	}
+	@RequestMapping("/writeFinish")
+	public String writeFinish() {
+		return "/WEB-INF/views/board/writeFinish.jsp";
+	}
+	
+	//읽기
+	@RequestMapping("/read")
+	public String read(@RequestParam int boardNo, Model model) {
+		BoardDto boardDto = boardDao.selectOne(boardNo);
+		model.addAttribute("boardDto", boardDto);
+		return "/WEB-INF/views/board/read.jsp";
+	}
 	
 }

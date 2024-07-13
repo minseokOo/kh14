@@ -6,8 +6,8 @@
 <h1>글 목록</h1>
 
 <h2>데이터 개수 : ${list.size()}</h2>
-<table border= "1">
-	<thead>
+<table border= "1" >
+	<thead align= "center">
 		<tr>
 			<th>번호</th>
 			<th width= "400">제목</th>
@@ -17,11 +17,11 @@
 			<th>좋아요</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody align= "center">
 		<c:forEach var= "boardDto" items= "${list}">
 			<tr>
 				<td>${boardDto.boardNo}</td>
-				<td>${boardDto.boardTitle}</td>
+				<td><a href= "/board/read?boardNo=${boardDto.boardNo}">${boardDto.boardTitle}</a></td>
 				<td>${boardDto.boardWriter}</td>
 				<td>${boardDto.boardWtime}</td>
 				<td>${boardDto.boardViews}</td>
@@ -30,6 +30,6 @@
 		</c:forEach>
 	</tbody>
 </table>
-
+<a href= "/board/write">글쓰기</a>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

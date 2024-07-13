@@ -33,22 +33,25 @@ public class BoardDao {
 		    return jdbcTemplate.query(sql, boardMapper, data);
 		}
 		
-//		//상세 메소드
-//		public BoardDto selectOne(int BoardNo) {
-//			String sql = "select * from board where board_no = ?";
-//			Object[] data = {boardNo};
-//			List<BoardDto> list = jdbcTemplate.query(sql, boardMapper, data);
-//			return list.isEmpty() ? null : list.get(0);
-	
+		//상세 메소드
+		public BoardDto selectOne(int boardNo) {
+			String sql = "select * from board where board_no = ?";
+			Object[] data = {boardNo};
+			List<BoardDto> list = jdbcTemplate.query(sql, boardMapper, data);
+			return list.isEmpty() ? null : list.get(0);
+		}
 	
 	
 	//글 등록
-	public void upload(BoardDto boardDto) {
+	public void write(BoardDto boardDto) {
 		String sql = "insert into board (BOARD_NO, BOARD_TITLE, "
-							+ "BOARD_CONTENT, BOARD_WRITER) "
-							+ "values(board_seq.nextval, ?, ?, ?)";
+							+ "BOARD_CONTENT, BOARD_WRITER, board_wtime, board_utime, "
+							+ "board_views, board_likes, board_replies) "
+							+ "values(board_seq.nextval, ?, ?, ?, sysdate, sysdate, ?, ?, ?)";
 		Object[] data = {
-				boardDto.getBoardTitle(), boardDto.getBoardContent(), boardDto.getBoardWriter()
+				boardDto.getBoardTitle(), boardDto.getBoardContent(), boardDto.getBoardWriter(),
+				boardDto.getBoardViews(), 
+				boardDto.getBoardLikes(), boardDto.getBoardReplies()
 		};
 		jdbcTemplate.update(sql, data);
 	}
