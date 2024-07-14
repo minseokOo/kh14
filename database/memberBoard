@@ -1,0 +1,188 @@
+DROP TABLE MEMBER;
+CREATE table MEMBER(
+member_id varchar2(60) primary key,
+member_pw varchar2(16) not null,
+member_nickname varchar2(30) not null,
+member_birth date,
+member_contact char(11),
+member_email varchar2(60) not null,
+member_level varchar2(12) default '일반회원',
+member_point number default 0,
+member_post varchar2(15),
+member_address1 varchar2(300),
+member_address2 varchar2(300),
+member_join date,
+member_login date
+
+check regexp_like(member_id, ^[a-z][a-z0-9]{4,19}$),
+check regexp_like(member_pw, ^[A-Za-z0-9!@#$]{8,16}$),
+check regexp_like(member_pw, ^[A-Z][a-z][0-9][!@#$]$),
+check regexp_like(member_nickname, ^[가-힣0-9]{2,10}$),
+check (member_level in ('일반회원', '우수회원', '관리자')),
+check (member_point >=0),
+);
+
+INSERT INTO member(member_id, member_pw, member_nickname, 
+				member_birth, member_contact, member_email,
+				MEMBER_LEVEL, MEMBER_point, member_post,
+				member_address1, member_address2, member_join,
+				member_login)
+VALUES ('khacademy', '1Q2w3e4r!', '민석', to_date'1997-08-25',01012345678,
+		'khaca@gmail.com', '일반회원', 300, 22333, '서울 영등포구', 
+		'이레빌딩', sysdate, sysdate);
+		
+SELECT * FROM MEMBER;
+
+
+DROP TABLE MEMBER;
+CREATE TABLE MEMBER (
+    member_id varchar2(60) PRIMARY KEY,
+    member_pw varchar2(16) NOT NULL,
+    member_nickname varchar2(30) NOT NULL,
+    member_birth DATE,
+    member_contact char(11),
+    member_email varchar2(60) NOT NULL,
+    member_level varchar2(12) DEFAULT '일반회원',
+    member_point NUMBER DEFAULT 0,
+    member_post varchar2(15),
+    member_address1 varchar2(300),
+    member_address2 varchar2(300),
+    member_join DATE,
+    member_login DATE DEFAULT null,
+    CHECK (regexp_like(member_id, '^[a-z][a-z0-9]{4,19}$')),
+    CHECK (regexp_like(member_pw, '^[A-Za-z0-9!@#$]{8,16}$')),
+    --CHECK (regexp_like(member_pw, '^[A-Z][a-z][0-9][!@#$]$')),
+    CHECK (regexp_like(member_nickname, '^[가-힣0-9]{2,10}$')),
+    CHECK (member_level IN ('일반회원', '우수회원', '관리자')),
+    CHECK (member_point >= 0)
+);
+
+INSERT INTO member (
+    member_id, member_pw, member_nickname, 
+    member_birth, member_contact, member_email,
+    member_level, member_point, member_post,
+    member_address1, member_address2, member_join,
+    member_login
+) 
+
+VALUES (
+    'khacademy', '1Q2w3e4r!', '민석', TO_DATE('1997-08-25', 'YYYY-MM-DD'),
+    '01012345678', 'khaca@gmail.com', '일반회원', 300, '123456 22333', 
+    '서울 영등포구', '이레빌딩', SYSDATE, SYSDATE);
+
+SELECT * FROM MEMBER;
+
+
+
+-- 기존 테이블 삭제
+DROP TABLE MEMBER CASCADE CONSTRAINTS;
+
+-- 새로운 테이블 생성
+CREATE TABLE MEMBER (
+    member_id varchar2(60) PRIMARY KEY,
+    member_pw varchar2(16) NOT NULL,
+    member_nickname varchar2(30) NOT NULL,
+    member_birth DATE,
+    member_contact char(11),
+    member_email varchar2(60) NOT NULL,
+    member_level varchar2(12) DEFAULT '일반회원',
+    member_point NUMBER DEFAULT 0,
+    member_post varchar2(15),
+    member_address1 varchar2(300),
+    member_address2 varchar2(300),
+    member_join DATE,
+    member_login DATE,
+    --CHECK (regexp_like(member_id, '^[a-z][a-z0-9]{4,19}$')),
+    --CHECK (regexp_like(member_pw, '^[A-Za-z0-9!@#$]{8,16}$')),
+    --CHECK (regexp_like(member_pw, '^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$]).{8,16}$')),
+    --CHECK (regexp_like(member_nickname, '^[가-힣0-9]{2,10}$')),
+    --CHECK (member_level IN ('일반회원', '우수회원', '관리자')),
+    CHECK (member_point >= 0)
+);
+
+-- 데이터 삽입
+INSERT INTO member (
+    member_id, member_pw, member_nickname, 
+    member_birth, member_contact, member_email,
+    member_level, member_point, member_post,
+    member_address1, member_address2, member_join,
+    member_login
+) 
+VALUES (
+    'khacademy', '1Q2w3e4r!', '민석', TO_DATE('1997-08-25', 'YYYY-MM-DD'),
+    '01012345678', 'khaca@gmail.com', '일반회원', 300, '22333', 
+    '서울 영등포구', '이레빌딩', SYSDATE, SYSDATE
+);
+
+INSERT INTO member (
+    member_id, member_pw, member_nickname, 
+     member_email,
+    member_level
+) VALUES (
+    'admin1', 'Admin123!', '관리자', 'khaca@gmail.com', '관리자'
+);
+
+-- 테이블 데이터 조회
+COMMIT;
+SELECT * FROM MEMBER;
+select * from member where member_id = 'admin1';
+
+--차단목록 테이블
+create sequence block_seq;
+create table block(
+block_no number primary key,
+block_type char(6) not null check(block_type in ('차단', '해제')),
+block_memo varchar2(300) not null,
+block_time date default sysdate not null,
+block_target references member(member_id) on delete cascade
+);
+
+-- 최신 회원 차단 뷰
+SELECT * FROM block;
+
+create or replace view block_latest as
+select * from (
+    select block.*, rank() over(partition by block_target 
+                                    order by block_no desc) rnk from block
+) where rnk=1;
+
+
+-- 게시판 생성구문
+drop sequence board_seq;
+create sequence board_seq;
+
+drop table board;
+create table board (
+board_no number primary key,
+board_title varchar2(300 byte) not null,
+board_content varchar2(4000 byte) not null,
+board_writer references member(member_id) on delete set null,
+board_wtime date default sysdate not null,
+board_utime DATE DEFAULT null,
+board_views number default 0 not null,
+board_likes number default 0 not null,
+board_replies number default 0 not null,
+check(board_no > 0),
+check(board_views >= 0),
+check(board_likes >= 0),
+check(board_replies >= 0)
+);
+
+INSERT INTO board (board_no, board_title, board_content,
+board_writer) VALUES (board_seq.nextval, '제목', '내용', 'admin1');
+)
+
+INSERT INTO board (board_no, board_title, board_content,
+board_writer) VALUES (board_seq.nextval, '제목2', '내용', 'admin1');
+)
+
+INSERT INTO board (board_no, board_title, board_content,
+board_writer) VALUES (board_seq.nextval, '제목3', '내용', 'admin1');
+)
+
+insert into board (BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_WRITER, board_wtime, board_views, board_likes, board_replies) 
+values(board_seq.nextval, '제목4', '내용', 'asd123', sysdate, 0, 0, 0);
+
+SELECT * FROM board;
+
+COMMIT;
