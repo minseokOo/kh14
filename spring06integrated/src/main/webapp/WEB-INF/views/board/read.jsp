@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <table border= "1">
 	<thead align= "center">
@@ -32,8 +32,9 @@
 	</tfoot>
 </table>
 <h2><a href= "/board/list">목록으로</a></h2>
-<h2><a href= "#">수정하기</a></h2>
-
-
+	<c:if test= "${sessionScope.createdUser == boardDto.boardWriter}">
+		<h2><a href= "/board/update?boardNo=${boardDto.boardNo}">수정하기</a></h2>
+		<h2><a href= "/board/delete?boardNo=${boardDto.boardNo}">삭제하기</a></h2>
+	</c:if>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

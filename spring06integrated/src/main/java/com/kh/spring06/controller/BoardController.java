@@ -61,4 +61,23 @@ public class BoardController {
 		return "/WEB-INF/views/board/read.jsp";
 	}
 	
+	//수정
+	@GetMapping("/update")
+	public String update(Model model, @RequestParam int boardNo) {
+		BoardDto boardDto = boardDao.selectOne(boardNo);
+		model.addAttribute("boardDto", boardDto);
+		return "/WEB-INF/views/board/update.jsp";
+	}
+	
+	@PostMapping("/update")
+	public String update(@ModelAttribute BoardDto boardDto) {
+		boardDao.update(boardDto);
+		return "redirect:read?boardNo="+boardDto.getBoardNo();
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(@RequestParam int boardNo) {
+		boardDao.delete(boardNo);
+		return "redirect:list";
+	}
 }

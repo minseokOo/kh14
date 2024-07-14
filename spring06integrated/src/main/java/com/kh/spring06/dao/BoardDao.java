@@ -55,4 +55,24 @@ public class BoardDao {
 		};
 		jdbcTemplate.update(sql, data);
 	}
+	
+	//글 수정
+	public boolean update(BoardDto boardDto) {
+		String sql = "update board set "
+				+ "board_title=?, board_content=?, board_writer=?, board_wtime=sysdate, "
+				+ "board_utime=sysdate, board_views=?, board_likes=?, board_replies=? where board_no = ?";
+		Object[] data = {
+				boardDto.getBoardTitle(), boardDto.getBoardContent(), boardDto.getBoardWriter(), 
+				boardDto.getBoardViews(), 
+				boardDto.getBoardLikes(), boardDto.getBoardReplies(), boardDto.getBoardNo()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	//글 삭제
+	public boolean delete(int boardNo) {
+		String sql = "delete board where board_no=?";
+		Object[] data = {boardNo};
+		return jdbcTemplate.update(sql, data) > 0;
+}	
 }
