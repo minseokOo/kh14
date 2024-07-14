@@ -1,0 +1,69 @@
+select * from member 
+	left outer join block 
+	on member.member_id = block.block_target;
+
+-- (ex) 차단 이력이 있는 회원만 조회(inner join)
+select * from member
+	inner join block
+	on member.member_id = block.block_target;
+
+-- block을 조회하세요
+select * from block;
+-- block과 순위(최신순)를 조회하세요
+select block.*, rank() over(order by block_no desc) rnk from block;
+-- block과 순위(아이디별로 최신순)를 조회하세요
+select block.*, rank() over(partition by block_target order by block_no desc) rnk from block;
+
+-- 위 결과에서 rnk가 1번인 친구들만 나오세요!
+select * from (
+	select block.*, rank() over(partition by block_target 
+									order by block_no desc) rnk from block
+) where rnk=1;
+
+-- 최종결과 : member에 최신차단내역을 합쳐서 조회하세요!
+select * from member
+	left outer join (
+		select * from (
+			select block.*, rank() over(partition by block_target 
+											order by block_no desc) rnk from block
+		) where rnk=1
+	)b on member.member_id = b.block_target;
+
+-- 업그레이드
+-- 최신차단내역 구문이 너무 어려우니까 이름을 지어서 저장해두자! (view)
+-- (주의) view는 생성 권한 필요(create view)
+create or replace view block_latest as
+select * from (
+	select block.*, rank() over(partition by block_target 
+									order by block_no desc) rnk from block
+) where rnk=1;
+
+select * from block_latest;
+
+-- 찐최종
+select * from member left outer join block_latest
+	on member.member_id = block_latest.block_target;
+
+-- 찐찐최종
+select 
+	M.*,
+	B.block_no, B.block_memo, B.block_time, B.block_target,
+	nvl(B.block_type, '해제') block_type
+from member M left outer join block_latest B
+	on M.member_id = B.block_target;
+
+
+-- View(논리 테이블)
+-- 테이블은 아닌데 편의를 위해 테이블처럼 구문을 저장해두는 도구
+create or replace view poketmon_status as
+select poketmon_type title, count(*) cnt from poketmon 
+group by poketmon_type order by cnt desc, title asc;
+
+select * from poketmon_status;
+
+create or replace view poketmon_electronic as
+select * from poketmon where poketmon_type = '전기';
+
+select * from poketmon_electronic;
+
+COMMIT;
