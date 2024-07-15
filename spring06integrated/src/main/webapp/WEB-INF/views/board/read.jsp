@@ -30,7 +30,10 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td colspan= "4" height= "400" valign= "top">${boardDto.boardContent}</td>
+				<td colspan= "4" height= "400" valign= "top">
+					<!-- pre 태그는 내용을 작성된 형태 그대로 출력한다 -->
+					<pre>${boardDto.boardContent}</pre>
+				</td>
 		</tr>
 	</tbody>
 	<tfoot>
