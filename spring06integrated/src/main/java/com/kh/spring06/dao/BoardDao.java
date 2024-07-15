@@ -85,13 +85,14 @@ public class BoardDao {
 		Object[] data = {boardNo};
 		return jdbcTemplate.update(sql, data) > 0;
 }	
-//	//댓글 쓰기
-//	public boolean replies(BoardDto boardDto) {
-//		String sql = "update board set "
-//				+ "board_replies=? where board_no=?";
-//		Object[] data = {
-//				boardDto.getBoardReplies(), boardDto.getBoardNo()
-//		};
-//		return jdbcTemplate.update(sql, data) > 0;
-//	}
+	//조회수 증가
+	public boolean updateBoardViews(int boardNo) {
+		String sql = "update board "
+				+ "set board_views=board_views+1 "
+				+ "where board_no=?";
+		Object[] data = {boardNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+
 }

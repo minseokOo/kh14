@@ -64,6 +64,7 @@ public class BoardController {
 	//읽기
 	@RequestMapping("/read")
 	public String read(@RequestParam int boardNo, Model model) {
+//		boardDao.updateBoardViews(boardNo);
 		BoardDto boardDto = boardDao.selectOne(boardNo);
 		if(boardDto == null) throw new TargetNotFoundException("존재하지 않는 글 번호");
 		model.addAttribute("boardDto", boardDto);
@@ -86,6 +87,7 @@ public class BoardController {
 		return "redirect:read?boardNo="+boardDto.getBoardNo();
 	}
 	
+	//삭제
 	@RequestMapping("/delete")
 	public String delete(@RequestParam int boardNo) {
 		BoardDto boardDto = boardDao.selectOne(boardNo);
@@ -93,5 +95,6 @@ public class BoardController {
 		boardDao.delete(boardNo);
 		return "redirect:list";
 	}
+	
 }
 

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.kh.spring06.interceptor.AdminInterceptor;
 import com.kh.spring06.interceptor.BoardOwnerInterceptor;
+import com.kh.spring06.interceptor.BoardViewsInterceptor;
 import com.kh.spring06.interceptor.MemberInterceptor;
 import com.kh.spring06.interceptor.TestInterceptor;
 @Configuration
@@ -30,6 +31,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	
 	@Autowired
 	private BoardOwnerInterceptor boardOwnerInterceptor;
+	
+	@Autowired
+	private BoardViewsInterceptor boardViewsInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -71,6 +75,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 				"/board/update", 
 				"/board/delete"
 				);
+		
+		registry.addInterceptor(boardViewsInterceptor)
+		.addPathPatterns("/board/read");
 	}
 	
 	
