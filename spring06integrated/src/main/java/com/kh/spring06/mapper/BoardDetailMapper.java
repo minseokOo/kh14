@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.spring06.dto.BoardDto;
 
 @Service
-public class BoardMapper implements RowMapper<BoardDto> {
+public class BoardDetailMapper implements RowMapper<BoardDto> {
 
 	@Override
 	public BoardDto mapRow(ResultSet rs, int rowNum) throws SQLException {

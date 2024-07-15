@@ -10,7 +10,7 @@
 	<thead align= "center">
 		<tr>
 			<th>번호</th>
-			<th width= "400">제목</th>
+			<th width= "300">제목</th>
 			<th>작성자</th>
 			<th>작성시간</th>
 			<th>조회수</th>
@@ -21,7 +21,7 @@
 		<c:forEach var= "boardDto" items= "${list}">
 			<tr>
 				<td>${boardDto.boardNo}</td>
-				<td><a href= "/board/read?boardNo=${boardDto.boardNo}">${boardDto.boardTitle}</a></td>
+				<td align= "left"><a href= "/board/read?boardNo=${boardDto.boardNo}">${boardDto.boardTitle}</a></td>
 				<td>${boardDto.boardWriter}</td>
 				<td>${boardDto.boardWtime}</td>
 				<td>${boardDto.boardViews}</td>
@@ -30,6 +30,24 @@
 		</c:forEach>
 	</tbody>
 </table>
-<a href= "/board/write">글쓰기</a>
+<br>
+<!-- 네비게이터 -->
+<h3>이전 1 2 3 4 5 6 7 8 9 다음</h3>
 
+<c:choose>
+	<c:when test= "${sessionScope.createdUser != null}">
+		<h2><a href= "/board/write">글쓰기</a></h2>
+	</c:when>
+	<c:otherwise>
+	</c:otherwise>
+</c:choose>	
+
+<form action="list" method="get">
+	<select name= "column">
+		<option value= "board_title">제목</option>
+		<option value= "board_writer">작성자</option>
+	</select>
+	<input type= "text" name= "keyword" placeholder= "검색어" value="${param.keyword}"> 
+	<button>검색</button>
+</form>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

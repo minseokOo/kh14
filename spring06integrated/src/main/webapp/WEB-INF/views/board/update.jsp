@@ -18,14 +18,15 @@
 	<tbody>
 			<th colspan= "2">내용</th>
 			<tr>
-			<td colspan= "2"><textarea rows= "30" cols= "67" name= "boardContent"  required>${boardDto.boardContent}</textarea></td>
+			<td colspan= "2"><textarea rows= "30" cols= "67" name= "boardContent"  required
+												>${boardDto.boardContent}</textarea></td>
 			</tr>
 		
 	</tbody>
 </table>
 
 
-	
+	<input type= "hidden" name= "boardWtime" value= "${boardDto.boardWtime}">
 	<input type= "hidden" name= "boardViews" value= "${boardDto.boardViews}">
 	<input type= "hidden" name= "boardLikes"  value= "${boardDto.boardLikes}">
 	<input type= "hidden" name= "boardReplies"  value= "${boardDto.boardReplies}">
