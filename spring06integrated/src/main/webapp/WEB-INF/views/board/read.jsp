@@ -17,7 +17,7 @@
 		<tr>
 			<td align= "center">${boardDto.boardNo}</td>
 			<td align= "center">${boardDto.boardTitle}</td>
-			<td align= "center">${boardDto.boardWriter}</td>
+			<td align= "center">${boardDto.boardWriterString}</td>
 	<c:choose>
 		<c:when test= "${boardDto.boardUtime == null}">
 			<td align= "center"><fmt:formatDate value="${boardDto.boardWtime}" pattern="yyyy년 MM월 dd일 kk:mm"/> </td>
@@ -39,13 +39,17 @@
 		<td><a href= "#">추천</a>
 	</tfoot>
 </table>
-<h2 align= "right"><a href= "/board/list">목록으로</a></h2>
 <c:choose>
+	<c:when test= "${sessionScope.createdUser == null}">
+		<h2 align= "right"><a href= "/board/list">목록으로</a></h2>
+	</c:when>
 	<c:when test= "${sessionScope.createdUser == boardDto.boardWriter}">
+		<h2 align= "right"><a href= "/board/list">목록으로</a></h2>
 		<h2 align= "right"><a href= "/board/update?boardNo=${boardDto.boardNo}">수정하기</a></h2>
 		<h2 align= "right"><a href= "/board/delete?boardNo=${boardDto.boardNo}">삭제하기</a></h2>
 	</c:when>
 	<c:when test= "${sessionScope.createdLevel == '관리자'}">
+		<h2 align= "right"><a href= "/board/list">목록으로</a></h2>
 		<h2 align= "right"><a href= "/board/delete?boardNo=${boardDto.boardNo}">삭제하기</a></h2>
 	</c:when>
 	<c:otherwise>

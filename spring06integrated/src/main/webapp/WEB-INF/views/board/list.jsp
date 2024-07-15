@@ -22,7 +22,13 @@
 			<tr>
 				<td>${boardDto.boardNo}</td>
 				<td align= "left"><a href= "/board/read?boardNo=${boardDto.boardNo}">${boardDto.boardTitle}</a></td>
-				<td>${boardDto.boardWriter}</td>
+<%-- 				<c:choose> --%>
+<%-- 					<c:when test= "${boardDto.boardWriter == null}"> --%>
+<%-- 						<td>탈퇴한 사용자</td> --%>
+<%-- 					</c:when> --%>
+<%-- 					<c:otherwise><td>${boardDto.boardWriter}</td></c:otherwise> --%>
+<%-- 				</c:choose> --%>
+				<td>${boardDto.boardWriterString}</td>
 				<td>${boardDto.boardWtime}</td>
 				<td>${boardDto.boardViews}</td>
 				<td>${boardDto.boardLikes}</td>

@@ -15,4 +15,10 @@ public class BoardDto {
 	public int boardViews;
 	public int boardLikes;
 	public int boardReplies;
+	
+	//메소드 추가
+	public String getBoardWriterString() {
+		if(boardWriter == null) return "탈퇴한 사용자";
+		return boardWriter;
+	}
 }
