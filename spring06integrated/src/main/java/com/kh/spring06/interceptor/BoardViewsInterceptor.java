@@ -57,8 +57,8 @@ public class BoardViewsInterceptor implements HandlerInterceptor {
 		boardDao.updateBoardViews(boardNo);
 		}
 		
-//		session.setAttribute("history", history); //3-4
 		
+		session.setAttribute("history", history); //3-4
 		return true; //무조건 통과
 	}
 }
