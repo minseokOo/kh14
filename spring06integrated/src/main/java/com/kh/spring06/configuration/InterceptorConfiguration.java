@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 
 import com.kh.spring06.interceptor.AdminInterceptor;
+import com.kh.spring06.interceptor.BoardOwnerInterceptor;
 import com.kh.spring06.interceptor.MemberInterceptor;
 import com.kh.spring06.interceptor.TestInterceptor;
 @Configuration
@@ -26,6 +27,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	
 	@Autowired
 	private AdminInterceptor adminInterceptor;
+	
+	@Autowired
+	private BoardOwnerInterceptor boardOwnerInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -61,8 +65,13 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 				"/member/login", //로그인 페이지
 				"/member/goodbye" //탈퇴완료 페이지
 				);
+		
+		//게시글 수정 삭제 검사 인터셉터 설정
+		registry.addInterceptor(boardOwnerInterceptor).addPathPatterns(
+				"/board/update", 
+				"/board/delete"
+				);
 	}
-	
 	
 	
 }

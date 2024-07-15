@@ -21,7 +21,7 @@
 		<c:forEach var= "boardDto" items= "${list}">
 			<tr>
 				<td>${boardDto.boardNo}</td>
-				<td align= "left"><a href= "/board/read?boardNo=${boardDto.boardNo}">${boardDto.boardTitle}</a></td>
+				<td align= "left"><a href= "/board/read?boardNo=${boardDto.boardNo}">${boardDto.boardTitle}</a> (${boardDto.boardReplies})</td>
 <%-- 				<c:choose> --%>
 <%-- 					<c:when test= "${boardDto.boardWriter == null}"> --%>
 <%-- 						<td>탈퇴한 사용자</td> --%>
