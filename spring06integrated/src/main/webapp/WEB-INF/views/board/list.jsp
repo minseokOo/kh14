@@ -29,7 +29,7 @@
 <%-- 					<c:otherwise><td>${boardDto.boardWriter}</td></c:otherwise> --%>
 <%-- 				</c:choose> --%>
 				<td>${boardDto.boardWriterString}</td>
-				<td>${boardDto.boardWtime}</td>
+				<td>${boardDto.boardWtimeString}</td>
 				<td>${boardDto.boardViews}</td>
 				<td>${boardDto.boardLikes}</td>
 			</tr>
