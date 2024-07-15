@@ -41,7 +41,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						.addPathPatterns(
 						"/emp/**", //모든 사원 페이지
 						"/book/**", //모든 도서페이지
-						"/member/**" //모든 회원페이지
+						"/member/**", //모든 회원페이지
+						"/board/write"//게시글 작성페이지
 								)
 						.excludePathPatterns(
 								"/member/join*", //가입페이지

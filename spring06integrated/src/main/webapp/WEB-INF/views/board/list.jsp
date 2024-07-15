@@ -40,11 +40,13 @@
 <!-- 네비게이터 -->
 <h3>이전 1 2 3 4 5 6 7 8 9 다음</h3>
 
+<%-- 비회원일 때와 회원일 때 다르게 보이도록 처리 --%>
 <c:choose>
 	<c:when test= "${sessionScope.createdUser != null}">
 		<h2><a href= "/board/write">글쓰기</a></h2>
 	</c:when>
 	<c:otherwise>
+		<h2><a title= "로그인 후 사용 가능합니다.">글쓰기</a></h2>
 	</c:otherwise>
 </c:choose>	
 
