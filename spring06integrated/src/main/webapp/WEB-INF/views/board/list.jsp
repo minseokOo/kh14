@@ -38,10 +38,18 @@
 </table>
 <br>
 <!-- 네비게이터 -->
-<h3><a href= "list?column=${param.column}&keyword=${param.keyword}&page=${startBlock-1}">이전</a> 
-
-<%-- startBlock부터 finishBlock까지 반복문으로 링크 출력 --%>
-<c:forEach var= "n" begin= "${startBlock}" end="${finishBlock}" step="1">
+<%-- 이전 버튼은 첫 번째 구간이 아닐 때(startBlock > 1) 나온다. --%>
+<h3>
+<c:if test="${startBlock > 1}">
+<a href= "list?column=${param.column}&keyword=${param.keyword}&page=${startBlock-1}">이전</a> 
+</c:if>
+<%-- 
+	startBlock부터 
+	finishBlock과 lastBlock중 작은 값 까지
+ 	반복문으로 링크 출력 
+--%>
+<c:forEach var= "n" begin= "${startBlock}" 
+										end="${Math.min(finishBlock, lastBlock)}" step="1">
 	<c:choose>
 		<c:when test= "${param.page == n}">
 			<a>${n}</a>
@@ -51,8 +59,10 @@
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
-<a href= "list?column=${param.column}&keyword=${param.keyword}&page=${finishBlock+1}">다음</a></h3>
-
+<%--다음 버튼은 마지막 구간이 아닐 때(finishBlock < lastBlock) 나온다 --%>
+<c:if test= "${finishBlock < lastBlock}">
+	<a href= "list?column=${param.column}&keyword=${param.keyword}&page=${finishBlock+1}">다음</a></h3>
+</c:if>
 <%-- 비회원일 때와 회원일 때 다르게 보이도록 처리 --%>
 <c:choose>
 	<c:when test= "${sessionScope.createdUser != null}">

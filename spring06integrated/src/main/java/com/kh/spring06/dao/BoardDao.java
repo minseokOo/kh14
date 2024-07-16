@@ -128,4 +128,16 @@ public class BoardDao {
 		return jdbcTemplate.query(sql, boardListMapper, data);
 		
 	}
+	
+	//페이징의 마지막 블록 번호를 위해 게시글 수를 구하는 메소드
+	public int countByPaging() {
+		String sql = "select count(*) from board";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	public int countByPaging(String column, String keyword) {
+		String sql = "select count(*) from board where instr(#1, ?) > 0";
+		sql = sql.replace("#1", column);
+		Object[] data = {keyword};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
 }

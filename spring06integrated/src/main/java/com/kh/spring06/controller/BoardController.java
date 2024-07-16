@@ -46,6 +46,13 @@ public class BoardController {
 		int finishBlock = startBlock + blockSize - 1;
 		model.addAttribute("startBlock", startBlock);
 		model.addAttribute("finishBlock", finishBlock);
+		
+		//(추가) 마지막 번호와 글 개수를 계산하여 전달
+		int count = isSearch ? boardDao.countByPaging(column, keyword)
+				: boardDao.countByPaging();
+		int lastBlock = (count -1) / size + 1;
+		model.addAttribute("count", count);
+		model.addAttribute("lastBlock", lastBlock);
 		return "/WEB-INF/views/board/list.jsp";
 	}
 	
