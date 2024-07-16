@@ -34,7 +34,7 @@ public class BoardController {
 			@RequestParam(required = false, defaultValue= "10") int size) {
 		boolean isSearch = column != null && keyword != null;
 		List<BoardDto> list = isSearch ? 
-				boardDao.selectList(column, keyword) : boardDao.selectListByPaging(page, size);
+				boardDao.selectListByPaging(column, keyword, page, size) : boardDao.selectListByPaging(page, size);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("column", column);
