@@ -39,6 +39,13 @@ public class BoardController {
 		model.addAttribute("list", list);
 		model.addAttribute("column", column);
 		model.addAttribute("keyword", keyword);
+		
+		//(추가) 페이지 네비게이터 출력을 위한 추가 정보를 계산 및 전달
+		int blockSize = 10;
+		int startBlock = (page-1) / blockSize * blockSize +1;
+		int finishBlock = startBlock + blockSize - 1;
+		model.addAttribute("startBlock", startBlock);
+		model.addAttribute("finishBlock", finishBlock);
 		return "/WEB-INF/views/board/list.jsp";
 	}
 	

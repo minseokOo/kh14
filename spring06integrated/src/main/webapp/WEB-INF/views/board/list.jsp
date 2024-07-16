@@ -38,7 +38,20 @@
 </table>
 <br>
 <!-- 네비게이터 -->
-<h3>이전 1 2 3 4 5 6 7 8 9 다음</h3>
+<h3><a href= "list?column=${param.column}&keyword=${param.keyword}&page=${startBlock-1}">이전</a> 
+
+<%-- startBlock부터 finishBlock까지 반복문으로 링크 출력 --%>
+<c:forEach var= "n" begin= "${startBlock}" end="${finishBlock}" step="1">
+	<c:choose>
+		<c:when test= "${param.page == n}">
+			<a>${n}</a>
+		</c:when>
+		<c:otherwise>
+			<a href="list?column=${param.column}&keyword=${param.keyword}&page=${n}">${n}</a>
+		</c:otherwise>
+	</c:choose>
+</c:forEach>
+<a href= "list?column=${param.column}&keyword=${param.keyword}&page=${finishBlock+1}">다음</a></h3>
 
 <%-- 비회원일 때와 회원일 때 다르게 보이도록 처리 --%>
 <c:choose>
