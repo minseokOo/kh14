@@ -94,5 +94,21 @@ public class BoardDao {
 		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
+	//페이징이 적용된 목록
+	public List<BoardDto> selectListByPaging(int page, int size){
+		int endRow = page * size;
+		int beginRow = endRow - (size - 1);
+		String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select "
+										+ "board_no, board_title, board_writer, board_wtime, "
+										+ "board_utime, board_views, board_likes, board_replies  "
+									+ "from board order by board_no desc"
+								+ ")TMP"
+							+ ") where rn between ? and ?";
+		Object[] data = {beginRow, endRow};
+		return jdbcTemplate.query(sql, boardListMapper, data);
+	}
+	//페이징이 적용된 검색
 
 }

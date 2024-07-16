@@ -29,10 +29,12 @@ public class BoardController {
 	@RequestMapping("/list")
 	public String list(Model model, 
 			@RequestParam(required = false) String column,
-			@RequestParam(required = false) String keyword) {
+			@RequestParam(required = false) String keyword, 
+			@RequestParam(required = false, defaultValue= "1")  int page,
+			@RequestParam(required = false, defaultValue= "10") int size) {
 		boolean isSearch = column != null && keyword != null;
 		List<BoardDto> list = isSearch ? 
-				boardDao.selectList(column, keyword) : boardDao.selectList();
+				boardDao.selectList(column, keyword) : boardDao.selectListByPaging(page, size);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("column", column);
