@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring06.dto.BoardDto;
 import com.kh.spring06.mapper.BoardListMapper;
+import com.kh.spring06.vo.PageVO;
 import com.kh.spring06.mapper.BoardDetailMapper;
 
 @Repository
@@ -139,5 +140,53 @@ public class BoardDao {
 		sql = sql.replace("#1", column);
 		Object[] data = {keyword};
 		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
+	
+	//페이징 객체를 이용한 목록 및 검색 메소드
+	public List<BoardDto> selectListByPaging(PageVO pageVO) {
+		if(pageVO.isSearch()) {//검색이라면
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select "
+										+ "board_no, board_title, board_writer, board_wtime, "
+										+ "board_utime, board_views, board_likes, board_replies "		
+									+ "from board "
+									+ "where instr(#1, ?) > 0 "
+									+ "order by board_no desc"
+								+ ")TMP"
+						+ ") where rn between ? and ?";
+			sql = sql.replace("#1", pageVO.getColumn());
+			Object[] data = {
+					pageVO.getKeyword(), 
+					pageVO.getBeginRow(), 
+					pageVO.getEndRow() 
+			};
+			return jdbcTemplate.query(sql, boardListMapper, data);
+		}
+		else {//목록이라면
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select "
+										+ "board_no, board_title, board_writer, board_wtime, "
+										+ "board_utime, board_views, board_likes, board_replies "
+									+ "from board order by board_no desc"
+								+ ")TMP"
+						+ ") where rn between ? and ?";
+			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, boardListMapper, data);
+		}
+	}
+
+	public int countByPaging(PageVO pageVO) {
+		if(pageVO.isSearch()) {//검색카운트
+			String sql = "select count(*) from board where instr(#1, ?) > 0";
+			sql = sql.replace("#1", pageVO.getColumn());
+			Object[] data = {pageVO.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else {//목록카운트
+			String sql = "select count(*) from board";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
 	}
 }

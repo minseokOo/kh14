@@ -11,6 +11,7 @@ import com.kh.spring06.mapper.MemberBlockMapper;
 import com.kh.spring06.mapper.MemberMapper;
 import com.kh.spring06.mapper.StatusMapper;
 import com.kh.spring06.vo.MemberBlockVO;
+import com.kh.spring06.vo.PageVO;
 import com.kh.spring06.vo.StatusVO;
 @Repository
 public class MemberDao {
@@ -125,6 +126,8 @@ public class MemberDao {
 		return jdbcTemplate.query(sql, statusMapper);
 	}
 	
+	
+	
 	//회원 목록에 차단을 합쳐서 조회
 	public List<MemberBlockVO> selectListWithBlock(String column, String keyword){
 		String sql="select "
@@ -138,4 +141,28 @@ public class MemberDao {
 		return jdbcTemplate.query(sql, memberBlockMapper, data);
 	}
 	
+	//회원 검색 페이징
+	public List<MemberBlockVO> selectListBlockByPaging(PageVO pageVO){
+		String sql="select * from ("
+				+ "select rownum rn, TMP.* from ("
+				+ "select "
+				+ "M.*, B.block_no, B.block_time, B.block_memo,"
+				+ "B.block_target, nvl(B.block_type, '해제') block_type "
+				+ "from member M left outer join block_latest B "
+				+ "on M.member_id=B.block_target "
+				+ "where instr(#1,?)>0 "
+				+ "order by #1 asc, member_id asc"
+				+ ")TMP"
+				+ ") where rn between ? and ?";
+		sql = sql.replace("#1", pageVO.getColumn());
+		Object[] data = {pageVO.getKeyword(), pageVO.getBeginRow(), pageVO.getEndRow()};
+		return jdbcTemplate.query(sql, memberBlockMapper, data);
+	}
+	
+	public int countByPaging(PageVO pageVO) {
+		String sql = "select count(*) from member where instr(#1, ?) > 0";
+		sql = sql.replace("#1", pageVO.getColumn());
+		Object[] data = {pageVO.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
 }

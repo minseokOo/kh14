@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring06.dto.BookDto;
 import com.kh.spring06.mapper.BookMapper;
+import com.kh.spring06.vo.PageVO;
 
 @Repository
 public class BookDao {
@@ -67,5 +68,40 @@ public class BookDao {
 		String sql = "delete book where book_id=?";
 		Object[] data = {bookId};
 		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
+	public List<BookDto> selectListByPaging(PageVO pageVO){
+		if(pageVO.isSearch()) {
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+					+ "select * from book where instr(#1, ?) > 0 "
+					+ "order by #1 asc, book_id asc"
+					+ ")TMP"
+					+ ") where rn between ? and ?";
+			sql = sql.replace("#1", pageVO.getColumn());
+			Object[] data = {pageVO.getColumn(), pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, mapper, data);
+		}
+		else {
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+					+ "select * from book order by book_id asc"
+					+ ")TMP"
+					+ ") where rn between ? and ?";
+			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, mapper, data);
+		}
+	}
+	public int countByPaging(PageVO pageVO) {
+		if(pageVO.isSearch()) {//검색
+			String sql = "select count(*) from book where instr(#1, ?) > 0";
+			sql = sql.replace("#1", pageVO.getColumn());
+			Object[] data = {pageVO.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		else {//목록
+			String sql = "select count(*) from book";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
 	}
 }

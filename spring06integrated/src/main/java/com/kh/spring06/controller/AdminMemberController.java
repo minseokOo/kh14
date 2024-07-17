@@ -16,6 +16,7 @@ import com.kh.spring06.dao.MemberDao;
 import com.kh.spring06.dto.BlockDto;
 import com.kh.spring06.dto.MemberDto;
 import com.kh.spring06.error.TargetNotFoundException;
+import com.kh.spring06.vo.PageVO;
 
 @Controller
 @RequestMapping("/admin/member")
@@ -28,21 +29,21 @@ public class AdminMemberController {
 	private BlockDao blockDao;
 	
 	
-	@RequestMapping("/list")
-	public String list(Model model,
-			@RequestParam(required = false) String column,
-			@RequestParam(required = false) String keyword) {
-		// 문제점
-		// - column에 허락 되지 않은 값(ex : member_pw)이 들어오는 상황이 존재
-		
-		boolean isSearch = this.checkSearch(column, keyword); //다른 매핑은 못부름
-		List<MemberDto> list = isSearch? 
-				memberDao.selectList(column, keyword) : memberDao.selectList();
-		model.addAttribute("list", memberDao.selectListWithBlock(column, keyword));
-		model.addAttribute("column", column);
-		model.addAttribute("keyword", keyword);
-		return "/WEB-INF/views/admin/memberList.jsp";
-	}
+//	@RequestMapping("/list")
+//	public String list(Model model,
+//			@RequestParam(required = false) String column,
+//			@RequestParam(required = false) String keyword) {
+//		// 문제점
+//		// - column에 허락 되지 않은 값(ex : member_pw)이 들어오는 상황이 존재
+//		
+//		boolean isSearch = this.checkSearch(column, keyword); //다른 매핑은 못부름
+//		List<MemberDto> list = isSearch? 
+//				memberDao.selectList(column, keyword) : memberDao.selectList();
+//		model.addAttribute("list", memberDao.selectListWithBlock(column, keyword));
+//		model.addAttribute("column", column);
+//		model.addAttribute("keyword", keyword);
+//		return "/WEB-INF/views/admin/memberList.jsp";
+//	}
 	
 	// 이 컨트롤러에서 외부에 공개하지 않고 내부에서만 쓰는 메소드
 	private boolean checkSearch(String column, String keyword) {
@@ -56,6 +57,19 @@ public class AdminMemberController {
 			return true;
 		}
 		return false;
+	}
+	
+	//검색 페이징
+	@RequestMapping("/list")
+	public String list(@ModelAttribute("pageVO") PageVO pageVO, Model model) {
+		if(pageVO.isSearch()) {
+		model.addAttribute("memberList", 
+				memberDao.selectListBlockByPaging(pageVO));
+		int count = memberDao.countByPaging(pageVO);
+		pageVO.setCount(count);
+		}
+		return "/WEB-INF/views/admin/memberList2.jsp";
+		
 	}
 	
 	@RequestMapping("/detail")
