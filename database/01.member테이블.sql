@@ -57,3 +57,8 @@ insert into board(board_no, board_title, board_content, board_writer, board_grou
 values(9, '아홉 번째 게시글', '아홉 번째 게시글 내용', 'testuser1', 2, 3, 2);
 commit;
 ```
+
+```sql
+drop sequence board_seq;
+create sequence board_seq start with 10;
+```
