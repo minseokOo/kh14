@@ -8,9 +8,7 @@
 	<select name= "column">
 		<option value= "book_title">도서명</option>
 		<option value= "book_author"> <c:if test="${column == 'book_author'}">selected</c:if></option>
-		
 	</select>
-
 </form>
 
 <h2>데이터 개수 : ${list.size()}</h2>
@@ -40,7 +38,7 @@
 			<td>${dto.bookGenre}</td>
 		</tr>
 	</c:forEach>
-	</tbody>		
+	</tbody>
 </table>
 <jsp:include page= "/WEB-INF/views/template/navigator.jsp"/>
 <h2><a href= "save">추가 등록하기</a></h2>
