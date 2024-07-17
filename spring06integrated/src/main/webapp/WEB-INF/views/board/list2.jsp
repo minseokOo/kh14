@@ -8,23 +8,36 @@
 <div>
 	${pageVO}
 </div>
-<div>${pageVO.beginRow} - ${pageVO.endRow} / ${pageVO.count} 개</div>
-<table border= "1" >
+<div>${pageVO.beginRow} - ${pageVO.count} / ${pageVO.endRow} 개</div>
+<table border= "1" width= "1000" >
 	<thead align= "center">
 		<tr>
 			<th>번호</th>
-			<th width= "300">제목</th>
+			<th width= "40%">제목</th>
 			<th>작성자</th>
 			<th>작성시간</th>
 			<th>조회수</th>
 			<th>좋아요</th>
+			<th>번호</th>
+			<th>그룹</th>
+			<th>상위</th>
+			<th>차수</th>
 		</tr>
 	</thead>
 	<tbody align= "center">
 		<c:forEach var= "boardDto" items= "${boardList}">
 			<tr>
 				<td>${boardDto.boardNo}</td>
-				<td align= "left"><a href= "/board/read?boardNo=${boardDto.boardNo}">${boardDto.boardTitle}</a> (${boardDto.boardReplies})</td>
+				<!-- HTML 특수문자를 이용하여 띄어쓰기 추가 -->
+				
+				<td align= "left">
+				<c:forEach var= "i" begin= "1" end= "${boardDto.boardDepth}" step= "1">
+				&nbsp;&nbsp;
+				</c:forEach>
+				<c:if test= "${boardDto.boardDepth > 0}">
+					<img src= "/images/reply.png" width= "15" height="16">
+				</c:if>
+				<a href= "/board/read?boardNo=${boardDto.boardNo}">${boardDto.boardTitle}</a> (${boardDto.boardReplies})</td>
 <%-- 				<c:choose> --%>
 <%-- 					<c:when test= "${boardDto.boardWriter == null}"> --%>
 <%-- 						<td>탈퇴한 사용자</td> --%>
@@ -35,6 +48,10 @@
 				<td>${boardDto.boardWtimeString}</td>
 				<td>${boardDto.boardViews}</td>
 				<td>${boardDto.boardLikes}</td>
+				<td>${boardDto.boardNo}</td>
+				<td>${boardDto.boardGroup}</td>
+				<td>${boardDto.boardTarget}</td>
+				<td>${boardDto.boardDepth}</td>
 			</tr>
 		</c:forEach>
 	</tbody>

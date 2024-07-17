@@ -22,6 +22,9 @@ public class BoardListMapper implements RowMapper<BoardDto> {
 		boardDto.setBoardViews(rs.getInt("board_views"));
 		boardDto.setBoardLikes(rs.getInt("board_likes"));
 		boardDto.setBoardReplies(rs.getInt("board_replies"));
+		boardDto.setBoardGroup(rs.getInt("board_group"));
+		boardDto.setBoardTarget(rs.getObject("board_target", Integer.class));
+		boardDto.setBoardDepth(rs.getInt("board_depth"));
 		return boardDto;
 	}
 

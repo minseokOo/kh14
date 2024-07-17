@@ -10,15 +10,19 @@ import lombok.Data;
 
 @Data
 public class BoardDto {
-	public int boardNo;
-	public String boardTitle;
-	public String boardContent;
-	public String boardWriter;
-	public Date boardWtime;
-	public Date boardUtime;
-	public int boardViews;
-	public int boardLikes;
-	public int boardReplies;
+	private int boardNo;
+	private String boardTitle;
+	private String boardContent;
+	private String boardWriter;
+	private Date boardWtime;
+	private Date boardUtime;
+	private int boardViews;
+	private int boardLikes;
+	private int boardReplies;
+	
+	private int boardGroup;
+	private Integer boardTarget;
+	private int boardDepth;
 	
 	//메소드 추가
 	public String getBoardWriterString() {

@@ -33,5 +33,6 @@
 
 
 </form><br><br>
+<a href= "#">답글쓰기</a>
 <a href= "/board/list">목록으로</a>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
