@@ -28,6 +28,7 @@
 	<thead>
   <tr>
     <th>No.</th>
+    <th></th>
     <th>이름</th>
     <th>속성</th>
     <th>메뉴</th>
@@ -37,6 +38,9 @@
 <c:forEach var="dto" items="${list}">
   <tr>
     <td>${dto.poketmonNo}</td>
+    <td>
+    	<img src= "image?poketmonNo=${dto.poketmonNo}" width= "16" height= "16">
+    </td>
     <td>${dto.poketmonName}</td>
     <td>${dto.poketmonType}</td>
     <td>
