@@ -10,6 +10,9 @@
 		<h2>존재하지 않는 몬스터 번호</h2>
 	</c:when>
 	<c:otherwise>
+	<!-- 이미지를 출력 -->
+	<img src = "image?poketmonNo=${dto.poketmonNo}" width= "150" height= "150">
+	
 		<table border="1" width="400">
 			<tr>
 				<th width="30%">번호</th>

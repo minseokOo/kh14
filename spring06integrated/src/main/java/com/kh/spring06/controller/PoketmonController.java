@@ -138,4 +138,18 @@ public class PoketmonController {
 		boolean result = poketmonDao.update(dto);
 		return "redirect:detail?poketmonNo="+dto.getPoketmonNo();
 	}
-}
+	
+	//이미지 제공 페이지
+	@RequestMapping("/image")
+	public String image(@RequestParam int poketmonNo) {
+		try {
+		Integer attachmentNo = poketmonDao.findImage(poketmonNo);
+		return "redirect:/attach/download?attachmentNo=" + attachmentNo;
+		
+	}
+		catch(Exception e) {//있으면
+			return "redirect:https://placehold.co/150";
+		}
+	}
+}	
+

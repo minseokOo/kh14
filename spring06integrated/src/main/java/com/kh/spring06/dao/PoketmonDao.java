@@ -108,5 +108,12 @@ public class PoketmonDao {
 			jdbcTemplate.update(sql, data);
 		}
 		
+		//이미지 번호 찾기 기능
+		public Integer findImage(int poketmonNo) {
+			String sql = "select attachment from poketmon_image where poketmon=?";
+			Object[] data = {poketmonNo};
+			return jdbcTemplate.queryForObject(sql, Integer.class, data);
+		}
+		
 		
 }
