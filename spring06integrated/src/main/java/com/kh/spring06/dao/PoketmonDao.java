@@ -82,4 +82,31 @@ public class PoketmonDao {
 			
 		}
 		
+		// 시퀀스 생성 및 등록 메소드
+		public int sequence() {
+			String sql = "select poketmon_seq.nextval from dual";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+		public void insertWithSequence(PoketmonDto poketmonDto) {
+			String sql = "insert into poketmon("
+					+ "poketmon_no, poketmon_name, poketmon_type"
+					+ ") values(?, ?, ?)";
+			Object[] data = {
+					poketmonDto.getPoketmonNo(),
+					poketmonDto.getPoketmonName(),
+					poketmonDto.getPoketmonType()
+			};
+			jdbcTemplate.update(sql, data);
+			
+		}
+		
+		//연결기능
+		public void connect(int poketmonNo, int attachmentNo) {
+			String sql = "insert into poketmon_image(poketmon, attachment) "
+					+ "values(?, ?)";
+			Object[] data = {poketmonNo, attachmentNo};
+			jdbcTemplate.update(sql, data);
+		}
+		
+		
 }

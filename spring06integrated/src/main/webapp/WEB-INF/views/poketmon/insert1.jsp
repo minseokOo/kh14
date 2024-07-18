@@ -5,11 +5,12 @@
 <!--    <a href="http://localhost:8080/poketmon/list"><button>포켓몬 리스트</button></a> -->
 <!--   <br> -->
    
-   <form action= "./insert" method="post">
+   <form action= "./insert" method="post" enctype="multipart/form-data">
    이름
-   <input name= "poketmonName" type= "text" required autocomplete="off">
+   <input name= "poketmonName" type= "text" required autocomplete="off"><br><br>
    타입
-   <input name= "poketmonType" type= "text" required autocomplete="off">
+   <input name= "poketmonType" type= "text" required autocomplete="off"><br><br>
+   이미지 <input name= "attach" type= "file"> <br><br>
    
    
    <button>등록</button>
