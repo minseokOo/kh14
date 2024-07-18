@@ -87,6 +87,21 @@ public class BoardController {
 		String createdUser = (String)session.getAttribute("createdUser");
 		//시퀀스 번호를 먼저 생성하도록 지시
 		int seq = boardDao.sequence();
+		
+		//(추가) 새글, 답글 여부에 따라 그룹, 상위글, 차수를 설정해야한다.
+		if(boardDto.isNew()) {
+			boardDto.setBoardGroup(seq);//그룹번호는 글 번호와 동일
+			boardDto.setBoardTarget(null);//상위 글 번호는 null로 설정(생략 가능)
+			boardDto.setBoardDepth(0);//차수는 0으로 설정(생략가능)
+		}
+		else {
+			//타겟글의 정보 조회
+			BoardDto targetDto = boardDao.selectOne(boardDto.getBoardTarget());
+			boardDto.setBoardGroup(targetDto.getBoardGroup());//그룹번호는 원본 글과 동일
+			boardDto.setBoardTarget(targetDto.getBoardNo());//상위 글 번호는 원본글 번호와 동일 (안써도됨)
+			boardDto.setBoardDepth(targetDto.getBoardDepth()+1);//차수는 원본글보다 1크다.
+		}
+		
 		boardDto.setBoardWriter(createdUser);
 		boardDto.setBoardNo(seq);
 		boardDao.write(boardDto);

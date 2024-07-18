@@ -6,6 +6,16 @@
 <h2>글 작성</h2>
 
 <form action= "./write"  method= "post">
+
+	<!-- (추가) 파라미터에 boardTarget이 있으면 답글이 되도록 정보 첨부 -->
+	<c:if test="${param.boardTarget != null}">
+		<input type="hidden" name= "boardTarget" value= "${param.boardTarget}">
+	</c:if>
+
+
+
+
+
 <input type= "hidden" name= "boardWriter" value= "${createdUser}">
 <table border= "1" width = "505">
 	<thead>
@@ -33,6 +43,5 @@
 
 
 </form><br><br>
-<a href= "#">답글쓰기</a>
 <a href= "/board/list">목록으로</a>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

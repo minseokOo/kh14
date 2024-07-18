@@ -52,7 +52,7 @@
 	<c:when test= "${sessionScope.createdUser == null}">
 	</c:when>
 	<c:when test= "${sessionScope.createdUser == boardDto.boardWriter}">
-		<h2 align= "right"><a href= "#">답글달기</a></h2>
+		<h2 align= "right"><a href= "write?boardTarget=${boardDto.boardNo}">답글달기</a></h2>
 		<h2 align= "right"><a href= "/board/update?boardNo=${boardDto.boardNo}">수정하기</a></h2>
 		<h2 align= "right"><a href= "/board/delete?boardNo=${boardDto.boardNo}">삭제하기</a></h2>
 	</c:when>

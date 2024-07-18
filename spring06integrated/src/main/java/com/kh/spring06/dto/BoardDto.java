@@ -46,4 +46,11 @@ public class BoardDto {
 		else {
 		return time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));	} //날짜
 	}
+	public boolean isNew() {
+		return this.boardTarget == null;
+	}
+	public boolean isReply() {
+		return this.boardTarget != null;
+	}
+	
 }
