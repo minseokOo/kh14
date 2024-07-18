@@ -2,6 +2,7 @@ package com.kh.spring07.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,6 +68,29 @@ public class FileController {
 		
 		File target = new File(dir, attach.getOriginalFilename());//저장할 파일을 정하고
 		attach.transferTo(target);//저장
+		
+		return "redirect:/";
+	}
+	
+	//자바에서 "여러개"를 처리하는 방법은?
+	// 1. 배열 2. 리스트(컬렉션)
+	@PostMapping("/upload4")
+	public String upload4(
+			@RequestParam String poketmonName, 
+			@RequestParam String poketmonType, 
+			@RequestParam List<MultipartFile> attach) throws IllegalStateException, IOException {
+		System.out.println("업로드한 파일 개수 : " + attach.size());
+		
+		//(Q) 전부 다 저장하려면?
+		for(MultipartFile mf :attach) {
+		//파일을 실제 저장소(HDD)에 저장
+		File dir = new File("D:/upload");
+		dir.mkdirs();
+		System.out.println("업로드 위치 = " + dir.getAbsolutePath());
+		
+		File target = new File(dir, mf.getOriginalFilename());//저장할 파일을 정하고
+		mf.transferTo(target);//저장
+		}
 		
 		return "redirect:/";
 	}
