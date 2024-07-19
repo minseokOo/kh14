@@ -108,7 +108,7 @@ public class BookDao {
 	
 	// 시퀀스 생성 및 등록 메소드
 	public int sequence() {
-		String sql = "select emp_seq.nextval from dual";
+		String sql = "select book_seq.nextval from dual";
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	public void insertWithSequence(BookDto bookDto) {
@@ -134,10 +134,17 @@ public class BookDao {
 	}
 	
 	//이미지 번호 찾기
-	public Integer findImage(int bookNo) {
-		String sql = "select attachment from book_image where book=?";
-		Object[] data = {bookNo};
+	public Integer findImage(int bookId) {
+		String sql = "select min(attachment) from book_image where book=?";
+		Object[] data = {bookId};
 		return jdbcTemplate.queryForObject(sql, Integer.class, data);
+	}
+	
+	//여러 이미지중 첫 번째만 가져오는 메소드
+	public List<Integer> findImages(int bookId){
+		String sql = "select attachment from book_image where book=?";
+		Object[] data = {bookId};
+		return jdbcTemplate.queryForList(sql, Integer.class, data);
 	}
 	
 }

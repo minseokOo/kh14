@@ -15,23 +15,36 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spring06.configuration.CustomFileuploadProperties;
 import com.kh.spring06.dao.AttachmentDao;
 import com.kh.spring06.dto.AttachmentDto;
 import com.kh.spring06.error.TargetNotFoundException;
 
+import jakarta.annotation.PostConstruct;
+
 //첨부파일 서비스
 @Service
 public class AttachmentService {
+
+	
+	// 목표 : application.properties에 작성된 설정을 불러와 업로드 폴더로 지정
+	@Autowired
+	private CustomFileuploadProperties properties;
+	private File dir;
+	@PostConstruct //객체 생성 및 등록 후 딱 한번만 실행되는 메소드(초기세팅)
+	public void init() {
+		dir = new File(properties.getPath());
+		dir.mkdirs();
+	}
+	
 	
 	@Autowired
 	private AttachmentDao attachmentDao;
 	
-	private File dir = new File("D:/upload");
 	
 	public int save(MultipartFile attach) throws IllegalStateException, IOException {
 		int attachmentNo = attachmentDao.sequence();
 		// 2-2. 실물 파일 저장
-		dir.mkdirs();
 		File target = new File(dir, String.valueOf(attachmentNo));
 		attach.transferTo(target);
 		

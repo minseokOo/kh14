@@ -3,7 +3,7 @@
 
     <h1>책 목록 추가</h1>
     <br><br>
-    <form action= "./save" method= "get">
+    <form action= "./save" method= "get" enctype= "multipart/form-data">
     책 제목
     <input type= "text" name= "bookTitle" required autocomplete= "off">
 	<br>
@@ -25,6 +25,7 @@
 	장르
 	<input type= "text" name= "bookGenre" required autocomplete= "off">
 	<br>
+	<input type= "file" name= "attachList" multiple accept= "image/*">
 	<button>등록</button>
 </form>
 

@@ -5,6 +5,17 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <h1>도서 상세 정보</h1>
 
+<%--(추가) 전달된 도서 이미지(images) 번호를 이용하여 이미지 태그를 생성 --%>
+<c:choose>
+	<c:when test= "${images.isEmpty()}"}>
+		<h3>이 도서는 미리보기 이미지가 없습니다.</h3>
+	</c:when>
+	<otherwise>
+		<c:forEach var= "no" items= "${images}">
+			<img src= "/attach/download?attachmentNo=${no}" width="50" height="50">
+		</c:forEach>
+	</otherwise>
+</c:choose>
     <table border= "1">
     	<tr>
     		<th>번호</th>
