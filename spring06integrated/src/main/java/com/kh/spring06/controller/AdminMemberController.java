@@ -61,22 +61,36 @@ public class AdminMemberController {
 	
 	//검색 페이징
 	@RequestMapping("/list")
-	public String list(@ModelAttribute("pageVO") PageVO pageVO, Model model) {
-		if(pageVO.isSearch()) {
-		model.addAttribute("memberList", 
-				memberDao.selectListBlockByPaging(pageVO));
-		int count = memberDao.countByPaging(pageVO);
-		pageVO.setCount(count);
+	public String list(
+			@ModelAttribute("pageVO") PageVO pageVO, Model model) {
+		if(pageVO.isSearch() && checkSearch(pageVO)) {
+			model.addAttribute("list", 
+					memberDao.selectListWithBlockByPaging(pageVO));	
+			int count = memberDao.countByPaging(pageVO);
+			pageVO.setCount(count);
 		}
 		return "/WEB-INF/views/admin/memberList2.jsp";
-		
+	}
+	
+	//이 컨트롤러에서 외부에 공개하지 않고 내부에서만 쓰는 메소드
+	private boolean checkSearch(PageVO pageVO) {
+		if(pageVO.getColumn() == null) return false;
+		if(pageVO.getKeyword() == null) return false;
+		switch(pageVO.getColumn()) {
+		case "member_id":
+		case "member_email":
+		case "member_nickname":
+		case "member_level":
+			return true;
+		}
+		return false;
 	}
 	
 	@RequestMapping("/detail")
 	public String detail(@RequestParam String memberId, Model model) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		if(memberDto == null)
-			throw new TargetNotFoundException("존재하지 않는 회원 ID");
+			throw new TargetNotFoundException("존재하지 않는 회원ID");
 		model.addAttribute("memberDto", memberDto);
 		return "/WEB-INF/views/admin/adminDetail.jsp";
 	}
@@ -91,7 +105,7 @@ public class AdminMemberController {
 	
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute MemberDto memberDto) {
-		boolean result = memberDao.updateMemberAdmin(memberDto);
+		boolean result = memberDao.updateMemberByAdmin(memberDto);
 		if(result == false)
 			throw new TargetNotFoundException("존재하지 않는 회원 ID");
 		return "redirect:detail?memberId="+memberDto.getMemberId();
@@ -132,7 +146,7 @@ public class AdminMemberController {
 	public String cancel(@ModelAttribute BlockDto blockDto) {
 		BlockDto lastDto = blockDao.selectLastOne(blockDto.getBlockTarget());
 		if(lastDto.getBlockType().equals("차단")) {
-		blockDao.cancel(blockDto);
+		blockDao.insertCancel(blockDto);
 		}
 		return "redirect:list";
 	}

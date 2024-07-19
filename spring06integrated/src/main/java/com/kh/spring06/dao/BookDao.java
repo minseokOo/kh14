@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring06.dto.BookDto;
+import com.kh.spring06.dto.EmpDto;
 import com.kh.spring06.mapper.BookMapper;
 import com.kh.spring06.vo.PageVO;
 
@@ -104,4 +105,39 @@ public class BookDao {
 			return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}
+	
+	// 시퀀스 생성 및 등록 메소드
+	public int sequence() {
+		String sql = "select emp_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	public void insertWithSequence(BookDto bookDto) {
+		String sql = "insert into book("
+				+ "book_id, book_title, book_author, book_publication_date, "
+				+ "book_price, book_publisher, book_page_count, book_genre"
+				+ ") "
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?)";
+		Object[] data = {
+				bookDto.getBookTitle(), bookDto.getBookAuthor(), bookDto.getBookPublicationDate(),
+				bookDto.getBookPrice(), bookDto.getBookPublisher(), bookDto.getBookPageCount(),
+				bookDto.getBookGenre()
+		};
+		jdbcTemplate.update(sql, data);
+	}
+	
+	// 연결 기능
+	public void connect(int bookId, int attachmentNo) {
+		String sql = "insert into book_image(book, attachment) "
+				+ "values(?, ?)";
+		Object[] data = {bookId, attachmentNo};
+		jdbcTemplate.update(sql, data);
+	}
+	
+	//이미지 번호 찾기
+	public Integer findImage(int bookNo) {
+		String sql = "select attachment from book_image where book=?";
+		Object[] data = {bookNo};
+		return jdbcTemplate.queryForObject(sql, Integer.class, data);
+	}
+	
 }

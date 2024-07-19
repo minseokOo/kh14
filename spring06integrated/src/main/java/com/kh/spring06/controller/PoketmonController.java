@@ -19,6 +19,7 @@ import com.kh.spring06.dao.AttachmentDao;
 import com.kh.spring06.dao.PoketmonDao;
 import com.kh.spring06.dto.AttachmentDto;
 import com.kh.spring06.dto.PoketmonDto;
+import com.kh.spring06.service.AttachmentService;
 
 @Controller
 @RequestMapping("/poketmon")
@@ -30,7 +31,8 @@ public class PoketmonController {
 	@Autowired
 	private AttachmentDao attachmentDao;
 	
-	
+	@Autowired
+	private AttachmentService attachmentService;
 	
 //	@RequestMapping("/insert1")//입력
 	@GetMapping("/insert")//GET방식만 처리
@@ -61,25 +63,7 @@ public class PoketmonController {
 		
 		//MultipartFile은 비어있을 수 있으므로 조건으로 검사를 해야한다.
 		if(!attach.isEmpty()) {
-			
-			int attachmentNo = attachmentDao.sequence();
-		// 3. 첨부파일 저장(있으면) - 이름이 겹치지 않도록 시퀀스로 이름 설정
-			File dir = new File("D:/upload");
-			dir.mkdirs();
-			
-//			File target = new File(dir, attach.getOriginalFilename());
-			File target = new File(dir, String.valueOf(attachmentNo));
-			attach.transferTo(target);
-			
-		// 4. 첨부파일 정보 등록(attachment)
-			AttachmentDto attachmentDto = new AttachmentDto();
-			attachmentDto.setAttachmentNo(attachmentNo);
-			attachmentDto.setAttachmentName(attach.getOriginalFilename());
-			attachmentDto.setAttachmentType(attach.getContentType());
-			attachmentDto.setAttachmentSize(attach.getSize());
-			attachmentDao.insert(attachmentDto);
-		// 5. 첨부파일이 있다면 포켓몬스터와 첨부파일을 연결(poketmon_image table)
-		// insert into poketmon_image(poketmon, attachment) values(?, ?);
+			int attachmentNo = attachmentService.save(attach);
 			poketmonDao.connect(poketmonNo, attachmentNo);
 			
 		
@@ -121,8 +105,15 @@ public class PoketmonController {
 	//삭제
 	@RequestMapping("/delete")
 	public String delete(@RequestParam int poketmonNo) {
-		boolean result = poketmonDao.delete(poketmonNo);
-		return "redirect:list";
+		try {//일단 파일을 지워봐
+			int attachmentNo = poketmonDao.findImage(poketmonNo);
+			attachmentService.delete(attachmentNo);
+		}
+		catch(Exception e) {}//문제가 생기면 넘어가
+		finally {//문제가 생기든 말든 포켓몬은 무조건 지워야돼
+			poketmonDao.delete(poketmonNo);
+		}
+		return "redirect:list";//목록으로 추방
 	}
 	
 	// 수정 (입력) - 화면에 띄울 정보를 구해서 전달해야 한다

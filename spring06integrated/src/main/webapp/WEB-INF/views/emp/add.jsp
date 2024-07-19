@@ -4,7 +4,10 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
     <h2>사원 정보 등록</h2>
     <br><br>
-    <form action= "./add" method="post">
+    <form action= "./add" method="post" enctype= "multipart/form-data">
+    사진 등록
+    <input name= "attach" type= "file"><br><br>
+    
     사원 이름
     <input name= "empName" type="text" required autocomplete="off">
 	<br>

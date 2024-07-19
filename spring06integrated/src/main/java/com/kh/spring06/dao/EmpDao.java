@@ -25,7 +25,7 @@ public class EmpDao {
 		String sql = "insert into emp("
 				+ "emp_no, emp_name, emp_dept, emp_date, emp_rank, emp_sal"
 				+ ") "
-				+ "values(emp_no_seq.nextval, ?, ?, ?, ?, ?)";
+				+ "values(emp_seq.nextval, ?, ?, ?, ?, ?)";
 		Object[] data = {dto.getEmpName(), dto.getEmpDept(), dto.getEmpDate(), dto.getEmpRank(), dto.getEmpSal()};
 		jdbcTemplate.update(sql, data);
 	}
@@ -72,5 +72,35 @@ public class EmpDao {
 		String sql = "select emp_rank title, count(*) cnt from emp group by emp_rank "
 				+ "order by cnt desc, title asc";
 		return jdbcTemplate.query(sql, statusMapper);
+	}
+	
+	// 시퀀스 생성 및 등록 메소드
+	public int sequence() {
+		String sql = "select emp_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	public void insertWithSequence(EmpDto empDto) {
+		String sql = "insert into emp("
+				+ "emp_no, emp_name, emp_dept, emp_date, emp_rank, emp_sal"
+				+ ") values(?, ?, ?, ?, ?, ?)";
+		Object[] data = {
+				empDto.getEmpNo(), empDto.getEmpName(), empDto.getEmpDept(), 
+				empDto.getEmpDate(), empDto.getEmpRank(), empDto.getEmpSal()
+		};
+		jdbcTemplate.update(sql, data);
+	}
+	
+	//연결 기능
+	public void connect(int empNo, int attachmentNo) {
+		String sql = "insert into emp_photo(emp, attachment) "
+				+ "values(?, ?)";
+		Object[] data = {empNo, attachmentNo};
+		jdbcTemplate.update(sql, data);
+}
+	//이미지 번호 찾기 기능
+	public Integer findImage(int empNo) {
+		String sql = "select attachment from emp_photo where emp=?";
+		Object[] data = {empNo};
+		return jdbcTemplate.queryForObject(sql, Integer.class, data);
 	}
 }

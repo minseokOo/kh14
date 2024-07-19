@@ -7,6 +7,9 @@
 
 <h1>${memberDto.memberId} 님의 개인 정보</h1>
 
+<img src="myImage" width= "100" height= "100">
+
+
 <table border="1" width="400">
 	<tr>
 		<th height= "50">닉네임</th>

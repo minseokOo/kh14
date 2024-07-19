@@ -1,21 +1,23 @@
 package com.kh.spring06.controller;
 
-import java.text.DecimalFormat;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spring06.dao.AttachmentDao;
 import com.kh.spring06.dao.EmpDao;
+import com.kh.spring06.dto.AttachmentDto;
 import com.kh.spring06.dto.EmpDto;
 
  
@@ -24,7 +26,11 @@ import com.kh.spring06.dto.EmpDto;
 public class EmpController {
 	
 	@Autowired
-	private EmpDao dao;
+	private EmpDao empDao;
+	
+	@Autowired
+	private AttachmentDao attachmentDao;
+	
 	
 	// 이 컨트롤러에서 파라미터를 처리하는 규칙을 변경
 	// - 비어있는 문자열("")을 null로 변환하도록 처리
@@ -44,10 +50,44 @@ public class EmpController {
 		return "/WEB-INF/views/emp/add.jsp";
 	}
 	
+//	@PostMapping("/add")
+//	public String add(@ModelAttribute EmpDto dto) {
+//		dao.insert(dto);
+//		return "redirect:addFinish";
+//	}
+	@Transactional
 	@PostMapping("/add")
-	public String add(@ModelAttribute EmpDto dto) {
-		dao.insert(dto);
-		return "redirect:addFinish";
+	public String insert(@ModelAttribute EmpDto empDto, 
+			@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+	int empNo = empDao.sequence();
+	empDto.setEmpNo(empNo);
+	
+	empDao.insertWithSequence(empDto);
+	
+	//MultipartFile은 비어있을 수 있으므로 조건으로 검사를 해야한다.
+			if(!attach.isEmpty()) {
+				
+				int attachmentNo = attachmentDao.sequence();
+			// 3. 첨부파일 저장(있으면) - 이름이 겹치지 않도록 시퀀스로 이름 설정
+				File dir = new File("D:/upload");
+				dir.mkdirs();
+				
+//				File target = new File(dir, attach.getOriginalFilename());
+				File target = new File(dir, String.valueOf(attachmentNo));
+				attach.transferTo(target);
+				
+			// 4. 첨부파일 정보 등록(attachment)
+				AttachmentDto attachmentDto = new AttachmentDto();
+				attachmentDto.setAttachmentNo(attachmentNo);
+				attachmentDto.setAttachmentName(attach.getOriginalFilename());
+				attachmentDto.setAttachmentType(attach.getContentType());
+				attachmentDto.setAttachmentSize(attach.getSize());
+				attachmentDao.insert(attachmentDto);
+				
+				empDao.connect(empNo, attachmentNo);
+			}
+			
+			return "redirect:addFinish";
 	}
 	@RequestMapping("/addFinish")
 	public String addFinish() {
@@ -77,7 +117,7 @@ public class EmpController {
 								@RequestParam(required = false) String keyword) {
 		boolean isSearch = column != null && keyword != null;
 		List<EmpDto> list = isSearch ? 
-				dao.selectList(column, keyword) : dao.selectList() ;
+				empDao.selectList(column, keyword) : empDao.selectList() ;
 		
 		model.addAttribute("list", list);
 		model.addAttribute("column", column);
@@ -89,26 +129,38 @@ public class EmpController {
 	//상세 페이지
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int empNo, Model model) {
-		EmpDto dto = dao.selectOne(empNo);
+		EmpDto dto = empDao.selectOne(empNo);
 			model.addAttribute("dto", dto);
 			return "/WEB-INF/views/emp/detail.jsp";
 	}
 	@RequestMapping("/delete")
 	public String delete(@RequestParam int empNo) {
-		boolean result = dao.remove(empNo);
+		boolean result = empDao.remove(empNo);
 		return "redirect:list";
 	}
 	
 	@GetMapping("/edit")
 	public String edit(Model model, @RequestParam int empNo) {
-		EmpDto dto = dao.selectOne(empNo);
+		EmpDto dto = empDao.selectOne(empNo);
 		model.addAttribute("dto", dto);
 		return "/WEB-INF/views/emp/edit.jsp";
 	}
 	
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute EmpDto dto) {
-		boolean result = dao.edit(dto);
+		boolean result = empDao.edit(dto);
 		return "redirect:detail?empNo="+dto.getEmpNo();
+	}
+	
+	@RequestMapping("/image")
+	public String image(@RequestParam int empNo) {
+		try {
+		Integer attachmentNo = empDao.findImage(empNo);
+		return "redirect:/attach/download?attachmentNo=" + attachmentNo;
+		
+	}
+		catch(Exception e) {//있으면
+			return "redirect:https://placehold.co/150";
+		}
 	}
 }

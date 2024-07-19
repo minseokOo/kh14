@@ -23,6 +23,7 @@
 	<thead>
 		<tr>
 		<th>No.</th>
+		<th>사진</th>
 		<th>이름</th>
 		<th>부서</th>
 		<th>입사일</th>
@@ -35,6 +36,7 @@
 	<c:forEach var= "dto" items="${list}">
 		<tr>
 			<td>${dto.empNo}</td>
+			<td align="center"><img src = "image?empNo=${dto.empNo}" width= "15" height= "15"></td>
 			<td>${dto.empName}</td>
 			<td>${dto.empDept}</td>
 			<td>${dto.empDate}</td>

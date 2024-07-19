@@ -39,6 +39,10 @@ public class AttachmentDao {
 		List<AttachmentDto> list = jdbcTemplate.query(sql, attachmentMapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-	
+	public boolean delete(int attachmentNo) {
+		String sql = "delete attachment where attachment_no = ?";
+		Object[] data = {attachmentNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
 	
 }

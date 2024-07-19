@@ -18,7 +18,7 @@ public class PageVO {
 		public boolean isSearch() {
 			return this.column != null && this.keyword != null;
 		}
-
+		
 		//시작행, 종료행 계산 메소드
 		public int getBeginRow() {
 			return this.page * this.size - (this.size-1);
@@ -29,31 +29,31 @@ public class PageVO {
 		
 		//네비게이터를 위한 메소드
 		public int getStartBlock() {
-			return (this.page-1)/this.blockSize * this.blockSize +1;
+			return (this.page-1) / this.blockSize * this.blockSize + 1;
 		}
 		public boolean isFirst() {
-			return this.getStartBlock() <=1;
+			return this.getStartBlock() <= 1;
 		}
 		public boolean hasPrev() {
 			return !this.isFirst();
 		}
-		public int getPrevBlock() {
+		public int getPrevBlock() {//이전 누르면 나올 페이지 번호
 			return this.getStartBlock()-1;
 		}
-		public int getLastBlock() {//마지막 번호
-			return (this.getCount()-1)/ this.size +1;
+		public int getLastBlock() {//마지막 블록 번호
+			return (this.count-1) / this.size + 1;
 		}
-		public int getFinishBlock() {//표시할 마지막 블록 번호
-			int finishBlock = this.getStartBlock() + this.blockSize -1;
-			return Math.min(this.getLastBlock(), finishBlock);
+		public int getFinishBlock() {//표시할 마지막 블록번호
+			int finishBlock = this.getStartBlock() + this.blockSize - 1;
+			return Math.min(finishBlock, this.getLastBlock());
 		}
 		public boolean isLast() {//마지막 구역인가요?
 			return this.getFinishBlock() >= this.getLastBlock();
 		}
-		public boolean hasNext() {
-			return !this.isLast();
+		public boolean hasNext() {//다음 구역이 있어요?
+			return this.isLast() == false;
 		}
-		public int getNextBlock() {
-			return this.getLastBlock() +1;
+		public int getNextBlock() {//다음 구역 이동시 나올 번호
+			return this.getFinishBlock() + 1;
 		}
-}
+	}

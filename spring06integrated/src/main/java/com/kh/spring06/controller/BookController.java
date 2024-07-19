@@ -19,7 +19,7 @@ import com.kh.spring06.vo.PageVO;
 public class BookController {
 	
 	@Autowired
-	private BookDao dao;
+	private BookDao bookDao;
 	
 //	등록 - 파라미터에 있는 도서정보를 받아서 DAO에게 전달
 	@GetMapping("/save")
@@ -29,7 +29,7 @@ public class BookController {
 	
 	@PostMapping("/save")
 	public String save(@ModelAttribute BookDto dto) {
-		dao.insert(dto);
+		bookDao.insert(dto);
 		return "redirect:saveComplete";
 	}
 	
@@ -66,15 +66,15 @@ public class BookController {
 	
 	@RequestMapping("/list")
 	public String list(@ModelAttribute("pageVO") PageVO pageVO, Model model) {
-		model.addAttribute("list", dao.selectListByPaging(pageVO));
-		pageVO.setCount(dao.countByPaging(pageVO));
+		model.addAttribute("list", bookDao.selectListByPaging(pageVO));
+		pageVO.setCount(bookDao.countByPaging(pageVO));
 		return "/WEB-INF/views/book/list2.jsp";
 	}
 	
 	@RequestMapping("/detail")
 	public String detail(Model model,
 			@RequestParam int bookId) {
-		BookDto dto = dao.selectOne(bookId);
+		BookDto dto = bookDao.selectOne(bookId);
 		if(dto == null) {
 			throw new TargetNotFoundException();
 		}
@@ -85,7 +85,7 @@ public class BookController {
 	
 	@RequestMapping("/edit")
 	public String edit(@ModelAttribute BookDto dto) {
-		boolean result = dao.update(dto);
+		boolean result = bookDao.update(dto);
 		if(result) {
 			return "/WEB-INF/views/book/noBookId.jsp";
 		}
@@ -96,7 +96,7 @@ public class BookController {
 	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam int bookId) {
-		boolean result = dao.delete(bookId);
+		boolean result = bookDao.delete(bookId);
 		return "redirect:list";
 	}
 	

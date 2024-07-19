@@ -1,5 +1,8 @@
 package com.kh.spring06.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,11 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring06.dao.BlockDao;
 import com.kh.spring06.dao.MemberDao;
 import com.kh.spring06.dto.BlockDto;
 import com.kh.spring06.dto.MemberDto;
+import com.kh.spring06.service.AttachmentService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -24,16 +29,37 @@ public class MemberController {
 	private MemberDao memberDao;
 	@Autowired
 	private BlockDao blockDao;
+	@Autowired
+	private AttachmentService attachmentService;
+	
 	//회원가입
 	@GetMapping("/join")
 	public String join() {
 		return "/WEB-INF/views/member/join.jsp";
 	}
+//	@PostMapping("/join")
+//	public String join(@ModelAttribute MemberDto memberDto) {
+//		memberDao.insert(memberDto);
+//		return "redirect:joinFinish";
+//	}
+	
 	@PostMapping("/join")
-	public String join(@ModelAttribute MemberDto memberDto) {
+	public String join(@ModelAttribute MemberDto memberDto, MultipartFile attach) throws IllegalStateException, IOException {
+		// 1. 회원가입
 		memberDao.insert(memberDto);
+		
+		if(attach.isEmpty() == false) {
+			// 2. 첨부파일이 있다면 등록
+			// 2-1. 시퀀스 생성
+			int attachmentNo = attachmentService.save(attach);
+			// 3. 회원 이미지에 연결정보 저장
+			memberDao.connect(memberDto.getMemberId(), attachmentNo);
+			
+		}
+		
 		return "redirect:joinFinish";
 	}
+	
 	@RequestMapping("/joinFinish")
 	public String joinFinish() {
 		return "/WEB-INF/views/member/joinFinish.jsp";
@@ -103,7 +129,7 @@ public class MemberController {
 		String createdUser = (String) session.getAttribute("createdUser");
 		MemberDto memberDto = memberDao.selectOne(createdUser);
 		model.addAttribute("memberDto", memberDto);
-		model.addAttribute("blockList", blockDao.blockList(createdUser));
+		model.addAttribute("blockList", blockDao.selectList(createdUser));
 		return "/WEB-INF/views/member/mypage.jsp";
 	}
 	
@@ -176,7 +202,15 @@ public class MemberController {
 	boolean isValid = inputDto.getMemberPw().equals(findDto.getMemberPw());
 	if(!isValid) return "redirect:exit?error";
 	inputDto.setMemberId(memberId);
-	memberDao.delete(memberId);
+	try {
+		int attachmentNo = memberDao.findImage(memberId);
+		attachmentService.delete(attachmentNo);
+	}
+	catch(Exception e) {}
+	finally {
+		memberDao.delete(memberId);
+	}
+	
 	session.removeAttribute("createdUser");
 	session.removeAttribute("createdLevel");
 	return "redirect:goodbye";
@@ -193,6 +227,31 @@ public class MemberController {
 		return "/WEB-INF/views/member/block.jsp";
 	}
 	
+	//이미지 찾기
+	@RequestMapping("/myImage")
+	public String myImage(HttpSession session) {
+		try {
+		String memberId = (String) session.getAttribute("createUser");
+		int attachmentNo = memberDao.findImage(memberId);
+		return "redirect:/attach/download?attachmentNo="  + attachmentNo;
+		}
+		catch (Exception e) {
+			return "redirect:/images/user.jpg";
+		
+		}
+	}
+	
+	@RequestMapping("/image")
+	public String image(@RequestParam String memberId) {
+		try {
+		int attachmentNo = memberDao.findImage(memberId);
+		return "redirect:/attach/download?attachmentNo="  + attachmentNo;
+		}
+		catch (Exception e) {
+			return "redirect:/images/user.jpg";
+		
+		}
+	}
 	
 	
 	

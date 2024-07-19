@@ -10,6 +10,8 @@
 	 <h2>존재하지 않는 번호</h2>
 	</c:when>
 	<c:otherwise>
+	
+	<img src = "image?empNo=${dto.empNo}" width= "150" height= "150">
 <table border="1">
 	<tr>
 		<th>번호</th>
