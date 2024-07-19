@@ -10,11 +10,11 @@
 	<c:when test= "${images.isEmpty()}"}>
 		<h3>이 도서는 미리보기 이미지가 없습니다.</h3>
 	</c:when>
-	<otherwise>
+	<c:otherwise>
 		<c:forEach var= "no" items= "${images}">
 			<img src= "/attach/download?attachmentNo=${no}" width="50" height="50">
 		</c:forEach>
-	</otherwise>
+	</c:otherwise>
 </c:choose>
     <table border= "1">
     	<tr>
