@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KH정보교육원 - 로그인</title>
+    <style>
+        h1{
+            color: #444444;
+        }
+        h1:nth-child(1){
+            margin: 0px 130px 0px 125px;
+        }
+        input[name=memberId]{
+            font-size: 16px;
+            font-family: sans-serif;
+            width: 320px;
+            padding: 10px;
+            background-color: #ffffff;
+            border-color: rgb(199, 199, 199);
+            border-style: solid;
+            border-width: 1px;
+        }
+        input[name=memberPw]{
+            font-size: 16px;
+            font-family: sans-serif;
+            width: 320px;    
+            padding: 10px;
+            margin-top: 8px;
+            background-color: #ffffff;
+            border-color: rgb(199, 199, 199);
+            border-style: solid;
+            border-width: 1px;
+        }
+        button[name=loginButton]{
+            font-size: 16px;
+            color: #ffffff;
+            padding: 10px 145px 10px 145px;
+            background-color: #222222;
+            margin-top: 8px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>로그인</h1>
+<form action="login" method="post">
+    <input type="text" name="memberId"  placeholder= "아이디 (*이메일 형식 입력불가)"><br>
+    <input type="password" name="memberPw" placeholder="비밀번호"><br>
+    <button name="loginButton">로그인</button>
+    
+</form>
+</body>
+</html>
