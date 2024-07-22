@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KH정보교육원 - 로그인</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+        /*영역을 시각적으로 표시하기 위한 테스트 코드*/
+        /*div{
+            box-shadow: 0 0 1px 0 gray;
+        }
+        */
+
+        /* 컨테이너 디자인 */
+        .container {
+            width: 300px;
+            /*좌우 여백을 auto로 주면 자동으로 동일하게 맞춰 가운데 정렬이 된다.*/
+            margin: 50px auto;
+        }
+        
+        /* 행 디자인 */
+        .row {
+            margin: 10px 0;
+        }
+        
+        .title {
+            text-align: center;
+        }
+
+        .field, 
+        .btn {
+            width: 100%;
+            font-size: 16px;
+            padding: 0.5em;
+
+        }
+
+        .btn {
+            color: #ffffff;
+            background-color: #222222;
+            border: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <form autocomplete="off">
+    <div class="container">
+        <div class="row">
+            <h2 class="title">로그인</h2>
+        </div>
+        <div class="row">
+            <input class="field" type="text" name="memberId" placeholder= "아이디 (*이메일 형식 입력불가)">
+        </div>
+        <div class="row">
+            <input class="field" type="password" name="memberPw" placeholder="비밀번호">
+        </div>
+        <div class="row">
+            <button class="btn">로그인</button>
+        </div>
+    </div>
+    </form>
+</body>
+</html>
