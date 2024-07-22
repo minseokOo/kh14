@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KH정보교육원 - 로그인</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+        
+
+        /* 컨테이너 디자인 */
+        .container {
+            width: 300px;
+            /*좌우 여백을 auto로 주면 자동으로 동일하게 맞춰 가운데 정렬이 된다.*/
+            margin: 50px auto;
+        }
+        
+        /* 행 디자인 */
+        .row {
+            margin: 10px 0;
+        }
+        
+        .title {
+            text-align: center;
+        }
+
+        .field, 
+        .btn {
+            width: 100%;
+            font-size: 16px;
+            padding: 0.5em;
+
+        }
+        .field{
+            border-color: lightgray;
+            border-radius: 5px;
+            border-width: 1px;
+            border-style: double;
+        }
+        .btn {
+            color: #ffffff;
+            background-color: rgb(76, 181, 249);
+            border: none;
+            border-radius: 5px;
+        }
+        .a {
+            display: block;
+            color: darkcyan;
+            text-align: center;
+            font-size: 12px;
+            text-decoration-line: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <form autocomplete="off">
+    <div class="container">
+        <div class="row">
+            <h1 class="title">Instagram</h1>
+        </div>
+        <div class="row">
+            <input class="field" type="text" name="memberId" placeholder= "전화번호, 사용자 이름 또는 이메일">
+        </div>
+        <div class="row">
+            <input class="field" type="password" name="memberPw" placeholder="비밀번호">
+        </div>
+        <div class="row">
+            <button class="btn">로그인</button>
+        </div>
+        <div class="row">
+            <a href="#" class= "a">비밀번호를 잊으셨나요?</a>
+        </div>
+    </div>
+    </form>
+</body>
+</html>
