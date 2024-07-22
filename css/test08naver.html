@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KH정보교육원 - 로그인</title>
+    <title>네이버 - 로그인</title>
+    
     <style>
         *{
             box-sizing: border-box;
@@ -56,21 +57,25 @@
             border-top-left-radius: 5px;
         }
         input[name="memberPw"]{
+            border-top:none;
             border-bottom-right-radius: 5px;
             border-bottom-left-radius: 5px;
         }
+        .center {
+    text-align: center;
+    margin-bottom: 30px;
+}
+    
     </style>
 </head>
 <body>
     <form autocomplete="off" action="login" method="post">
     <div class="container">
-        <div class="row">
-            <h1 class="title">NAVER</h1>
+        <div class="row center">
+            <a href="https://www.naver.com"><img src="images/naver_bi.png" width="200px"></a>
         </div>
         <div class="row">
             <input class="field" type="text" name="memberId" placeholder= "아이디">
-        </div>
-        <div class="row">
             <input class="field" type="password" name="memberPw" placeholder="비밀번호">
         </div>
         <div class="row">
@@ -80,3 +85,5 @@
     </form>
 </body>
 </html>
+
+
