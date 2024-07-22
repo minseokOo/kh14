@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kakao - 로그인</title>
+    <title>쿠팡 - 로그인</title>
     <style>
         *{
             box-sizing: border-box;
@@ -13,7 +13,7 @@
 
         /* 컨테이너 디자인 */
         .container {
-            width: 300px;
+            width: 400px;
             /*좌우 여백을 auto로 주면 자동으로 동일하게 맞춰 가운데 정렬이 된다.*/
             margin: 50px auto;
         }
@@ -35,29 +35,33 @@
             height: 40px;
 
         }
+        input[name=memberId]{
+            margin-top: 20px;
+        }
         .field{
             border-color: lightgray;
             border-width: 1px;
             border-style: solid;
-            border-top: none;
-            border-right: none;
-            border-left: none;
+            
             
         }
         .btn {
-            color: #000000;
-            background-color: yellow;
+            color: #ffffff;
+            background-color: rgb(104, 88, 255);
             border: none;
             border-radius: 5px;
             margin: 7px 0 15px 0;
         }
         .btn2 {
             box-sizing: border-box;
-            width: 300px;
+            width: 400px;
             height: 40px;
             color: #000000;
-            background-color: rgb(231, 231, 231);
-            border: none;
+            background-color: rgb(255, 255, 255);
+            
+            border: 1px;
+            border-style: solid;
+            border-color: lightgray;
             border-radius: 5px;
             margin: 7px 0 15px 0;
         }
@@ -79,10 +83,10 @@
     <form autocomplete="off" action="login" method="post">
     <div class="container">
         <div class="row center">
-            <img src="images/카카오 로고 Brown.png" width="100px">
+            <img src="images/Coupang_logo.png" width="200px">
         </div>
         <div class="row">
-            <input class="field" type="text" name="memberId" placeholder= "카카오메일 아이디, 이메일, 전화번호">
+            <input class="field" type="text" name="memberId" placeholder= "아이디(이메일)">
         </div>
         <div class="row">
             <input class="field" type="password" name="memberPw" placeholder="비밀번호">
@@ -92,7 +96,7 @@
         </div>
         <hr>
         <div class="row">
-            <button class="btn2">QR코드 로그인</button>
+            <button class="btn2">회원가입</button>
         </div>
     </div>
     </form>
