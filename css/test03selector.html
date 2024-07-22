@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>선택자</title>
+    <style>
+        /* 태그 선택자 - 태그명으로 대상을 선택하는 방법*/
+        h1{
+            color: #0984e3;
+        }
+        h2{
+            color: aqua;
+        }
+        /* 상태 선택자
+         - 특정 상태의 대상을 선택하는 방법 
+         - nth-child는 순서를 기반으로 선택한다.
+         */
+        h1:nth-child(1){
+            font-style:italic;
+        }
+        h1:nth-child(2){
+            text-decoration: underline;
+        }
+        h1:hover{
+            background-color: red;
+
+        }
+        h2:nth-child(3){
+            font-style:italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello design</h1>
+    <h1>Hello design</h1>
+    <h2>Hello design</h2>
+    <h2>Hello design</h2>
+</body>
+</html>
