@@ -39,7 +39,7 @@
             border-color: lightgray;
             border-radius: 3px;
             border-width: 1px;
-            border-style: double;
+            border-style: solid;
             background-color: rgb(248, 248, 248);
         }
         .btn {
@@ -57,16 +57,27 @@
             text-decoration-line: none;
             margin-top: 20px;
         }
-        
+        /* 정렬과 관련된 클래스 */
+        .left{
+            text-align: left;
+        }
+        .center{
+            text-align: center;
+        }
+        .right{
+            text-align: right;
+        }
+
+
     </style>
 </head>
 <body>
     <form autocomplete="off" action="login" method="post">
     <div class="container">
         <div class="row">
-            <h1 class="title">Instagram</h1>
+            <img src="images/insta.png" width="300px">
         </div>
-        <div class="row">
+        <div class="row center">
             <input class="field" type="text" name="memberId" placeholder= "전화번호, 사용자 이름 또는 이메일">
         </div>
         <div class="row">
@@ -76,7 +87,7 @@
             <button class="btn">로그인</button>
         </div>
         <hr>
-        <div class="row">
+        <div class="row center">
             <a href="#" class= "a">비밀번호를 잊으셨나요?</a>
         </div>
     </div>
