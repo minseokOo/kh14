@@ -9,52 +9,66 @@
             box-sizing: border-box;
         }
 
-        /*영역을 시각적으로 표시하기 위한 테스트 코드*/
-        /*div{
-            box-shadow: 0 0 1px 0 gray;
-        }
-        */
+       
+       
+       
 
-        /* 컨테이너 디자인 */
         .container {
-            width: 300px;
+            width: 400px;
             /*좌우 여백을 auto로 주면 자동으로 동일하게 맞춰 가운데 정렬이 된다.*/
             margin: 50px auto;
         }
         
         /* 행 디자인 */
         .row {
-            margin: 10px 0;
+            
         }
         
         .title {
             text-align: center;
+            color: #03CF5D;
+            
         }
 
         .field, 
         .btn {
             width: 100%;
             font-size: 16px;
-            padding: 0.5em;
-
+            padding: 0.7em;
+            
+        }
+        
+        .field{
+            border-color: lightgray;
+            border-style: solid;
+            border-width: 1px;
         }
 
         .btn {
             color: #ffffff;
-            background-color: #222222;
+            background-color:  #03CF5D;
             border: none;
+            margin-top: 25px;
+            border-radius: 5px;
         }
-        
+        input[name="memberId"]{
+            border-top-right-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+        input[name="memberPw"]{
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
     </style>
 </head>
 <body>
-    <form autocomplete="off">
+    <form autocomplete="off" action="login" method="post">
     <div class="container">
         <div class="row">
-            <h2 class="title">로그인</h2>
+            <h1 class="title">NAVER</h1>
         </div>
         <div class="row">
-            <input class="field" type="text" name="memberId" placeholder= "아이디 (*이메일 형식 입력불가)">
+            <input class="field" type="text" name="memberId" placeholder= "아이디">
         </div>
         <div class="row">
             <input class="field" type="password" name="memberPw" placeholder="비밀번호">
