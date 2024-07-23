@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>쿠팡 - 로그인</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<!-- <link rel="stylesheet" type="text/css" href="./test.css"> -->
     <style>
         *{
             box-sizing: border-box;
@@ -44,17 +46,15 @@
             border-style: solid;
             outline: none;
         }
-        .btn {
+        .btn.btn-positive {
             color: #ffffff;
             background-color: rgb(104, 88, 255);
             border: none;
             border-radius: 5px;
-            margin: 7px 0 15px 0;
+            margin: 7px 0 7px 0;
         }
-        .btn2 {
-            box-sizing: border-box;
-            width: 400px;
-            height: 40px;
+        .btn.btn-neutral {
+            
             color: #000000;
             background-color: rgb(255, 255, 255);
             
@@ -64,16 +64,7 @@
             border-radius: 5px;
             margin: 7px 0 15px 0;
         }
-        /* 정렬과 관련된 클래스 */
-        .left{
-            text-align: left;
-        }
-        .center{
-            text-align: center;
-        }
-        .right{
-            text-align: right;
-        }
+       
 
 
     </style>
@@ -91,11 +82,11 @@
             <input class="field" type="password" name="memberPw" placeholder="비밀번호">
         </div>
         <div class="row">
-            <button class="btn">로그인</button>
+            <button type="summit" class="btn btn-positive">로그인</button>
         </div>
         <hr>
         <div class="row">
-            <button class="btn2">회원가입</button>
+            <button type="button" class="btn btn-neutral">회원가입</button>
         </div>
     </div>
     </form>
