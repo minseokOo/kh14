@@ -46,6 +46,10 @@
     text-align: right;
 }
 
+.field:focus {
+    border-color: gray;
+}
+
  /*
             폭을 제어하는 클래스
             - 자주 사용하는 폭을 클래스로 미리 정의해서 사용하도록 구현

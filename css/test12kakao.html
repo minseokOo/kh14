@@ -16,7 +16,6 @@
         /* 컨테이너 디자인 */
         .container {
             width: 300px;
-            /*좌우 여백을 auto로 주면 자동으로 동일하게 맞춰 가운데 정렬이 된다.*/
             margin: 50px auto;
         }
 
@@ -29,8 +28,7 @@
             text-align: center;
         }
 
-        .field,
-        .btn {
+        .field, .btn {
             width: 100%;
             font-size: 14px;
             padding: 0.5em;
@@ -44,11 +42,9 @@
             border-top: none;
             border-right: none;
             border-left: none;
-            
+            outline: none;
         }
-        .field:focus{
-            color: #ffffff00;
-        }
+        
         .btn {
             color: #000000;
             background-color: yellow;
@@ -66,16 +62,7 @@
             border-radius: 5px;
             margin: 7px 0 15px 0;
         }
-        /* 정렬과 관련된 클래스 */
-        .left{
-            text-align: left;
-        }
-        .center{
-            text-align: center;
-        }
-        .right{
-            text-align: right;
-        }
+       
 
 
     </style>
