@@ -30,6 +30,24 @@
             border-radius: 0.2em;
             cursor: pointer; /*커서모양 변경*/
         }
+        /* 긍정 버튼 디자인 */
+        .btn.btn-positive{
+            border-color: green;
+            background-color: rgb(0, 177, 0);
+            color: white;
+        }
+        /* 부정 버튼 디자인 */
+        .btn.btn-negative{
+            border-color: rgb(139, 0, 0);
+            background-color: red;
+            color: white;
+        }
+        /* 중립 버튼 디자인 */
+        .btn.btn-neutral{
+            border-color: #b2bec3;
+            background-color: #b2bec3;
+            color: white;
+        }
 
     </style>
 </head>
@@ -41,6 +59,28 @@
         <div class="row">
             <button class="btn">버튼</button>
             <a href="#" class="btn">버튼</a>
+            <input type="button" value="버튼" class="btn">
+        </div>
+        <div class="row">
+            <button class="btn btn-positive">긍정</button>
+            <a href="#" class="btn btn-positive">긍정</a>
+            <input type="button" value="긍정" class="btn btn-positive">
+        </div>
+        <div class="row">
+            <button class="btn btn-negative">부정</button>
+            <a href="#" class="btn btn-negative">부정</a>
+            <input type="button" value="부정" class="btn btn-negative">
+        </div>
+        <div class="row">
+            <button class="btn btn-neutral">중립</button>
+            <a href="#" class="btn btn-neutral">중립</a>
+            <input type="button" value="중립" class="btn btn-neutral">
+        </div>
+        <div class="row">
+            <button class="btn btn-positive w-100">한줄 긍정버튼</button>
+        </div>
+        <div class="row right">
+            <button class="btn btn-negative">오른쪽 부정버튼</button>
         </div>
     </div>
 </body>
