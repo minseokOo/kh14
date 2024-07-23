@@ -45,3 +45,141 @@
 .right {
     text-align: right;
 }
+
+ /*
+            폭을 제어하는 클래스
+            - 자주 사용하는 폭을 클래스로 미리 정의해서 사용하도록 구현
+            - 단위는 50px로 하고 최소 200px부터 1200px 사이로 구현
+            - w-??? 과 같은 클래스로 정의
+            - 비율로 설정할 수도 있도록 구현
+        */
+        .w-20 {width:20%;}
+        .w-25 {width:25%;}
+        .w-33 {width:33.3333%;}
+        .w-50 {width:50%;}
+        .w-66 {width:66%;}
+        .w-75 {width:75%;}
+        .w-80 {width:80%;}
+        .w-100 {width:100%;}
+
+        .w-200 {width: 200px;}
+        .w-250 {width: 250px;}
+        .w-300 {width: 300px;}
+        .w-350 {width: 350px;}
+        .w-400 {width: 400px;}
+        .w-450 {width: 450px;}
+        .w-500 {width: 500px;}
+        .w-550 {width: 550px;}
+        .w-600 {width: 600px;}
+        .w-650 {width: 650px;}
+        .w-700 {width: 700px;}
+        .w-750 {width: 750px;}
+        .w-800 {width: 800px;}
+        .w-850 {width: 850px;}
+        .w-900 {width: 900px;}
+        .w-950 {width: 950px;}
+        .w-1000 {width: 1000px;}
+        .w-1050 {width: 1050px;}
+        .w-1100 {width: 1100px;}
+        .w-1150 {width: 1150px;}
+        .w-1200 {width: 1200px;}
+
+        /*
+            여백 스타일 (margin, padding)
+            - 여백의 종류와 방향에 따라 단위별로 디자인을 미리 구현
+            - 방향의 종류 - top / bottom / start(left) / end(right) / x / y
+        */
+        .mt-0 {margin-top: 0px;}
+        .mt-10 {margin-top: 10px;}
+        .mt-20 {margin-top: 20px;}
+        .mt-30 {margin-top: 30px;}
+        .mt-40 {margin-top: 40px;}
+        .mt-50 {margin-top: 50px;}
+
+        .mb-0 {margin-bottom: 0px;}
+        .mb-10 {margin-bottom: 10px;}
+        .mb-20 {margin-bottom: 20px;}
+        .mb-30 {margin-bottom: 30px;}
+        .mb-40 {margin-bottom: 40px;}
+        .mb-50 {margin-bottom: 50px;}
+
+        .ms-0 {margin-left: 0px;}
+        .ms-10 {margin-left: 10px;}
+        .ms-20 {margin-left: 20px;}
+        .ms-30 {margin-left: 30px;}
+        .ms-40 {margin-left: 40px;}
+        .ms-50 {margin-left: 50px;}
+
+        .me-0 {margin-right: 0px;}
+        .me-10 {margin-right: 10px;}
+        .me-20 {margin-right: 20px;}
+        .me-30 {margin-right: 30px;}
+        .me-40 {margin-right: 40px;}
+        .me-50 {margin-right: 50px;}
+
+        .mx-0 {margin-left: 0px; margin-right: 0px;}
+        .mx-10 {margin-left: 10px; margin-right: 10px;}
+        .mx-20 {margin-left: 20px; margin-right: 20px;}
+        .mx-30 {margin-left: 30px; margin-right: 30px;}
+        .mx-40 {margin-left: 40px; margin-right: 40px;}
+        .mx-50 {margin-left: 50px; margin-right: 50px;}
+
+        .my-0 {margin-top: 0px; margin-bottom: 0px;}
+        .my-10 {margin-top: 10px; margin-bottom: 10px;}
+        .my-20 {margin-top: 20px; margin-bottom: 20px;}
+        .my-30 {margin-top: 30px; margin-bottom: 30px;}
+        .my-40 {margin-top: 40px; margin-bottom: 40px;}
+        .my-50 {margin-top: 50px; margin-bottom: 50px;}
+
+        .pt-0 {padding-top: 0px;}
+        .pt-10 {padding-top: 10px;}
+        .pt-20 {padding-top: 20px;}
+        .pt-30 {padding-top: 30px;}
+        .pt-40 {padding-top: 40px;}
+        .pt-50 {padding-top: 50px;}
+
+        .pb-0 {padding-bottom: 0px;}
+        .pb-10 {padding-bottom: 10px;}
+        .pb-20 {padding-bottom: 20px;}
+        .pb-30 {padding-bottom: 30px;}
+        .pb-40 {padding-bottom: 40px;}
+        .pb-50 {padding-bottom: 50px;}
+
+        .ps-0 {padding-left: 0px;}
+        .ps-10 {padding-left: 10px;}
+        .ps-20 {padding-left: 20px;}
+        .ps-30 {padding-left: 30px;}
+        .ps-40 {padding-left: 40px;}
+        .ps-50 {padding-left: 50px;}
+
+        .pe-0 {padding-right: 0px;}
+        .pe-10 {padding-right: 10px;}
+        .pe-20 {padding-right: 20px;}
+        .pe-30 {padding-right: 30px;}
+        .pe-40 {padding-right: 40px;}
+        .pe-50 {padding-right: 50px;}
+
+        .px-0 {padding-left: 0px; padding-right: 0px;}
+        .px-10 {padding-left: 10px; padding-right: 10px;}
+        .px-20 {padding-left: 20px; padding-right: 20px;}
+        .px-30 {padding-left: 30px; padding-right: 30px;}
+        .px-40 {margin-left: 40px; padding-right: 40px;}
+        .px-50 {padding-left: 50px; padding-right: 50px;}
+
+        .py-0 {padding-top: 0px; padding-bottom: 0px;}
+        .py-10 {padding-top: 10px; padding-bottom: 10px;}
+        .py-20 {padding-top: 20px; padding-bottom: 20px;}
+        .py-30 {padding-top: 30px; padding-bottom: 30px;}
+        .py-40 {padding-top: 40px; padding-bottom: 40px;}
+        .py-50 {padding-top: 50px; padding-bottom: 50px;}
+
+         /*
+            입력창 확장 클래스 (.field-underline)
+        */
+        .field.field-underline{
+            border-left: none;
+            border-top: none;
+            border-right: none;
+            padding-left: 5px;
+            padding-right: 5px;
+        }

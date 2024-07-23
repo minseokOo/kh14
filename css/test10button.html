@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>버튼 디자인</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <link rel="stylesheet" type="text/css" href="./test.css">
+    <style>
+        /*
+            버튼 스타일
+            - <button>, <input>, <a> 등이 버튼이 될 수 있다.
+            - 모든 종류가 동일한 모양을 가져야 한다.
+            - 버튼마다 역할이 있으며, 그에 걸맞는 색상을 가져야 한다.
+                1. 긍정버튼 - 현재 화면의 목적을 달성할 수 있는 버튼
+                2. 부정버튼 - 작업을 중지하거나 위험한 작업에 대한 버튼
+                3. 중립버튼 - 제 3의 작업을 발생시키는 버튼
+
+            - 기본 스타일 : .btn
+        */
+        .btn{
+            color: black;
+            font-size: 16px; /* 입력창이랑 동일하게 */
+            font-family: Maplestory light;
+            text-decoration: none; /* 밑줄 제거 */
+            display: inline-block;/* 한줄에 여러개 배치 + 폭 설정 가능 (a 태그는 기본값이 inline이라 폭 설정 불가능)*/
+            border: 1px solid black;  
+            padding:0.5em 0.75em; /* 입력창이랑 동일하게 */
+            background-color: rgb(231, 231, 231);
+            border-radius: 0.2em;
+            cursor: pointer; /*커서모양 변경*/
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container w-400 my-50">
+        <div class="row center">
+            <h1>버튼 디자인</h1>
+        </div>
+        <div class="row">
+            <button class="btn">버튼</button>
+            <a href="#" class="btn">버튼</a>
+        </div>
+    </div>
+</body>
+</html>
