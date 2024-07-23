@@ -71,6 +71,14 @@ textarea.field {
     padding-left: 5px;
     padding-right: 5px;
 }
+/* 이미지가 있는 입력 필드 */
+.field.field-image {
+    background-size: 1em;
+    background-repeat: no-repeat;
+    background-position-x: 0.5em;
+    background-position-y: center;
+    padding-left: 2em;
+}
 
  /*
             폭을 제어하는 클래스

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배경 이미지 넣기</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+    <style>
+        /* 이미지가 있는 입력 필드 */
+        .field.field-image {
+            background-size: 1em;
+            background-repeat: no-repeat;
+            background-position-x: 0.5em;
+            background-position-y: center;
+            padding-left: 2em;
+        }
+        [name=memberId]{
+            background-image: url("images/user.png");
+        }
+        [name=memberPw]{
+            background-image: url("images/password.png");
+        }
+    </style>
+</head>
+<body>
+    <div class="container w-400 my-50">
+        <div class="row center"><h1>배경 이미지 넣기</h1></div>
+        <form action="login" method="post" autocomplete="off">
+        <div>
+            <input name="memberId" type="text" class="field field-image w-100" placeholder="ID">
+        </div>
+        <div>
+            <input name="memberPw" type="password" class="field field-image w-100" placeholder="password">
+        </div>
+        </form>
+    </div>
+</body>
+</html>
