@@ -7,7 +7,7 @@
 
 <%--(추가) 전달된 도서 이미지(images) 번호를 이용하여 이미지 태그를 생성 --%>
 <c:choose>
-	<c:when test= "${images.isEmpty()}"}>
+	<c:when test= "${images.isEmpty()}">
 		<h3>이 도서는 미리보기 이미지가 없습니다.</h3>
 	</c:when>
 	<c:otherwise>
