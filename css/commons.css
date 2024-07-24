@@ -54,6 +54,11 @@
     border-radius: 0.1em;
     line-height: 1.2;
 }
+.field:not(textarea), 
+.btn { /* class=field 중에서 textarea 빼고 선택 */
+    height: 2.5em !important;
+    vertical-align: middle;
+}
 .field:focus { /* focus : 선택하여 커서가 위치할 때만 적용되는 스타일*/
     border-color: rgb(39, 39, 39);
 }
@@ -63,7 +68,7 @@ textarea.field {
     min-height: 120px;
 }
 /*
-    입력창 확장 클래스 (.field-underline)
+입력창 확장 클래스 (.field-underline)
 */
 .field.field-underline{
     border-left: none;
@@ -218,7 +223,10 @@ textarea.field {
             padding-left: 5px;
             padding-right: 5px;
         }
-
+        .btn:hover{
+            filter: brightness(150%);
+        }
+       
         /* 긍정 버튼 디자인 */
         .btn.btn-positive{
             border-color: green;
@@ -297,3 +305,4 @@ textarea.field {
     .table.table-horizontal > tfoot {
         border-top: 1px solid black;
     }
+    
