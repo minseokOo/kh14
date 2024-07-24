@@ -16,6 +16,13 @@
             border-radius: 3px;
             text-decoration-line: none;
         }
+        .btn.btn-menu{
+            background-color: rgb(187, 186, 255);
+            color: rgb(0, 0, 131);
+            border-radius: 3px;
+            text-decoration-line: none;
+            
+        }
 
     </style>
 
@@ -41,29 +48,29 @@
 			- 로그인 상태 : sessionScope.createdUser != null
 			
 			-->
-		<div>
+		<div class="row mt-10">
 			<c:choose>
 				<c:when test= "${sessionScope.createdUser != null}">
-					<a class="btn btn-neutral" href= "/">홈으로</a>
-					<a class="btn btn-neutral" href= "/poketmon/list">포켓몬스터</a>
-					<a class="btn btn-neutral" href= "/emp/list">사원정보</a>	
-					<a class="btn btn-neutral" href= "/book/list">도서정보</a>
-					<a class="btn btn-neutral" href= "/member/mypage">내정보</a>
-					<a class="btn btn-neutral" href= "/board/list">게시판</a>
-					<a class="btn btn-neutral" href= "/member/logout">로그아웃</a>
+					<a class="btn btn-menu" href= "/">홈으로</a>
+					<a class="btn btn-menu" href= "/poketmon/list">포켓몬스터</a>
+					<a class="btn btn-menu" href= "/emp/list">사원정보</a>	
+					<a class="btn btn-menu" href= "/book/list">도서정보</a>
+					<a class="btn btn-menu" href= "/member/mypage">내정보</a>
+					<a class="btn btn-menu" href= "/board/list">게시판</a>
+					<a class="btn btn-menu" href= "/member/logout">로그아웃</a>
 					
 					<c:if test= "${sessionScope.createdLevel == '관리자' }">
 					<!-- 관리자 메뉴 -->
-					<a class="btn btn-neutral" href= "/admin/home">[관리메뉴]</a>
+					<a class="btn btn-menu" href= "/admin/home">[관리메뉴]</a>
 					</c:if>
 				</c:when>
 				
 				<c:otherwise>
-					<a class="btn btn-neutral" href= "/">홈으로</a>
-					<a class="btn btn-neutral" href= "/poketmon/list">포켓몬스터</a>
-					<a class="btn btn-neutral" href= "/member/join">회원가입</a>
-					<a class="btn btn-neutral" href= "/member/login">로그인</a>
-					<a class="btn btn-neutral" href= "/board/list">게시판</a>
+					<a class="btn btn-menu" href= "/">홈으로</a>
+					<a class="btn btn-menu" href= "/poketmon/list">포켓몬스터</a>
+					<a class="btn btn-menu" href= "/member/join">회원가입</a>
+					<a class="btn btn-menu" href= "/member/login">로그인</a>
+					<a class="btn btn-menu" href= "/board/list">게시판</a>
 				</c:otherwise>
 			
 			</c:choose>

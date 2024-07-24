@@ -1,5 +1,5 @@
 @charset "UTF-8";
-
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 /*
     앞으로 자주 사용할 디자인 코드들을 보관해두는 파일
 */
@@ -240,6 +240,5 @@ textarea.field {
             border-color: #b2bec3;
             background-color: #b2bec3;
             color: white;
-            line-height: 1.2;
             padding: 0.5em 0.75em;
         }
