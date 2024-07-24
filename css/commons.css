@@ -1,5 +1,7 @@
 @charset "UTF-8";
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link rel = "stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
 /*
     앞으로 자주 사용할 디자인 코드들을 보관해두는 파일
 */
@@ -305,4 +307,24 @@ textarea.field {
     .table.table-horizontal > tfoot {
         border-top: 1px solid black;
     }
-    
+    .pagination {
+        text-align: center;
+    }
+    .pagination > a {
+        color: #636e72;
+        text-decoration: none;
+        display: inline-block;
+
+        
+        padding: 0.5em;
+        min-width: 1.5em;
+        
+        font-size: inherit; /* 외부의 글자 크기를 따른다. */
+    }
+    .pagination > a:hover, /* 마우스가 올라간 경우 */
+    .pagination > a.on /* 활성화 된 경우 */
+    {
+        /* box-shadow : x위치 y위치 번짐 퍼짐 색상; */
+        box-shadow: 0px 0px 0px 1px rgb(206, 206, 206);
+        color: blueviolet;
+    }
