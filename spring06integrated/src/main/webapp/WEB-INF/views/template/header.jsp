@@ -8,6 +8,11 @@
 	<head> <!-- 문서의 정보를 표시하는 태그 -->
 		<title>나의 홈페이지</title>
 		<meta charset= "UTF-8">
+		
+		<!-- 내가 만든 스타일 시트를 불러오는 코드 -->
+	<link rel="stylesheet" type="text/css" href="/css/commons.css">
+	<link rel="stylesheet" type="text/css" href="/css/test.css">
+	
 	</head>
 	<body> <!-- 문서의 출력 내용을 담는 태그 -->
 <!-- 		<h1>내가 만든 홈페이지</h1> -->
