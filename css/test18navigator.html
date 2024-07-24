@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이지 네비게이터</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+
+    <style>
+        /* 페이지 네비게이터 디자인 */
+        .pagination {
+            text-align: center;
+        }
+        .pagination > a {
+            color: #636e72;
+            text-decoration: none;
+            display: inline-block;
+
+            
+            padding: 0.5em;
+            min-width: 1.5em;
+            
+            font-size: inherit; /* 외부의 글자 크기를 따른다. */
+        }
+        .pagination > a:hover, /* 마우스가 올라간 경우 */
+        .pagination > a.on /* 활성화 된 경우 */
+        {
+            /* box-shadow : x위치 y위치 번짐 퍼짐 색상; */
+            box-shadow: 0px 0px 0px 1px rgb(206, 206, 206);
+            color: blueviolet;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container w-800 my-50">
+        <div class="row center">
+            <h1>페이지 네비게이터</h1>
+        </div>
+        <div class="row">
+            <div class="pagination">
+                <a href="#"><i class="fa-solid fa-chevron-left"></i></a>
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">7</a>
+                <a href="#">8</a>
+                <a href="#">9</a>
+                <a href="#">10</a>
+                <a href="#"><i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

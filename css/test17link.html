@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>링크 디자인</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+    <style>
+        /* 
+            링크 디자인
+            - 기본 색상 제거
+            - 밑줄 제거
+            - 호버(hover) 디자인
+        */
+        .link{
+            color: #2d3436;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .link:hover{
+            filter: brightness(200%);
+        }
+        .link.link-animation {
+            /* transition : 항목 시간 타이밍 */
+            transition: transform 0.5s ease-out;
+        }
+        .link.link-animation:hover {
+           
+            transform: rotate(360deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="container w-400">
+        <div class="row center">
+            <h1>링크 디자인</h1>
+        </div>
+        <div class="row">
+            <a href="#">테스트 링크</a>
+            <a href="#" class="link">테스트 링크</a>
+            <a href="#" class="link link-animation">테스트 링크</a>
+        </div>
+    </div>
+</body>
+</html>

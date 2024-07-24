@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +8,15 @@
 	<link rel="stylesheet" type="text/css" href="./test.css">
 </head>
 <body>
+<style>
+	.container{
+		width: 500px;
+	}
 
-<div class="container">
+</style>
+
+
+<div class="container center">
     <div class="row">
         <h2>글 작성</h2>
     </div>
@@ -25,11 +32,11 @@
 
 
 <input type= "hidden" name= "boardWriter" value= "${createdUser}">
-<table border= "1" width = "505">
+<table border= "1" class="row w-100">
 	<thead>
 		<tr>
 			<th>제목</th>
-			<td ><input size= "60" type= "text" name= "boardTitle" required></td>
+			<td ><input class="row" size="63px" type= "text" name= "boardTitle" required></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -42,12 +49,12 @@
 </table>
 
 
-	
+
 	<input type= "hidden" name= "boardViews" value= "0">
 	<input type= "hidden" name= "boardLikes"  value= "0">
 	<input type= "hidden" name= "boardReplies"  value= "0">
 <div class="row">
-    <button class="btn btn-positive center">등록</button>
+    <button class="btn btn-positive">등록</button>
 </div>
 </form>
 
