@@ -4,6 +4,16 @@
    <h2>포켓몬 입력기</h2>
 <!--    <a href="http://localhost:8080/poketmon/list"><button>포켓몬 리스트</button></a> -->
 <!--   <br> -->
+<style>
+	.btn.btn-positive{
+	 background-color: rgb(88, 104, 255);
+     color: blue;
+	border: none;
+    border-radius: 3px;
+    height: 35px;
+    
+	}
+</style>
    <form action= "./insert" method="post" enctype="multipart/form-data">
    
     <div class="container w-400 my-50">

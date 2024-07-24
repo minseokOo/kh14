@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 </div>
+<div class="center">
 		<hr>
 		<!-- 하단(Footer) -->
 		<div>
@@ -14,6 +15,6 @@
 			이메일주소무단수집거부 |
 			파트너사
 		</div>
-		
+</div>
 	</body>
 </html>

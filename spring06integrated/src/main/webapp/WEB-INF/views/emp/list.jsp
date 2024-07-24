@@ -42,7 +42,7 @@
 			<td>${dto.empDate}</td>
 			<td>${dto.empRank}</td>
 			<td>${dto.empSal}원</td>
-			<th><a href= "detail?empNo=${dto.empNo}">상세</a></th>
+			<th><a class="btn btn-neutral" href= "detail?empNo=${dto.empNo}">상세</a></th>
 		</tr>
 	</c:forEach>
 	

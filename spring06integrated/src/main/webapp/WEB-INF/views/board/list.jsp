@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<div class="container center w-800">
+<div class="row center">
 <h1>글 목록</h1>
+</div>
 
 <h2>데이터 개수 : ${list.size()}</h2>
 <table border= "1" >
@@ -39,34 +43,35 @@
 <br>
 <!-- 네비게이터 -->
 <%-- 이전 버튼은 첫 번째 구간이 아닐 때(startBlock > 1) 나온다. --%>
-<h3>
-<c:if test="${startBlock > 1}">
-<a href= "list?column=${param.column}&keyword=${param.keyword}&page=${startBlock-1}">이전</a> 
+<div class="pagination">
+<c:if test="${pageVO.hasPrev()}">
+<a href= "list?column=${pageVO.column}&keyword=${pageVO.keyword}&page=${pageVO.prevBlock}">이전</a> 
 </c:if>
 <%-- 
 	startBlock부터 
 	finishBlock과 lastBlock중 작은 값 까지
  	반복문으로 링크 출력 
 --%>
-<c:forEach var= "n" begin= "${startBlock}" 
-										end="${Math.min(finishBlock, lastBlock)}" step="1">
+<c:forEach var= "n" begin= "${pageVO.startBlock}" 
+										end="${pageVO.finishBlock}" step="1">
 	<c:choose>
-		<c:when test= "${param.page == n}">
+		<c:when test= "${pageVO.page == n}">
 			<a>${n}</a>
 		</c:when>
 		<c:otherwise>
-			<a href="list?column=${param.column}&keyword=${param.keyword}&page=${n}">${n}</a>
+			<a href="list?column=${pageVO.column}&keyword=${pageVO.keyword}&page=${n}">${n}</a>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
 <%--다음 버튼은 마지막 구간이 아닐 때(finishBlock < lastBlock) 나온다 --%>
-<c:if test= "${finishBlock < lastBlock}">
-	<a href= "list?column=${param.column}&keyword=${param.keyword}&page=${finishBlock+1}">다음</a></h3>
+<c:if test= "${pageVO.hasNext()}">
+	<a href= "list?column=${pageVO.column}&keyword=${pageVO.keyword}&page=${pageVO.nextBlock}">다음</a></h3>
 </c:if>
+</div>
 <%-- 비회원일 때와 회원일 때 다르게 보이도록 처리 --%>
 <c:choose>
 	<c:when test= "${sessionScope.createdUser != null}">
-		<h2><a href= "/board/write">글쓰기</a></h2>
+		<h2><a class="btn btn-neutral"  href= "/board/write">글쓰기</a></h2>
 	</c:when>
 	<c:otherwise>
 		<h2><a title= "로그인 후 사용 가능합니다.">글쓰기</a></h2>
@@ -81,4 +86,5 @@
 	<input type= "text" name= "keyword" placeholder= "검색어" value="${param.keyword}"> 
 	<button>검색</button>
 </form>
+</div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

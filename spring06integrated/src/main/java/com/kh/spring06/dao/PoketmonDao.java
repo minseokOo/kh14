@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring06.dto.BoardDto;
 import com.kh.spring06.dto.PoketmonDto;
 import com.kh.spring06.mapper.PoketmonMapper;
 import com.kh.spring06.mapper.StatusMapper;
+import com.kh.spring06.vo.PageVO;
 import com.kh.spring06.vo.StatusVO;
 
 @Repository //저장관리도구를 등록하는 방법 (영속성 제어도구)
@@ -114,6 +116,101 @@ public class PoketmonDao {
 			Object[] data = {poketmonNo};
 			return jdbcTemplate.queryForObject(sql, Integer.class, data);
 		}
+		//페이징이 적용된 목록
+		public List<PoketmonDto> selectListByPaging(int page, int size){
+			int endRow = page * size;
+			int beginRow = endRow - (size - 1);
+			String sql = "select * from ("
+									+ "select rownum rn, TMP.* from ("
+										+ "select "
+											+ "poketmon_no, poketmon_name, poketmon_type "
+										+ "from poketmon order by poketmon_no desc"
+									+ ")TMP"
+								+ ") where rn between ? and ?";
+			Object[] data = {beginRow, endRow};
+			return jdbcTemplate.query(sql, poketmonMapper, data);
+		}
+		//페이징이 적용된 검색
+		public List<PoketmonDto> selectListByPaging(
+			String column, String keyword, int page, int size){
+			int endRow = page * size;
+			int beginRow = endRow - (size - 1);
+			String sql = "select * from ("
+					+ "select rownum rn, TMP.* from ("
+					+ "select "
+						+ "poketmon_no, poketmon_name, poketmon_type "
+			    		+ " from poketmon " 
+			                + "where instr(" + column + ", ?) > 0 " 
+			                + "order by " + column + " desc, board_no desc"
+				+ ")TMP"
+			+ ") where rn between ? and ?";
+			Object[] data = {keyword, beginRow, endRow};
+			return jdbcTemplate.query(sql, poketmonMapper, data);
+			
+		}
 		
+		//페이징의 마지막 블록 번호를 위해 게시글 수를 구하는 메소드
+		public int countByPaging() {
+			String sql = "select count(*) from poketmon";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+		public int countByPaging(String column, String keyword) {
+			String sql = "select count(*) from board where instr(#1, ?) > 0";
+			sql = sql.replace("#1", column);
+			Object[] data = {keyword};
+			return jdbcTemplate.queryForObject(sql, int.class, data);
+		}
+		
+//		//페이징 객체를 이용한 목록 및 검색 메소드
+//		public List<PoketmonDto> selectListByPaging(PageVO pageVO) {
+//			if(pageVO.isSearch()) {//검색이라면
+//				String sql = "select * from ("
+//									+ "select rownum rn, TMP.* from ("
+//										+ "select "
+//											+ "poketmon_no, poketmon_name, poketmon_type "		
+//										+ "from board "
+//										+ "where instr(#1, ?) > 0 "
+//										+ "connect by prior poketmon_no = poketmon_target "
+//										+ "start with poketmon_target is null "
+//										+ "order siblings by board_group desc, board_no asc"
+//									+ ")TMP"
+//							+ ") where rn between ? and ?";
+//				sql = sql.replace("#1", pageVO.getColumn());
+//				Object[] data = {
+//						pageVO.getKeyword(), 
+//						pageVO.getBeginRow(), 
+//						pageVO.getEndRow() 
+//				};
+//				return jdbcTemplate.query(sql, poketmonMapper, data);
+//			}
+//			else {//목록이라면
+//				String sql = "select * from ("
+//									+ "select rownum rn, TMP.* from ("
+//										+ "select "
+//											+ "poketmon_no, poketmon_name, poketmon_type "
+//										+ "from board "
+//										+  "connect by prior poketmon_no = board_target "
+//										+ "start with board_target is null "
+//										+ "order siblings by board_group desc, board_no asc"
+//									+ ")TMP"
+//							+ ") where rn between ? and ?";
+//				Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+//				return jdbcTemplate.query(sql, boardListMapper, data);
+//			}
+//		}
+//
+//		public int countByPaging(PageVO pageVO) {
+//			if(pageVO.isSearch()) {//검색카운트
+//				String sql = "select count(*) from board where instr(#1, ?) > 0";
+//				sql = sql.replace("#1", pageVO.getColumn());
+//				Object[] data = {pageVO.getKeyword()};
+//				return jdbcTemplate.queryForObject(sql, int.class, data);
+//			}
+//			else {//목록카운트
+//				String sql = "select count(*) from board";
+//				return jdbcTemplate.queryForObject(sql, int.class);
+//			}
+//		}
+//		
 		
 }

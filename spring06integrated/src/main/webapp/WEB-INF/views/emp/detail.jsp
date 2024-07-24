@@ -45,11 +45,11 @@
 	</c:otherwise>
 </c:choose>    
 
-<h2><a href="list">사원 목록보기</a></h2>
-<h2><a href="add">사원 추가하기</a></h2>
+<h2><a class="btn btn-neutral" href="list">사원 목록보기</a></h2>
+<h2><a class="btn btn-neutral" href="add">사원 추가하기</a></h2>
 
 <c:if test= "${dto.empNo != null}">
-<h2><a href= "edit?empNo=${dto.empNo}">사원 수정하기</a></h2>
-<h2><a href= "delete?empNo=${dto.empNo}">사원 삭제하기</a></h2>
+<h2><a class="btn btn-neutral" href= "edit?empNo=${dto.empNo}">사원 수정하기</a></h2>
+<h2><a class="btn btn-neutral" href= "delete?empNo=${dto.empNo}">사원 삭제하기</a></h2>
 </c:if>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -31,12 +31,12 @@
 </c:choose>
 
 <!-- 다른 페이지로 이동할 수 있는 링크 -->
-<h2><a href="insert">신규 포켓몬 등록</a></h2>
-<h2><a href="list">목록으로 이동</a></h2>
+<h2><a class="btn btn-neutral" href="insert">신규 포켓몬 등록</a></h2>
+<h2><a class="btn btn-neutral" href="list">목록으로 이동</a></h2>
 
 <c:if test= "${dto != null}">
-<h2><a href= "edit?poketmonNo=${dto.poketmonNo}">이 몬스터 정보 수정</a></h2>
-<h2><a href= "delete?poketmonNo=${dto.poketmonNo}">이 몬스터 삭제하기</a></h2>
+<h2><a class="btn btn-neutral" href= "edit?poketmonNo=${dto.poketmonNo}">이 몬스터 정보 수정</a></h2>
+<h2><a class="btn btn-neutral" href= "delete?poketmonNo=${dto.poketmonNo}">이 몬스터 삭제하기</a></h2>
 </c:if>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

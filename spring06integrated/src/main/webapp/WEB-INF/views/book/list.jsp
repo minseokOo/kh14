@@ -2,10 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<h1>도서 목록</h1>
+    <style>
+        .btn.btn-neutral{
+            background-color: rgb(101, 101, 250);
+            border-radius: 3px;
+            color: rgb(0, 0, 124);
+        }
+    </style>
+    <h1>도서 목록</h1>
 
 <form action= "list" method= "get">
-	<select name= "column">
+	<select class="field width: 50px" name= "column">
 		<option value= "book_title">도서명</option>
 		<option value= "book_author"> <c:if test="${column == 'book_author'}">selected</c:if></option>
 		
@@ -43,5 +50,7 @@
 	</tbody>		
 </table>
 
-<h2><a href= "save">추가 등록하기</a></h2>
+<h2><a class="btn btn-neutral" href= "save">추가 등록하기</a></h2>
+</body>
+</html>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
