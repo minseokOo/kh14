@@ -242,3 +242,58 @@ textarea.field {
             color: white;
             padding: 0.5em 0.75em;
         }
+
+         /* 
+    테이블디자인 
+    - 테이블은 여러 태그가 조합된 형태
+    - 클래스를 하나만 붙이고 탐색하여 원하는 대상을 찾는다.
+    - 자식선택자, 후손선택자(띄어쓰기)를 사용
+    - 후손선택자는 안에 포함된 모든 대상 중에서 탐색하여 선택
+    - 자식선택자는 바로 아래 대상 중에서 선택
+    */
+    .table{
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 16px;
+    }
+    .table > thead > tr > th, 
+    .table > thead > tr > td, 
+    .table > tbody > tr > th,
+    .table > tbody > tr > td,
+    .table > tfoot > tr > th,
+    .table > tfoot > tr > td
+    {
+        text-align: center;
+        padding: 0.25em;
+    }
+
+    /*확장스타일 - 테두리가 있는 테이블 */
+    .table.table-border,
+    .table.table-border > thead > tr > th, 
+    .table.table-border > thead > tr > td, 
+    .table.table-border > tbody > tr > th,
+    .table.table-border > tbody > tr > td,
+    .table.table-border > tfoot > tr > th,
+    .table.table-border > tfoot > tr > td{
+        border: 1px solid black;
+    }
+    
+    /*확장스타일 - 줄무늬 테이블 */
+    .table.table-stripe > tbody > tr:nth-child(2n-1) {
+        background-color: rgb(223, 223, 255);
+    }
+    /* 확장스타일 - 마우스에 반응하는 테이블 */
+    .table.table-hover > tbody > tr:hover {
+        background-color: antiquewhite;
+    }
+    /* 확장스타일 - 가로선만 있는 테이블 */
+    .table.table-horizontal {
+        border-top: 3px solid black;
+        border-bottom: 3px solid black;
+    }
+    .table.table-horizontal > thead {
+        border-bottom: 1px solid black;
+    }
+    .table.table-horizontal > tfoot {
+        border-top: 1px solid black;
+    }
