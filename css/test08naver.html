@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>네이버 - 로그인</title>
+    
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+       
+       
+       
+
+        .container {
+            width: 400px;
+            /*좌우 여백을 auto로 주면 자동으로 동일하게 맞춰 가운데 정렬이 된다.*/
+            margin: 50px auto;
+        }
+        
+        /* 행 디자인 */
+        .row {
+            
+        }
+        
+        .title {
+            text-align: center;
+            color: #03CF5D;
+            
+        }
+
+        .field, 
+        .btn {
+            width: 100%;
+            font-size: 16px;
+            padding: 0.7em;
+            
+        }
+        
+        .field{
+            border-color: lightgray;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        .btn {
+            color: #ffffff;
+            background-color:  #03CF5D;
+            border: none;
+            margin-top: 25px;
+            border-radius: 5px;
+        }
+        input[name="memberId"]{
+            border-top-right-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+        input[name="memberPw"]{
+            border-top:none;
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+        .center {
+    text-align: center;
+    margin-bottom: 30px;
+}
+    
+    </style>
+</head>
+<body>
+    <form autocomplete="off" action="login" method="post">
+    <div class="container">
+        <div class="row center">
+            <a href="https://www.naver.com"><img src="images/naver_bi.png" width="200px"></a>
+        </div>
+        <div class="row">
+            <input class="field" type="text" name="memberId" placeholder= "아이디">
+            <input class="field" type="password" name="memberPw" placeholder="비밀번호">
+        </div>
+        <div class="row">
+            <button class="btn">로그인</button>
+        </div>
+    </div>
+    </form>
+</body>
+</html>
+
+

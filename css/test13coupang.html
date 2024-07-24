@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쿠팡 - 로그인</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<!-- <link rel="stylesheet" type="text/css" href="./test.css"> -->
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+
+
+        /* 컨테이너 디자인 */
+        .container {
+            width: 400px;
+            /*좌우 여백을 auto로 주면 자동으로 동일하게 맞춰 가운데 정렬이 된다.*/
+            margin: 50px auto;
+        }
+
+        /* 행 디자인 */
+        .row {
+            margin: 10px 0;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .field,
+        .btn {
+            width: 100%;
+            font-size: 14px;
+            padding: 0.5em;
+            height: 40px;
+
+        }
+        input[name=memberId]{
+            margin-top: 20px;
+        }
+        .field{
+            border-color: lightgray;
+            border-width: 1px;
+            border-style: solid;
+            outline: none;
+        }
+        .btn.btn-positive {
+            color: #ffffff;
+            background-color: rgb(104, 88, 255);
+            border: none;
+            border-radius: 5px;
+            margin: 7px 0 7px 0;
+        }
+        .btn.btn-neutral {
+            
+            color: #000000;
+            background-color: rgb(255, 255, 255);
+            
+            border: 1px;
+            border-style: solid;
+            border-color: lightgray;
+            border-radius: 5px;
+            margin: 7px 0 15px 0;
+        }
+       
+
+
+    </style>
+</head>
+<body>
+    <form autocomplete="off" action="login" method="post">
+    <div class="container">
+        <div class="row center">
+            <img src="images/Coupang_logo.png" width="200px">
+        </div>
+        <div class="row">
+            <input class="field" type="text" name="memberId" placeholder= "아이디(이메일)">
+        </div>
+        <div class="row">
+            <input class="field" type="password" name="memberPw" placeholder="비밀번호">
+        </div>
+        <div class="row">
+            <button type="summit" class="btn btn-positive">로그인</button>
+        </div>
+        <hr>
+        <div class="row">
+            <button type="button" class="btn btn-neutral">회원가입</button>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

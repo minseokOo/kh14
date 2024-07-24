@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오 계정</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <!-- <link rel="stylesheet" type="text/css" href="./test.css"> -->
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+
+
+        /* 컨테이너 디자인 */
+        .container {
+            width: 300px;
+            margin-top: 50px;
+        }
+
+        .field,
+        .btn {
+            font-size: 14px;
+            padding: 0.5em;
+            height: 40px;
+
+        }
+        
+
+        .btn.btn-positive {
+            color: #000000;
+            background-color: rgb(254, 229, 0);
+            border: none;
+            border-radius: 5px;
+            margin: 7px 0 7px 0;
+        }
+        .btn.btn-neutral {
+            color: #000000;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(240, 240, 240);
+            margin-top: 7px;
+        }
+        
+       
+
+
+    </style>
+</head>
+<body>
+    <form autocomplete="off" action="login" method="post">
+    <div class="container">
+        <div class="row center">
+            <img src="images/카카오 로고 Brown.png" width="100px">
+        </div>
+        <div class="row">
+            <input class="field w-100 field-underline" type="text" name="memberId" placeholder= "카카오메일 아이디, 이메일, 전화번호">
+        </div>
+        <div class="row">
+            <input class="field w-100 field-underline" type="password" name="memberPw" placeholder="비밀번호">
+        </div>
+        <div class="row">
+            <button class="btn btn-positive w-100">로그인</button>
+        </div>
+        <hr>
+        <div class="row">
+            <button class="btn btn-neutral w-100">QR코드 로그인</button>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

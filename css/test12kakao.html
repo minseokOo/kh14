@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kakao - 로그인</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <!-- <link rel="stylesheet" type="text/css" href="./test.css"> -->
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+
+
+        /* 컨테이너 디자인 */
+        .container {
+            width: 300px;
+            margin: 50px auto;
+        }
+
+        /* 행 디자인 */
+        .row {
+            margin: 10px 0;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .field, .btn {
+            width: 100%;
+            font-size: 14px;
+            padding: 0.5em;
+            height: 40px;
+
+        }
+        .field{
+            border-color: lightgray;
+            border-width: 1px;
+            border-style: solid;
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            outline: none;
+        }
+        
+        .btn {
+            color: #000000;
+            background-color: rgb(254, 229, 0);
+            border: none;
+            border-radius: 5px;
+            margin: 7px 0 7px 0;
+        }
+        .btn2 {
+            box-sizing: border-box;
+            width: 300px;
+            height: 40px;
+            color: #000000;
+            background-color: rgb(231, 231, 231);
+            border: none;
+            border-radius: 5px;
+            margin: 7px 0 15px 0;
+        }
+       
+
+
+    </style>
+</head>
+<body>
+    <form autocomplete="off" action="login" method="post">
+    <div class="container">
+        <div class="row center">
+            <img src="images/카카오 로고 Brown.png" width="100px">
+        </div>
+        <div class="row">
+            <input class="field" type="text" name="memberId" placeholder= "카카오메일 아이디, 이메일, 전화번호">
+        </div>
+        <div class="row">
+            <input class="field" type="password" name="memberPw" placeholder="비밀번호">
+        </div>
+        <div class="row">
+            <button class="btn">로그인</button>
+        </div>
+        <hr>
+        <div class="row">
+            <button class="btn2">QR코드 로그인</button>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

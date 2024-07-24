@@ -1,0 +1,238 @@
+@charset "UTF-8";
+
+/*
+    앞으로 자주 사용할 디자인 코드들을 보관해두는 파일
+*/
+
+
+/*
+    모든 태그에 폭 설정 기준을 "테두리"로 지정
+*/
+*{
+    box-sizing: border-box;
+}
+
+/*
+    화면을 만들기 위한 컨테이너(container)와 행(row)에 대한 디자인
+    - 컨테이너는 가운데 정렬 되도록 구현
+    - 폭은 다른 클래스로 지정하도록 구현
+*/
+
+.container {
+    /* 좌우 여백을 자동으로 설정하여 가운데 정렬 */
+    margin-left: auto;
+    margin-right: auto;
+}
+.row{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/*
+    내용물 정렬과 관련된 클래스
+    주로 row에 추가하여 내부 요소들을 정렬할 때 사용
+    (TMI)
+    - left, right는 차별적인 단어라서 사용을 자제
+    - left 대신 start를 사용
+    - right 대신 end를 사용
+*/
+.left{
+    text-align: left !important;
+}
+.center {
+    text-align: center !important;
+}
+.right {
+    text-align: right !important;
+}
+
+.field{
+    font-size: 16px;
+    padding: 0.5em 0.75em;
+    outline: none; /* 브라우저에서 제공하는 자동 강조효과 제거 */
+    border: 1px solid rgb(129, 129, 129);
+    border-radius: 0.1em;
+}
+.field:focus { /* focus : 선택하여 커서가 위치할 때만 적용되는 스타일*/
+    border-color: rgb(39, 39, 39);
+}
+/* textarea는 크기 변경이 수직으로만 가능하도록 구현 */
+textarea.field {
+    resize: vertical;
+    min-height: 120px;
+}
+/*
+    입력창 확장 클래스 (.field-underline)
+*/
+.field.field-underline{
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+/* 이미지가 있는 입력 필드 */
+.field.field-image {
+    background-size: 1em;
+    background-repeat: no-repeat;
+    background-position-x: 0.5em;
+    background-position-y: center;
+    padding-left: 2em;
+}
+
+ /*
+            폭을 제어하는 클래스
+            - 자주 사용하는 폭을 클래스로 미리 정의해서 사용하도록 구현
+            - 단위는 50px로 하고 최소 200px부터 1200px 사이로 구현
+            - w-??? 과 같은 클래스로 정의
+            - 비율로 설정할 수도 있도록 구현
+        */
+        .w-20 {width:20% !important;}
+        .w-25 {width:25% !important;}
+        .w-33 {width:33.3333% !important;}
+        .w-50 {width:50% !important;}
+        .w-66 {width:66% !important;}
+        .w-75 {width:75% !important;}
+        .w-80 {width:80% !important;}
+        .w-100 {width:100% !important;}
+
+        .w-200 {width: 200px !important;}
+        .w-250 {width: 250px !important;}
+        .w-300 {width: 300px !important;}
+        .w-350 {width: 350px !important;}
+        .w-400 {width: 400px !important;}
+        .w-450 {width: 450px !important;}
+        .w-500 {width: 500px !important;}
+        .w-550 {width: 550px !important;}
+        .w-600 {width: 600px !important;}
+        .w-650 {width: 650px !important;}
+        .w-700 {width: 700px !important;}
+        .w-750 {width: 750px !important;}
+        .w-800 {width: 800px !important;}
+        .w-850 {width: 850px !important;}
+        .w-900 {width: 900px !important;}
+        .w-950 {width: 950px !important;}
+        .w-1000 {width: 1000px !important;}
+        .w-1050 {width: 1050px !important;}
+        .w-1100 {width: 1100px !important;}
+        .w-1150 {width: 1150px !important;}
+        .w-1200 {width: 1200px !important;}
+
+        /*
+            여백 스타일 (margin, padding)
+            - 여백의 종류와 방향에 따라 단위별로 디자인을 미리 구현
+            - 방향의 종류 - top / bottom / start(left) / end(right) / x / y
+        */
+        .mt-0 {margin-top: 0px !important;}
+        .mt-10 {margin-top: 10px !important;}
+        .mt-20 {margin-top: 20px !important;}
+        .mt-30 {margin-top: 30px !important;}
+        .mt-40 {margin-top: 40px !important;}
+        .mt-50 {margin-top: 50px !important;}
+
+        .mb-0 {margin-bottom: 0px !important;}
+        .mb-10 {margin-bottom: 10px !important;}
+        .mb-20 {margin-bottom: 20px !important;}
+        .mb-30 {margin-bottom: 30px !important;}
+        .mb-40 {margin-bottom: 40px !important;}
+        .mb-50 {margin-bottom: 50px !important;}
+
+        .ms-0 {margin-left: 0px !important;}
+        .ms-10 {margin-left: 10px !important;}
+        .ms-20 {margin-left: 20px !important;}
+        .ms-30 {margin-left: 30px !important;}
+        .ms-40 {margin-left: 40px !important;}
+        .ms-50 {margin-left: 50px !important;}
+
+        .me-0 {margin-right: 0px !important;}
+        .me-10 {margin-right: 10px !important;}
+        .me-20 {margin-right: 20px !important;}
+        .me-30 {margin-right: 30px !important;}
+        .me-40 {margin-right: 40px !important;}
+        .me-50 {margin-right: 50px !important;}
+
+        .mx-0 {margin-left: 0px !important; margin-right: 0px !important;}
+        .mx-10 {margin-left: 10px !important; margin-right: 10px !important;}
+        .mx-20 {margin-left: 20px !important; margin-right: 20px !important;}
+        .mx-30 {margin-left: 30px !important; margin-right: 30px !important;}
+        .mx-40 {margin-left: 40px !important; margin-right: 40px !important;}
+        .mx-50 {margin-left: 50px !important; margin-right: 50px !important;}
+
+        .my-0 {margin-top: 0px !important; margin-bottom: 0px !important;}
+        .my-10 {margin-top: 10px !important; margin-bottom: 10px !important;}
+        .my-20 {margin-top: 20px !important; margin-bottom: 20px !important;}
+        .my-30 {margin-top: 30px !important; margin-bottom: 30px !important;}
+        .my-40 {margin-top: 40px !important; margin-bottom: 40px !important;}
+        .my-50 {margin-top: 50px !important; margin-bottom: 50px !important;}
+
+        .pt-0 {padding-top: 0px !important;}
+        .pt-10 {padding-top: 10px !important;}
+        .pt-20 {padding-top: 20px !important;}
+        .pt-30 {padding-top: 30px !important;}
+        .pt-40 {padding-top: 40px !important;}
+        .pt-50 {padding-top: 50px !important;}
+
+        .pb-0 {padding-bottom: 0px !important;}
+        .pb-10 {padding-bottom: 10px !important;}
+        .pb-20 {padding-bottom: 20px !important;}
+        .pb-30 {padding-bottom: 30px !important;}
+        .pb-40 {padding-bottom: 40px !important;}
+        .pb-50 {padding-bottom: 50px !important;}
+
+        .ps-0 {padding-left: 0px !important;}
+        .ps-10 {padding-left: 10px !important;}
+        .ps-20 {padding-left: 20px !important;}
+        .ps-30 {padding-left: 30px !important;}
+        .ps-40 {padding-left: 40px !important;}
+        .ps-50 {padding-left: 50px !important;}
+
+        .pe-0 {padding-right: 0px !important;}
+        .pe-10 {padding-right: 10px !important;}
+        .pe-20 {padding-right: 20px !important;}
+        .pe-30 {padding-right: 30px !important;}
+        .pe-40 {padding-right: 40px !important;}
+        .pe-50 {padding-right: 50px !important;}
+
+        .px-0 {padding-left: 0px !important; padding-right: 0px !important;}
+        .px-10 {padding-left: 10px !important; padding-right: 10px !important;}
+        .px-20 {padding-left: 20px !important; padding-right: 20px !important;}
+        .px-30 {padding-left: 30px !important; padding-right: 30px !important;}
+        .px-40 {margin-left: 40px !important; padding-right: 40px !important;}
+        .px-50 {padding-left: 50px !important; padding-right: 50px !important;}
+
+        .py-0 {padding-top: 0px !important; padding-bottom: 0px !important;}
+        .py-10 {padding-top: 10px !important; padding-bottom: 10px !important;}
+        .py-20 {padding-top: 20px !important; padding-bottom: 20px !important;}
+        .py-30 {padding-top: 30px !important; padding-bottom: 30px !important;}
+        .py-40 {padding-top: 40px !important; padding-bottom: 40px !important;}
+        .py-50 {padding-top: 50px !important; padding-bottom: 50px !important;}
+
+         /*
+            입력창 확장 클래스 (.field-underline)
+        */
+        .field.field-underline{
+            border-left: none;
+            border-top: none;
+            border-right: none;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        /* 긍정 버튼 디자인 */
+        .btn.btn-positive{
+            border-color: green;
+            background-color: rgb(0, 177, 0);
+            color: white;
+        }
+        /* 부정 버튼 디자인 */
+        .btn.btn-negative{
+            border-color: rgb(139, 0, 0);
+            background-color: red;
+            color: white;
+        }
+        /* 중립 버튼 디자인 */
+        .btn.btn-neutral{
+            border-color: #b2bec3;
+            background-color: #b2bec3;
+            color: white;
+        }

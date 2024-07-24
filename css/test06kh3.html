@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KH정보교육원 - 로그인</title>
+    <style>
+         /*
+            클래스를 이용하여 "역할"을 지정하고, 선택하여 디자인을 부여
+            클래스는 점(. )을 이용하여 선택자를 작성한다.
+        */
+    *{
+        box-sizing: border-box;
+    }
+
+        .title {
+            width: 300px;
+            text-align: center;
+        }
+        .field, .btn{
+            display: block;
+            width: 300px;
+            padding: 0.625em;
+            margin-top: 8px;
+        }
+        
+       .btn{
+            background-color: #222222;
+            color: #ffffff;
+            border: none;
+       }
+    </style>
+</head>
+<body>
+    <form action="login" method="post">
+        <h1 class="title">로그인</h1>
+        <input class="field" type="text" name="memberId"  placeholder= "아이디 (*이메일 형식 입력불가)">
+        <input class="field" type="password" name="memberPw" placeholder="비밀번호">
+        <button class="btn" name="loginButton">로그인</button>
+    </form>
+</body>
+</html>

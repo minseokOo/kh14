@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주요 CSS 속성들</title>
+    <style>
+        input[name=test1]{
+            /*
+                주요 속성
+                - color : 글자색상 (색상 이름, RGBA, Hex-String), (rgb(9, 132, 227 = #0984e3))
+                - border-* : 테두리
+                - font-* : 글꼴
+                    - serif : 시작과 끝이 꺾이는 글꼴. (ex) 명조, 궁서, arial, ...
+                    - sans-serif : 시작과 끝이 꺾이지 않는 글꼴. (ex) 고딕, 굴림, ....
+                    - monospace : 모든 글자가 같은 폭을 가지는 글꼴. (ex) consolas (한글은 기본적으로 폭이 다 같음)
+                - padding-* : 안쪽 여백
+                - margin-* : 바깥쪽 여백
+                - width : 폭(px), 부여하지 않으면 자동으로 조정
+                - height : 높이(px), 부여하지 않으면 자동으로 조정
+                - background-* : 배경 속성(이미지 or 색상)
+            */
+            color: rgb(248, 96, 96);
+            color: rgb(96, 85, 255); /* 뒤에 칠해진 색깔로 칠해짐*/
+        
+            border-color: #2db400; /*나눠서*/
+            border-width: 5px;
+            border-style: double;
+
+            border: 5px solid #2db400; /*한번에*/
+            border-radius: 5px;
+
+            font-size: 20px; /*단위는 px, 기본크기 16px*/
+            font-family: Maplestory light, sans-serif; /*글씨체, 글씨체가 없을시 플랜b(원본 글씨체가 끝이 꺾이지 않을 경우 sans-serif를 사용) */
+            /*font-style: italic;*/
+
+            /*margin: 50px (전체여백)*/
+            margin: 30px 0px; /*상하 좌우*/
+
+            margin: 30px 0px 30px 0px; /* 12/3/6/9 여백 */
+            margin-bottom:  30px; /*여백 위치 정하기*/
+
+            /* 
+            padding은 글자 크기에 비례해서 주는 경우가 많다.
+            */
+            padding: 10px; /*10px이라는 고정 크기*/
+            padding: 0.5em; /*글자 반개 크기*/
+            
+            width: 250px; /*250px 고정 크기*/
+            width: 50%; /*화면의 50%*/
+            width: 20em; /*글자 20개 크기*/
+
+            /*height: 50px;*/
+
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" name="test1">
+</body>
+</html>

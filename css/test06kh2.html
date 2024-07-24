@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KH정보교육원 - 로그인</title>
+    <style>
+         /*
+            문제1. 폭이 맞지 않는다.
+                - box-sizing 속성으로 폭 설정 기준을 정해야 한다.
+            문제2. 줄바꿈을 <br>로 하고 싶지 않다.
+                - display 속성으로 배치 방식을 정해야 한다.
+                - display:block 이면 한 줄에 하나씩 배치된다.
+                - display:inline
+        */
+        *{  /*전체 선택자*/
+        box-sizing: border-box;
+        
+        }
+        h1{
+            color: #444444;
+            text-align: center;
+            width: 320px;
+            /* text-align은 내부 컴포넌트의 정렬을 설정*/
+        }
+        input[name=memberId]{
+            font-size: 16px;
+            font-family: sans-serif;
+            width: 320px;
+            padding: 0.625em;
+            background-color: #ffffff;
+            border-color: rgb(199, 199, 199);
+            border-style: solid;
+            border-width: 1px;
+            display: block;
+        }
+        input[name=memberPw]{
+            font-size: 16px;
+            font-family: sans-serif;
+            width: 320px;    
+            padding: 0.625em;
+            margin-top: 8px;
+            background-color: #ffffff;
+            border-color: rgb(199, 199, 199);
+            border-style: solid;
+            border-width: 1px;
+            display: block;
+        }
+        button[name=loginButton]{
+            font-size: 16px;
+            
+            color: #ffffff;
+            width: 320px;
+            padding: 0.5em;
+            background-color: #222222;
+            margin-top: 8px;
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>로그인</h1>
+<form action="login" method="post">
+    <input type="text" name="memberId"  placeholder= "아이디 (*이메일 형식 입력불가)">
+    <input type="password" name="memberPw" placeholder="비밀번호">
+    <button name="loginButton">로그인</button>
+    
+</form>
+</body>
+</html>
