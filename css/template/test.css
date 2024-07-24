@@ -1,0 +1,6 @@
+/*
+    div와 같은 투명 영역들에 대한 테스트용 표시 디자인
+*/
+div, span, label{
+    box-shadow: 0 0 1px 0 rgb(53, 53, 53);
+}

@@ -1,0 +1,73 @@
+<!Doctype HTML>
+<html><!-- HTML 문서의 범위를 나타내는 태그 -->
+	<head> <!-- 문서의 정보를 표시하는 태그 -->
+		<title>나의 홈페이지</title>
+		<meta charset= "UTF-8">
+		
+		<!-- 내가 만든 스타일 시트를 불러오는 코드 -->
+	<link rel="stylesheet" type="text/css" href="/css/commons.css">
+	<link rel="stylesheet" type="text/css" href="/css/test.css">
+	
+	</head>
+    <style>
+        .btn.btn-neutral{
+            background-color: rgb(187, 186, 255);
+            color: rgb(0, 0, 131);
+            border-radius: 3px;
+            text-decoration-line: none;
+        }
+
+    </style>
+
+	<body bgcolor='#dff9fb'> <!-- 문서의 출력 내용을 담는 태그 -->
+<!-- 		<h1>내가 만든 홈페이지</h1> -->
+<!-- 		<a href=""></a> -->
+		<!-- 상단(Header) -->
+		<div class="row center">
+            <img src="images/홈페이지.png" width="200px">
+        </div>
+		
+		<!-- 정보 확인용 공간 -->
+		<div>
+			session id = ${pageContext.session.id} , 
+			createdUser = ${sessionScope.createdUser} ,
+			createdLevel = ${sessionScope.createdLevel}
+		</div>
+		
+		<!-- 
+			메뉴(Navbar) 
+			- (중요) 템플릿 페이지의 모든 경호는 전부 다 절대경로로 사용
+			- 로그인 상태일 때와 비로그인 상태일 때 다르게 표시
+			- 로그인 상태 : sessionScope.createdUser != null
+			
+			-->
+		<div>
+			<c:choose>
+				<c:when test= "${sessionScope.createdUser != null}">
+					<a class="btn btn-neutral" href= "/">홈으로</a>
+					<a class="btn btn-neutral" href= "/poketmon/list">포켓몬스터</a>
+					<a class="btn btn-neutral" href= "/emp/list">사원정보</a>	
+					<a class="btn btn-neutral" href= "/book/list">도서정보</a>
+					<a class="btn btn-neutral" href= "/member/mypage">내정보</a>
+					<a class="btn btn-neutral" href= "/board/list">게시판</a>
+					<a class="btn btn-neutral" href= "/member/logout">로그아웃</a>
+					
+					<c:if test= "${sessionScope.createdLevel == '관리자' }">
+					<!-- 관리자 메뉴 -->
+					<a class="btn btn-neutral" href= "/admin/home">[관리메뉴]</a>
+					</c:if>
+				</c:when>
+				
+				<c:otherwise>
+					<a class="btn btn-neutral" href= "/">홈으로</a>
+					<a class="btn btn-neutral" href= "/poketmon/list">포켓몬스터</a>
+					<a class="btn btn-neutral" href= "/member/join">회원가입</a>
+					<a class="btn btn-neutral" href= "/member/login">로그인</a>
+					<a class="btn btn-neutral" href= "/board/list">게시판</a>
+				</c:otherwise>
+			
+			</c:choose>
+		</div>
+		<hr>
+		<!-- 중단(Container) -->
+		<div>

@@ -52,7 +52,6 @@
     outline: none; /* 브라우저에서 제공하는 자동 강조효과 제거 */
     border: 1px solid rgb(129, 129, 129);
     border-radius: 0.1em;
-    line-height: 1.2;
 }
 .field:focus { /* focus : 선택하여 커서가 위치할 때만 적용되는 스타일*/
     border-color: rgb(39, 39, 39);
@@ -224,7 +223,6 @@ textarea.field {
             border-color: green;
             background-color: rgb(0, 177, 0);
             color: white;
-            line-height: 1.2;
             padding: 0.5em 0.75em;
         }
         /* 부정 버튼 디자인 */
@@ -232,7 +230,6 @@ textarea.field {
             border-color: rgb(139, 0, 0);
             background-color: red;
             color: white;
-            line-height: 1.2;
             padding: 0.5em 0.75em;
         }
         /* 중립 버튼 디자인 */
@@ -240,6 +237,6 @@ textarea.field {
             border-color: #b2bec3;
             background-color: #b2bec3;
             color: white;
-            line-height: 1.2;
+            text-decoration-line: none;
             padding: 0.5em 0.75em;
         }

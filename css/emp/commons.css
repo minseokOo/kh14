@@ -224,7 +224,6 @@ textarea.field {
             border-color: green;
             background-color: rgb(0, 177, 0);
             color: white;
-            line-height: 1.2;
             padding: 0.5em 0.75em;
         }
         /* 부정 버튼 디자인 */
@@ -232,7 +231,6 @@ textarea.field {
             border-color: rgb(139, 0, 0);
             background-color: red;
             color: white;
-            line-height: 1.2;
             padding: 0.5em 0.75em;
         }
         /* 중립 버튼 디자인 */
@@ -240,6 +238,6 @@ textarea.field {
             border-color: #b2bec3;
             background-color: #b2bec3;
             color: white;
-            line-height: 1.2;
+            text-decoration-line: none;
             padding: 0.5em 0.75em;
         }
