@@ -173,6 +173,13 @@ textarea.field {
         .my-40 {margin-top: 40px !important; margin-bottom: 40px !important;}
         .my-50 {margin-top: 50px !important; margin-bottom: 50px !important;}
 
+        .p-0 {padding: 0px !important;}
+        .p-10 {padding: 10px !important;}
+        .p-20 {padding: 20px !important;}
+        .p-30 {padding: 30px !important;}
+        .p-40 {padding: 40px !important;}
+        .p-50 {padding: 50px !important;}
+
         .pt-0 {padding-top: 0px !important;}
         .pt-10 {padding-top: 10px !important;}
         .pt-20 {padding-top: 20px !important;}
@@ -363,3 +370,15 @@ textarea.field {
             justify-content: center;
             align-items: center;
         }
+        * {
+            word-break: break-all; /*글자 줄 바꿈*/
+        }
+         /* 
+        말줄임표 스타일
+        - (조건) 글자가 소속된 영역의 폭이 확정되어 있을 것! (폭이 늘어날 수 있으면 안됨)
+    */
+    .text-ellipsis{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }

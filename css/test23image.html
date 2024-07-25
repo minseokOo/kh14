@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 디자인</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+    /* 이미지 스타일링 */
+    .image {
+
+    }
+
+    .image.image-round{
+        border-radius: 5px;
+    }
+    .image.image-circle{
+        border-radius: 50%;
+    }
+    .image.image-shadow{
+        /*box-shadow : x y blur spread color*/
+        box-shadow: 2px 2px 2px 1px black;
+    }
+    .image.image-lift{
+        box-shadow: 0 0 5px 1px black
+    }
+    .image.image-blur{
+        filter: blur(5px);
+    }
+    .image.image-blur.image-hover:hover{
+        filter: blur(0px);
+        transition: 1s;
+    }
+    .image.image-grayscale{
+        filter: grayscale(100%);
+    }
+    .image.image-grayscale.image-hover:hover{
+        filter: grayscale(0%);
+        transition: 1s;
+    }
+    .image.image-fade{
+        opacity: 0.1;
+    }
+    .image.image-fade.image-hover:hover{
+    opacity: 1;
+    transition: 2s;
+    }
+    .image.image-scale {
+        transition: transform 0.2s linear;
+    }
+    .image.image-scale.image-hover:hover {
+        transform: scale(1.5);
+        box-shadow: 0 0 5px 1px black;
+    }
+    .image.image-scale2{
+        overflow: hidden;
+    }
+    .image.image-scale2 > img {
+        transition: transform 0.2s linear;
+        transform: scale(1);
+        width: 100%;
+        height: 100%;
+    }
+    .image.image-scale2.image-hover > img:hover {
+        transform: scale(1.5);
+    }
+
+</style>
+
+</head>
+<body>
+    <div class="container w-600 my-50">
+<div class="row center">
+    <h1>이미지 디자인</h1>
+</div>
+<div class="row" style="display: flex; justify-content: space-between;">
+    <img src="https://picsum.photos/150" class="image image-round">
+    <img src="https://picsum.photos/150" class="image image-circle">
+    <img src="https://picsum.photos/150" class="image image-shadow">
+</div>
+<div class="row" style="display: flex; justify-content: space-between;">
+    <img src="https://picsum.photos/150" class="image image-lift">
+    <img src="https://picsum.photos/150" class="image image-blur image-hover">
+    <img src="https://picsum.photos/150" class="image image-grayscale image-hover">
+</div>
+<div class="row" style="display: flex; justify-content: space-between;">
+    <img src="https://picsum.photos/150" class="image image-fade image-hover">
+    <img src="https://picsum.photos/150" class="image image-scale image-hover">
+    <div class="image image-scale2 image-hover">
+        <img src="https://picsum.photos/150" >
+    </div>
+</div>
+    </div>
+</body>
+</html>

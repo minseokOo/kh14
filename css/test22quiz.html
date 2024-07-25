@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색창</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<!-- <link rel="stylesheet" type="text/css" href="./test.css"> -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+    .field.field-underline{
+        border-color: rgb(0, 129, 214);
+        border-width: 2px;
+    }
+    .field{
+        padding: 0.3em;
+        font-size: 20px;
+    }
+    .btnRed{
+        border-color: red;
+        color: red;
+        background-color: white;
+        border-radius: 3px;
+    }
+    .btnRed.btnRed:hover{
+        color: white;
+        background-color: red;
+    }
+    .fcolor{
+        color: rgb(109, 109, 109);
+    }
+    .border-underline{
+        border-top: none;
+    }
+    .field.field-underline, 
+    .btn.btn-underline{
+        background: none;
+    }
+    * {
+        word-break: break-all; /*글자 줄 바꿈*/
+    }
+    /* 
+        말줄임표 스타일
+        - (조건) 글자가 소속된 영역의 폭이 확정되어 있을 것! (폭이 늘어날 수 있으면 안됨)
+    */
+    .text-ellipsis{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+
+</head>
+<body>
+    <div class="container w-400 my-50">
+        <div class="row flex-box" style="height: 100px; display: flex; justify-content: center; align-items: center; border-bottom: 1px; border-color: aqua;">
+            <div style="display: flex; flex-direction: row;">
+                <input name="search" type="text" class="field flex field-underline" style="border-radius: 0;">
+                <button class="btn btn-underline flex"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container w-450 my-50">
+        <div class="row flex-box">
+            <div class="flex-grow"><img src="images/서운.png" style="border-radius: 5px;" width="200px"></div>
+            <div class="flex-grow " style="padding: 10px;">
+                <div style="font-weight: 600;">신입 개발자가 취업을 포기하는 단 한가지 이유 </div>
+                <div style="margin-top: 10px; color: rgb(84, 95, 107); font-size: 0.85em;"> 개발 알려주는 남자, 데브남</div>
+                <div style="margin-top: 5px; color: rgb(84, 95, 107); font-size: 0.85em;">조회수 8.2천회 | 3개월 전</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container w-300 my-50">
+        <div class="row" style="font-weight: 600;">
+            (주)브로드웨이브
+        </div>
+        <div class="row" style="border: 1px solid rgb(177, 177, 177); padding: 10px; border-radius: 3px;">
+            <div class="fcolor">풀스택 개발자</div>
+            <div class="fcolor">서울전체 | 경력 2~10년 | 학력무관</div>
+            <div class="float-box" style="margin-top: 10px;">
+                <div class="float-left fcolor"><i class="fa-regular fa-star" style="font-size: 15px; margin: 0.3em;"></i></div>
+                <div class="float-right fcolor">상시채용 <button class="btnRed">입사지원</button></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
