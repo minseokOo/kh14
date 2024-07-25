@@ -382,7 +382,7 @@ textarea.field {
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    
+
     .image {
 
     }
@@ -439,4 +439,19 @@ textarea.field {
     }
     .image.image-scale2.image-hover > img:hover {
         transform: scale(1.5);
+    }
+    .link {
+        color: #2d3436;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .link:hover {
+        filter: brightness(150%);
+    }
+    .link.link-animation {
+        /* transition : 항목 시간 타이밍 */
+        transition: transform 0.1s ease-out;
+    }
+    .link.link-animation:hover {
+        transform: scale(1.02);
     }
