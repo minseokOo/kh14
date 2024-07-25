@@ -382,3 +382,61 @@ textarea.field {
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    
+    .image {
+
+    }
+
+    .image.image-round{
+        border-radius: 5px;
+    }
+    .image.image-circle{
+        border-radius: 50%;
+    }
+    .image.image-shadow{
+        /*box-shadow : x y blur spread color*/
+        box-shadow: 2px 2px 2px 1px black;
+    }
+    .image.image-lift{
+        box-shadow: 0 0 5px 1px black
+    }
+    .image.image-blur{
+        filter: blur(5px);
+    }
+    .image.image-blur.image-hover:hover{
+        filter: blur(0px);
+        transition: 1s;
+    }
+    .image.image-grayscale{
+        filter: grayscale(100%);
+    }
+    .image.image-grayscale.image-hover:hover{
+        filter: grayscale(0%);
+        transition: 1s;
+    }
+    .image.image-fade{
+        opacity: 0.1;
+    }
+    .image.image-fade.image-hover:hover{
+    opacity: 1;
+    transition: 2s;
+    }
+    .image.image-scale {
+        transition: transform 0.2s linear;
+    }
+    .image.image-scale.image-hover:hover {
+        transform: scale(1.5);
+        box-shadow: 0 0 5px 1px black;
+    }
+    .image.image-scale2{
+        overflow: hidden;
+    }
+    .image.image-scale2 > img {
+        transition: transform 0.2s linear;
+        transform: scale(1);
+        width: 100%;
+        height: 100%;
+    }
+    .image.image-scale2.image-hover > img:hover {
+        transform: scale(1.5);
+    }
