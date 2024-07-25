@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /*
+            float 관련 스타일
+            가상 선택자(virtual selector) 
+            - 존재하지 않는 영역을 선택하여 디자인
+            - ::before는 태그의 가장 첫 지점을 의미
+            - ::after는 태그의 가장 마지막 지점을 의미
+
+        */
+        .float-box::after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .float-box > .float-left {
+            float:left;
+        }
+        .float-box > .float-right {
+            float:right;
+        }
+    </style>
+</head>
+<body>
+    <div class="container w-500 my-50">
+        <div class="row center">
+            <h1>Float 속성 배우기</h1>
+        </div>
+        <div class="row">
+            <div style="float:left">왼쪽1</div>
+            <div style="float:left">왼쪽2</div>
+            <div style="float:right">오른쪽1</div>
+            <div style="float:right">오른쪽2</div>
+        </div>
+        <!-- float를 쓰면 다음 내용과 겹치게 되는데 이를 원치 않는다면 제거 -->
+        <!-- <div style="clear:left;"></div>
+        <div style="clear:right;"></div> -->
+        <div style="clear:both;"></div>
+        <div class="row">
+            다음 줄의 테스트 내용
+        </div>
+
+        <!-- float를 클래스화 시켜보자 -->
+         <div class="row float-box">
+            <div class="float-left">왼쪽1</div>
+            <div class="float-left">왼쪽2</div>
+            <div class="float-right">오른쪽1</div>
+            <div class="float-right">오른쪽2</div>
+         </div>
+
+         <div class="row">
+            다음 줄의 테스트 내용
+         </div>
+
+         <div class="row float-box">
+            <button class="float-left" style="width: 49.5%;">버튼1</button>
+            <button class="float-right" style="width: 49.5%;">버튼2</button>
+         </div>
+    </div>    
+</body>
+</html>

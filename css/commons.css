@@ -328,3 +328,23 @@ textarea.field {
         box-shadow: 0px 0px 0px 1px rgb(206, 206, 206);
         color: blueviolet;
     }
+
+     /*
+            float 관련 스타일
+            가상 선택자(virtual selector) 
+            - 존재하지 않는 영역을 선택하여 디자인
+            - ::before는 태그의 가장 첫 지점을 의미
+            - ::after는 태그의 가장 마지막 지점을 의미
+
+        */
+        .float-box::after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .float-box > .float-left {
+            float:left;
+        }
+        .float-box > .float-right {
+            float:right;
+        }
