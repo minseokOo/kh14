@@ -20,19 +20,19 @@
     <h1>회원 가입 정보 입력</h1>
 
 <form action= "join" method= "post" enctype= "multipart/form-data" autocomplete="off">
-    <label>아이디*</label>
+    <label>아이디<i class="fa-beat fa-solid fa-asterisk"></i></label>
     <div class="row">
     <input class="field field-image w-100" type= "text" name="memberId" required>
 	</div>
-    <label>비밀번호*</label>
+    <label>비밀번호<i class="fa-beat fa-solid fa-asterisk"></i></label>
     <div class="row">
     <input class="field field-image w-100" type="password" name= "memberPw" required>
     </div>
-    <label>닉네임*</label>
+    <label>닉네임<i class="fa-beat fa-solid fa-asterisk"></i></label>
     <div class="row">
 	<input class="field w-100" type= "text" name= "memberNickname" required>
 	</div>
-    <label>이메일*</label>
+    <label>이메일<i class="fa-beat fa-solid fa-asterisk"></i></label>
     <div class="row">
     <input class="field w-100" type= "email" name= "memberEmail" required>
 	</div>

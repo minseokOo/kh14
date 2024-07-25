@@ -26,5 +26,5 @@
 <%--다음 버튼은 마지막 구간이 아닐 때(finishBlock < lastBlock) 나온다 --%>
 <c:if test= "${pageVO.hasNext()}">
 	<a href= "list?column=${pageVO.column}&keyword=${pageVO.keyword}&page=${pageVO.nextBlock}">다음</a></h3>
-</div>
 </c:if>
+</div>
