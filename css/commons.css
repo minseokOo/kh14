@@ -348,3 +348,18 @@ textarea.field {
         .float-box > .float-right {
             float:right;
         }
+
+         /* flexible layout 스타일 */
+         .flex-box{
+            display: flex;
+            flex-wrap: nowrap;
+        }
+        .flex-box.column-2 > * {width: 50% !important;} 
+        .flex-box.column-3 > * {width: 33.3333% !important; }
+        .flex-box.column-4 > * { width: 25% !important; }
+
+        .flex-core {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
