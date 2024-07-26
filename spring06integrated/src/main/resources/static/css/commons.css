@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 /*
     앞으로 자주 사용할 디자인 코드들을 보관해두는 파일
 */
@@ -55,7 +56,7 @@
     line-height: 1.2;
 }
 .field:not(textarea), 
-.btn{ /* class=field 중에서 textarea 빼고 선택 */
+.btn { /* class=field 중에서 textarea 빼고 선택 */
     height: 2.5em !important;
     vertical-align: middle;
 }
@@ -68,7 +69,7 @@ textarea.field {
     min-height: 120px;
 }
 /*
-    입력창 확장 클래스 (.field-underline)
+입력창 확장 클래스 (.field-underline)
 */
 .field.field-underline{
     border-left: none;
@@ -171,6 +172,13 @@ textarea.field {
         .my-40 {margin-top: 40px !important; margin-bottom: 40px !important;}
         .my-50 {margin-top: 50px !important; margin-bottom: 50px !important;}
 
+        .p-0 {padding: 0px !important;}
+        .p-10 {padding: 10px !important;}
+        .p-20 {padding: 20px !important;}
+        .p-30 {padding: 30px !important;}
+        .p-40 {padding: 40px !important;}
+        .p-50 {padding: 50px !important;}
+
         .pt-0 {padding-top: 0px !important;}
         .pt-10 {padding-top: 10px !important;}
         .pt-20 {padding-top: 20px !important;}
@@ -224,18 +232,16 @@ textarea.field {
             padding-right: 5px;
         }
         .btn:hover{
-            filter: brightness(110%);
+            filter: brightness(150%);
         }
-
+       
         /* 긍정 버튼 디자인 */
         .btn.btn-positive{
             border-color: green;
             background-color: rgb(0, 177, 0);
-            border-radius: 3px;
-            border: none;
             color: white;
             line-height: 1.2;
-            padding: 0.25em 0.5em;
+            padding: 0.5em 0.75em;
         }
         /* 부정 버튼 디자인 */
         .btn.btn-negative{
@@ -243,14 +249,14 @@ textarea.field {
             background-color: red;
             color: white;
             line-height: 1.2;
-            padding: 0.25em 0.5em;
+            padding: 0.5em 0.75em;
         }
         /* 중립 버튼 디자인 */
         .btn.btn-neutral{
             border-color: #b2bec3;
             background-color: #b2bec3;
             color: white;
-            padding: 0.25em 0.5em;
+            padding: 0.5em 0.75em;
         }
 
          /* 
@@ -328,4 +334,123 @@ textarea.field {
         box-shadow: 0px 0px 0px 1px rgb(206, 206, 206);
         color: blueviolet;
     }
-    
+
+     /*
+            float 관련 스타일
+            가상 선택자(virtual selector) 
+            - 존재하지 않는 영역을 선택하여 디자인
+            - ::before는 태그의 가장 첫 지점을 의미
+            - ::after는 태그의 가장 마지막 지점을 의미
+
+        */
+        .float-box::after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .float-box > .float-left {
+            float:left;
+        }
+        .float-box > .float-right {
+            float:right;
+        }
+
+         /* flexible layout 스타일 */
+         .flex-box{
+            display: flex;
+            flex-wrap: nowrap;
+        }
+        .flex-box.column-2 > * {width: 50% !important;} 
+        .flex-box.column-3 > * {width: 33.3333% !important; }
+        .flex-box.column-4 > * { width: 25% !important; }
+
+        .flex-core {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        * {
+            word-break: break-all; /*글자 줄 바꿈*/
+        }
+         /* 
+        말줄임표 스타일
+        - (조건) 글자가 소속된 영역의 폭이 확정되어 있을 것! (폭이 늘어날 수 있으면 안됨)
+    */
+    .text-ellipsis{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .image {
+
+    }
+
+    .image.image-round{
+        border-radius: 5px;
+    }
+    .image.image-circle{
+        border-radius: 50%;
+    }
+    .image.image-shadow{
+        /*box-shadow : x y blur spread color*/
+        box-shadow: 2px 2px 2px 1px black;
+    }
+    .image.image-lift{
+        box-shadow: 0 0 5px 1px black
+    }
+    .image.image-blur{
+        filter: blur(5px);
+    }
+    .image.image-blur.image-hover:hover{
+        filter: blur(0px);
+        transition: 1s;
+    }
+    .image.image-grayscale{
+        filter: grayscale(100%);
+    }
+    .image.image-grayscale.image-hover:hover{
+        filter: grayscale(0%);
+        transition: 1s;
+    }
+    .image.image-fade{
+        opacity: 0.1;
+    }
+    .image.image-fade.image-hover:hover{
+    opacity: 1;
+    transition: 2s;
+    }
+    .image.image-scale {
+        transition: transform 0.2s linear;
+    }
+    .image.image-scale.image-hover:hover {
+        transform: scale(1.5);
+        box-shadow: 0 0 5px 1px black;
+    }
+    .image.image-scale2{
+        overflow: hidden;
+    }
+    .image.image-scale2 > img {
+        transition: transform 0.2s linear;
+        transform: scale(1);
+        width: 100%;
+        height: 100%;
+    }
+    .image.image-scale2.image-hover > img:hover {
+        transform: scale(1.5);
+    }
+    .link {
+        color: #2d3436;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .link:hover {
+        filter: brightness(150%);
+    }
+    .link.link-animation {
+        /* transition : 항목 시간 타이밍 */
+        transition: transform 0.1s ease-out;
+    }
+    .link.link-animation:hover {
+        transform: scale(1.02);
+    }

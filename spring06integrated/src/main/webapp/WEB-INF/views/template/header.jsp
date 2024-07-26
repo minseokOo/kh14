@@ -1,20 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
-	<link rel="stylesheet" type="text/css" href="/css/commons.css">
- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-<!-- 	<link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 
     <!-- 문서 설정 - HTML버전 지정 (HTML 5)-->
-<!Doctype HTML>
-<html><!-- HTML 문서의 범위를 나타내는 태그 -->
-	<head> <!-- 문서의 정보를 표시하는 태그 -->
-		<title>나의 홈페이지</title>
-		<meta charset= "UTF-8">
-		
-		<!-- 내가 만든 스타일 시트를 불러오는 코드 -->
-	
-	</head>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인페이지</title>
+    <link rel="stylesheet" type="text/css" href="/css/commons.css">
+<!-- 	<link rel="stylesheet" type="text/css" href="./test.css"> -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
         .btn.btn-neutral{
             background-color: rgb(187, 186, 255);
@@ -44,29 +41,12 @@
             transform: rotate(360deg);
         }
     </style>
-
-	<body bgcolor='#dff9fb'> <!-- 문서의 출력 내용을 담는 태그 -->
-<!-- 		<h1>내가 만든 홈페이지</h1> -->
-<!-- 		<a href=""></a> -->
-		<!-- 상단(Header) -->
-		<div class="center">
+</head>
+<body bgcolor='#dff9fb'>
+    <!-- 홈페이지 크기를 결정하는 외부 영역(main) -->
+    <div class="container w-1200 center">
             <a href="/" class="link link-animation"><img src="/images/홈페이지.png" width="200px"></a>
-		</div>
-		<!-- 정보 확인용 공간 -->
-<!-- 		<div> -->
-<%-- 			session id = ${pageContext.session.id} ,  --%>
-<%-- 			createdUser = ${sessionScope.createdUser} , --%>
-<%-- 			createdLevel = ${sessionScope.createdLevel} --%>
-<!-- 		</div> -->
-		
-		<!-- 
-			메뉴(Navbar) 
-			- (중요) 템플릿 페이지의 모든 경호는 전부 다 절대경로로 사용
-			- 로그인 상태일 때와 비로그인 상태일 때 다르게 표시
-			- 로그인 상태 : sessionScope.createdUser != null
-			
-			-->
-		<div class="row center mt-10">
+        <div class="row center mt-10">
 			<c:choose>
 				<c:when test= "${sessionScope.createdUser != null}">
 <!-- 					<a class="btn btn-menu" href= "/">홈으로</a> -->
@@ -93,7 +73,17 @@
 			
 			</c:choose>
 		</div>
+
 		</div>
-		<hr>
-		<!-- 중단(Container) -->
-		<div>
+	</div>
+        <div class="row my-0 flex-box" style="min-height: 400px;">
+            <div class="w-200">
+                <div class="row center">
+                    <img src="/images/프로필사진.png" class="image image-circle image-lift" width="50%">
+                </div>
+                <div class="row center">${sessionScope.createdUser}(${sessionScope.createdLevel})</div>
+                <div class="row center">5,000 point</div>
+            </div>
+            <hr>
+            <div style="flex-grow: 1;">
+            
