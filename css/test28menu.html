@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디자인 수업</title>
+
+    <!-- google font cdn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <!-- font awesome icon cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- my css -->
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <link rel="stylesheet" type="text/css" href="./test.css">
+    <style>
+        /*
+            메뉴와 같은 계층형(tree) 구조는 ul 또는 ol 로 구현한다 (리스트 태그)
+            1. 태그에 존재하는 기본 여백과 모양을 제거(리셋)
+            2. 1차 메뉴의 배치를 가로로 변경
+            3. 메뉴별 크기를 지정하고 a태그를 영역에 꽉 채우도록 설정
+            4. (중요) 1차메뉴항목을 기준으로 2차메뉴항목 위치가 정해지도록 구현(2차 이상도 마찬가지)
+            5. 하위메뉴(2차이상)을 숨김 처리하고 항목에 마우스가 올라가면 하위메뉴를 표시
+            6. 1차메뉴 중에서 오른쪽에 배치되는 메뉴를 처리하도록 구현
+                - 오른쪽 메뉴 항목 중 가장 왼쪽 항목에 margin-left를 auto로 부여
+            7. 3차메뉴 이상부터는 좌/우로 펼쳐지도록 구현
+            8. 배경색상 및 hover 상태 색상 설정
+            9. 홈페이지에 적용
+        */
+
+        /* 1 */
+        .menu,      /*1차메뉴*/
+        .menu ul    /*2차메뉴이상*/
+        {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .menu a /* 메뉴안의 모든 a태그 */
+        {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* 2 */
+        .menu {
+            display: flex;
+        }
+
+        /* 3 */
+        .menu li /* 메뉴안에 있는 모든 항목 */
+        {
+            width: 120px;
+        }
+        .menu a /* 메뉴안에 있는 모든 a태그 */
+        {
+            display: block;
+            width: 100%;
+            padding: 0.5em;
+            text-align: center;
+        }
+
+        /* 4 */
+        .menu li /* 모든 메뉴의 항목 */
+        {
+            position: relative;
+        }
+        .menu ul /* 2차 이상 메뉴 */
+        {
+            position: absolute;
+            top:100%;
+            left:0;
+            
+        }
+
+        /* 5 */
+        .menu ul {
+            display: none;
+        }
+        .menu li:hover > ul /* 모든 항목에 마우스가 올라가면 바로아래 메뉴 */
+        {
+            display: block;
+            
+        }
+        
+        /* 6 */
+        .right-menu {
+            margin-left: auto;
+        }
+
+        /* 7 */
+        .menu > li > ul ul /* 3차 이상의 모든 메뉴 */
+        {
+            top: 0;
+            left: 100%;
+        }
+        .menu > li.right-menu > ul ul, 
+        .menu > li.right-menu ~ li > ul ul/* 3차 이상의 오른쪽 메뉴 */
+        {
+            top: 0;
+            left: -100%;
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container w-1000 my-50">
+        <div class="row center">
+            <h1>메뉴 만들기</h1>
+        </div>
+        <div class="row">
+            <ul class="menu">
+                <li>
+                    <a href="#">메뉴1</a>
+                    <ul>
+                        <li>
+                            <a href="#">항목1</a>
+                            <ul>
+                                <li><a href="#">상세항목1</a></li>
+                                <li><a href="#">상세항목2</a></li>
+                                <li><a href="#">상세항목3</a></li>
+                                <li><a href="#">상세항목4</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">항목2</a>
+                            <ul>
+                                <li><a href="#">상세항목1</a></li>
+                                <li><a href="#">상세항목2</a></li>
+                                <li><a href="#">상세항목3</a></li>
+                                <li><a href="#">상세항목4</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">항목3</a></li>
+                        <li><a href="#">항목4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">메뉴2</a>
+                    <ul>
+                        <li><a href="#">항목1</a></li>
+                        <li><a href="#">항목2</a></li>
+                        <li><a href="#">항목3</a></li>
+                        <li><a href="#">항목4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">메뉴3</a>
+                    <ul>
+                        <li><a href="#">항목1</a></li>
+                        <li><a href="#">항목2</a></li>
+                        <li><a href="#">항목3</a></li>
+                        <li><a href="#">항목4</a></li>
+                    </ul>
+                </li>
+                <li class="right-menu">
+                    <a href="#">메뉴4</a>
+                    <ul>
+                        <li>
+                            <a href="#">항목1</a>
+                            <ul>
+                                <li><a href="#">상세항목1</a></li>
+                                <li><a href="#">상세항목2</a></li>
+                                <li><a href="#">상세항목3</a></li>
+                                <li><a href="#">상세항목4</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">항목2</a>
+                            <ul>
+                                <li><a href="#">상세항목1</a></li>
+                                <li><a href="#">상세항목2</a></li>
+                                <li><a href="#">상세항목3</a></li>
+                                <li><a href="#">상세항목4</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">항목3</a>
+                            <ul>
+                                <li><a href="#">상세항목1</a></li>
+                                <li><a href="#">상세항목2</a></li>
+                                <li><a href="#">상세항목3</a></li>
+                                <li><a href="#">상세항목4</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">항목4</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -7,16 +7,84 @@
     <link rel="stylesheet" type="text/css" href="./commons.css">
 	<link rel="stylesheet" type="text/css" href="./test.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /* 
+            + 를 이용하여 "바로 뒤"에 있는 태그를 선택하거나 (1개 선택)
+            ~을 이용하여 "뒤"에 있는 태그를 선택할 수 있다. (여러 개 선택)
+        */
+        .ck1 + span {
+            color: red;
+        }
+        .ck1:checked + span {
+            color: green;
+        }
+        #ck {
+            display: none;
+        }
+        #ck + label {
+            color: red;
+        }
+        #ck:checked + label {
+            color: green;
+        }
+        #ck-sidebar{
+            display: none;
+        }
+        #ck-sidebar + .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 200px;
+            background-color: lightblue;
+            z-index: 9998;
+            transition: transform 0.2s ease-out;
+        }
+        #ck-sidebar:checked +.sidebar {
+            /* margin-left: -200px; */
+            transform: translate(-100%, 0);
+        }
+        .sidebar-toggle{
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            background-color: lightblue;
+            cursor: pointer;
+            padding: 0.5em;
+            box-shadow: 0 0 1px 1px black;
+        }
+    </style>
 </head>
-<body>
+<body style="-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none">
     <div class="container w-500 my-50">
         <div class="row center">
             <h1>체크박스 디자인</h1>
         </div>
         <div class="row">
-            <input type="checkbox">
+            <input type="checkbox" class="ck1"> <span>동의합니다</span>
+        </div>
+        <div class="row">
+            <!-- 페이지에서 유일해야 하며 태그당 1개만 부여가 되는 고유값 -->
+            <input type="checkbox" id="ck"> 
+            <label for="ck">동의합니다</label>
+        </div>
+
+        <div class="row">
+            <label for="ck-sidebar">
+                <i class ="fa-solid fa-bars"></i>
+            </label>
         </div>
     </div>
     
+<!-- 사이드바 배치 -->
+ <label for="ck-sidebar" class="sidebar-toggle">
+    <i class ="fa-solid fa-bars fa-2x"></i>
+ </label>
+    <input type="checkbox" id="ck-sidebar">
+    <div class="sidebar">
+
+    </div>
+
 </body>
 </html>
