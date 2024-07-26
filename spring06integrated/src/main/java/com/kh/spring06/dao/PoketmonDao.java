@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.spring06.dto.BoardDto;
 import com.kh.spring06.dto.PoketmonDto;
 import com.kh.spring06.mapper.PoketmonMapper;
 import com.kh.spring06.mapper.StatusMapper;
@@ -161,56 +160,55 @@ public class PoketmonDao {
 			return jdbcTemplate.queryForObject(sql, int.class, data);
 		}
 		
-//		//페이징 객체를 이용한 목록 및 검색 메소드
-//		public List<PoketmonDto> selectListByPaging(PageVO pageVO) {
-//			if(pageVO.isSearch()) {//검색이라면
-//				String sql = "select * from ("
-//									+ "select rownum rn, TMP.* from ("
-//										+ "select "
-//											+ "poketmon_no, poketmon_name, poketmon_type "		
-//										+ "from board "
-//										+ "where instr(#1, ?) > 0 "
-//										+ "connect by prior poketmon_no = poketmon_target "
-//										+ "start with poketmon_target is null "
-//										+ "order siblings by board_group desc, board_no asc"
-//									+ ")TMP"
-//							+ ") where rn between ? and ?";
-//				sql = sql.replace("#1", pageVO.getColumn());
-//				Object[] data = {
-//						pageVO.getKeyword(), 
-//						pageVO.getBeginRow(), 
-//						pageVO.getEndRow() 
-//				};
-//				return jdbcTemplate.query(sql, poketmonMapper, data);
-//			}
-//			else {//목록이라면
-//				String sql = "select * from ("
-//									+ "select rownum rn, TMP.* from ("
-//										+ "select "
-//											+ "poketmon_no, poketmon_name, poketmon_type "
-//										+ "from board "
-//										+  "connect by prior poketmon_no = board_target "
-//										+ "start with board_target is null "
-//										+ "order siblings by board_group desc, board_no asc"
-//									+ ")TMP"
-//							+ ") where rn between ? and ?";
-//				Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
-//				return jdbcTemplate.query(sql, boardListMapper, data);
-//			}
-//		}
-//
-//		public int countByPaging(PageVO pageVO) {
-//			if(pageVO.isSearch()) {//검색카운트
-//				String sql = "select count(*) from board where instr(#1, ?) > 0";
-//				sql = sql.replace("#1", pageVO.getColumn());
-//				Object[] data = {pageVO.getKeyword()};
-//				return jdbcTemplate.queryForObject(sql, int.class, data);
-//			}
-//			else {//목록카운트
-//				String sql = "select count(*) from board";
-//				return jdbcTemplate.queryForObject(sql, int.class);
-//			}
-//		}
-//		
+		//페이징 객체를 이용한 목록 및 검색 메소드
+		public List<PoketmonDto> selectListByPaging(PageVO pageVO) {
+		    if(pageVO.isSearch()) {//검색이라면
+		        String sql = "select * from ("
+		                            + "select rownum rn, TMP.* from ("
+		                                + "select "
+		                                    + "poketmon_no, poketmon_name, poketmon_type "        
+		                                + "from poketmon "  // board -> poketmon
+		                                + "where instr(#1, ?) > 0 "
+		                                + "connect by prior poketmon_no = poketmon_target "
+		                                + "start with poketmon_target is null "
+		                                + "order siblings by poketmon_group desc, poketmon_no asc" // board_group -> poketmon_group, board_no -> poketmon_no
+		                            + ")TMP"
+		                    + ") where rn between ? and ?";
+		        sql = sql.replace("#1", pageVO.getColumn());
+		        Object[] data = {
+		                pageVO.getKeyword(), 
+		                pageVO.getBeginRow(), 
+		                pageVO.getEndRow() 
+		        };
+		        return jdbcTemplate.query(sql, poketmonMapper, data);
+		    }
+		    else {//목록이라면
+		        String sql = "select * from ("
+		                            + "select rownum rn, TMP.* from ("
+		                                + "select "
+		                                    + "poketmon_no, poketmon_name, poketmon_type "
+		                                + "from poketmon "  // board -> poketmon
+		                                + "connect by prior poketmon_no = poketmon_target " // board_target -> poketmon_target
+		                                + "start with poketmon_target is null "
+		                                + "order siblings by poketmon_group desc, poketmon_no asc" // board_group -> poketmon_group, board_no -> poketmon_no
+		                            + ")TMP"
+		                    + ") where rn between ? and ?";
+		        Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+		        return jdbcTemplate.query(sql, poketmonMapper, data);
+		    }
+		}
+
+		public int countByPaging(PageVO pageVO) {
+		    if(pageVO.isSearch()) {//검색카운트
+		        String sql = "select count(*) from poketmon where instr(#1, ?) > 0"; // board -> poketmon
+		        sql = sql.replace("#1", pageVO.getColumn());
+		        Object[] data = {pageVO.getKeyword()};
+		        return jdbcTemplate.queryForObject(sql, int.class, data);
+		    }
+		    else {//목록카운트
+		        String sql = "select count(*) from poketmon"; // board -> poketmon
+		        return jdbcTemplate.queryForObject(sql, int.class);
+		    }
+		}
 		
 }

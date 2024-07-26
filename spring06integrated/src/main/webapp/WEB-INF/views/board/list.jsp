@@ -4,12 +4,14 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container center w-800">
-<div class="row center">
+<div class="container w-900 my-50">
+<div class="row">
 <h1>글 목록</h1>
 </div>
 
+<div class="row center">
 <h2>데이터 개수 : ${list.size()}</h2>
+</div>
 <table border= "1" >
 	<thead align= "center">
 		<tr>

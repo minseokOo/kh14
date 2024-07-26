@@ -5,7 +5,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <div class="container w-700" style="height=400">
 		<div class="row center">
-			<h1>홈페이지 방문을 환영합니다!</h1>
+			<h1>歡迎來到我們的網站。</h1>
 		</div>
 <style>
 .img-box {
@@ -21,6 +21,7 @@
   width: 100%;
   height: 100%;
   transition: transform 2s linear; 
+  border-radius: 1em;
 }
 
 .img-box img.img-hover {
@@ -36,14 +37,14 @@ transition: 2s;
 transition: 2s;
   opacity: 1; 
 }
-	}
+	
 </style>			
 <div class="img-box">
-  <img class="img" src="/images/qhshqhsh2.png" width="700"height="400" alt="">
-  <img class="img-hover" src="/images/썬구리.png" width="700" height="400"alt="">
+  <img class="img" src="/images/qhshqhsh2.png" width="700"height="400" >
+  <img class="img-hover" src="/images/썬구리.png" width="700" height="400">
 </div>
-			
+</div>		
 <!-- 			<img src="https://placehold.co/700x400"width="700"height="400"> -->
-	</div>
+	
 <!-- footer.jsp에 존재하는 내용을 불러오도록 설정 -->
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

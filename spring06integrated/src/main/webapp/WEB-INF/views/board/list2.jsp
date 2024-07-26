@@ -3,13 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<h1>글 목록</h1>
 
-<div>
-	${pageVO}
+<div class="container w-900 my-50">
+<div class="row">
+<h1>글 목록</h1>
 </div>
-<div>${pageVO.beginRow} - ${pageVO.count} / ${pageVO.endRow} 개</div>
-<table border= "1" width= "1000" >
+<!-- <div> -->
+<%-- 	${pageVO} --%>
+<!-- </div> -->
+<%-- <div>${pageVO.beginRow} - ${pageVO.count} / ${pageVO.endRow} 개</div> --%>
+<div class="row">
+<table class="table table-border table-stripe table-hover" border= "1" width= "1000" >
 	<thead align= "center">
 		<tr>
 			<th>번호</th>
@@ -37,7 +41,7 @@
 				<c:if test= "${boardDto.boardDepth > 0}">
 					<img src= "/images/reply.png" width= "15" height="16">
 				</c:if>
-				<a href= "/board/read?boardNo=${boardDto.boardNo}">${boardDto.boardTitle}</a> (${boardDto.boardReplies})</td>
+				<a href= "/board/read?boardNo=${boardDto.boardNo}" >${boardDto.boardTitle}</a> (${boardDto.boardReplies})</td>
 <%-- 				<c:choose> --%>
 <%-- 					<c:when test= "${boardDto.boardWriter == null}"> --%>
 <%-- 						<td>탈퇴한 사용자</td> --%>
@@ -56,7 +60,7 @@
 		</c:forEach>
 	</tbody>
 </table>
-<br>
+</div>
 
 <!-- 네비게이터 불러오는 코드 -->
 <jsp:include page= "/WEB-INF/views/template/navigator.jsp"/>
@@ -79,4 +83,5 @@
 	<input type= "text" name= "keyword" placeholder= "검색어" value="${param.keyword}"> 
 	<button>검색</button>
 </form>
+</div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

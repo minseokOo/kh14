@@ -53,6 +53,8 @@ public class MemberDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	
+	
 	//최종 로그인 시각 갱신(U)
 	public boolean updateMemberLogin(String memberId) {
 		String sql = "update member set member_login=sysdate "

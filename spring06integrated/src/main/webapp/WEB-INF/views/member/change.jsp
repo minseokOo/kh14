@@ -13,7 +13,7 @@
 	우편번호 <input type="text" name= "memberPost" value="${memberDto.memberPost}"><br>
 	주소 <input type= "text" name= "memberAddress1" value="${memberDto.memberAddress1}"><br>
 	상세 주소 <input type= "text" name= "memberAddress2" value="${memberDto.memberAddress2}"><br><br>
-	
+	프로필 사진 <input type="file" name="attach" accept="image/*">
 	비밀번호 확인* <input type="password" name="memberPw"><br><br>
 <button>변경하기</button>
 </form>
