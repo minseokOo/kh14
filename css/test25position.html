@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /*
+            HTML 태그가 배치되는 기준을 정할 수 있다.
+
+            position:static 
+            - (기본방식) 먼저 작성한 것이 먼저 배치되며 조정 불가
+            position:relative 
+            - 연관배치. static과 같지만 위치 미세조정 가능
+            position:absolute 
+            - 절대배치. 특정 영역에서 좌표로 배치. 미세조정 가능
+            - (주의) 기준 영역은 가장 가까운 relative/absolte/fixed 또는 body
+            position:fixed
+            - 고정배치. 보여지는 화면에서의 좌표로 배치. 미세조정 가능.
+            위치조정에 사용되는 속성 - top, left, right, bottom, z-index
+        */
+
+        .box {
+            width: 100px;
+            height: 100px;
+            box-shadow: 0 0 0 1px black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: aliceblue;
+        }
+
+        .bounce {
+            position: relative;
+        }
+        .bounce:hover {
+            /* animation: 이름 지속시간 타이밍함수 반복횟수 */
+            animation: bounce 0.5s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0% { top: 0px; }
+            50% { top: -5px;}
+            100% {top: 0px;}
+        }
+    </style>
+</head>
+<body>
+        <div class="container w-600 my-50">
+            <div class="row center">
+                <h1>Position 배우기</h1>
+            </div>
+            <h3>position : static</h3>
+            <div class="row">
+                <div class="box">1</div>
+                <div class="box">2</div>
+                <div class="box">3</div>
+            </div>
+            <h3>position : relative</h3>
+            <div class="row">
+                <div class="box" style="position: relative; left: 10px; z-index: 2;">4</div>
+                <div class="box" style="position: relative; top: -10px; z-index: 1;">5</div>
+                <div class="box" style="position: relative;">6</div>
+            </div>
+            <div class="row">
+                <button class="btn btn-positive bounce">샘플 버튼</button>
+            </div>
+            <div class="row">
+                <h2>position : absolute</h2>
+            </div>
+            <div class="row">
+            <div class="row" style="position:relative">
+                <div class="box" style="position: absolute; top: -50px;">7</div>
+                <div class="box" style="position: absolute;">8</div>
+                <div class="box" style="position: absolute;">9</div>
+            </div>
+            <div class="row">
+                <h3>position : static</h3>
+            </div>
+            <div class="row">
+                <div class="box" style="position:fixed; top: 5px; right: 5px;">10</div>
+                <div class="box" style="position:fixed; top: 50%; right: 5px;">11</div>
+                <div class="box" style="position:fixed; bottom: 50%; right: 5px;">12</div>
+                <div class="box" style="position:fixed; bottom: 50%; right: 5px; transform: translate(0, -50%);">13</div>
+                
+            </div>
+            </div>
+        </div>
+</body>
+</html>

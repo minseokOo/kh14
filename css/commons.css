@@ -233,7 +233,7 @@ textarea.field {
             padding-right: 5px;
         }
         .btn:hover{
-            filter: brightness(150%);
+            filter: brightness(120%);
         }
        
         /* 긍정 버튼 디자인 */
@@ -454,4 +454,16 @@ textarea.field {
     }
     .link.link-animation:hover {
         transform: scale(1.02);
+    }
+    /* 화면 보호기 */
+    .screen-wrapper {
+        /* background-color: rgba(0, 0, 0, 0.3); */
+        background-color: black;
+        opacity: 0.3;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        z-index: 9999;
     }

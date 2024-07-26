@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모달</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /* 화면 가림 장치 */
+        .screen-wrapper {
+            /* background-color: rgba(0, 0, 0, 0.3); */
+            background-color: black;
+            opacity: 0.3;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            z-index: 9999;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container w-600 my-50">
+        <div class="row center">
+            <h1>모달(Modal) 배우기</h1>
+        </div>
+        <div class="row">
+            <button class="btn btn-positive w-100">결제하기</button>
+        </div>
+    </div>
+    <!-- 전체화면 보호기 -->
+    <div class="screen-wrapper flex-core">
+        <div class="container w-200">
+            <div class="row center">
+                <div class="row">
+                    <img src="images/카카오 로고 Brown.png" width="100px">
+                </div>
+                <div class="row">
+                    <input class="field w-100 field-underline" type="text" name="memberId" placeholder= "카카오메일 아이디, 이메일, 전화번호">
+                </div>
+                <div class="row">
+                    <input class="field w-100 field-underline" type="password" name="memberPw" placeholder="비밀번호">
+                </div>
+                <div class="row">
+                    <button class="btn btn-positive w-100">로그인</button>
+                </div>
+                <hr>
+                <div class="row">
+                    <button class="btn btn-neutral w-100">QR코드 로그인</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+</body>
+</html>
