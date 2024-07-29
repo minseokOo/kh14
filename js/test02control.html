@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        //자바스크립트의 조건, 반복문의 형태
+        // - if문은 자바와 같은 형태이다.
+        // - swith문도 자바와 같은 형태이다.
+
+        //(Q) 홀짝 판정 프로그램
+        var number = 4;
+
+        if(number % 2 == 0 ){
+            console.log("짝수");
+        }
+        else{
+            console.log("홀수");
+        }
+
+        switch(number % 2 ) {
+            case 0:
+                console.log("짝수");
+            case 1:
+                console.log("홀수");
+                break;
+        }
+
+        //(Q) 1부터 100까지 합계를 출력
+        var total = 0;
+        for(var i=1; i<=100; i++) {
+            total+=i;
+        }
+        console.log(total);
+
+    </script>
+</head>
+<body>
+
+    
+</body>
+</html>
