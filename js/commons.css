@@ -581,3 +581,15 @@ textarea.field {
             top: 0;
             left: -100%;
         }
+
+        /* 색상 관련 스타일 */
+.blue { color:#0984e3 !important; }
+.red { color:#d63031 !important; }
+.black { color:#2d3436 !important; }
+.gray { color:#b2bec3 !important; }
+.white { color:white !important; }
+.green { color:#00b894 !important; }
+.orange { color:#e17055 !important; }
+.purple { color:#6c5ce7 !important; }
+.yellow { color:#fdcb6e !important; }
+

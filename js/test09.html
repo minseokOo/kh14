@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        // 문자열(String)
+        // - 자바스크립트에도 문자열이 있으며 자바와 매우 유사하다.
+        // - 차이점은 자바스크립트에서는 문자열을 배열로 취급한다는 것!
+        
+        var str = "hello javascript";
+        console.log(str[4]); // 자바에선 str.charAt(4) 라고 작성한다.
+        console.log(str.length); // 자바에선 str.length() 라고 작성한다.
+        console.log(str.indexOf("java"));// 자바와 같은 명령
+        // contains() 는 없음
+
+        // 정규표현식(Regular Expression)
+        // - 형식 검사를 처리하는 식
+        // - 주요 형식(아이디, 이메일, 비밀번호, 닉네임, 전화번호, ...)을 검사한다
+        // - 자바와 같은 식을 사용
+        
+        var phone = "01012345678";
+        var regex = /^010[1-9][0-9]{7}$/;
+        var isValid = regex.test(phone); //자바였다면 phone.matchs(regex);
+        console.log("전화번호 형식 = " + isValid);
+
+    </script>
+</head>
+<body>
+
+    
+</body>
+</html>

@@ -16,21 +16,13 @@
         function checkLength(){
             var ip = document.querySelector(".ip");
             var display = document.querySelector(".display");
+            
             display.textContent = ip.value.length;
-            if(ip.value.length > 1000){
-                // 알림창 출력
-                alert("글자수 제한을 초과했습니다.")
-                // 글자색 변경
-                //display.style="color:red"; // 기존에 작성된 인라인 스타일을 덮어씀
-                //display.style.color = "red"; // 스타일 중 특정 항목만 덮어씀 (권장)
-                //display.className = "red"; // 기존에 작성된 클래스를 덮어씀
-                display.classList.add("red"); // 기존 클래스를 유지한 채 추가(권장)
-            }
-            else if(ip.value.length <= 1000){
-                //display.style=""; // 기존에 작성된 인라인 스타일을 덮어씀
-                //display.style.color=""; // 스타일 중 특정 항목만 덮어씀 (권장)
-                //display.className = ""; // 기존에 작성된 클래스를 덮어씀
-                display.classList.remove("red"); // 기존 클래스를 유지한 채 제거(권장)
+           var len = ip.value.length; 
+            while(len > 1000) {
+                var origin = ip.value;
+                ip.value = origin.substring(0, origin.length-1);
+                len--;
             }
         }
         
@@ -43,7 +35,7 @@
             <h1>입력창 글자수 제한</h1>
         </div>
         <div class="row">
-            <textarea class="ip field w-100" maxlength="1000" rows="5" oninput="checkLength();"></textarea>
+            <textarea class="ip field w-100" rows="5" oninput="checkLength();"></textarea>
         </div>
         <div class="float-box">
             <div class="float-right"> / 1000</div> <div class="display float-right">0</div>
