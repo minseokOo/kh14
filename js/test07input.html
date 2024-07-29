@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+
+    <!-- google font cdn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <!-- font awesome icon cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- my css -->
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <link rel="stylesheet" type="text/css" href="./test.css">
+    <style>
+        
+    </style>
+
+    <!-- 자바스크립트 코드 작성 영역 -->
+    <script type="text/javascript">
+        //입력 태그는 종류와 관계없이 입력값을 value 속성으로 확인/변경한다
+        function copy1() {
+            var ip1 = document.querySelector(".ip1");
+            var display = document.querySelector(".display");
+            display.textContent = ip1.value;
+        }
+        //(주의) select에서 option은 따로 제어할 필요가 없다
+        function copy2() {
+            var ip2 = document.querySelector(".ip2");
+            var display = document.querySelector(".display");
+            display.textContent = ip2.value;
+        }
+        //(주의) textarea는 div처럼 종료태그가 있지만 value로 값에 접근
+        function copy3() {
+            var ip3 = document.querySelector(".ip3");
+            var display = document.querySelector(".display");
+            display.textContent = ip3.value.length;//길이(length)
+        }
+    </script>
+</head>
+<body>
+    <div class="container w-500 my-50">
+        <div class="row center">
+            <h1>입력창 제어 예제</h1>
+        </div>
+        <div class="row">
+            <!--
+                입력창에 사용하는 주요 이벤트
+                - oninput 은 어떠한 형태로든 입력창에 입력이 발생한 경우 실행 (입력 시)
+                - onblur 는 입력창에서 커서가 탈출할 경우 발생 (입력 종료 시)
+            -->
+            <input type="text" class="ip1 field w-100" onblur="copy1();">
+        </div>
+        <div class="row">
+            <select class="ip2 field w-100" oninput="copy2();">
+                <option value="">선택하세요</option>
+                <option value="수박">수박</option>
+                <option value="자두">자두</option>
+                <option value="포도">포도</option>
+            </select>
+        </div>
+        <div class="row">
+            <textarea class="ip3 field w-100" rows="5" oninput="copy3();"></textarea>
+        </div>
+        <div class="row">
+            <div class="display"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+
+    <!-- google font cdn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <!-- font awesome icon cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- my css -->
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <link rel="stylesheet" type="text/css" href="./test.css">
+    <style>
+        
+    </style>
+
+    <!-- 자바스크립트 코드 작성 영역 -->
+    <script type="text/javascript">
+        function changeText() {
+            //목표 : .korean과 .english에 작성된 글자를 서로 교체
+            var koreanDiv = document.querySelector(".korean");
+            var englishDiv = document.querySelector(".english");
+            var korean = koreanDiv.textContent;
+            var english = englishDiv.textContent;
+            koreanDiv.textContent = english;
+            englishDiv.textContent = korean;
+
+            // 맞교환 가능(권장하진 않음, 자바스크립트 신문법)
+            // [koreanDiv.textContent, englishDiv.textContent]
+            //     = [englishDiv.textContent, koreanDiv.textContent];
+        }
+    </script>
+</head>
+<body>
+    <div class="container w-600">
+        <div class="row center">
+            <h1>단어 교체 기능 구현</h1>        
+        </div>
+
+        <div class="row">
+            <div class="korean">집에 가고 싶어</div>
+        </div>
+        <div class="row center">
+            <button class="btn btn-positive" onclick="changeText();">
+                <i class="fa-solid fa-arrows-up-down"></i>
+            </button>
+        </div>
+        <div class="row">
+            <div class="english">want to go home</div>
+        </div>
+    </div>
+</body>
+</html>

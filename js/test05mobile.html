@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        .btn{
+            padding: 0 20px 0 20px;
+        }
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        
+            function one(){
+                var target = document.querySelector(".display");
+                target.textContent+="1";
+            }
+            function two(){
+                var target = document.querySelector(".display");
+                target.textContent+="2";
+            }
+            function three(){
+                var target = document.querySelector(".display");
+                target.textContent+="3";
+            }
+            function four(){
+                var target = document.querySelector(".display");
+                target.textContent+="4";
+            }
+            function five(){
+                var target = document.querySelector(".display");
+                target.textContent+="5";
+            }
+            function six(){
+                var target = document.querySelector(".display");
+                target.textContent+="6";
+            }
+            function seven(){
+                var target = document.querySelector(".display");
+                target.textContent+="7";
+            }
+            function eight(){
+                var target = document.querySelector(".display");
+                target.textContent+="8";
+            }
+            function nine(){
+                var target = document.querySelector(".display");
+                target.textContent+="9";
+            }
+            function zero(){
+                var target = document.querySelector(".display");
+                target.textContent+="0";
+            }
+            function star(){
+                var target = document.querySelector(".display");
+                target.textContent+="*";
+            }
+            function mola(){
+                var target = document.querySelector(".display");
+                target.textContent+="#";
+            }
+            function numberClear () {
+            var target = document.querySelector(".display");
+            target.textContent = "";
+        }
+        
+            
+            </script>
+</head>
+<body>
+    <div class="container w-600 my-50 center">
+        <div class="row">
+            
+            <div class="display"></div>
+        </div>
+        <div class="row">
+            <button class="btn" onclick="one()">1</button><button class="btn" onclick="two()">2</button><button class="btn" onclick="three()">3</button>
+        </div>
+        <div class="row">
+            <button class="btn" onclick="four()">4</button><button class="btn" onclick="five()">5</button><button class="btn" onclick="six()">6</button>
+        </div>
+        <div class="row">
+            <button class="btn" onclick="seven()">7</button><button class="btn" onclick="eight()">8</button><button class="btn" onclick="nine()">9</button>
+        </div>
+        <div class="row">
+            <button class="btn" onclick="star()">*</button><button class="btn" onclick="zero()">0</button><button class="btn" onclick="mola()">#</button>
+        </div>
+        <div class="row">
+            <button class="btn" onclick="numberClear()">C</button>
+        </div>
+    </div>
+    
+</body>
+</html>
