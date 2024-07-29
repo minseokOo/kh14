@@ -19,21 +19,45 @@
             var isValid = rexId.test(account.value);
             console.log(isValid);
             if(isValid){
-                document.write("사용할 수 있는 아이디 입니다.");
-        }
+                var answer = document.querySelector(".answer");
+                answer.classList.add("green");
+                answer.textContent = "사용할 수 있는 아이디입니다.";
+            }
             else{
-                document.write("영어소문자, 0~9까지의 숫자 8~20글자를 입력하세요.");
+                var answer = document.querySelector(".answer");
+                answer.classList.add("red");
+                answer.textContent = "영어소문자, 0~9까지의 숫자 8~20글자를 입력하세요.";
             }
             }
             function password() {
             var password = document.querySelector(".password");
             var rexPw = /^(?=(.*?)[A-Z])(?=(.*?)[a-z])(?=(.*?)[0-9])(?=(.*?)[!@#$])[A-Za-z0-9!@#$]{8,16}$/;
             var isValid = rexPw.test(password.value);
+            if(isValid){
+                var answerPw = document.querySelector(".answerPw");
+                answerPw.classList.add("green");
+                answerPw.textContent = "사용 가능한 비밀번호 입니다.";
+            }
+            else{
+                var answerPw = document.querySelector(".answerPw");
+                answerPw.classList.add("red");
+                answerPw.textContent = "비밀번호는 영어대소문자, 숫자, 특수문자를 반드시 포함한 8~16자로 작성하세요.";
+            }
             }
             function checkPw() {
-            var Pw = document.querySelector(".Pw");
-            var rexPw = /^(?=(.*?)[A-Z])(?=(.*?)[a-z])(?=(.*?)[0-9])(?=(.*?)[!@#$])[A-Za-z0-9!@#$]{8,16}$/;
-            var isValid = rexPw.test(Pw.value);
+            var password = document.querySelector(".password").value;
+            var checkPw = document.querySelector(".checkPw").value;
+            var checkPw = document.querySelector(".chePw");
+            
+            // var isValid = password == checkPw;
+            if(password == checkPw){
+                checkPw.classList.add("green");
+                checkPw.textContent = "비밀번호가 일치합니다.";
+            }
+            else{
+                checkPw.classList.add("red");
+                checkPw.textContent = "비밀번호가 일치하지 않습니다.";
+            }
             }
         
 
@@ -48,9 +72,22 @@
         <div class="row center">
             <input type="text" class="account field w-100" onblur="account();">
         </div> 
-        <div class="row">
-            <div></div>
-        </div>
+
+        <div class="row answer"></div> 
+
+        <label>비밀번호</label>
+        <div class="row center">
+            <input type="password" class=" password field w-100" onblur="password();">
+        </div> 
+
+        <div class="row answerPw"></div>
+
+        <label>비밀번호 확인</label>
+        <div class="row center">
+            <input type="password" class=" checkPw field w-100" onblur="checkPw();">
+        </div> 
+
+        <div class="row chePw"></div>
         
 
     </div>
