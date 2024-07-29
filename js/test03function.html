@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        // 함수(function)
+        // - 혼자서 코드를 실행할 수 있는 도구
+        // - 메소드는 반드시 객체에 포함되어야 함
+        // - 원할 때 실행할 수 있다.
+        // - 함수를 호출하는 코드를 태그에 작성한다.
+
+        function hello(){
+            console.log("안녕");
+            // alert("안녕");
+        }
+        function sum(){
+            var total = 0;
+            for(var i=1; i<=100; i++){
+                total+=i;
+            }
+            console.log("합계 = " + total);
+        }
+        function seven(){
+            for(var i=1; i<=100; i++ ){
+                if(i % 7 == 0){
+                    console.log(i);
+                }
+            }
+        }
+        
+        //hello(); //함수 호출(call) 코드
+        </script>
+</head>
+<body>
+    <div class="container w-500 my-50">
+        <div class="row center">
+            <h1>자바스크립트 함수</h1>
+        </div>
+        <div class="row">
+            <button class="btn btn-positive" onclick="hello()">안녕</button>
+        </div>
+        <div class="row">
+            <button class="btn btn-positive" onclick="sum()">1부터 100까지 합계 구하기</button>
+        </div>
+        <div class="row">
+            <button class="btn btn-positive" onclick="seven()">1부터 100사이의 7의 배수 구하기</button>
+        </div>
+    </div>
+    
+</body>
+</html>
