@@ -47,16 +47,16 @@
             function checkPw() {
             var password = document.querySelector(".password").value;
             var checkPw = document.querySelector(".checkPw").value;
-            var checkPw = document.querySelector(".chePw");
+            var chePw = document.querySelector(".chePw");
             
-            // var isValid = password == checkPw;
-            if(password == checkPw){
-                checkPw.classList.add("green");
-                checkPw.textContent = "비밀번호가 일치합니다.";
+            // var isValid = password === checkPw;
+            if(password === checkPw){
+                chePw.classList.add("green");
+                chePw.textContent = "비밀번호가 일치합니다.";
             }
             else{
-                checkPw.classList.add("red");
-                checkPw.textContent = "비밀번호가 일치하지 않습니다.";
+                chePw.classList.add("red");
+                chePw.textContent = "비밀번호가 일치하지 않습니다.";
             }
             }
         
