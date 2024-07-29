@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        function account() {
+            var account = document.querySelector(".account");
+            var rexId = /^[a-z0-9]{8,20}$/;
+            var isValid = rexId.test(account.value);
+            console.log(isValid);
+            if(isValid){
+                document.write("사용할 수 있는 아이디 입니다.");
+        }
+            else{
+                document.write("영어소문자, 0~9까지의 숫자 8~20글자를 입력하세요.");
+            }
+            }
+            function password() {
+            var password = document.querySelector(".password");
+            var rexPw = /^(?=(.*?)[A-Z])(?=(.*?)[a-z])(?=(.*?)[0-9])(?=(.*?)[!@#$])[A-Za-z0-9!@#$]{8,16}$/;
+            var isValid = rexPw.test(password.value);
+            }
+            function checkPw() {
+            var Pw = document.querySelector(".Pw");
+            var rexPw = /^(?=(.*?)[A-Z])(?=(.*?)[a-z])(?=(.*?)[0-9])(?=(.*?)[!@#$])[A-Za-z0-9!@#$]{8,16}$/;
+            var isValid = rexPw.test(Pw.value);
+            }
+        
+
+    </script>
+</head>
+<body>
+    <div class="container w-600 my-50">
+        <div class="row center">
+            <h1>회원가입</h1>
+        </div>
+        <label>아이디</label>
+        <div class="row center">
+            <input type="text" class="account field w-100" onblur="account();">
+        </div> 
+        <div class="row">
+            <div></div>
+        </div>
+        
+
+    </div>
+    
+</body>
+</html>
