@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        //프로그래밍에서 가장 중요한것은 메세지를 화면에 출력하는것
+        //System.out.println("Hello"); //Java
+        console.log("Hello");
+        console.log(10 + 20);
+
+        // 변수(Variable)
+        // - 자바는 자료형을 매우 중요하게 여긴다 (컴파일 방식의 특징, 녹화방송)
+        // int a = 10;
+        // String b = "hello";
+        // - 자바스크립트는 유연함을 중요하게 여긴다(인터프리터, 스크립트 방식의 특징, 생방송)
+        // - 계산 등을 하다 보면 말도 안되는 값들이 나온다.
+        // - NaN(Not a Number), undefined, Infinity
+        var a = 10;
+        var b = "hello";
+        console.log(a);
+        console.log(b);
+        console.log(a + b);
+        console.log(a-b); //자바에서는 에러가 나는 계산, 자바스크립트는 NaN(Not a Number)
+        
+        var c;
+        console.log(c); //자바에서 에러가 나는 코드 (undefined)
+
+        var d = 10 / 0; //자바에서 에러나는 코드
+        var e = -10 / 0; //자바에서 에러나는 코드
+        console.log(d, e);
+
+        var f = null; //자바에도 있는 값
+        console.log(f);
+
+        //논리, 숫자(정수 + 실수), 문자열 등 기본적인 데이터들은 전부 존재
+        var g = 10 < 20;
+        console.log(g);
+
+        //자바 입장에서 보면 어이가 없는 계산들
+        var h1 = 0 == false;
+        console.log(h1);
+
+        var h2 = null == false;
+        console.log(h2);
+
+        var h3 = undefined == false;
+        console.log(h3);
+
+        var h4 = null == undefined;
+        console.log(h4);
+    </script>
+</head>
+<body>
+
+    
+</body>
+</html>
