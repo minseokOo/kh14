@@ -5,7 +5,9 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <!-- 제목 -->
+<div class="container w-1100 my-50">
 <h1>회원 관리</h1>
+<div class="row center"></div>
 
 <!-- 검색화면 -->
 <form action="list" method="get">
@@ -28,7 +30,7 @@
 </c:if>
 
 <c:if test="${list.size() > 0}">
-	<table border="1" width="900"> 
+	<table class="table table-hover" border="1" width="900"> 
 		<thead>
 			<tr>
 				<th>아이디</th>
@@ -69,5 +71,6 @@
 	
 	<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>
 </c:if>
+</div> 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

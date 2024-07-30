@@ -5,7 +5,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <div class="container w-700" style="height=400">
 		<div class="row center">
-			<h1>歡迎來到我們的網站。</h1>
+			<h1>홈페이지에 오신것을 환영합니다.</h1>
 		</div>
 <style>
 .img-box {
