@@ -593,3 +593,29 @@ textarea.field {
 .purple { color:#6c5ce7 !important; }
 .yellow { color:#fdcb6e !important; }
 
+/* 
+            입력창 피드백 디자인
+            - 입력창이 success가 되면 .success-feedback을 표시
+            - 입력창이 .fail이 되면 .fail-feedback을 표시
+        */
+        .success-feedback{
+            color: green;
+        }
+        .fail-feedback{
+            color: red;
+        }
+        .success{
+            border-color: green;
+        }
+        .fail{
+            border-color:red;
+        }
+        .success-feedback, 
+        .fail-feedback {
+            display: none;
+        }
+        .success ~ .success-feedback, /* .success 뒤에 있는 피드백 */
+        .fail ~ .fail-feedback /* .fail 뒤에 있는 피드백 */
+        {
+            display: block;
+        }

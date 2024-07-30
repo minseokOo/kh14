@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기본 이벤트 제어</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        // a, form과 같이 기본적인 이벤트가 존재하는 태그를 제어
+        // - a 태그의 클릭 이동을 막고 싶다면 onclick에 return false를 적으면 된다.
+        // - a 태그의 클릭 이동을 허용하고 싶다면 onclick에 return true를 적으면 된다.
+
+        function checkMove(){
+            // 확인창을 띄워서 확인을 누르면 이동, 취소를 누르면 차단
+            // 확인창 명령 - confirm("보여줄 메세지")
+            // var choice = confirm("이동하시겠습니까?");
+            // console.log("choice = " + choice);
+            // if(choice == true) {
+            //     return true;
+            // }
+            // else{
+            //     return false;
+            // }
+            return confirm("이동하시겠습니까?");
+        }
+        function checkForm(){
+            return confirm("제출 하시겠습니까?");
+        }
+
+    </script>
+</head>
+<body>
+    <div class="container w-500 my-50">
+        <div class="row center">
+            <h1>기본 이벤트 제어</h1>
+        </div>
+        <div class="row">
+            <a href="https://www.google.com" onclick="return true;">구글로 이동</a>
+        </div>
+        <div class="row">
+            <a href="https://www.google.com" onclick="return false;">구글로 이동</a>
+        </div>
+        <div class="row">
+            <a href="https://www.google.com" onclick="return checkMove();">구글로 이동</a>
+        </div>
+
+        <div class="row mt-50">
+            <form action="https://www.google.com" onsubmit="return checkForm();">
+                <button type="submit">전송</button>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>

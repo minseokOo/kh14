@@ -16,13 +16,16 @@
     // 태그 탐색(DOM 탐색, Document Object Model)
     // - 만든 페이지는 자동으로 tree 구조화 되어 자바스크립트에서 관리
     // - 인접한 요소들을 탐색할 수 있다.
-    // - 이전 요소는 previous
+    // - 이전 요소는 previousElementSibling으로 탐색한다.
+    // - 다음 요소는 nextElementSibling으로 탐색한다.
 
+    
         function account() {
             var account = document.querySelector("[name=memberId]");
             //var account = document.querySelector("[name=memberId]")
             //var result = document.querySelector("#mamberid-result")
             var answer = account.nextElementSibling;
+            var memberId = account.value;
             var rexId = /^[a-z][a-z0-9]{7,19}$/;
             var isValid = rexId.test(account.value);
             console.log(isValid);
