@@ -77,14 +77,17 @@
     <div class="row">
     <input class="field field-image w-100" type= "text" name="memberId" onblur="account()" required>
 	</div>
+    <div class="row answer"></div> 
     <label>비밀번호<i class="fa-beat fa-solid fa-asterisk"></i></label>
     <div class="row">
     <input class="field field-image w-100" type="password" name= "memberPw" onblur="password()" required>
     </div>
+    <div class="row answerPw"></div>
     <label>비밀번호 확인</label>
     <div class="row">
     <input class="field w-100" type="password" name="checkPw" onblur="checkPw()" required>
     </div>
+    <div class="row chePw"></div>
     <label>닉네임<i class="fa-beat fa-solid fa-asterisk"></i></label>
     <div class="row">
 	<input class="field w-100" type= "text" name= "memberNickname" required>
