@@ -529,7 +529,7 @@ textarea.field {
             display: flex;
         }
 		.menu.menu ul:hover{
-			filter:brightness(120%);
+/* 			filter:brightness(120%); */
 		}        
 
         /* 3 */
@@ -587,3 +587,40 @@ textarea.field {
             left: -100%;
         }
     
+           /* 색상 관련 스타일 */
+.blue { color:#0984e3 !important; }
+.red { color:#d63031 !important; }
+.black { color:#2d3436 !important; }
+.gray { color:#b2bec3 !important; }
+.white { color:white !important; }
+.green { color:#00b894 !important; }
+.orange { color:#e17055 !important; }
+.purple { color:#6c5ce7 !important; }
+.yellow { color:#fdcb6e !important; }
+
+    /* 
+            입력창 피드백 디자인
+            - 입력창이 success가 되면 .success-feedback을 표시
+            - 입력창이 .fail이 되면 .fail-feedback을 표시
+        */
+        .success-feedback{
+            color: green;
+        }
+        .fail-feedback{
+            color: red;
+        }
+        .success{
+            border-color: green;
+        }
+        .fail{
+            border-color:red;
+        }
+        .success-feedback, 
+        .fail-feedback {
+            display: none;
+        }
+        .success ~ .success-feedback, /* .success 뒤에 있는 피드백 */
+        .fail ~ .fail-feedback /* .fail 뒤에 있는 피드백 */
+        {
+            display: block;
+        }

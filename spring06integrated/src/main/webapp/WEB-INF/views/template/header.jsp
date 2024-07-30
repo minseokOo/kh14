@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메인페이지</title>
     <link rel="stylesheet" type="text/css" href="/css/commons.css">
-	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="/css/test.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
         .btn.btn-neutral{
@@ -84,9 +84,6 @@
                 <li>
                     <a class="btn btn-menu" href= "/board/list">게시판</a>
                 </li>
-                <li>
-                	<a class="btn btn-menu" href= "/member/logout">로그아웃</a>
-                </li>
                 <c:if test= "${sessionScope.createdLevel == '관리자' }">
                 <li>
 					<!-- 관리자 메뉴 -->
@@ -108,16 +105,8 @@
                             <a class="btn btn-menu" href= "/poketmon/list">포켓몬스터</a>
                     <ul>
                         <li>
-                        <a href="#">항목1</a>
-                            <ul>
-                                <li><a href="#">상세항목1</a></li>
-                                <li><a href="#">상세항목2</a></li>
-                                <li><a href="#">상세항목3</a></li>
-                                <li><a href="#">상세항목4</a></li>
-                            </ul>
+                        <a href="/poketmon/list">포켓몬 리스트</a>
                         </li>
-                        <li><a href="#">항목3</a></li>
-                        <li><a href="#">항목4</a></li>
                     </ul>
                 </li>
                 <li>
@@ -148,10 +137,13 @@
         <div class="row my-0 flex-box" style="min-height: 400px;">
             <div class="w-200">
                 <div class="row center" style="margin-top:200px">
-                    <img src="myImage" class="image image-circle image-lift" width="50%">
+                    <img src="image?memberId=memberDto.${sessionScope.createdUser}" class="image image-circle image-lift" width="50%">
                 </div>
                 <div class="row center">${sessionScope.createdUser}(${sessionScope.createdLevel})</div>
                 <div class="row center">5,000 point</div>
+                <div class="row center">
+                <a class="link link-animation" href= "/member/logout">로그아웃</a>
+                </div>
             </div>
     </div>
 	</div>

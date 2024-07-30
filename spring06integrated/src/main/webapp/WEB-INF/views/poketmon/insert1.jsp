@@ -14,33 +14,53 @@
     
 	}
 </style>
-   <form action= "./insert" method="post" enctype="multipart/form-data">
-   
-    <div class="container w-400 my-50">
-        <div class="row center"><h2>포켓몬 등록</h2></div>
-        <div class="row">
-            <label>몬스터 이름</label>
-            <input type="text" name="poketmonName" class="field w-100" required autocomplete="off">
-        </div>
-        <div class="row">
-            <label>몬스터 속성</label>
-            <select name="poketmonType" class="field w-100">
-                <option value="">선택</option>
-                <option value="불">불</option>
-                <option value="물">물</option>
-                <option value="풀">풀</option>
-                <option value="바람">바람</option>
-                <option value="땅">땅</option>
-            </select>
-        </div>
-        <div class="row">
-            <label>몬스터 이미지</label>
-            <input type="file" name="attach" accept="image/*" class="field w-100">
-        </div>
-        <div class="row mt-40">
-            <button class="btn btn-positive w-100">등록하기</button>
-        </div>
+ <script type="text/javascript">
+        var pmNameValid = false;
+        var pnTypeValid = false;
+
+        function pmName() {
+            var pmName = document.querySelector(".pmName");
+            var rexId = /^[가-힣\s]{1,10}$/;
+            pmNameValid =rexId.test(pmName.value);
+            pmName.classList.remove("success", "fail");
+            pmName.classList.add(pmNameValid ? "success" : "fail");
+        }
+        function pmType() {
+            var pmType = document.querySelector(".pmType");
+            pmTypeValid = pmType.value.length > 0;
+            pmType.classList.remove("success", "fail");
+            pmType.classList.add(pmTypeValid ? "success" : "fail");
+        }
+        // function pmImage(){
+        //     var pmImage = document.querySelector(".pmImage");
+        //     console.log(pmImage);
+        // }
+        function checkForm(){
+            return pmNameValid && pmTypeValid;
+        }
+
+    </script>
+    <div class="container w-500">
+   <form action=".insert" method="post" autocomplete="off" enctype="multipart/form-data" onsubmit="return checkForm();">
+            <div class="row">
+                <input type="hidden" name="poketmonNo" class="field">
+                <label>이름</label>
+                <input type="text" name="poketmonName" class=" pmName field w-100" onblur="pmName()">
+                <div class="success-feedback"></div>
+                <div class="fail-feedback">한글 또는 숫자 10자 이하로 작성하세요.</div>
+            </div>
+            <div class="row">
+                <label>속성</label>
+                <input type="text" name="poketmonType" class=" pmType field w-100" onblur="pmType()">
+                <div class="fail-feedback">속성을 입력해주세요.</div>
+            </div>
+            <div class="row">
+                <label>이미지</label>
+                <input type="file" name="attach" class="field w-100">
+            </div>
+            <button class="btn btn-positive w-100" type="submit">등록</button>
+        </form>
+
     </div>
-   </form>
    
    <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

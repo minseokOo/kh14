@@ -16,76 +16,69 @@
         }
 </style>
 <script type="text/javascript">
-    function account() {
-        var account = document.querySelector(".account");
-        var rexId = /^[a-z0-9]{8,20}$/;
-        var isValid = rexId.test(account.value);
-        console.log(isValid);
-        if(isValid){
-            var answer = document.querySelector(".answer");
-            answer.classList.remove("red");
-            answer.classList.add("green");
-            answer.textContent = "사용할 수 있는 아이디입니다.";
-        }
-        else{
-            var answer = document.querySelector(".answer");
-            answer.classList.remove("green");
-            answer.classList.add("red");
-            answer.textContent = "영어소문자, 0~9까지의 숫자 8~20글자를 입력하세요.";
-        }
-        }
-        function password() {
-        var password = document.querySelector(".password");
-        var rexPw = /^(?=(.*?)[A-Z])(?=(.*?)[a-z])(?=(.*?)[0-9])(?=(.*?)[!@#$])[A-Za-z0-9!@#$]{8,16}$/;
-        var isValid = rexPw.test(password.value);
-        if(isValid){
-            var answerPw = document.querySelector(".answerPw");
-            answerPw.classList.remove("red");
-            answerPw.classList.add("green");
-            answerPw.textContent = "사용 가능한 비밀번호 입니다.";
-        }
-        else{
-            var answerPw = document.querySelector(".answerPw");
-            answerPw.classList.remove("green");
-            answerPw.classList.add("red");
-            answerPw.textContent = "비밀번호는 영어대소문자, 숫자, 특수문자를 반드시 포함한 8~16자로 작성하세요.";
-        }
-        }
-        function checkPw() {
-        var password = document.querySelector(".password").value;
-        var checkPw = document.querySelector(".checkPw").value;
-        var chePw = document.querySelector(".chePw");
-        
-        // var isValid = password === checkPw;
-        if(password === checkPw){
-            chePw.classList.remove("red");
-            chePw.classList.add("green");
-            chePw.textContent = "비밀번호가 일치합니다.";
-        }
-        else{
-            chePw.classList.remove("green");
-            chePw.classList.add("red");
-            chePw.textContent = "비밀번호가 일치하지 않습니다.";
-        }
-        }
+function account() {
+    var account = document.querySelector(".account");
+    //var account = document.querySelector("[name=memberId]")
+    //var result = document.querySelector("#mamberid-result")
+    var rexId = /^[a-z][a-z0-9]{7,19}$/;
+    var isValid = rexId.test(account.value);
+    
+    //이제 주인공은 "입력창"이며 입력창에 success/fail을 추가한다
+    account.classList.remove("success", "fail");
+    account.classList.add(isValid ? "success" :  "fail");
+    }
+    function password() {
+    var password = document.querySelector(".password");
+    var rexPw = /^(?=(.*?)[A-Z])(?=(.*?)[a-z])(?=(.*?)[0-9])(?=(.*?)[!@#$])[A-Za-z0-9!@#$]{8,16}$/;
+    var isValid = rexPw.test(password.value);
+
+    password.classList.remove("success", "fail");
+    password.classList.add(isValid ? "success" :  "fail");
+    
+    }
+    function checkPw() {
+    var password = document.querySelector(".password");
+    var checkPw = document.querySelector(".checkPw");
+    var isValid = password.value.length > 0 && password.value === checkPw.value;
+    console.log(isValid);
+    checkPw.classList.remove("success", "fail");
+    checkPw.classList.add(isValid ? "success" :  "fail");
+   
+    }
     </script>
 <div class="container">    
     <h1>회원 가입 정보 입력</h1>
 
 <form action= "join" method= "post" enctype= "multipart/form-data" autocomplete="off">
+    <div class="row">
     <label>아이디<i class="fa-beat fa-solid fa-asterisk"></i></label>
-    <div class="row">
-    <input class="field field-image w-100" type= "text" name="memberId" onblur="account()" required>
+    <input class="field field-image w-100 account" type= "text" name="memberId" onblur="account()" required>
+    <div class="success-feedback">사용할 수 있는 아이디입니다.</div> 
+    <div class="fail-feedback">영문 소문자로 시작, 영문소문자와 0~9까지의 숫자 8~20글자를 입력하세요.</div>
 	</div>
-    <div class="row answer"></div> 
-    <label>비밀번호<i class="fa-beat fa-solid fa-asterisk"></i></label>
+<<<<<<< HEAD
+	<div class="row answer"></div> 
+	
     <div class="row">
-    <input class="field field-image w-100" type="password" name= "memberPw" onblur="password()" required>
+=======
+    <div class="row answer"></div> 
+>>>>>>> branch 'main' of https://github.com/minseokOo/kh14.git
+    <label>비밀번호<i class="fa-beat fa-solid fa-asterisk"></i></label>
+    <input class="field field-image w-100 password" type="password" name= "memberPw" onblur="password()" required>
+    <div class="success-feedback">사용 가능한 비밀번호 입니다.</div> 
+    <div class="fail-feedback">비밀번호는 영어대소문자, 숫자, 특수문자를 반드시 포함한 8~16자로 작성하세요.</div>
     </div>
+<<<<<<< HEAD
+     <div class="row answerPw"></div>
+=======
     <div class="row answerPw"></div>
     <label>비밀번호 확인</label>
+>>>>>>> branch 'main' of https://github.com/minseokOo/kh14.git
     <div class="row">
-    <input class="field w-100" type="password" name="checkPw" onblur="checkPw()" required>
+    <label>비밀번호 확인<i class="fa-beat fa-solid fa-asterisk"></i></label>
+    <input class="field field-image w-100 checkPw" type="password"  onblur="checkPw();" required>
+    <div class="success-feedback">비밀번호가 일치합니다.</div> 
+    <div class="fail-feedback">비밀번호가 일치하지 않습니다.</div>
     </div>
     <div class="row chePw"></div>
     <label>닉네임<i class="fa-beat fa-solid fa-asterisk"></i></label>
@@ -116,7 +109,7 @@
     </div>
     <label>사진 등록</label>
     <div class="row">
-	    <input type= "file" name= "attach"> 
+	    <input type= "file" name= "attach" class="field w-100"> 
     </div>
 <!-- 	프로필 이미지 <input type= "file" name= "attach" accept= ".png"> <br><br> -->
 <!-- 	프로필 이미지 <input type= "file" name= "attach" accept= ".png, .jpg"> <br><br> -->

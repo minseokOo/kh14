@@ -4,6 +4,8 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+
+<div class="container w-1100">
 <h1>사원 목록 검색</h1>
 
 <form action="list" method= "get">
@@ -48,5 +50,6 @@
 	
 	</tbody>
 </table>
+</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
