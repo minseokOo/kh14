@@ -20,11 +20,13 @@
             console.log(isValid);
             if(isValid){
                 var answer = document.querySelector(".answer");
+                answer.classList.remove("red");
                 answer.classList.add("green");
                 answer.textContent = "사용할 수 있는 아이디입니다.";
             }
             else{
                 var answer = document.querySelector(".answer");
+                answer.classList.remove("green");
                 answer.classList.add("red");
                 answer.textContent = "영어소문자, 0~9까지의 숫자 8~20글자를 입력하세요.";
             }
@@ -35,11 +37,13 @@
             var isValid = rexPw.test(password.value);
             if(isValid){
                 var answerPw = document.querySelector(".answerPw");
+                answerPw.classList.remove("red");
                 answerPw.classList.add("green");
                 answerPw.textContent = "사용 가능한 비밀번호 입니다.";
             }
             else{
                 var answerPw = document.querySelector(".answerPw");
+                answerPw.classList.remove("green");
                 answerPw.classList.add("red");
                 answerPw.textContent = "비밀번호는 영어대소문자, 숫자, 특수문자를 반드시 포함한 8~16자로 작성하세요.";
             }
@@ -51,10 +55,12 @@
             
             // var isValid = password === checkPw;
             if(password === checkPw){
+                chePw.classList.remove("red");
                 chePw.classList.add("green");
                 chePw.textContent = "비밀번호가 일치합니다.";
             }
             else{
+                chePw.classList.remove("green");
                 chePw.classList.add("red");
                 chePw.textContent = "비밀번호가 일치하지 않습니다.";
             }
