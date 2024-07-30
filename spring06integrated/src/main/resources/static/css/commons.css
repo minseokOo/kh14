@@ -528,7 +528,9 @@ textarea.field {
         .menu {
             display: flex;
         }
-        
+		.menu.menu ul:hover{
+			filter:brightness(120%);
+		}        
 
         /* 3 */
         .menu li /* 메뉴안에 있는 모든 항목 */

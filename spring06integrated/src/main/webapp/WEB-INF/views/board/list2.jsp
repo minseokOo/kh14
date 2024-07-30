@@ -12,8 +12,9 @@
 <%-- 	${pageVO} --%>
 <!-- </div> -->
 <%-- <div>${pageVO.beginRow} - ${pageVO.count} / ${pageVO.endRow} 개</div> --%>
+
 <div class="row">
-<table class="table table-border table-stripe table-hover" border= "1" width= "1000" >
+<table class="table table-border table-stripe table-hover"  border= "1" width= "1000" >
 	<thead align= "center">
 		<tr>
 			<th>번호</th>
@@ -28,7 +29,7 @@
 			<th>차수</th>
 		</tr>
 	</thead>
-	<tbody align= "center">
+	<tbody align= "center" >
 		<c:forEach var= "boardDto" items= "${boardList}">
 			<tr>
 				<td>${boardDto.boardNo}</td>
