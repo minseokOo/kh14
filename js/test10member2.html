@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입</title>
+    <title>회원가입2</title>
     <link rel="stylesheet" type="text/css" href="./commons.css">
 	<link rel="stylesheet" type="text/css" href="./test.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -13,21 +13,27 @@
     </style>
     <!-- 자바스크립트 작성 영역 -->
     <script type="text/javascript">
+    // 태그 탐색(DOM 탐색, Document Object Model)
+    // - 만든 페이지는 자동으로 tree 구조화 되어 자바스크립트에서 관리
+    // - 인접한 요소들을 탐색할 수 있다.
+    // - 이전 요소는 previous
+
         function account() {
-            var account = document.querySelector(".account");
+            var account = document.querySelector("[name=memberId]");
             //var account = document.querySelector("[name=memberId]")
             //var result = document.querySelector("#mamberid-result")
+            var answer = account.nextElementSibling;
             var rexId = /^[a-z][a-z0-9]{7,19}$/;
             var isValid = rexId.test(account.value);
             console.log(isValid);
             if(isValid){
-                var answer = document.querySelector(".answer");
+                //var answer = document.querySelector(".answer");
                 answer.classList.remove("red");
                 answer.classList.add("green");
                 answer.textContent = "사용할 수 있는 아이디입니다.";
             }
             else{
-                var answer = document.querySelector(".answer");
+                //var answer = document.querySelector(".answer");
                 answer.classList.remove("green");
                 answer.classList.add("red");
                 answer.textContent = "영문 소문자로 시작, 영문소문자와 0~9까지의 숫자 8~20글자를 입력하세요.";
@@ -78,10 +84,9 @@
         </div>
         <label>아이디</label>
         <div class="row center">
-            <input type="text" name="memberId" class="account field w-100" onblur="account();">
+            <input type="text" name="memberId" class="field w-100" onblur="account();">
         </div> 
-
-        <div class="row answer"></div> 
+        <div></div> 
 
         <label>비밀번호</label>
         <div class="row center">
