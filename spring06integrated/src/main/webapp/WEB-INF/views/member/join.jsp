@@ -56,15 +56,24 @@ function account() {
     <div class="success-feedback">사용할 수 있는 아이디입니다.</div> 
     <div class="fail-feedback">영문 소문자로 시작, 영문소문자와 0~9까지의 숫자 8~20글자를 입력하세요.</div>
 	</div>
+<<<<<<< HEAD
 	<div class="row answer"></div> 
 	
     <div class="row">
+=======
+    <div class="row answer"></div> 
+>>>>>>> branch 'main' of https://github.com/minseokOo/kh14.git
     <label>비밀번호<i class="fa-beat fa-solid fa-asterisk"></i></label>
     <input class="field field-image w-100 password" type="password" name= "memberPw" onblur="password()" required>
     <div class="success-feedback">사용 가능한 비밀번호 입니다.</div> 
     <div class="fail-feedback">비밀번호는 영어대소문자, 숫자, 특수문자를 반드시 포함한 8~16자로 작성하세요.</div>
     </div>
+<<<<<<< HEAD
      <div class="row answerPw"></div>
+=======
+    <div class="row answerPw"></div>
+    <label>비밀번호 확인</label>
+>>>>>>> branch 'main' of https://github.com/minseokOo/kh14.git
     <div class="row">
     <label>비밀번호 확인<i class="fa-beat fa-solid fa-asterisk"></i></label>
     <input class="field field-image w-100 checkPw" type="password"  onblur="checkPw();" required>

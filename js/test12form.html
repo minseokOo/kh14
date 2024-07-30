@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입3</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /* 
+            입력창 피드백 디자인
+            - 입력창이 success가 되면 .success-feedback을 표시
+            - 입력창이 .fail이 되면 .fail-feedback을 표시
+        */
+        .success-feedback{
+            color: green;
+        }
+        .fail-feedback{
+            color: red;
+        }
+        .success{
+            border-color: green;
+        }
+        .fail{
+            border-color:red;
+        }
+        .success-feedback, 
+        .fail-feedback {
+            display: none;
+        }
+        .success ~ .success-feedback, /* .success 뒤에 있는 피드백 */
+        .fail ~ .fail-feedback /* .fail 뒤에 있는 피드백 */
+        {
+            display: block;
+        }
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        // 외부에 여러 함수들이 공용으로 사용할 수 있는 변수를 두고 값을 전달
+        var accountValid = false;
+        var passwordValid = false;
+        var checkPwValid = false;
+
+
+        function account() {
+            var account = document.querySelector(".account");
+            //var account = document.querySelector("[name=memberId]")
+            //var result = document.querySelector("#mamberid-result")
+            var rexId = /^[a-z][a-z0-9]{7,19}$/;
+             accountValid = rexId.test(account.value);
+            
+            //이제 주인공은 "입력창"이며 입력창에 success/fail을 추가한다
+            account.classList.remove("success", "fail");
+            account.classList.add(accountValid ? "success" :  "fail");
+            }
+            function password() {
+            var password = document.querySelector(".password");
+            var rexPw = /^(?=(.*?)[A-Z])(?=(.*?)[a-z])(?=(.*?)[0-9])(?=(.*?)[!@#$])[A-Za-z0-9!@#$]{8,16}$/;
+             passwordValid = rexPw.test(password.value);
+            password.classList.remove("success", "fail");
+            password.classList.add(passwordValid ? "success" :  "fail");
+            
+            }
+            function checkPw() {
+            var password = document.querySelector(".password");
+            var checkPw = document.querySelector(".checkPw");
+            checkPwValid = password.value.length > 0 && password.value === checkPw.value;
+            checkPw.classList.remove("success", "fail");
+            checkPw.classList.add(checkPwValid ? "success" :  "fail");
+            }
+
+            // form을 검사하여 전송할 것인지 아닌지 판단하는 함수
+            // - form 안에 있는 입력창들의 검사 결과를 알아야한다.
+
+            function checkForm() {
+                console.log(accountValid, passwordValid, checkPwValid);
+                return accountValid && passwordValid && checkPwValid;
+            }
+
+    </script>
+</head>
+<body>
+    <div class="container w-600 my-50">
+        <div class="row center">
+            <h1>회원가입</h1>
+        </div>
+        <form action="" method="post" autocomplete="off" onsubmit="return checkForm();">
+            <div class="row">
+                <label>아이디</label>
+                <input type="text" name="memberId" class="account field w-100" onblur="account();">
+                <div class="success-feedback">사용할 수 있는 아이디입니다.</div> 
+                <div class="fail-feedback">영문 소문자로 시작, 영문소문자와 0~9까지의 숫자 8~20글자를 입력하세요.</div>
+            </div> 
+            
+            <div class="row">
+                <label>비밀번호</label>
+                <input type="password" name="memberPw" class=" password field w-100" onblur="password();">
+                <div class="success-feedback">사용 가능한 비밀번호 입니다.</div> 
+                <div class="fail-feedback">비밀번호는 영어대소문자, 숫자, 특수문자를 반드시 포함한 8~16자로 작성하세요.</div>
+            </div> 
+            
+            
+            <div class="row">
+                <label>비밀번호 확인</label>
+                <input type="password" class="checkPw field w-100" onblur="checkPw();">
+                <div class="success-feedback">비밀번호가 일치합니다.</div> 
+                <div class="fail-feedback">비밀번호가 일치하지 않습니다.</div>
+            </div> 
+
+            <div class="row">
+                <button class="btn btn-positive w-100" type="submit">
+                    회원가입
+                </button>
+            </div>
+        </div>
+    </form>
+        
+</body>
+</html>
