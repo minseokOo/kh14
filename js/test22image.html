@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        window.addEventListener("click", function(){
+            var btn = document.querySelector("#small");
+            btn.onclick = function(){
+                var image = document.querySelector(".image");
+                image.style.width = "150px";
+                image.style.height = "150px";
+            };
+        });
+        window.addEventListener("click", function(){
+            var btn = document.querySelector("#medium");
+            btn.onclick = function(){
+                var image = document.querySelector(".image");
+                image.style.width = "300px";
+                image.style.height = "300px";
+            };
+        });
+        window.addEventListener("click", function(){
+            var btn = document.querySelector("#large");
+            btn.onclick = function(){
+                var image = document.querySelector(".image");
+                image.style.width = "450px";
+                image.style.height = "450px";
+            };
+        });
+    </script>
+</head>
+<body>
+    <div class="container w-500 my-50">
+        <div class="row center">
+            <h1>이미지 크기 조절</h1>
+        </div>
+        <div class="row center">
+            <button class="btn" id="small" type="button">작게</button>
+            <button class="btn" id="medium" type="button">보통</button>
+            <button class="btn" id="large" type="button">크게</button>
+        </div>
+        <div class="row center">
+            
+            <img class="image" src="https://picsum.photos/id/237/300/300">
+        </div>
+    </div>
+</body>
+</html>
