@@ -8,7 +8,10 @@
 	<link rel="stylesheet" type="text/css" href="./test.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-
+        .image {
+            transition: 0.1s ease-out;
+            transition-property: width, height;
+        }
     </style>
     <!-- 자바스크립트 작성 영역 -->
     <script type="text/javascript">
@@ -16,24 +19,24 @@
             var btn = document.querySelector("#small");
             btn.onclick = function(){
                 var image = document.querySelector(".image");
-                image.style.width = "150px";
-                image.style.height = "150px";
+                image.style.width = "50%";
+                image.style.height = "50%";
             };
         });
         window.addEventListener("click", function(){
             var btn = document.querySelector("#medium");
             btn.onclick = function(){
                 var image = document.querySelector(".image");
-                image.style.width = "300px";
-                image.style.height = "300px";
+                image.style.width = "75%";
+                image.style.height = "75%";
             };
         });
         window.addEventListener("click", function(){
             var btn = document.querySelector("#large");
             btn.onclick = function(){
                 var image = document.querySelector(".image");
-                image.style.width = "450px";
-                image.style.height = "450px";
+                image.style.width = "100%";
+                image.style.height = "100%";
             };
         });
     </script>
@@ -49,8 +52,7 @@
             <button class="btn" id="large" type="button">크게</button>
         </div>
         <div class="row center">
-            
-            <img class="image" src="https://picsum.photos/id/237/300/300">
+            <img class="image" src="images/보노보노총합.gif">
         </div>
     </div>
 </body>
