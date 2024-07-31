@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        //자바스크립트의 객체와 배열
+        // - 자바에는 클래스가 존재하지만 ES5에는 클래스가 없다.
+        // - 객체를 만드는 방법이 두 가지가 존재
+        //      1. 생성자 함수를 이용하는 방법 (자바의 클래스와 비슷)
+        //      2. 일회성 객체를 만드는 방법 (자바의 Map과 비슷)
+
+        //생성자 함수
+        function Student(name, score){
+            this.name = name;
+            this.score = score;
+        }
+
+        var s1 = new Student("피카츄", 50);
+        var s2 = new Student("파이리", 77);
+
+        // 일회성 객체
+        var s3 = {name : "꼬부기", score : 90};
+        var s4 = {name : "이상해씨", score : 65};
+
+        console.log(s1);
+        console.log(s1.name, s1.score);
+        console.log(s2);
+        console.log(s3);
+        console.log(s4);
+
+        // 함수를 객체 안에 넣으면 메소드라고 부른다.
+        var s5 = {
+            name : "디그다",
+            score : 80,
+            setName : function(name){
+                this.name = name;
+            },
+            getName : function(){
+                return this.name;
+            },
+        }
+
+        // 배열(Array)
+        // - 자바의 배열은 같은 데이터를 정해진 개수만큼 저장
+        // - (ex) int[] data = new int[5];
+        // - 자바스크립트는 데이터를 구분하지 않으며 크기도 확장 가능
+
+        // var data = []; //비어있는 배열 생성
+        // data[10] = 50;
+        // console.log(data);
+
+        var data = [5, 10, 15]; //데이터를 넣으면서 배열 생성
+        data.push(10);
+        data.push(20);
+        data.push(30);
+        data.push("hello");
+        // console.log(data);        
+
+        //반복문으로 data에 들어있는 값 전체 출력
+        for(var i=0;  i< date.length; i++) {
+            console.log(data[i]);
+        }
+
+    </script>
+</head>
+<body>
+
+    
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 내장객체</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        /*
+            자바스크립트는 브라우저에 종속되어 있는 언어이다.
+            자바스크립트는 브라우저를 효과적으로 제어할 수 있는 내장객체를 가지고 있다.
+            - window : 창을 제어하기 위한 최상위 내장객체이며 생략 가능
+            - location : 주소창을 제어하기 위한 window의 하위 객체
+            - history : 방문이력을 관리하는 window의 하위 객체
+            - document : 문서를 제어할 수 있는 window의 하위 객체
+        */
+
+        function window01(){
+            // console.log(window);
+            // window.alert("알림창 샘플");
+            alert("알림창 샘플\n알림창 샘플");
+        }
+        function window02(){
+            // window.confirm("확인창 샘플");
+            var choice = confirm("확인창 샘플");
+            console.log("선택 결과", choice);
+        }
+        function window03(){
+            window.open("https://www.naver.com");
+        }
+        function window04(){
+            window.open("https://naver.com", null, "width=500, height=500");
+        }
+
+        function location01(){
+            //console.log(window.location);
+            // console.log(location);
+            location.href = "https://www.google.com";
+        }
+        function location02(){
+            // console.log(location);
+            location.reload();
+        }
+        function history01(){
+            // console.log(history);
+            // history.back();
+            history.go(-3); //숫자만큼 이동
+        }
+        function history02(){
+            history.forward();
+            // history.go(1);
+        }
+        function document01(){
+            // console.log(window.document);
+            var target = document.getElementById("test1");
+            target.style.color = "red";
+        }
+        function document02(){
+            var targetList = document.getElementsByTagName("h2");
+            //console.log(targetList);
+            // targetList.style.color = "blue"; // 안됨(배열리모컨)
+            // targetList[0].style.color = "blue";
+            for(var i=0; i<targetList.length; i++){
+                targetList[i].style.color = "blue";
+            }
+        }
+        function document03(){
+            var targetList = document.getElementsByClassName("hello");
+            console.log(targetList);
+            for(var i=0; i<targetList.length; i++){
+                targetList[i].style.color = "green";
+            }
+        }
+        function document04(){
+            // var target = document.querySelector("#test2");
+            var target = document.querySelector(".hello");
+            // document.querySelector("#test2.hello");
+            target.style.color = "maroon";
+        }
+        function document05(){
+            var targetList = document.querySelectorAll(".hello");
+            for(var i=0; i<targetList.length; i++){
+                targetList[i].style.color = "purple";
+            }
+        }
+
+
+    </script>
+</head>
+<body>
+    <div class="container w-500 my-50">
+        <div class="row center">
+            <h1>자바스크립트 내장 객체</h1>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-positive" onclick="window01();">알림창</button>
+            <button type="button" class="btn btn-positive" onclick="window02();">확인창</button>
+            <button type="button" class="btn btn-positive" onclick="window03();">새탭</button>
+            <button type="button" class="btn btn-positive" onclick="window04();">새창</button>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-positive" onclick="location01();">구글로 이동</button>
+            <button type="button" class="btn btn-positive" onclick="location02();">새로 고침</button>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-positive" onclick="history01();">뒤로가기</button>
+            <button type="button" class="btn btn-positive" onclick="history02();">앞으로가기</button>
+            <a href="#">dsa</a>
+            <a href="">dsa</a>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-positive" onclick="document01();">getElementsByTagName</button>
+            <button type="button" class="btn btn-positive" onclick="document02();">getElementById</button>
+            <button type="button" class="btn btn-positive" onclick="document03();">getElementsByClassName</button>
+            <button type="button" class="btn btn-positive" onclick="document04();">querySelector</button>
+            <button type="button" class="btn btn-positive" onclick="document05();">querySelectorAll</button>
+        </div>
+        <div class="row">
+            <h2 id="test1">Hello Javascript</h2>
+            <h2 id="test2" class="hello">Hello Javascript</h2>
+            <h2 id="test3" class="hello">Hello Javascript</h2>
+            <h2 class="hello">Hello Javascript</h2>
+            <h2>Hello Javascript</h2>
+        </div>
+    </div>
+    
+</body>
+</html>
