@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이용약관 동의</title>
+
+    <!-- google font cdn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <!-- font awesome icon cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- my css -->
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <link rel="stylesheet" type="text/css" href="./test.css">
+    <style>
+
+    </style>
+
+    <!-- 자바스크립트 코드 작성 영역 -->
+    <script type="text/javascript">
+        //전체 체크
+        function checkAll() {
+            //전체 선택 체크박스 불러오기
+            var checkbox = document.querySelector(".check-all");
+
+            //전체 항목 체크박스에 적용
+            var targetList = document.querySelectorAll(".check-item");
+            for(var i=0; i < targetList.length; i++) {
+                targetList[i].checked = checkbox.checked;
+            }
+
+            //뒷정리를 부탁해
+            checkItems();
+        }
+        //필수 체크
+        function checkRequiredAll() {
+            var checkbox = document.querySelector(".check-required-all");
+
+            var targetList = document.querySelectorAll(".check-required-item");
+            for(var i=0; i < targetList.length; i++) {
+                targetList[i].checked = checkbox.checked;
+            }
+
+            //뒷정리를 부탁해
+            checkItems();
+        }
+        //개별 항목 체크
+        //- 필수 체크 항목의 체크 수를 세어 반영
+        //- 전체 체크 항목의 체크 수를 세어 반영
+        function checkItems() {
+            var requiredCount = document.querySelectorAll(".check-required-item:checked").length;
+            var requiredCountAll = document.querySelectorAll(".check-required-item").length;
+            var itemCount = document.querySelectorAll(".check-item:checked").length;
+            var itemCountAll = document.querySelectorAll(".check-item").length;
+
+            var requiredCheckbox = document.querySelector(".check-required-all");
+            requiredCheckbox.checked = (requiredCount == requiredCountAll);
+            var itemCheckbox = document.querySelector(".check-all");
+            itemCheckbox.checked = (itemCount == itemCountAll);
+        }
+    </script>
+</head>
+<body>
+    <div class="container w-800 my-50">
+        <div class="row center">
+            <h1>이용약관 동의</h1>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="check-item check-required-item"
+                                                            oninput="checkItems();">
+                <span>(필수) 개인정보 취급방침에 동의합니다</span>
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="check-item check-required-item"
+                                                            oninput="checkItems();">
+                <span>(필수) 홈페이지 이용규칙을 준수합니다</span>
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="check-item" oninput="checkItems();">
+                <span>(선택) 이벤트성 정보 수신에 동의합니다</span>
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="check-item" oninput="checkItems();">
+                <span>(선택) 개인정보의 제 3자 제공에 대해 동의합니다</span>
+            </label>
+        </div>
+        <hr>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="check-required-all" oninput="checkRequiredAll();">
+                <span>필수 이용약관에 동의합니다</span>
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="check-all" oninput="checkAll();">
+                <span>전체 이용약관에 동의합니다</span>
+            </label>
+        </div>
+    </div>
+</body>
+</html>

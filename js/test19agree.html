@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<!-- <link rel="stylesheet" type="text/css" href="./test.css"> -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        function allChecked(){
+            var target = document.querySelector(".allChecked");
+            var targetList = document.querySelectorAll(".ckbox");
+            for(var i = 0; i<targetList.length; i++){
+               targetList[i].checked = target.checked;
+            }
+        }
+        function selectMust(){
+            var target = document.querySelector(".selectMust");
+            var targetList = document.querySelectorAll(".mustBox");
+           
+            for(var i = 0; i<targetList.length; i++){
+                targetList[i].checked = target.checked;
+            }
+            
+        }
+        function reverseCheck(){
+            var ck1 = document.querySelector("#ckbox1");
+            var ck2 = document.querySelector("#ckbox2");
+            var ck3 = document.querySelector("#ckbox3");
+            var ck4 = document.querySelector("#ckbox4");
+            var selectMust = document.querySelector(".selectMust");
+            var allChecked = document.querySelector(".allChecked");
+            
+            if(ck1.checked && ck2.checked && ck3.checked && ck4.checked && selectMust.checked == true){
+                allChecked.checked = true;
+            }
+            else{
+                allChecked.checked =false;
+            }
+            if(ck1.checked && ck2.checked == true){
+                selectMust.checked = true;
+            }
+            else{
+                selectMust.checked = false;
+            }
+            
+        }
+        
+    </script>
+</head>
+<body>
+    <div class="container w-500 my-50">
+        <div class="row center w-100">
+            <h1>이용약관</h1>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="ckbox mustBox" id="ckbox1" oninput="reverseCheck();">
+                (필수) 개인정보 취급방침에 동의합니다.
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="ckbox mustBox" id="ckbox2" oninput="reverseCheck();">
+                (필수) 홈페이지 이용규칙을 준수합니다.
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="ckbox" id="ckbox3" oninput="reverseCheck();">
+                (선택) 이벤트성 정보 수신에 동의합니다.
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="ckbox" id="ckbox4" oninput="reverseCheck();">
+                (선택) 개인정보의 제 3자 제공에 동의합니다.
+            </label>
+        </div>
+        <hr>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="ckbox selectMust" oninput="selectMust();">
+                필수 이용약관에 동의합니다.
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="allChecked" oninput="allChecked();">
+                전체 이용약관에 동의합니다.
+            </label>
+        </div>
+    </div>
+</body>
+</html>
