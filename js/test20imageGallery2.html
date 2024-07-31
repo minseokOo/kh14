@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        .cell {
+            width: 25%;
+            padding: 5px;
+            transition: width 0.1s ease-out;
+            transition-property: width, height;
+        }
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        function changeColumn1(){
+            var images = document.querySelectorAll(".cell");
+            for(var i=0; i<images.length; i++){
+                images[i].style.width = "100%"
+            }
+        }
+        function changeColumn2(){
+            var images = document.querySelectorAll(".image");
+            for(var i=0; i<images.length; i++){
+                images[i].style.width = "50%"
+            }
+        }
+        function changeColumn3(){
+            var images = document.querySelectorAll(".image");
+            for(var i=0; i<images.length; i++){
+                images[i].style.width = "33%"
+            }
+        }
+        function changeColumn4(){
+            var images = document.querySelectorAll(".image");
+            for(var i=0; i<images.length; i++){
+                images[i].style.width = "25%"
+            }
+        }
+        
+    </script>
+</head>
+<body>
+    <div class="container w-1000 my-50">
+        <div class="row">
+            <div class="row center">
+                <h1>더미 이미지 갤러리</h1>
+            </div>
+            <div class="row center">
+                <button type="button" class="btn" onclick="changeColumn4()">4열로 보기</button>
+                <button type="button" class="btn" onclick="changeColumn3()">3열로 보기</button>
+                <button type="button" class="btn" onclick="changeColumn2()">2열로 보기</button>
+                <button type="button" class="btn" onclick="changeColumn1()">1열로 보기</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="flex-box" style="flex-wrap: wrap;">
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/11/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/10/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/12/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/13/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/14/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/15/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/16/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/17/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/18/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/19/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/20/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/21/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/22/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/23/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/24/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/25/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/26/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/27/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/28/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/29/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/30/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/31/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/32/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/33/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/34/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/35/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/36/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/37/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/38/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/39/200/300"></div>
+                <div class="cell w-25 image image-scale image-hover"><img class="w-100" src="https://picsum.photos/id/40/200/300"></div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
