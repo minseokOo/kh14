@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리(jQuery)수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+
+    <!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js">
+        console.log(jQuery);
+        console.log($);
+     </script>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+       // console.log(jQuery); == console.log($);
+
+       // jQuery의 시작점 (화면이 준비되고 jQuery까지 준비되면 자동실행)
+       $(function(){
+        // jQuery는 무조건 $ 뒤에 무엇인가를 넣어서 "선택"한 다음 작업을 수행
+        //$(대상).명령()
+            //$("h1") == document.querySelecterAll
+        
+
+        // 이벤트 설정
+        // - .addEventListener(종류, 함수) >> .on)(종류, 함수)
+        // - .removeEventListener(함수)>>>.off(종류)
+            $("h1").on("click", function(){
+                // this는 동일하게 존재
+                // this.style.color = "red"; //Java Script
+                $(this).css("color", "red");
+            });
+
+            //특징
+            // 1. 달러($)로 시작
+            // 2. 달러 뒤에 괄호를 열고 선택할 대상을 작성
+            // 3. 뒤에 함수를 연결하여 부여하고 싶은 효과를 작성
+
+       });
+    </script>
+</head>
+<body>
+    <h1>Hello jQuery</h1>
+    <h1>Hello jQuery</h1>
+    <h1>Hello jQuery</h1>
+    <h1>Hello jQuery</h1>
+</body>
+</html>
