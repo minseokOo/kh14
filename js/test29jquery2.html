@@ -11,14 +11,25 @@
 
     </style>
 
-    
+    <!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js">
 
+     </script>
     <!-- 자바스크립트 작성 영역 -->
     <script type="text/javascript">
-
+        // (Q) 모든 h1 태그의 글자색을 빨강으로 바꾸세요!
+        $(function(){
+            $("h1").on("click", function(){
+                $(this).css("color", "red");
+            });
+        });
     </script>
 </head>
 <body>
-
+    <h1>Hello jQuery</h1></a>
+    <h1>Hello jQuery</h1></a>
+    <h1>Hello jQuery</h1></a>
+    <h1>Hello jQuery</h1></a>
+    <h1>Hello jQuery</h1></a>
 </body>
 </html>
