@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        window.addEventListener("load", function(){
+            var buttons = document.querySelectorAll(".btn-color");
+            for(var i=0; i<buttons.length; i++){
+                buttons[i].addEventListener("click", function(){
+                    var color = this.dataset.color;
+                    console.log(color);
+                    var target = document.querySelector(".title");
+                    target.style.color = color;
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container w-500 my-50">
+        <div class="row center">
+            <h1 class="title">색상 변경 문제</h1>
+        </div>
+        <div class="row center">
+            <button type="button" class="btn btn-color" data-color="red" >빨강</button>
+            <button type="button" class="btn btn-color" data-color="orange" >주황</button>
+            <button type="button" class="btn btn-color" data-color="yellow" >노랑</button>
+            <button type="button" class="btn btn-color" data-color="green" >초록</button>
+            <button type="button" class="btn btn-color" data-color="blue" >파랑</button>
+            <button type="button" class="btn btn-color" data-color="navy" >남색</button>
+            <button type="button" class="btn btn-color" data-color="purple" >보라</button>
+        </div>
+    </div>
+</body>
+</html>

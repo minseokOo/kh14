@@ -15,44 +15,38 @@
     </style>
     <!-- 자바스크립트 작성 영역 -->
     <script type="text/javascript">
+        // 앞 예제의 문제점
+        // 1. 버튼 개수만큼 선택하고 이벤트를 설정하는 노가다성 코드
+        // 2. 버튼마다 다르게 부여해야 하는 클래스
+        // 3. 낮은 확장성
         window.addEventListener("load", function(){
-            var decreaseBtn = document.querySelector("#decrease");
-            var smallBtn = document.querySelector("#small");
-            var mediumBtn = document.querySelector("#medium");
-            var largeBtn = document.querySelector("#large");
-            var increaseBtn = document.querySelector("#increase");
-            var text = document.querySelector(".field");
-            decreaseBtn.onclick = function(){
-                var currentSize = parseInt(getComputedStyle(text).fontSize);
-                text.style.fontSize = (currentSize - 1) + "px";
-            }
-            smallBtn.onclick = function(){
-                text.style.fontSize = "12px";
-            };
-            mediumBtn.onclick = function(){
-                text.style.fontSize = "16px";
-            };
-            largeBtn.onclick = function(){
-                text.style.fontSize = "24px";
-            };
-            increaseBtn.onclick = function(){
-                var currentSize = parseInt(getComputedStyle(text).fontSize);
-                text.style.fontSize = (currentSize + 1) + "px";
-            }
-        });
+            // 한번에 다 선택
+            var buttons = document.querySelectorAll(".btn-size");
+            for(var i=0; i<buttons.length; i++){
+            buttons[i].addEventListener("click", function(){
+                // 다른 함수기 때문에 외부의 i를 사용할 수 없음
+                // 이 상황을 this로 해결할 수 있다.(주인공)
+                console.log(this);  
+                var size = this.dataset.size; // 주인공의 [data-size]를 읽어라
+                console.log(size);
+                var target = document.querySelector(".target");
+                target.style.fontSize = size;
+            })
+        }   
+            });
     </script>
 </head>
 <body>
     <div class="container w-500 my-50">
         <div class="row center">
-            <button type="button" class="btn" id="decrease">-</button>
-            <button type="button" class="btn" id="small">작게</button>
-            <button type="button" class="btn" id="medium">보통</button>
-            <button type="button" class="btn" id="large">크게</button>
-            <button type="button" class="btn" id="increase">+</button>
+            <!-- <button type="button" class="btn btn-size" >-</button> -->
+            <button type="button" class="btn btn-size" data-size="12px" >작게</button>
+            <button type="button" class="btn btn-size" data-size="16px" >보통</button>
+            <button type="button" class="btn btn-size" data-size="20px" >크게</button>
+            <!-- <button type="button" class="btn btn-size" >+</button> -->
         </div>
         <div class="row">
-            <textarea class="field w-100" style="font-size: 16px;">
+            <textarea class="field w-100 target" rows="10" style="font-size: 16px;">
                 스타크래프트 립버전 1.16.1다운 스타크래프트 립버전 1.16.1다운 있을 것 같았다. 그건 실로 벅찬 감격이었다.고마워요 본드. 덕분에 마음이 아주 편해졌어요.고마워할 필요는 없어.킴은 미소지으며 손을 내밀었다. 니콜라는 기쁜 얼굴로 악수를
 리를 질렀다. 이건....정말 상황 파악이 느린 녀석이로군. 네가 지금 어디에 스타크래프트 립버전 1.16.1다운 알기나 하는 거야 어리광을 받아주는 것도 여기까지다. 어서 이름이나 말해 어디서 감히 스타크래프트 립버전 1.16.1다운 지르나 천한
 입구가 녹슬어 엉겨붙은 문을 열어 부지내를 마차가 스타크래프트 립버전 1.16.1다운 저택으로 향하는 길만은 어떻게든 풀사리도 되어 있는 것 같지만 스타크래프트 립버전 1.16.1다운 그것을 조금이라도 빗나가면자 거칠어지는 대로의 풀숲뿐만. 그런
