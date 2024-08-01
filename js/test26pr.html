@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        window.addEventListener("load", function(){
+            var textList = document.querySelectorAll(".field");
+            for(var i=0; i<textList.length; i++){
+                textList[i].addEventListener("input", function(){
+                    // this == 입력이 발생한 textarea
+                    // parentElement는 상위 태그를 반환
+                    // nextElementSibling은 뒤 태그를 반환
+                    // children은 하위 태그를 반환(여러개)
+                    var text = this;
+                    var span = this.parentElement.nextElementSibling.children[0];
+
+                    var count = text.value.length;
+
+                    span.textContent = count;
+                })
+                           }});
+            
+    </script>
+</head>
+<body>
+    <div class="container w-800 my-50">
+        <div class="row center">
+            <label>(Q1) 본인의 성장과정에 대해서 설명하세요.</label>
+            <textarea class="field w-100" rows="5" data-text="1"></textarea>
+        </div>
+        <div class="row right">
+            <span>0</span> / 1000
+        </div>
+        <div class="row center">
+            <label>(Q2) 본인의 성장과정에 대해서 설명하세요.</label>
+            <textarea class="field w-100" rows="5" data-text="2"></textarea>
+        </div>
+        <div class="row right">
+            <span>0</span> / 1000
+        </div>
+        <div class="row center">
+            <label>(Q3) 본인의 성장과정에 대해서 설명하세요.</label>
+            <textarea class="field w-100" rows="5" data-text="3"></textarea>
+        </div>
+        <div class="row right">
+            <span>0</span> / 1000
+        </div>
+        <div class="row center">
+            <label>(Q3) 본인의 성장과정에 대해서 설명하세요.</label>
+            <textarea class="field w-100" rows="5" data-text="3"></textarea>
+        </div>
+        <div class="row right">
+            <span>0</span> / 1000
+        </div>
+        <div class="row center">
+            <label>(Q3) 본인의 성장과정에 대해서 설명하세요.</label>
+            <textarea class="field w-100" rows="5" data-text="3"></textarea>
+        </div>
+        <div class="row right">
+            <span>0</span> / 1000
+        </div>
+
+    </div>
+</body>
+</html>
