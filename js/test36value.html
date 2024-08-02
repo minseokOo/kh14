@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리(jQuery)</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+
+    <!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+       $(function(){
+            $(".user-input").on("input", function(){
+                // this.value == $(this.val())
+
+                var input = $(this).val();
+                $(".user-input2").val(input);
+                $(".target1").text(input);
+                $(".target2").html(input); //입력창에 html을 입력하면 적용이 됨
+            });
+       });
+    </script>
+</head>
+<body>
+    <div class="container w-600 my-50">
+        <div class="row center">
+            <h1>입력창과 글자 제어</h1>
+        </div>
+        <div class="row">
+            <input type="text" class="field w-100 user-input">
+        </div>
+        <div class="row">
+            <input type="text" class="field w-100 user-input2">
+        </div>
+        <div class="row target1"></div>
+        <div class="row target2"></div>
+    </div>
+</body>
+</html>
