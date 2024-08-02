@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리(jQuery)</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <link rel="stylesheet" type="text/css" href="./test.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+
+    <!-- jquery cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        $(function(){
+            //상태 객체
+            var empStatus = {
+                empNameValid: false,
+                empDeptValid: false,
+                empDateValid: false,
+                empRankValid: false,
+                empSalValid: false,
+                ok: function () {
+                    return this.empNameValid && this.empDeptValid
+                        && this.empDateValid && this.empRankValid
+                        && this.empSalValid;
+                }
+            };
+
+            //입력창 이벤트
+            //$("[name=empName]").on("blur", function(){});
+            $("[name=empName]").blur(function(){
+                var regex = /^[가-힣]{2,7}$/;
+                //var isValid = regex.test(this.value);//JS
+                var isValid = regex.test($(this).val());//jQuery
+                $(this).removeClass("success fail")
+                            .addClass(isValid ? "success" : "fail");
+                empStatus.empNameValid = isValid;
+            });
+
+            $("[name=empDept]").on("input", function(){
+                var str = "^(기획팀|영업팀|총무팀|개발팀|운영팀)$";
+                var regex = new RegExp(str);//문자열을 정규표현식으로 변환
+                var isValid = regex.test($(this).val());
+                $(this).removeClass("success fail")
+                        .addClass(isValid ? "success" : "fail");
+                empStatus.empDeptValid = isValid;
+            });
+            $("[name=empDate]").blur(function(){
+                var regex = /^(19[0-9]{2}|20([0-9]{2})-(02-(0[1-9]|1[0-9]|2[0-8])|(0[469]|11)-(0[1-9]|1[0-9]|2[0-9]|30)|(0[13578]|1[02])-(0[1-9]|1[0-9]|2[0-9]|3[01])))$/;
+                var isValid = regex.test($(this).val());
+                $(this).removeClass("success fail")
+                            .addClass(isValid ? "success" : "fail");
+                empStatus.empDateValid = isValid;
+            });
+            $("[name=empRank]").on("input", function(){
+                var regex = /^(인턴|사원|주임|대리|과장|부장|이사|부사장|사장)$/;
+                var isValid = regex.test($(this).val());
+                $(this).removeClass("success fail")
+                            .addClass(isValid ? "success" : "fail");
+                empStatus.empRankValid = isValid;
+            });
+            $("[name=empSal]").blur(function(){
+                var regex = /^[0-9]+$/;
+                var isValid = regex.test($(this).val());
+                $(this).removeClass("success fail")
+                            .addClass(isValid ? "success" : "fail");
+                empStatus.empSalValid = isValid;
+            });
+
+            //폼 이벤트 - return false와 e.preventDefault() 모두 가능
+            //$(".check-form").on("submit", function(){});
+            // $(".check-form").submit(function(e){
+            //     if(!empStatus.ok()) {
+            //         e.preventDefault();
+            //     }
+            // });
+            $(".check-form").submit(function(){
+                //(+추가) 모든 입력창에 강제로 이벤트를 발생시킨다(이벤트 트리거)
+                //$(this).find("[name]").trigger("input");
+                //$(this).find("[name]").trigger("blur");
+                $(this).find("[name]").trigger("input").trigger("blur");
+
+                return empStatus.ok();
+            });
+
+        });
+        
+    </script>
+</head>
+
+<body>
+    <div class="container w-400 my-50">
+        <div class="row">
+            <h2>사원 정보 등록</h2>
+        </div>
+        <form action="./add" method="post" enctype="multipart/form-data" autocomplete="off" class="check-form">
+            <div class="row">
+                <label>사원명</label>
+                <input type="text" name="empName" class="eName field w-100">
+                <div class="fail-feedback">잘못된 이름입니다!</div>
+            </div>
+            <div class="row">
+                <label>사진 등록</label>
+                <input class="field w-100" name="attach" type="file">
+            </div>
+            <div class="row">
+                <label>부서명</label>
+                <select class="eDept field w-100" name="empDept">
+                    <option value="">선택하세요</option>
+                    <option value="기획팀">기획팀</option>
+                    <option value="영업팀">영업팀</option>
+                    <option value="총무팀">총무팀</option>
+                    <option value="개발팀">개발팀</option>
+                    <option value="운영팀">운영팀</option>
+                </select>
+                <div class="fail-feedback">부서는 반드시 선택해야 합니다</div>
+            </div>
+            <div class="row">
+                <label>입사일</label>
+                <input type="date" name="empDate" class="eDate field w-100">
+                <div class="fail-feedback">입사일은 반드시 설정해야 합니다</div>
+            </div>
+            <div class="row">
+                <label>사원등급</label>
+                <select class="eRank field w-100" name="empRank">
+                    <option value="인턴">인턴</option>
+                    <option value="사원">사원</option>
+                    <option value="주임">주임</option>
+                    <option value="대리">대리</option>
+                    <option value="과장">과장</option>
+                    <option value="부장">부장</option>
+                    <option value="이사">이사</option>
+                    <option value="부사장">부사장</option>
+                    <option value="사장">사장</option>
+                </select>
+            </div>
+            <div class="row">
+                <label>급여</label>
+                <input type="number" name="empSal" class="eSal field w-100">
+                <div class="fail-feedback">급여는 0 이상 숫자로 입력하세요</div>
+            </div>
+            <div class="row">
+                <button class="btn btn-positive" type="submit">등록</button>
+            </div>
+        </form>
+    </div>
+    
+</body>
+
+</html>

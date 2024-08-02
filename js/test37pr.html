@@ -17,10 +17,14 @@
     <script type="text/javascript">
        $(function(){
             $(".field").on("input", function(){
-                var count = $(this).val().length
+                var count = $(this).val().length;
                 $(this).parent().next().children("span").text(count);
+
+
                 if(count > 1000){
                     $(this).parent().next().children("span").css("color", "red");
+                    alert("1000자 이하로 작성해주세요.");
+                    
                 }
                 else if(count <= 1000){
                     $(this).parent().next().children("span").css("color", "black");
