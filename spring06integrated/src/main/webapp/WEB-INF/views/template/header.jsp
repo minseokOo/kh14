@@ -42,6 +42,13 @@
             transform: rotate(360deg);
         }
     </style>
+    <!-- 자바스크립트 -->
+    <!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+     <!-- 내가 만든 jQuery 라이브러리-->
+     <script src="/js/checkbox.js"></script>
+    <script src="/js/confirm-link.js"></script>
+    
 </head>
 <body bgcolor='#dff9fb' style="-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none">
     <!-- 홈페이지 크기를 결정하는 외부 영역(main) -->
