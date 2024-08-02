@@ -27,7 +27,7 @@
                 // $(this).parent().prev().children("h1").css("color", "red");
                 // $(this).parent().prev().children("h1").remove();//삭제
                 // $(this).parent().prev().children("h1").hide();//숨김
-                $(this).parent().prev().children("h1").slideUp();//숨김 + 애니메이션
+                $(this).parent().prev().children("h1").slideToggle();//숨김 + 애니메이션
             });
        });
     </script>
@@ -35,7 +35,7 @@
 <body>
     <div class="container w-600 my-50">
         <div class="row center">
-            <h1>DOM 탐색 예제</h1>
+            <h1 >DOM 탐색 예제</h1>
         </div>
         <div class="row">
             <button type="button" class="btn btn-positive btn-change w-100">push</button>
