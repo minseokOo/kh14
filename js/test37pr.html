@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리(jQuery)</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+
+    <!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+       $(function(){
+            $(".field").on("input", function(){
+                var count = $(this).val().length
+                $(this).parent().next().children("span").text(count);
+                if(count > 1000){
+                    $(this).parent().next().children("span").css("color", "red");
+                }
+                else if(count <= 1000){
+                    $(this).parent().next().children("span").css("color", "black");
+                }
+            });
+       });
+    </script>
+</head>
+<body>
+    <div class="container w-800 my-50">
+        <div class="row center">
+            <h1>자기소개서</h1>
+        </div>
+        <div class="row center">
+            <label>(Q1) 본인의 성장과정에 대해서 설명하세요.</label>
+            <textarea class="field w-100" rows="5" ></textarea>
+        </div>
+        <div class="row right">
+            <span>0</span> / 1000
+        </div>
+        <div class="row center">
+            <label>(Q2) 성격의 장단점을 설명해 주세요.</label>
+            <textarea class="field w-100" rows="5" ></textarea>
+        </div>
+        <div class="row right">
+            <span>0</span> / 1000
+        </div>
+        <div class="row center">
+            <label>(Q3) 어려움을 이겨내고 성취한 경험을 말해주세요.</label>
+            <textarea class="field w-100" rows="5" ></textarea>
+        </div>
+        <div class="row right">
+            <span>0</span> / 1000
+        </div>
+        <div class="row center">
+            <label>(Q4) 우리 회사에 지원한 동기를 설명해 주세요.</label>
+            <textarea class="field w-100" rows="5" ></textarea>
+        </div>
+        <div class="row right">
+            <span>0</span> / 1000
+        </div>
+        <div class="row center">
+            <label>(Q5) 입사 후 10년 뒤의 나의 모습을 상상해서 설명해 주세요.</label>
+            <textarea class="field w-100" rows="5" ></textarea>
+        </div>
+        <div class="row right">
+            <span>0</span> / 1000
+        </div>
+
+    </div>
+</body>
+</html>
