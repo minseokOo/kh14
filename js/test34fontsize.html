@@ -20,18 +20,21 @@
             var textSize = $(this).attr("data-size");
             $("textarea").css("fontSize", textSize);
         });
+        // $(".btn-size").on("click", function(){
+        //     var decrease = $(this).attr("")
+        // });
        });
-
+    //    (parseInt(getComputedStyle(text).fontSize) + 1) + "px";
     </script>
 </head>
 <body>
     <div class="container w-500 my-50">
         <div class="row center">
-            <!-- <button type="button" class="btn" id="decrease" data-size="">-</button> -->
+            <!-- <button type="button" class="btn btn-size" id="decrease" data-size= >-</button> -->
             <button type="button" class="btn" id="small" data-size="12px">작게</button>
             <button type="button" class="btn" id="medium" data-size="16px">보통</button>
             <button type="button" class="btn" id="large" data-size="24px">크게</button>
-            <!-- <button type="button" class="btn" id="increase" data-size="">+</button> -->
+            <!-- <button type="button" class="btn btn-size" id="increase" data-size="">+</button> -->
         </div>
         <div class="row">
             <textarea class="field w-100" style="font-size: 16px;">
