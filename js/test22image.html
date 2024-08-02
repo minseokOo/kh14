@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        .image {
+            transition: 0.1s ease-out;
+            transition-property: width, height;
+        }
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        window.addEventListener("click", function(){
+            var btn = document.querySelector("#small");
+            btn.onclick = function(){
+                var image = document.querySelector(".image");
+                image.style.width = "50%";
+                image.style.height = "50%";
+            };
+        });
+        window.addEventListener("click", function(){
+            var btn = document.querySelector("#medium");
+            btn.onclick = function(){
+                var image = document.querySelector(".image");
+                image.style.width = "75%";
+                image.style.height = "75%";
+            };
+        });
+        window.addEventListener("click", function(){
+            var btn = document.querySelector("#large");
+            btn.onclick = function(){
+                var image = document.querySelector(".image");
+                image.style.width = "100%";
+                image.style.height = "100%";
+            };
+        });
+    </script>
+</head>
+<body>
+    <div class="container w-500 my-50">
+        <div class="row center">
+            <h1>이미지 크기 조절</h1>
+        </div>
+        <div class="row center">
+            <button class="btn" id="small" type="button">작게</button>
+            <button class="btn" id="medium" type="button">보통</button>
+            <button class="btn" id="large" type="button">크게</button>
+        </div>
+        <div class="row center">
+            <img class="image" src="images/보노보노총합.gif">
+        </div>
+    </div>
+</body>
+</html>

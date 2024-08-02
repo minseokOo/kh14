@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리(jQuery) 이미지</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        
+    </style>
+
+    <!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+       $(function(){
+            $(".btn").on("click", function(){
+                var size = $(this).attr("id");
+                $(".image").css("width", size);
+            });
+       });
+    </script>
+</head>
+<body>
+    <div class="container w-500 my-50">
+        <div class="row center">
+            <h1>이미지 크기 조절</h1>
+        </div>
+        <div class="row center">
+            <button class="btn btn-small" id="50%" type="button">작게</button>
+            <button class="btn btn-medium" id="75%" type="button">보통</button>
+            <button class="btn btn-large" id="100%" type="button">크게</button>
+        </div>
+        <div class="row center">
+            <img class="image" src="images/보노보노총합.gif">
+        </div>
+    </div>
+</body>
+</html>

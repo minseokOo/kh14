@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        // HTML 태그에서 자바스크립트 함수를 부르게 만들면 강한 의존성이 생김(강결합)
+        // 이러한 문제를 해결하려면 자바스크립트에서 모든 설정을 하도록 구현해야한다.
+        // 원하는 시점(태그가 생긴 뒤)에 코드가 실행되게 만들 필요가 있다.(롤백)
+        
+        
+        // window 객체의 onload 속성에 코드가 담긴 함수를 저장
+        window.onload = task; // = window야 load가 끝나면 task좀 실행해줘.
+
+        function task(){
+            var btn = document.querySelector(".btn");
+            btn.onclick = hello;
+        }
+
+        function hello(){
+            alert("안녕");
+        }
+    </script>
+</head>
+<body>
+    <div class="container w-500 my-50">
+        <div class="row center">
+            <h1>독립형 자바스크립트</h1>
+        </div>
+        <div class="row">
+            <button class="btn btn-positive">클릭하세요</button>
+        </div>
+    </div>
+</body>
+</html>

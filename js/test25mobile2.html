@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        window.addEventListener("load", function(){
+            var buttons = document.querySelectorAll(".btn");
+            for(var i=0; i<buttons.length; i++){
+                buttons[i].addEventListener("click", function(){
+                    var number = this.textContent;
+                    var display = document.querySelector(".display");
+                    if(this.textContent != "clearAll"){
+                        display.textContent += number;
+                    }
+                    else{
+                        display.textContent = "";
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container w-600 my-50 center">
+        <div class="row center">
+            <div class="display"></div>
+        </div>
+        <div class="row" >
+            <button class="btn p-10 " >1</button>
+            <button class="btn p-10 " >2</button>
+            <button class="btn p-10 "  >3</button>
+        </div>
+        <div class="row" >
+            <button class="btn p-10 " >4</button>
+            <button class="btn p-10 " >5</button>
+            <button class="btn p-10 " >6</button>
+        </div>
+        <div class="row" >
+            <button class="btn p-10 " >7</button>
+            <button class="btn p-10 " >8</button>
+            <button class="btn p-10 " >9</button>
+        </div>
+        <div class="row" >
+            <button class="btn p-10 " >*</button>
+            <button class="btn p-10 " >0</button>
+            <button class="btn p-10 " >#</button>
+        </div>
+        <div class="row">
+            <button class="btn" >clearAll</button>
+        </div>
+    </div>
+</body>
+</html>

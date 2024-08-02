@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+
+    <!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js">
+
+     </script>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        // (Q) 모든 h1 태그의 글자색을 빨강으로 바꾸세요!
+        window.addEventListener("load", function(){
+            var targets = document.querySelectorAll("h1");
+            for(var i=0; i<targets.length; i++){
+                targets[i].addEventListener("click", function(){
+                    this.style.color = "red";
+                })
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>Hello jQuery</h1></a>
+    <h1>Hello jQuery</h1></a>
+    <h1>Hello jQuery</h1></a>
+    <h1>Hello jQuery</h1></a>
+    <h1>Hello jQuery</h1></a>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        window.addEventListener("load", function(){
+            var buttons = document.querySelectorAll(".btn");
+            for(var i=0; i<buttons.length; i++){
+                buttons[i].addEventListener("click", function(){
+                    var number = this.dataset.number;
+                    var display = document.querySelector(".display");
+                    if(this.dataset.number != "clearAll"){
+                        display.textContent += number;
+                    }
+                    else{
+                        display.textContent = "";
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container w-600 my-50 center">
+        <div class="row">
+            <div class="display"></div>
+        </div>
+        <div class="row" >
+            <button class="btn" data-number="1">1</button>
+            <button class="btn" data-number="2">2</button>
+            <button class="btn" data-number="3" >3</button>
+        </div>
+        <div class="row" >
+            <button class="btn" data-number="4">4</button>
+            <button class="btn" data-number="5">5</button>
+            <button class="btn" data-number="6">6</button>
+        </div>
+        <div class="row" >
+            <button class="btn" data-number="7">7</button>
+            <button class="btn" data-number="8">8</button>
+            <button class="btn" data-number="9">9</button>
+        </div>
+        <div class="row" >
+            <button class="btn" data-number="*">*</button>
+            <button class="btn" data-number="0">0</button>
+            <button class="btn" data-number="#">#</button>
+        </div>
+        <div class="row">
+            <button class="btn" data-number="clearAll">C</button>
+        </div>
+    </div>
+</body>
+</html>

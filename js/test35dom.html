@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리(jQuery)</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+
+    <!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+       $(function(){
+        // 버튼을 기준으로 위에 있는 h1 태그를 찾아 빨강으로 변경
+        // DOM(Document Object Model) 탐색이 필요하다.
+        // JS = parentElement, children, previousElementSibling, nextElementSibling
+        // jQuery
+        // = parent(), children(), prev(), next()
+        // = +@ parents(), find(), prevAll(), nextAll()
+            $(".btn-change").on("click", function(){
+                //$("h1").css("color", "red");
+                // $(this).parent().prev().children("h1").css("color", "red");
+                // $(this).parent().prev().children("h1").remove();//삭제
+                // $(this).parent().prev().children("h1").hide();//숨김
+                $(this).parent().prev().children("h1").slideToggle();//숨김 + 애니메이션
+            });
+       });
+    </script>
+</head>
+<body>
+    <div class="container w-600 my-50">
+        <div class="row center">
+            <h1 >DOM 탐색 예제</h1>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-positive btn-change w-100">push</button>
+        </div>
+        <div class="row center">
+            <h1>DOM 탐색 예제</h1>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-positive btn-change w-100">push</button>
+        </div>
+        <div class="row center">
+            <h1>DOM 탐색 예제</h1>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-positive btn-change w-100">push</button>
+        </div>
+        <div class="row center">
+            <h1>DOM 탐색 예제</h1>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-positive btn-change w-100">push</button>
+        </div>
+        <div class="row center">
+            <h1>DOM 탐색 예제</h1>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-positive btn-change w-100">push</button>
+        </div>
+    </div>
+</body>
+</html>

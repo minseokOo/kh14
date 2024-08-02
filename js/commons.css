@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-<link rel = "stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 /*
     앞으로 자주 사용할 디자인 코드들을 보관해두는 파일
@@ -222,16 +221,7 @@ textarea.field {
         .py-40 {padding-top: 40px !important; padding-bottom: 40px !important;}
         .py-50 {padding-top: 50px !important; padding-bottom: 50px !important;}
 
-         /*
-            입력창 확장 클래스 (.field-underline)
-        */
-        .field.field-underline{
-            border-left: none;
-            border-top: none;
-            border-right: none;
-            padding-left: 5px;
-            padding-right: 5px;
-        }
+        
         .btn:hover{
             filter: brightness(120%);
         }
@@ -239,7 +229,7 @@ textarea.field {
         /* 긍정 버튼 디자인 */
         .btn.btn-positive{
             border-color: green;
-            background-color: rgb(0, 177, 0);
+            background-color: rgb(8, 167, 114);
             color: white;
             line-height: 1.2;
             padding: 0.5em 0.75em;

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체크박스 제어</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        function test01(){
+            var target = document.querySelector(".ckbox");
+            var targetList = document.querySelectorAll(".ckbox2");
+           for(var i = 0; i<targetList.length; i++){
+               targetList[i].checked = target.checked;
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div class="container w-500 my-50">
+        <div class="row center">
+            <h1>체크박스 제어</h1>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="ckbox" oninput="test01();" checked="checked">
+                샘플
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="ckbox2">
+                항목
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="ckbox2">
+                항목
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="ckbox2">
+                항목
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="ckbox2">
+                항목
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="ckbox2">
+                항목
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="ckbox2">
+                항목
+            </label>
+        </div>
+    </div>
+</body>
+</html>

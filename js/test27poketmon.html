@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 수업</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        window.addEventListener("load", function(){
+
+//상태 객체
+var status = {
+    poketmonNameValid : false,
+    poketmonTypeValid : false,
+    ok : function(){
+        return this.poketmonNameValid && this.poketmonTypeValid;
+    },
+};
+//입력창에 대한 이벤트
+var poketmonNameInput = document.querySelector("[name=poketmonName]");
+poketmonNameInput.addEventListener("blur", function(){
+    //this == 포켓몬 이름 입력창
+    var regex = /^[가-힣0-9\s]{1,10}$/;
+    var isValid = regex.test(this.value);
+    this.classList.remove("success", "fail");
+    this.classList.add(isValid ? "success" : "fail");
+    status.poketmonNameValid = isValid;
+});
+
+var poketmonTypeInput = document.querySelector("[name=poketmonType]");
+poketmonTypeInput.addEventListener("input", function(){
+    //this == 포켓몬 속성 선택창
+    var isValid = this.value.length > 0;
+    this.classList.remove("success", "fail");
+    this.classList.add(isValid ? "success" : "fail");
+    status.poketmonTypeValid = isValid;
+});
+
+//폼에 대한 이벤트
+//- (주의) 기본이벤트를 차단하려면 이벤트 정보 객체가 필요(함수에 선언하면 자동으로 들어옴)
+var form = document.querySelector(".check-form");
+form.addEventListener("submit", function(e){
+    if(status.ok() == false) {//보낼 수 없는 상태라면
+        e.preventDefault();//기본이벤트 차단! (과거의 return false)
+    }
+    //아무것도 쓰지 않으면 return true 효과
+});
+});
+    </script>
+</head>
+<body>
+    <div class="container w-600 my-50">
+        <div class="row center">
+            <h1>포켓몬스터 등록</h1>
+        </div>
+        <form action="insert" method="post" autocomplete="off" enctype="multipart/form-data" class="check-form">
+            <div class="row">
+                <input type="hidden" name="poketmonNo" class="field">
+                <label>이름</label>
+                <input type="text" name="poketmonName" class=" pmName field w-100">
+                <div class="success-feedback"></div>
+                <div class="fail-feedback">한글 또는 숫자 10자 이하로 작성하세요.</div>
+            </div>
+            <div class="row">
+                <label>속성</label>
+                <input type="text" name="poketmonType" class=" pmType field w-100">
+                <div class="fail-feedback">속성을 입력해주세요.</div>
+            </div>
+            <div class="row">
+                <label>이미지</label>
+                <input type="file" name="attach" class="field pmImage w-100">
+            </div>
+            <button class="btn btn-positive w-100" type="submit">등록</button>
+        </form>
+    </div>
+</body>
+</html>
