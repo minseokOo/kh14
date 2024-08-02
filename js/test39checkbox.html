@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리(jQuery)</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+
+    <!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+       $(function(){
+            //$(".test1").on("input", function(){});
+            $(".test1").change(function(){
+                //this == 체크당한 박스
+                // console.log($(this).attr("checked")); //태그에 작성된 값을 읽는 명령
+                // console.log($(this).prop("checked")); //태그의 관리되는 상태를 읽는 명령 (property)
+                var checked = $(this).prop("checked");
+                    $(".test2").prop("checked", checked); 
+            });
+            $(".btn-reverse").click(function(){
+                // this == 클릭당한 버튼
+                // .test의 체크상태를 뒤집으세요!
+                $(".test2").each(function(){
+                    // this ==  체크박스중 하나
+                    var checked = $(this).prop("checked");
+                    $(this).prop("checked", !checked);
+                });
+            });
+       });
+    </script>
+</head>
+<body>
+    <div class="container w-600 my-50">
+        <div class="row center">
+            <h1>체크박스 제어</h1>
+        </div>
+        <div class="row">
+            <button class="btn btn-positive btn-reverse">체크 반전</button>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="test1">
+                <span>체크하세요</span>
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="test2">
+                <span>체크하세요</span>
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="test2">
+                <span>체크하세요</span>
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="test2">
+                <span>체크하세요</span>
+            </label>
+        </div>
+    </div>
+</body>
+</html>
