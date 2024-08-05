@@ -114,6 +114,38 @@
             $(".check-form").submit(function(){
                 return status.ok();
             });
+
+            // 부가 기능
+            // $(".field-show").change(function(){
+            //     var checked = $(this).prop("checked");
+            //     $("[name=memberPw], #password-check")
+            //             .attr("type", checked ? "text" : "password");
+            // });
+            $(".fa-eye").click(function(){
+                var checked = $(this).hasClass("fa-eye");
+                if(checked){
+                    $(this).removeClass("fa-eye").addClass("fa-eye-slash");
+                    $("[name=memberPw], #password-check").attr("type", "text");
+                }
+                else{
+                    $(this).removeClass("fa-eye-slash").addClass("fa-eye");
+                    $("[name=memberPw], #password-check").attr("type", "password");
+                }
+            });
+
+            $("[name=attach]").change(function(){
+                //파일 태그에만 존재하는 files라는 항목에는 선택된 파일 정보가 담김
+                //- length가 0이면 파일을 선택하지 않았다는 뜻
+                //- length가 0보다 크면 파일을 선택했다는 뜻
+                if(this.files.length == 0){
+                    $(this).parent().next().children("img").attr("src", "https://placehold.co/150?text=No Image");
+                }
+                else{ //1개라는 뜻
+                    var file = this.files[0];
+                    var url = window.URL.createObjectURL(file);
+                    $(this).parent().next().children("img").attr("src", url);
+                }
+            })
         });
     </script>
 </head>
@@ -161,7 +193,18 @@
                         <h2>2단계 : 비밀번호 입력</h2>
                     </div>
                     <div class="row">
-                        <label>비밀번호</label>
+                        <label>
+                            비밀번호
+
+                            <!-- 방법1 : 체크박스 사용 -->
+                            <!-- <label class="ms-20">
+                                <input type="checkbox" class="field-show">
+                                <span>표시하기</span>
+                            </label> -->
+
+                            <!-- 방법2 : 아이콘 사용 -->
+                            <i class= "fa-solid fa-eye ms-20"></i>
+                        </label>
                         <input type="password" name="memberPw" class="field w-100"
                                     placeholder="영문 대소문자, 숫자, !@#$중 하나 반드시 포함">
                         <div class="success-feedback">올바른 형식입니다!</div>
@@ -307,6 +350,9 @@
                     </div>
                     <div class="row">
                         <input type="file" name="attach" accept="image/*" class="field w-100">
+                    </div>
+                    <div class="row">
+                        <img src="https://placehold.co/150?text=No Image" width="150" height="150">
                     </div>
                     <div class="row mt-50">
                         <div class="flex-box">
