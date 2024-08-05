@@ -36,10 +36,14 @@
                 memberPwCheckValid : false,
                 memberNicknameValid : false, 
                 memberEmailValid : false,
+                memberContactValid : true, //선택항목
+                memberBirthValid : true,  //선택항목
+                memberAddressValid : true,  //선택항목
                 ok : function(){
                     return this.memberIdValid && this.memberPwValid
                                 && this.memberPwCheckValid && this.memberNicknameValid 
-                                && this.memberEmailValid;
+                                && this.memberEmailValid && this.memberContactValid && this.memberBirthValid 
+                                && this.memberAddressValid;
                 },
             };
 
@@ -72,7 +76,39 @@
                 $(this).removeClass("success fail")
                             .addClass(isValid ? "success" : "fail");
                 status.memberEmailValid = isValid;
-            })
+            });
+            $("[name=memberContact]").blur(function(){
+                var regex = /^010[1-9][0-9]{7}$/;
+                var isValid = $(this).val().length == 0 || regex.test($(this).val());
+                $(this).removeClass("success fail")
+                .addClass(isValid ? "success" : "fail");
+                status.memberContactValid = isValid;
+            });
+            $("[name=memberBirth]"),blur(function(){
+                var isValid = $(this).val().length > 0;
+                $(this).removeClass("success fail")
+                .addClass(isValid ? "success" : "fail");
+                status.memberBirthValid = isValid;
+            });
+            // 주소는 모두 없거나 모두 있거나 둘 중 하나면 통과
+            $("[name=memberPost],[name=memberAddress1],[name=memberAddress2]").blur(function(){
+                var memberPost = $("[name=memberPost]").val();
+                var memberAddress1 = $("[name=memberAddress1]").val();
+                var memberAddress2 = $("[name=memberAddress2]").val();
+
+                var isEmpty = memberPost.length == 0 
+                && memberAddress1.length == 0 
+                && memberAddress2.length == 0;
+                var isFill = memberPost.length > 0 
+                && memberAddress1.length > 0 
+                && memberAddress2.length > 0;
+
+                var isValid = isEmpty || isFill;
+                $("[name=memberPost],[name=memberAddress1],[name=memberAddress2]")
+                .removeClass("success fail")
+                .addClass(isValid ? "success" : "fail");
+                status.memberAddressValid = isValid;
+            });
 
             //폼 검사
             $(".check-form").submit(function(){
@@ -202,8 +238,22 @@
                     </div>
                 </div>
                 <div class="page">
-                    <h2>5단계 : 선택정보 입력</h2>
-
+                    <div class="row">
+                        <h2>5단계 : 선택정보 입력</h2>
+                    </div>
+                    <div class="row">
+                        <label>연락처(휴대전화번호, - 제외)</label>
+                        <input type="text" name="memberContact" class="field w-100" 
+                        placeholder="010XXXXXXXX">
+                        <div class="success-feedback"></div>
+                        <div class="fail-feedback">입력한 번호가 형식에 맞지 않습니다.</div>
+                    </div>
+                    <div class="row">
+                        <label>생년월일</label>
+                        <input type="date" name="memberBirth" class="field w-100">
+                        <div class="success-feedback"></div>
+                        <div class="fail-feedback">올바른 날짜를 입력해주세요.</div>
+                    </div>
                     <div class="row mt-50">
                         <div class="flex-box">
                             <div class="w-50 left">
@@ -220,8 +270,22 @@
                     </div>
                 </div>
                 <div class="page">
-                    <h2>6단계 : 주소 입력</h2>
-
+                    <div class="row">
+                        <h2>6단계 : 주소 입력</h2>
+                    </div>
+                    <div class="row">
+                        <input type="text" name="memberPost" class="field" placeholder="우편번호">
+                        <button class="btn btn-neutral">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <input type="text" name="memberAddress1" class="field w- 100" placeholder="기본주소">
+                    </div>
+                    <div class="row">
+                        <input type="text" name="memberAddress2" class="field w-100" placeholder="상세주소">
+                        <div class="fail-feedback">주소는 비어있거나 모두 입력되어야 합니다.</div>
+                    </div>
                     <div class="row mt-50">
                         <div class="flex-box">
                             <div class="w-50 left">
@@ -238,8 +302,12 @@
                     </div>
                 </div>
                 <div class="page">
-                    <h2>7단계 : 프로필 이미지 선택</h2>
-
+                    <div class="row">
+                        <h2>7단계 : 프로필 이미지 선택</h2>
+                    </div>
+                    <div class="row">
+                        <input type="file" name="attach" accept="image/*" class="field w-100">
+                    </div>
                     <div class="row mt-50">
                         <div class="flex-box">
                             <div class="w-50 left">
