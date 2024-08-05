@@ -16,14 +16,8 @@
     <!-- 자바스크립트 작성 영역 -->
     <script type="text/javascript">
        $(function(){
-        $(".btn-java").click(function(){
-            $(".btn-subJava").fadeToggle();
-        });
-        $(".btn-oracle").click(function(){
-            $(".btn-subOracle").fadeToggle();
-        });
-        $(".btn-javaScript").click(function(){
-            $(".btn-subJavaScript").fadeToggle();
+        $(".accordion").children("li").click(function(){
+            $(this).children("ul").slideToggle();
         });
        });
     </script>
@@ -34,38 +28,31 @@
             <h1>아코디언 형태</h1>
         </div>
         <div class="row">
-            <button type="button" class="btn btn-positive btn-java">자바</button>
-        </div>
-        <div class="row">
-            <button type="button" class="btn btn-subJava">객체지향</button>
-        </div>
-        <div class="row">
-            <button type="button" class="btn btn-subJava">상속</button>
-        </div>
-        <div class="row">
-            <button type="button" class="btn btn-subJava">다형성</button>
-        </div>
-        <div class="row">
-            <button type="button" class="btn btn-positive btn-oracle">오라클</button>
-        </div>
-        <div class="row">
-            <button type="button" class="btn btn-subOracle">데이터베이스</button>
-        </div>
-        <div class="row">
-            <button type="button" class="btn btn-subOracle">CRUD</button>
-        </div>
-        
-        <div class="row">
-            <button type="button" class="btn btn-positive btn-javaScript">자바스크립트</button>
-        </div>
-        <div class="row">
-            <button type="button" class="btn btn-subJavaScript">함수형 언어</button>
-        </div>
-        <div class="row">
-            <button type="button" class="btn btn-subJavaScript">유연함</button>
-        </div>
-        <div class="row">
-            <button type="button" class="btn btn-subJavaScript">내장객체</button>
+            <ul class="accordion">
+                <li>
+                    자바
+                    <ul>
+                        <li>객체지향</li>
+                        <li>상속</li>
+                        <li>다형성</li>
+                    </ul>
+                </li>    
+                <li>
+                    오라클
+                    <ul>
+                        <li>데이터베이스</li>
+                        <li>CRUD</li>
+                    </ul>
+                </li>    
+                <li>
+                    자바스크립트
+                    <ul>
+                        <li>함수형 언어</li>
+                        <li>유연함</li>
+                        <li>내장객체</li>
+                    </ul>
+                </li>    
+            </ul>
         </div>
     </div>
 </body>

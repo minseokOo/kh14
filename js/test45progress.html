@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리(jQuery) 수업</title>
+
+    <!-- google font cdn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <!-- font awesome icon cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- my css -->
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <link rel="stylesheet" type="text/css" href="./test.css">
+    <style>
+        /* 프로그레스바(progressbar) 디자인 */
+        .progressbar {
+
+        }        
+        .progressbar > .guage {
+            background: rgb(131,58,180);
+            background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+            width: 0%;
+            height: 5px;
+            transition: width 0.1s linear;
+        }
+    </style>
+
+    <!-- jquery cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- 자바스크립트 코드 작성 영역 -->
+    <script type="text/javascript">
+        $(function(){
+            $(".btn-20").click(function(){
+                $(".progressbar > .guage").css("width", "20%");
+            });
+            $(".btn-50").click(function(){
+                $(".progressbar > .guage").css("width", "50%");
+            });
+            $(".btn-70").click(function(){
+                $(".progressbar > .guage").css("width", "70%");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container w-600 my-50">
+        <div class="row center">
+            <h1>Progress bar</h1>
+        </div>
+        <div class="row">
+            <div class="progressbar">
+                <div class="guage"></div>
+            </div>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-neutral btn-20">20%</button>
+            <button type="button" class="btn btn-neutral btn-50">50%</button>
+            <button type="button" class="btn btn-neutral btn-70">70%</button>
+        </div>
+    </div>
+</body>
+</html>
