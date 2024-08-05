@@ -1,0 +1,23 @@
+<input type="text"  name="memberPost" placeholder="우편번호">
+<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+<input type="text" name="memberAddress1" placeholder="주소"><br>
+<input type="text" name="memberAddress2" placeholder="상세주소">
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = ''; 
+                if (data.userSelectedType === 'R') { 
+                    addr = data.roadAddress;
+                } else { 
+                    addr = data.jibunAddress;
+                }
+                document.querySelector("[name=memberPost]").value = data.zonecode;
+                document.querySelector("[name=memberAddress1]").value = addr;
+                document.querySelector("[name=memberAddress2]").focus();
+            }
+        }).open();
+    }
+</script>
