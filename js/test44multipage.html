@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리(jQuery)</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+
+    <!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+       $(function(){
+            // 1페이지를 제외한 모든 페이지를 숨김(이벤트 아님)
+            // $(".multipage > .page").hide();
+            // $(".multipage > .page").eq(0).show();
+            // $(".multipage > .page").first().show();
+            $(".multipage > .page").hide().first().show();
+
+        $(".btn-next").click(function(){
+            // $(this).parents().slideUp(".page");
+            // $(this).parent().next(".page").slideDown();
+            $(this).parents().hide(".page").next().show(".page");
+
+        });
+        $(".btn-prev").click(function(){
+            // $(this).parents().slideUp(".page");
+            // $(this).parent().prev(".page").slideDown();
+            $(this).parents().hide(".page").prev().show(".page");
+        });
+       });
+    </script>
+</head>
+<body>
+    <div class="container w-600 my-50">
+        <div class="row center">
+            <h1>멀티페이지</h1>
+        </div>
+        <div class="row">
+            <div class="multipage">
+                <div class="page page-1">
+                    <h1>1번째 페이지</h1>
+                    <button type="button" class="btn btn-positive btn-next">다음</button>
+                </div>
+                <div class="page">
+                    <h1>2번째 페이지</h1>
+                    <button type="button" class="btn btn-positive btn-prev">이전</button>
+                    <button type="button" class="btn btn-positive btn-next">다음</button>
+                </div>
+                <div class="page">
+                    <h1>3번째 페이지</h1>
+                    <button type="button" class="btn btn-positive btn-prev">이전</button>
+                    <button type="button" class="btn btn-positive btn-next">다음</button>
+                </div>
+                <div class="page">
+                    <h1>4번째 페이지</h1>
+                    <button type="button" class="btn btn-positive btn-prev">이전</button>
+                    <button type="button" class="btn btn-positive btn-next">다음</button>
+                </div>
+                <div class="page">
+                    <h1>5번째 페이지</h1>
+                    <button type="button" class="btn btn-positive btn-prev">이전</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

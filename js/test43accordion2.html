@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리(jQuery)</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+
+    <!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        $(function(){
+            //이벤트 확산(propogation) 방지 처리
+            //- 클릭 이벤트가 중첩될 경우 안쪽을 클릭하면 바깥쪽도 클릭됨
+            //- 이벤트 객체의 .stopPropogation()을 호출하면 이를 막을 수 있다.
+        $(".accordion").find("li").click(function(e){
+            e.stopPropagation();
+            $(this).children("ul").slideToggle();
+        });
+       });
+    </script>
+</head>
+<body>
+    <div class="container w-1000 my-50">
+        <div class="row center">
+            <h1>메뉴 만들기</h1>
+        </div>
+        <div class="row">
+            <ul class="accordion">
+                <li>
+                    <a href="#">메뉴1</a>
+                    <ul>
+                        <li>
+                            <a href="#">항목1</a>
+                            <ul>
+                                <li><a href="#">상세항목1</a></li>
+                                <li><a href="#">상세항목2</a></li>
+                                <li><a href="#">상세항목3</a></li>
+                                <li><a href="#">상세항목4</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">항목2</a>
+                            <ul>
+                                <li><a href="#">상세항목1</a></li>
+                                <li><a href="#">상세항목2</a></li>
+                                <li><a href="#">상세항목3</a></li>
+                                <li><a href="#">상세항목4</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">항목3</a></li>
+                        <li><a href="#">항목4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">메뉴2</a>
+                    <ul>
+                        <li><a href="#">항목1</a></li>
+                        <li><a href="#">항목2</a></li>
+                        <li><a href="#">항목3</a></li>
+                        <li><a href="#">항목4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">메뉴3</a>
+                    <ul>
+                        <li><a href="#">항목1</a></li>
+                        <li><a href="#">항목2</a></li>
+                        <li><a href="#">항목3</a></li>
+                        <li><a href="#">항목4</a></li>
+                    </ul>
+                </li>
+                <li class="right-menu">
+                    <a href="#">메뉴4</a>
+                    <ul>
+                        <li>
+                            <a href="#">항목1</a>
+                            <ul>
+                                <li><a href="#">상세항목1</a></li>
+                                <li><a href="#">상세항목2</a></li>
+                                <li><a href="#">상세항목3</a></li>
+                                <li><a href="#">상세항목4</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">항목2</a>
+                            <ul>
+                                <li><a href="#">상세항목1</a></li>
+                                <li><a href="#">상세항목2</a></li>
+                                <li><a href="#">상세항목3</a></li>
+                                <li><a href="#">상세항목4</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">항목3</a>
+                            <ul>
+                                <li><a href="#">상세항목1</a></li>
+                                <li><a href="#">상세항목2</a></li>
+                                <li><a href="#">상세항목3</a></li>
+                                <li><a href="#">상세항목4</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">항목4</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

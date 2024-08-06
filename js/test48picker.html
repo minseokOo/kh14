@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리(jQuery)</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+    
+    <!-- light pick cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
+    <!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+       $(function(){
+        // var picker1 = new LightPick({/*옵션*/});
+        var picker1 = new Lightpick({
+            field: document.querySelector(".test1"), //설치 대상
+            format: "YYYY-MM-DD", //날짜의 표시 형식(momentJS 형식)
+        });
+        var picker2= new Lightpick({
+            field: document.querySelector(".test2"), //설치 대상
+            format: "YYYY-MM-DD", //날짜의 표시 형식(momentJS 형식)
+            minDate: moment("2024-08-01"),
+            maxDate: moment("2024-08-31"),
+        });
+        var picker3= new Lightpick({
+            field: document.querySelector(".test3"), //설치 대상
+            format: "YYYY-MM-DD", //날짜의 표시 형식(momentJS 형식)
+            maxDate: moment(),
+        });
+        var picker4= new Lightpick({
+            field: document.querySelector(".test4"), //설치 대상
+            format: "YYYY-MM-DD", //날짜의 표시 형식(momentJS 형식)
+            minDate: moment().add(1, 'days'),
+        });
+        var picker5= new Lightpick({
+            field: document.querySelector(".test5"), //설치 대상
+            format: "YYYY-MM-DD", //날짜의 표시 형식(momentJS 형식)
+            minDate: moment().startOf('month'), // 같은 month의 시작값
+            maxDate: moment().endOf('month'), // 같은 month의 종료값
+        });
+        var picker6= new Lightpick({
+            field: document.querySelector(".test6"), //설치 대상
+            format: "YYYY-MM-DD", //날짜의 표시 형식(momentJS 형식)
+            firstDay:7, //일요일부터 표시
+            disableDates: [//선택 불가일
+            '2024-08-15', '2024-08-16', 
+            ['2024-08-26', '2024-08-30']
+            ],
+        });
+        var picker7 = new Lightpick({
+            field: document.querySelector(".test7-1"), //설치 대상
+            secondField: document.querySelector(".test7-2"),
+            singleDate: false, // 하루만 선택하는 모드를 해제
+            format: "YYYY-MM-DD", //날짜의 표시 형식(momentJS 형식)
+            firstDay: 7, //일요일부터 표시
+            numberOfMonths:3, //표시할 월의 수
+            numberOfColumns:3, //한줄에 표시할 월의 수
+        });
+       });
+    </script>
+</head>
+<body>
+    <div class="container w-600 my-50">
+        <div class="row center">
+            <h1>Date Picker</h1>
+        </div>
+        <div class="row">
+            <h2>기본 Picker</h2>
+        </div>
+        <div class="row">
+            <input type="text" class="field w-100 test1">
+        </div>
+
+        <div class="row">
+            <h2>범위 지정</h2>
+        </div>
+        <div class="row">
+            <input type="text" class="field w-100 test2">
+        </div>
+        <div class="row">
+            <h2>생년월일 선택</h2>
+        </div>
+        <div class="row">
+            <input type="text" class="field w-100 test3">
+        </div>
+        <div class="row">
+            <h2>예약날짜 선택</h2>
+        </div>
+        <div class="row">
+            <input type="text" class="field w-100 test4">
+        </div>
+        <div class="row">
+            <h2>이번달 중 선택</h2>
+        </div>
+        <div class="row">
+            <input type="text" class="field w-100 test5">
+        </div>
+        <div class="row">
+            <h2>선택 금지일</h2>
+        </div>
+        <div class="row">
+            <input type="text" class="field w-100 test6">
+        </div>
+        <div class="row">
+            <h2>기간 선택</h2>
+        </div>
+        <div class="row flex-box">
+            <div class="w-50">
+                <input type="text" class="field w-100 test7-1">
+            </div>
+            <div class="w-50">
+                <input type="text" class="field w-100 test7-2">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

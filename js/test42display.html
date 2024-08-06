@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리(jQuery)</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+
+    <!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+       $(function(){
+        $(".btn-show").click(function(){
+            // $(".target").css("display", "");// css제어
+            // $(".target").show();
+            // $(".target").fadeIn();
+            $(".target").slideDown();
+        });
+        $(".btn-hide").click(function(){
+            // $(".target").css("display", "none"); //css제어
+            // $(".target").hide();
+            // $(".target").fadeOut();
+            $(".target").slideUp();
+        });
+        $(".btn-toggle").click(function(){
+            // if($(".target").css("display") == "none"){
+                //     $(".target").css("display", "");
+                // }
+                // else{
+                    //     $(".target").css("display", "none");
+                    // }
+                    
+                    // $(".target").toggle();
+                    // $(".target").fadeToggle();
+                    $(".target").slideToggle();
+        })
+       })
+    </script>
+</head>
+<body>
+    <div class="container w-600 my-50">
+        <div class="row center">
+            <h1>표시 제어</h1>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-show">보여주기</button>
+            <button type="button" class="btn btn-hide">숨기기</button>
+            <button type="button" class="btn btn-toggle">왔다갔다</button>
+
+        </div>
+        <div class="row">
+            <h1 class="target">Hello jQuery!</h1>
+        </div>
+    </div>
+</body>
+</html>
