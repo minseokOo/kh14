@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비동기 통신 예제</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+
+    <!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+       $(function(){
+        //버튼을 클릭하면 비동기 통신을 발생시켜 서버에 요청을 발송
+        $(".btn-ajax").click(function(){
+
+            var btn = this;
+
+            // $.ajax({옵션})
+            $.ajax({
+                url:"http://localhost:8080/test/ex01", 
+                success: function(response) {
+                    // console.log(response);
+                    $(btn).parent().next().text(response); 
+                }
+            });
+        });
+        $(".btn-dice").click(function(){
+            var btn = this;
+            $.ajax({
+                url:"http://localhost:8080/test/ex02",
+                success:function(response){
+                    $(btn).parent().next().children().text(response);
+                }
+            });
+        });
+        $(".btn-subway").click(function(){
+            var btn = this;
+            var birthValue = $(".birth-input").val();//입력값 조회
+
+            //[1] 파라미터를 GET 방식으로 전송하는 방법
+            // $.ajax({
+            //     url:"http://localhost:8080/test/ex03?birth=" + birthValue,
+            //     // url:`http://localhost:8080/test/ex03?birth=${birthValue}`,
+            //     method:"get",
+            //     success:function(response){
+            //         $(btn).parent().next().text(response);
+            //     }
+            // });
+
+            //[2] 파라미터를 POST 방식으로 전송하는 방법
+            $.ajax({
+                url:"http://localhost:8080/test/ex03",
+                method:"post",
+                data:{ //post일 때만 가능
+                    birth : birthValue //birth란 이름으로 birthValue를 보냅니다.
+                },
+                success:function(response){
+                     $(btn).parent().next().text(response);
+                 }
+            });
+        });
+       });
+    </script>
+</head>
+<body>
+    <div class="container w-600 my-50">
+        <div class="row center">
+            <h1>비동기 통신(AJAX)</h1>
+        </div>
+        <div class="row">
+            <a href="http://localhost:8080/test/ex01" class="btn btn-positive">요청(동기)</a>
+            <button type="button" class="btn btn-positive btn-ajax">요청(비동기)</button>
+        </div>
+        <div class="row"></div>
+
+        <div class="row">
+            <h2>주사위 던지기</h2>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-positive btn-dice">던지기</button>
+        </div>
+        <div class="row"><h1></h1></div>
+        <div class="row">
+            <h2>지하철 요금 계산기</h2>
+        </div>
+        <div class="row flex-box">
+            <input type="text" name="birth" class="field w-50 birth-input" autocomplete="off">
+            <button type="button" class="btn btn-positive btn-subway">조회</button>
+        </div>
+        <div class="row"></div>
+    </div>
+</body>
+</html>
