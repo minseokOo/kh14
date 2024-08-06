@@ -41,6 +41,30 @@
             format: "YYYY-MM-DD", //날짜의 표시 형식(momentJS 형식)
             minDate: moment().add(1, 'days'),
         });
+        var picker5= new Lightpick({
+            field: document.querySelector(".test5"), //설치 대상
+            format: "YYYY-MM-DD", //날짜의 표시 형식(momentJS 형식)
+            minDate: moment().startOf('month'), // 같은 month의 시작값
+            maxDate: moment().endOf('month'), // 같은 month의 종료값
+        });
+        var picker6= new Lightpick({
+            field: document.querySelector(".test6"), //설치 대상
+            format: "YYYY-MM-DD", //날짜의 표시 형식(momentJS 형식)
+            firstDay:7, //일요일부터 표시
+            disableDates: [//선택 불가일
+            '2024-08-15', '2024-08-16', 
+            ['2024-08-26', '2024-08-30']
+            ],
+        });
+        var picker7 = new Lightpick({
+            field: document.querySelector(".test7-1"), //설치 대상
+            secondField: document.querySelector(".test7-2"),
+            singleDate: false, // 하루만 선택하는 모드를 해제
+            format: "YYYY-MM-DD", //날짜의 표시 형식(momentJS 형식)
+            firstDay: 7, //일요일부터 표시
+            numberOfMonths:3, //표시할 월의 수
+            numberOfColumns:3, //한줄에 표시할 월의 수
+        });
        });
     </script>
 </head>
@@ -73,6 +97,29 @@
         </div>
         <div class="row">
             <input type="text" class="field w-100 test4">
+        </div>
+        <div class="row">
+            <h2>이번달 중 선택</h2>
+        </div>
+        <div class="row">
+            <input type="text" class="field w-100 test5">
+        </div>
+        <div class="row">
+            <h2>선택 금지일</h2>
+        </div>
+        <div class="row">
+            <input type="text" class="field w-100 test6">
+        </div>
+        <div class="row">
+            <h2>기간 선택</h2>
+        </div>
+        <div class="row flex-box">
+            <div class="w-50">
+                <input type="text" class="field w-100 test7-1">
+            </div>
+            <div class="w-50">
+                <input type="text" class="field w-100 test7-2">
+            </div>
         </div>
     </div>
 </body>
