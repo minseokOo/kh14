@@ -36,7 +36,7 @@
 
 <c:if test= "${dto != null}">
 <h2><a class="btn btn-neutral" href= "edit?poketmonNo=${dto.poketmonNo}">이 몬스터 정보 수정</a></h2>
-<h2><a class="btn btn-neutral" href= "delete?poketmonNo=${dto.poketmonNo}">이 몬스터 삭제하기</a></h2>
+<h2><a class="btn btn-neutral confirm-link" href= "delete?poketmonNo=${dto.poketmonNo}" data-text="정말 삭제하시겠습니까?" >이 몬스터 삭제하기</a></h2>
 </c:if>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
