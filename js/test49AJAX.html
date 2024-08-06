@@ -65,6 +65,17 @@
                  }
             });
         });
+        $(".btn-exchange").click(function(){
+            var btn = this;
+            var krwValue = $(".krw-input").val();
+            $.ajax({
+                url:"http://localhost:8080/test/ex04?krw=" + krwValue,
+                method:"get",
+                success:function(response){
+                    $(btn).parent().next().text(response);
+                }
+            })
+        });
        });
     </script>
 </head>
@@ -94,6 +105,22 @@
             <button type="button" class="btn btn-positive btn-subway">조회</button>
         </div>
         <div class="row"></div>
+        <div class="row">
+            <h2>환율 계산기</h2>
+        </div>
+        <div class="row flex-box">
+            <!-- <select name="money" class="field w-30 money-type">
+                <option value="">선택하세요</option>
+                <option value="krw">KRW</option>
+                <option value="usd">USD</option>
+                <option value="jpy">JPY</option>
+                <option value="cny">CNY</option>
+            </select> -->
+            <input type="text" name="krw" class="field w-50 krw-input" autocomplete="off" placeholder="원">
+            <button type="button" class="btn btn-positive btn-exchange">조회</button>
+        </div>
+        <div></div>
+        
     </div>
 </body>
 </html>
