@@ -32,10 +32,22 @@
 <div class="row">
 데이터 개수 : ${list.size()}
 </div>
+
+<form action="deleteAll" method="post">
+<c:if test= "${sessionScope.createdLevel == '관리자' }">
+<div class="row right">
+	<button type="submit" class="btn btn-negative">체크된 항목 삭제</button>
+</div>
+</c:if>
 <div class="row">
 <table class="table table-border table-hover">
-	<thead>
+	<thead></thead>
   <tr>
+  <c:if test= "${sessionScope.createdLevel == '관리자' }">
+  	<th>
+  		<input type="checkbox" class="check-all">
+  	</th>
+  	</c:if>
     <th>No.</th>
     <th>이미지</th>
     <th>이름</th>
@@ -46,6 +58,11 @@
   
 <c:forEach var="dto" items="${list}">
   <tr>
+  <c:if test= "${sessionScope.createdLevel == '관리자' }">
+  	<td>
+  		<input type="checkbox" class="check-item" name="poketmonNo" value="${dto.poketmonNo}">
+  	</td>
+  </c:if>
     <td>${dto.poketmonNo}</td>
     <td>
     	<img src= "image?poketmonNo=${dto.poketmonNo}" width= "16" height= "16">
@@ -97,6 +114,7 @@
 		<h2><a title= "로그인 후 사용 가능합니다.">글쓰기</a></h2>
 	</c:otherwise>
 </c:choose>	
+</form>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
