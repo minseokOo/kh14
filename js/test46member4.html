@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 가입 페이지</title>
+
+    <!-- google font cdn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <!-- font awesome icon cdn -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- my css -->
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <link rel="stylesheet" type="text/css" href="./test.css">
+    <style>
+        
+    </style>
+
+<!-- jquery cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="checkbox.js"></script>
+<script src="confirm-link.js"></script>
+<script src="multipage.js"></script>
+
+<!-- lightpick -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
+
+
+    <!-- kakao postcode api -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <!-- 자바스크립트 코드 작성 영역 -->
+    <script type="text/javascript">
+        $(function () {
+            //상태 객체
+            var status = {
+                memberIdValid: false, // 형식검사
+                memberIdCheckValid: false, //중복검사
+                memberPwValid: false,
+                memberPwCheckValid: false,
+                memberNicknameValid: false,
+                memberEmailValid: false,
+                memberContactValid: true, //선택항목
+                memberBirthValid: true,  //선택항목
+                memberAddressValid: true,  //선택항목
+                ok: function () {
+                    return this.memberIdValid && this.memberPwValid && this.memberIdCheckValid
+                        && this.memberPwCheckValid && this.memberNicknameValid
+                        && this.memberEmailValid && this.memberContactValid && this.memberBirthValid
+                        && this.memberAddressValid;
+                },
+            };
+
+            //입력창 검사
+            $("[name=memberId]").blur(function () {
+                // step 1 : 아이디에 대한 형식 검사
+                var regex = /^[a-z][a-z0-9]{7,19}$/;
+                var memberId = $(this).val();
+                var isValid = regex.test(memberId);//this.value
+                // step 2 : 아이디 중복 검사(형식이 올바른 경우만)
+                if(isValid){
+                    // 비동기 통신
+                    $.ajax({
+                        url:"http://localhost:8080/rest/member/checkId",
+                        method:"post",
+                        data:{memberId : memberId},
+                        success: function(response){
+                            console.log("중복확인결과 : ", response);
+                        },
+                    });
+                }
+                else{
+                    $(this).removeClass("success fail")
+                        .addClass(isValid ? "success" : "fail");
+                    status.memberIdValid = isValid;
+                    
+                }
+
+            });
+            $("[name=memberPw]").blur(function () {
+                var regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z0-9!@#$]{8,16}$/;
+                var isValid = regex.test($(this).val());
+                $(this).removeClass("success fail")
+                    .addClass(isValid ? "success" : "fail");
+                status.memberPwValid = isValid;
+            });
+            $("#password-check").blur(function () {
+                var isValid = $("[name=memberPw]").val().length
+                    && $(this).val() == $("[name=memberPw").val();
+                $(this).removeClass("success fail")
+                    .addClass(isValid ? "success" : "fail");
+                status.memberPwCheckValid = isValid;
+            });
+
+
+            $("[name=memberEmail]").blur(function () {
+                var isValid = $(this).val().length > 0;
+                $(this).removeClass("success fail")
+                    .addClass(isValid ? "success" : "fail");
+                status.memberEmailValid = isValid;
+            });
+            $("[name=memberContact]").blur(function () {
+                var regex = /^010[1-9][0-9]{7}$/;
+                var isValid = $(this).val().length == 0 || regex.test($(this).val());
+                $(this).removeClass("success fail")
+                    .addClass(isValid ? "success" : "fail");
+                status.memberContactValid = isValid;
+            });
+            $("[name=memberBirth]"), blur(function () {
+                var isValid = $(this).val().length > 0;
+                $(this).removeClass("success fail")
+                    .addClass(isValid ? "success" : "fail");
+                status.memberBirthValid = isValid;
+            });
+            // 주소는 모두 없거나 모두 있거나 둘 중 하나면 통과
+            $("[name=memberPost],[name=memberAddress1],[name=memberAddress2]").blur(function () {
+                var memberPost = $("[name=memberPost]").val();
+                var memberAddress1 = $("[name=memberAddress1]").val();
+                var memberAddress2 = $("[name=memberAddress2]").val();
+
+                var isEmpty = memberPost.length == 0
+                    && memberAddress1.length == 0
+                    && memberAddress2.length == 0;
+                var isFill = memberPost.length > 0
+                    && memberAddress1.length > 0
+                    && memberAddress2.length > 0;
+
+                var isValid = isEmpty || isFill;
+                $("[name=memberPost],[name=memberAddress1],[name=memberAddress2]")
+                    .removeClass("success fail")
+                    .addClass(isValid ? "success" : "fail");
+                status.memberAddressValid = isValid;
+            });
+
+            //폼 검사
+            $(".check-form").submit(function () {
+                return status.ok();
+            });
+
+            // 부가 기능
+            // $(".field-show").change(function(){
+            //     var checked = $(this).prop("checked");
+            //     $("[name=memberPw], #password-check")
+            //             .attr("type", checked ? "text" : "password");
+            // });
+            $(".fa-eye").click(function () {
+                var checked = $(this).hasClass("fa-eye");
+                if (checked) {
+                    $(this).removeClass("fa-eye").addClass("fa-eye-slash");
+                    $("[name=memberPw], #password-check").attr("type", "text");
+                }
+                else {
+                    $(this).removeClass("fa-eye-slash").addClass("fa-eye");
+                    $("[name=memberPw], #password-check").attr("type", "password");
+                }
+            });
+
+            $("[name=attach]").change(function () {
+                //파일 태그에만 존재하는 files라는 항목에는 선택된 파일 정보가 담김
+                //- length가 0이면 파일을 선택하지 않았다는 뜻
+                //- length가 0보다 크면 파일을 선택했다는 뜻
+                if (this.files.length == 0) {
+                    $(this).parent().next().children("img").attr("src", "https://placehold.co/150?text=No Image");
+                }
+                else { //1개라는 뜻
+                    var file = this.files[0];
+                    var url = window.URL.createObjectURL(file);
+                    $(this).parent().next().children("img").attr("src", url);
+                }
+            });
+
+            $("[name=memberPost], [name=memberAddress1], .btn-find-address").click(function () {
+                new daum.Postcode({
+                    oncomplete: function (data) {
+                        var addr = '';
+                        if (data.userSelectedType === 'R') {
+                            addr = data.roadAddress;
+                        } else {
+                            addr = data.jibunAddress;
+                        }
+                        document.querySelector("[name=memberPost]").value = data.zonecode;
+                        document.querySelector("[name=memberAddress1]").value = addr;
+                        document.querySelector("[name=memberAddress2]").focus();
+                        $("[name=memberPost]").trigger("input");
+                    }
+                }).open();
+            });
+
+            $(".btn-clear-address").click(function () {
+                $("[name=memberPost]").val("");
+                $("[name=memberAddress1]").val("");
+                $("[name=memberAddress2]").val("");
+            });
+            $(".btn-clear-address").hide();
+            $("[name=memberPost],[name=memberAddress1],[name=memberAddress2]").on("input", function () {
+                var len1 = $("[name=memberPost]").val().length;
+                var len2 = $("[name=memberAddress1]").val().length;
+                var len3 = $("[name=memberAddress2]").val().length;
+                if (len1 + len2 + len3 > 0) {
+                    $(".btn-clear-address").fadeIn();
+                }
+                else {
+                    $(".btn-clear-address").fadeOut();
+                }
+            });
+            var picker= new Lightpick({
+            field: document.querySelector("[name=memberBirth]"), //설치 대상
+            format: "YYYY-MM-DD", //날짜의 표시 형식(momentJS 형식)
+            firstDay: 7,
+            maxDate: moment(),
+        });
+        });
+        
+    </script>
+</head>
+
+<body>
+    <div class="container w-600 my-50">
+        <div class="row center">
+            <h1>회원 가입 페이지</h1>
+        </div>
+        <div class="row">
+            <div class="progressbar">
+                <div class="guage"></div>
+            </div>
+        </div>
+
+        <form class="check-form" action="" method="post" autocomplete="off" enctype="multipart/form-data">
+
+            <div class="row">
+                <div class="multipage">
+                    <div class="page">
+                        <div class="row">
+                            <h2>1단계 : 아이디 입력</h2>
+                        </div>
+                        <div class="row">
+                            <label>아이디</label>
+                            <input type="text" name="memberId" class="field w-100" placeholder="영문소문자 시작, 숫자 포함 8~20자">
+                            <div class="success-feedback">멋진 아이디입니다!</div>
+                            <div class="fail-feedback">올바른 형식으로 작성해주세요</div>
+                        </div>
+
+                        <div class="row mt-50">
+                            <div class="flex-box">
+                                <div class="w-50 left">
+
+                                </div>
+                                <div class="w-50 right">
+                                    <button type="button" class="btn btn-neutral btn-next">
+                                        다음<i class="fa-solid fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="row">
+                            <h2>2단계 : 비밀번호 입력</h2>
+                        </div>
+                        <div class="row">
+                            <label>
+                                비밀번호
+
+                                <!-- 방법1 : 체크박스 사용 -->
+                                <!-- <label class="ms-20">
+                                <input type="checkbox" class="field-show">
+                                <span>표시하기</span>
+                            </label> -->
+
+                                <!-- 방법2 : 아이콘 사용 -->
+                                <i class="fa-solid fa-eye ms-20"></i>
+                            </label>
+                            <input type="password" name="memberPw" class="field w-100"
+                                placeholder="영문 대소문자, 숫자, !@#$중 하나 반드시 포함">
+                            <div class="success-feedback">올바른 형식입니다!</div>
+                            <div class="fail-feedback">형식에 맞춰 8~16자로 작성하세요</div>
+                        </div>
+                        <div class="row">
+                            <label>비밀번호 확인</label>
+                            <input type="password" id="password-check" class="field w-100"
+                                placeholder="확인을 위해 비밀번호 한번 더 입력">
+                            <div class="success-feedback">비밀번호가 일치합니다</div>
+                            <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
+                        </div>
+
+                        <div class="row mt-50">
+                            <div class="flex-box">
+                                <div class="w-50 left">
+                                    <button type="button" class="btn btn-neutral btn-prev">
+                                        <i class="fa-solid fa-chevron-left"></i>이전
+                                    </button>
+                                </div>
+                                <div class="w-50 right">
+                                    <button type="button" class="btn btn-neutral btn-next">
+                                        다음<i class="fa-solid fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <h2>3단계 : 닉네임 입력</h2>
+                        <div class="row">
+                            <label>닉네임</label>
+                            <input type="text" name="memberNickname" class="field w-100"
+                                placeholder="한글과 숫자로 2~10자 이내로 입력해주세요">
+                        </div>
+                        <div class="row mt-50">
+                            <div class="flex-box">
+                                <div class="w-50 left">
+                                    <button type="button" class="btn btn-neutral btn-prev">
+                                        <i class="fa-solid fa-chevron-left"></i>이전
+                                    </button>
+                                </div>
+                                <div class="w-50 right">
+                                    <button type="button" class="btn btn-neutral btn-next">
+                                        다음<i class="fa-solid fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="row">
+                            <h2>4단계 : 이메일 입력</h2>
+                        </div>
+                        <div class="row">
+                            <label>이메일</label>
+                            <input type="email" name="memberEmail" class="field w-100" placeholder="test@kh.com">
+                            <div class="success-feedback"></div>
+                            <div class="fail-feedback">이메일을 입력해주세요.</div>
+                        </div>
+                        <div class="row mt-50">
+                            <div class="flex-box">
+                                <div class="w-50 left">
+                                    <button type="button" class="btn btn-neutral btn-prev">
+                                        <i class="fa-solid fa-chevron-left"></i>이전
+                                    </button>
+                                </div>
+                                <div class="w-50 right">
+                                    <button type="button" class="btn btn-neutral btn-next">
+                                        다음<i class="fa-solid fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="row">
+                            <h2>5단계 : 선택정보 입력</h2>
+                        </div>
+                        <div class="row">
+                            <label>연락처(휴대전화번호, - 제외)</label>
+                            <input type="text" name="memberContact" class="field w-100" placeholder="010XXXXXXXX">
+                            <div class="success-feedback"></div>
+                            <div class="fail-feedback">입력한 번호가 형식에 맞지 않습니다.</div>
+                        </div>
+                        <div class="row">
+                            <label>
+                                생년월일
+                                <button type="button" class="btn btn-neutral btn-calendar">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </button>
+                            </label>
+                            <input type="text" name="memberBirth" class="field w-100">
+                        </div>
+                        
+                        <div class="row mt-50">
+                            <div class="flex-box">
+                                <div class="w-50 left">
+                                    <button type="button" class="btn btn-neutral btn-prev">
+                                        <i class="fa-solid fa-chevron-left"></i>이전
+                                    </button>
+                                </div>
+                                <div class="w-50 right">
+                                    <button type="button" class="btn btn-neutral btn-next">
+                                        다음<i class="fa-solid fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="row">
+                            <h2>6단계 : 주소 입력</h2>
+                        </div>
+                        <div class="row">
+                            <input type="text" name="memberPost" class="field" placeholder="우편번호" readonly>
+                            <button class="btn btn-neutral btn-find-address">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            <button class="btn btn-negative btn-clear-address">
+                                <i class="fa-solid fa-eraser"></i>
+                            </button>
+                        </div>
+                        <div class="row">
+                            <input type="text" name="memberAddress1" class="field w- 100" placeholder="기본주소" readonly>
+                        </div>
+                        <div class="row">
+                            <input type="text" name="memberAddress2" class="field w-100" placeholder="상세주소">
+                            <div class="fail-feedback">주소는 비어있거나 모두 입력되어야 합니다.</div>
+                        </div>
+                        <div class="row mt-50">
+                            <div class="flex-box">
+                                <div class="w-50 left">
+                                    <button type="button" class="btn btn-neutral btn-prev">
+                                        <i class="fa-solid fa-chevron-left"></i>이전
+                                    </button>
+                                </div>
+                                <div class="w-50 right">
+                                    <button type="button" class="btn btn-neutral btn-next">
+                                        다음<i class="fa-solid fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="row">
+                            <h2>7단계 : 프로필 이미지 선택</h2>
+                        </div>
+                        <div class="row">
+                            <input type="file" name="attach" accept="image/*" class="field w-100">
+                        </div>
+                        <div class="row">
+                            <img src="https://placehold.co/150?text=No Image" width="150" height="150">
+                        </div>
+                        <div class="row mt-50">
+                            <div class="flex-box">
+                                <div class="w-50 left">
+                                    <button type="button" class="btn btn-neutral btn-prev">
+                                        <i class="fa-solid fa-chevron-left"></i>이전
+                                    </button>
+                                </div>
+                                <div class="w-50 right">
+                                    <button type="submit" class="btn btn-positive">
+                                        <i class="fa-solid fa-right-to-bracket"></i>
+                                        회원가입
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</body>
+
+</html>
