@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포켓몬스터 등록</title>
+
+    <!-- google font cdn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <!-- font awesome icon cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- my css -->
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <link rel="stylesheet" type="text/css" href="./test.css">
+    <style>
+
+    </style>
+
+    <!-- jquery cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="checkbox.js"></script>
+    <script src="confirm-link.js"></script>
+    <script src="multipage.js"></script>
+
+    <!-- 자바스크립트 코드 작성 영역 -->
+    <script type="text/javascript">
+        $(function(){
+            //상태 객체
+            var status = {
+                poketmonNameValid : false,//형식검사
+                poketmonNameCheckValid : false,//중복검사
+                poketmonTypeValid : false,//형식검사
+                ok:function(){
+                    return this.poketmonNameValid 
+                                && this.poketmonNameCheckValid
+                                && this.poketmonTypeValid;
+                },
+            };
+
+            //입력창 검사
+            $("[name=poketmonName]").blur(function(){
+                //step 1 - 형식 검사
+                var regex = /^[가-힣0-9\s]{1,10}$/;
+                var poketmonName = $(this).val();
+                status.poketmonNameValid = regex.test(poketmonName);
+                //step 2 - 중복 검사
+                if(status.poketmonNameValid) {//형식이 맞는 경우
+                    $.ajax({
+                        url:"http://localhost:8080/rest/poketmon/checkPoketmonName",
+                        method:"post",
+                        data : {poketmonName : poketmonName},
+                        success : function(response) {
+                            status.poketmonNameCheckValid = response;
+                            if(response === true) {//사용 가능한 닉네임인 경우(.success)
+                                $("[name=poketmonName]").removeClass("success fail fail2")
+                                                                                .addClass("success");
+                            }
+                            else {//사용중인 닉네임인 경우(.fail2)
+                                $("[name=poketmonName]").removeClass("success fail fail2")
+                                                                                .addClass("fail2");
+                            }
+                        }
+                    });
+                }
+                else {//형식이 맞지 않는 경우 (.fail)
+                    $("[name=poketmonName]").removeClass("success fail fail2")
+                                                                                .addClass("fail");
+                }
+            });
+            $("[name=poketmonType]").blur(function(){
+                var poketmonType = $(this).val();
+                status.poketmonTypeValid = poketmonType.length > 0;
+                if(status.poketmonTypeValid) {//올바른 선택이라면
+                    $("[name=poketmonType]").removeClass("success fail")
+                                                            .addClass("success");
+                }
+                else {//잘못된 선택이라면
+                    $("[name=poketmonType]").removeClass("success fail")
+                                                            .addClass("fail");
+                }
+            });
+
+            //폼 검사
+            $(".check-form").submit(function(){
+                $("[name]").trigger("blur");
+                return status.ok();
+            });
+        });
+    </script>
+</head>
+<body>
+    <form action="" method="post" autocomplete="off" class="check-form"
+                enctype="multipart/form-data">
+        <div class="container w-400 my-50">
+            <div class="row center">
+                <h1>포켓몬 등록</h1>
+            </div>
+
+            <div class="row">
+                <label>이름 <i class="fa-solid fa-asterisk red"></i></label>
+                <input type="text" name="poketmonName" class="field w-100">
+                <!-- <div class="success-feedback"></div> -->
+                <div class="fail-feedback">한글 또는 숫자 10자 이하로 작성하세요</div>
+                <div class="fail2-feedback">이미 등록된 몬스터 이름입니다</div>
+            </div>
+
+            <div class="row">
+                <label>속성 <i class="fa-solid fa-asterisk red"></i></label>
+                <select name="poketmonType" class="field w-100">
+                    <option value="">선택하세요</option>
+                    <option value="풀">풀</option>
+                    <option value="불꽃">불꽃</option>
+                    <option value="물">물</option>
+                    <option value="전기">전기</option>
+                    <option value="바람">바람</option>
+                    <option value="얼음">얼음</option>
+                    <option value="땅">땅</option>
+                </select>
+                <div class="fail-feedback">속성은 반드시 선택해야 합니다</div>
+            </div>
+
+            <div class="row">
+                <label>이미지</label>
+                <input type="file" name="attach" class="field w-100" accept="image/*">
+            </div>
+
+            <div class="row">
+                <button type="submit" class="btn btn-positive w-100">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    등록
+                </button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

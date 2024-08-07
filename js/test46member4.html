@@ -102,7 +102,8 @@
                         method:"post",
                         data:{memberNickname : memberNickname},
                         success: function(response){
-                            if(response){
+                            //if(response == true){ //크게 봤을 때 같다면
+                            if(response === true){ //정확하게 같다면
                                 status.memberNicknameValid = true;
                                 $("[name=memberNickname]").removeClass("success fail fail2").addClass("success");
                             }
