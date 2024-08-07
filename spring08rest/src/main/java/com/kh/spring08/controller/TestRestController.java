@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 //비동기 통신(AJAX)을 위한 컨트롤러
 //- 화면이 아니라 데이터를 원하는 통신
 //- 필연적으로 교차출처(CORS) 이슈가 발생하므로 이를 설정으로 해결
-@CrossOrigin(origins = {"http://127.0.0.1:5500"})
+@CrossOrigin(origins = {"http://127.0.0.1:5500"}) //허용 설정
 @RestController
 @RequestMapping("/test")
 public class TestRestController {
@@ -42,5 +42,28 @@ public class TestRestController {
 		else {
 			return 1500;
 		}
+	}
+	@RequestMapping("/ex04")
+	public double ex04(@RequestParam int krw) {
+		
+//		if(money == "krw") {
+//			double krwValue = 1*krw;
+//			return krwValue;
+//		}
+//		else if(money == "usd") {
+			double usd = 0.00083*krw;
+			return usd;
+//		}
+//		else if(money == "jpy") {
+//			double jpy = 0.11*krw;
+//			return jpy;
+//		}
+//		else if(money == "cny") {
+//			double cny = 0.01*krw;
+//			return cny;
+//		}
+//		else {
+//			return 0;
+//		}
 	}
 }
