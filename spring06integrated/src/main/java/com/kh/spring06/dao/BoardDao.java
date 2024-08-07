@@ -38,7 +38,7 @@ public class BoardDao {
 					+ "board_utime, board_views, board_likes, board_replies  "
 		    		+ " from board " 
 		                + "where instr(" + column + ", ?) > 0 " 
-		                + "order by " + column + " desc, board_no desc";
+		                + "order by board_no desc";
 		    Object[] data = {keyword};
 		    return jdbcTemplate.query(sql, boardListMapper, data);
 		}
@@ -201,4 +201,14 @@ public class BoardDao {
 			return jdbcTemplate.queryForObject(sql, int.class);
 		}
 	}
+	
+	// 좋아요 숫자 최신화 기능
+	public boolean updateBoardLikes(int boardNo) {
+		String sql = "update board set board_likes = ("
+				+ "select count(*) from board_like where board_no=?"
+				+ ") where board_no = ?";
+		Object[] data = {boardNo, boardNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	
 }

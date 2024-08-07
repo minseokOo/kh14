@@ -3,6 +3,62 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<script type="text/javascript">
+	$(function(){
+		// 이 페이지의 파라미터 중에서 boardNo의 값을 알아내는 코드
+		var params = new URLSearchParams(location.search);
+		var boardNo = params.get("boardNo");
+		
+		// 페이지가 만들어진 뒤 좋아요 기록을 확인해서 하트와 숫자를 구현
+		$.ajax({
+			url: "/rest/board/check",
+			method:"post",
+			data:{boardNo : boardNo},
+			success: function(response){
+// 				console.log(response);
+				if(response.checked){
+					$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-solid");
+				}
+				else{
+					$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-regular");
+				}
+				//하트 뒤에 있는 span에 개수 적으세요
+				$(".fa-heart").next("span").text(response.count);
+			}
+		});
+		
+	});
+</script>
+<c:if test="${sessionScope.createdUser != null}">
+<script type="text/javascript">
+	//(회원 전용) 하트를 누르면 좋아요 처리를 수행
+	$(function(){
+		$(".fa-heart")
+		.css
+		var params = new URLSearchParams(location.search);
+		var boardNo = params.get("boardNo");
+		$(".fa-heart").click(function(){
+			$.ajax({
+				url: "/rest/board/action",
+				method:"post",
+				data:{boardNo : boardNo},
+				success: function(response){
+//	 				console.log(response);
+					if(response.checked){
+						$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-solid");
+					}
+					else{
+						$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-regular");
+					}
+					//하트 뒤에 있는 span에 개수 적으세요
+					$(".fa-heart").next("span").text(response.count);
+				}
+			});
+		})
+	});
+</script>
+</c:if>
 <table border= "1">
 	<thead align= "center">
 		<tr>
@@ -39,7 +95,9 @@
 	</tbody>
 	<tfoot>
 		<td colspan="2"></td>
-		<td>좋아요 : ${boardDto.boardLikes}</td>
+		
+		<td><i class="fa-solid fa-heart"></i>
+		<span>0</span></td>
 		<td><a href= "#">추천</a></td>
 	</tfoot>
 </table>

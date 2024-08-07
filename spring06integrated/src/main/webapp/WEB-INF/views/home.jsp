@@ -33,7 +33,7 @@
 }
 
 .item{
-    width: calc(var(--index) * 3);
+    width: calc(var(--index) * 4);
     height: calc(var(--index) * 6);
     background-color: #222;
 	background-size: cover;
@@ -119,9 +119,11 @@
     margin: 0 .45vw;
 }
 .itmes.item:focus {
-	width: 480px;
+	width: 100%;
+	height: 100%;
 }
     </style>	
+    
 <div class="row center" style="height: 200px">
         <div class="items">
           <div class="item" tabindex="0" style="background-image: url(images/qhshqhsh2.png)"></div>

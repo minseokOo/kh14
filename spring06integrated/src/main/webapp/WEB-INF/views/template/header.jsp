@@ -54,7 +54,7 @@
     <!-- 홈페이지 크기를 결정하는 외부 영역(main) -->
     <div class="container w-1200 center">
     <div class="row">
-            <a href="/" class="link home-animation"><img src="/images/홈페이지.png" width="200px"></a>
+            <a href="/" class="link home-animation"><img src="/images/노정현(2).png" width="200px"></a>
 </div>
 			<c:choose>
 				<c:when test= "${sessionScope.createdUser != null}">
