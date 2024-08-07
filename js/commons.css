@@ -587,25 +587,35 @@ textarea.field {
             입력창 피드백 디자인
             - 입력창이 success가 되면 .success-feedback을 표시
             - 입력창이 .fail이 되면 .fail-feedback을 표시
+            - 실패와 관련된 클래스를 증가 (.fail / .fail2 / .fail3)
+            - 그에 따른 피드백을 추가
         */
         .success-feedback{
             color: green;
         }
-        .fail-feedback{
+        .fail-feedback,
+        .fail2-feedback,
+        .fail3-feedback
+        {
             color: red;
         }
         .success{
             border-color: green;
         }
-        .fail{
+        .fail, .fail2, .fail3{
             border-color:red;
         }
         .success-feedback, 
-        .fail-feedback {
+        .fail-feedback,
+        .fail2-feedback,
+        .fail3-feedback
+        {
             display: none;
         }
         .success ~ .success-feedback, /* .success 뒤에 있는 피드백 */
-        .fail ~ .fail-feedback /* .fail 뒤에 있는 피드백 */
+        .fail ~ .fail-feedback, /* .fail 뒤에 있는 피드백 */
+        .fail2 ~ .fail2-feedback, /* .fail 뒤에 있는 피드백 */
+        .fail3 ~ .fail3-feedback /* .fail 뒤에 있는 피드백 */
         {
             display: block;
         }
