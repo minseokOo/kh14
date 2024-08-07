@@ -53,6 +53,13 @@ public class MemberDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	//회원 닉네임 검색
+	public MemberDto selectOneByMemberNickname(String memberNickname) {
+		String sql = "select * from member where member_nickname = ?";
+		Object[] data = {memberNickname};
+		List<MemberDto> list = jdbcTemplate.query(sql, memberMapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 	
 	
 	//최종 로그인 시각 갱신(U)

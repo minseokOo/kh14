@@ -32,5 +32,12 @@ public class MemberRestController {
 //		}
 		
 	}
+	
+	//닉네임 중복 검사
+	@PostMapping("/checkNickname")
+	public boolean checkNickname(@RequestParam String memberNickname) {
+		MemberDto memberDto = memberDao.selectOneByMemberNickname(memberNickname);
+		return memberDto == null;
+	}
 			
 }
