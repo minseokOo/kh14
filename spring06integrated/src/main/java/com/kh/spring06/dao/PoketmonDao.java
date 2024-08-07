@@ -65,7 +65,13 @@ public class PoketmonDao {
 			Object[] data = {keyword};
 			return jdbcTemplate.query(sql, poketmonMapper, data);
 		}
-
+		//이름으로 검색
+		public PoketmonDto selectOneByName(String poketmonName) {
+			String sql = "select * from poketmon where poketmon_name = ?";
+			Object[] data = {poketmonName};
+			List<PoketmonDto> list = jdbcTemplate.query(sql, poketmonMapper, data);
+			return list.isEmpty() ? null : list.get(0);
+		}
 		//상세
 		public PoketmonDto selectOne(int poketmonNo) {
 			String sql = "select * from poketmon where poketmon_no = ?";

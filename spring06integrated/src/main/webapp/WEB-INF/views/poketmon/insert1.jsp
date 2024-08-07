@@ -41,7 +41,7 @@
 
     </script>
     <div class="container w-500">
-   <form action=".insert" method="post" autocomplete="off" enctype="multipart/form-data" onsubmit="return checkForm();">
+   <form action="insert" method="post" autocomplete="off" enctype="multipart/form-data" onsubmit="return checkForm();">
             <div class="row">
                 <input type="hidden" name="poketmonNo" class="field">
                 <label>이름</label>
