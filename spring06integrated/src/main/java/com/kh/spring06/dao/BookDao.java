@@ -7,9 +7,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring06.dto.BookDto;
-import com.kh.spring06.dto.EmpDto;
 import com.kh.spring06.mapper.BookMapper;
+import com.kh.spring06.mapper.StatusMapper;
 import com.kh.spring06.vo.PageVO;
+import com.kh.spring06.vo.StatusVO;
 
 @Repository
 public class BookDao {
@@ -19,6 +20,8 @@ public class BookDao {
 	
 	@Autowired
 	private BookMapper mapper;
+	@Autowired
+	private StatusMapper statusMapper;
 
 	
 	//CRUD 메소드
@@ -38,6 +41,12 @@ public class BookDao {
 	public List<BookDto> selectList() {
 		String sql = "select * from book order by book_id asc";
 		return jdbcTemplate.query(sql, mapper);
+	}
+	public List<StatusVO> selectListByGanre(){
+		String sql = "select book_genre title, count(*) cnt from book "
+				+ "group by book_genre "
+				+ "order by cnt desc, title asc";
+		return jdbcTemplate.query(sql,statusMapper);
 	}
 	public List<BookDto> selectList(String column, String keyword) {
 		String sql = "select * from book where instr(#1, ?) > 0 "
