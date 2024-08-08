@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>포켓몬스터 현황</title>
+  <title>데이터베이스 현황</title>
   <link rel="stylesheet" type="text/css" href="./commons.css">
   <link rel="stylesheet" type="text/css" href="./test.css">
   <link rel="stylesheet" type="text/css"
@@ -31,10 +31,9 @@
 
       //step 1
       $.ajax({
-        url : "/rest/poketmon/status",
+        url : "http://localhost:8080/rest/poketmon/status",
         method : "post",
         success : function(response){
-          //response는 객체 배열 형태 - [{...}, {...}, {...}]
           console.log(response);
 
           //response를 두 개의 배열로 분리
@@ -71,7 +70,7 @@
       options: {
         scales: {
           y: {
-            //beginAtZero: true //차트를 0부터 표기
+            beginAtZero: true //차트를 0부터 표기
           }
         }
       }
@@ -80,8 +79,154 @@
   
         }
       });
+      $.ajax({
+        url : "http://localhost:8080/rest/emp/status",
+        method : "post",
+        success : function(response){
+          console.log(response);
 
+          //response를 두 개의 배열로 분리
+          var names = []; //title
+          var values = []; //cnt
 
+          for(var i=0; i < response.length; i++){
+            names.push(response[i].title); //title을 names에 추가
+            values.push(response[i].cnt); //cnt를 values에 추가
+          }
+          console.log(names, values);
+
+          //step 2
+          // 차트를 그릴 대상 선택
+      const ctx = document.querySelector(".emp-chart");
+      
+      // 차트 생성 코드
+      // new Chart(캔버스태그, {옵션객체});
+      new Chart(ctx, {
+        type: 'bar', // 차트 유형(bar/pie/doughnut/line)
+        data: {// 차트에 표시될 데이터
+
+          //label은 차트에 표시되는 항목(x축)
+          labels: names,
+
+          //실제로 차트에 표시될 값
+          datasets: [{
+            label: '사원수', //범례
+            data: values, //데이터
+            borderWidth: 1
+          }
+        ]
+        },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true //차트를 0부터 표기
+          }
+        }
+      }
+    });
+    
+  
+        }
+      });
+      $.ajax({
+        url : "http://localhost:8080/rest/book/status",
+        method : "post",
+        success : function(response){
+          console.log(response);
+
+          //response를 두 개의 배열로 분리
+          var names = []; //title
+          var values = []; //cnt
+
+          for(var i=0; i < response.length; i++){
+            names.push(response[i].title); //title을 names에 추가
+            values.push(response[i].cnt); //cnt를 values에 추가
+          }
+          console.log(names, values);
+
+          //step 2
+          // 차트를 그릴 대상 선택
+      const ctx = document.querySelector(".book-chart");
+      
+      // 차트 생성 코드
+      // new Chart(캔버스태그, {옵션객체});
+      new Chart(ctx, {
+        type: 'bar', // 차트 유형(bar/pie/doughnut/line)
+        data: {// 차트에 표시될 데이터
+
+          //label은 차트에 표시되는 항목(x축)
+          labels: names,
+
+          //실제로 차트에 표시될 값
+          datasets: [{
+            label: '장르', //범례
+            data: values, //데이터
+            borderWidth: 1
+          }
+        ]
+        },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true //차트를 0부터 표기
+          }
+        }
+      }
+    });
+    
+  
+        }
+      });
+      $.ajax({
+        url : "http://localhost:8080/rest/member/status",
+        method : "post",
+        success : function(response){
+          console.log(response);
+
+          //response를 두 개의 배열로 분리
+          var names = []; //title
+          var values = []; //cnt
+
+          for(var i=0; i < response.length; i++){
+            names.push(response[i].title); //title을 names에 추가
+            values.push(response[i].cnt); //cnt를 values에 추가
+          }
+          console.log(names, values);
+
+          //step 2
+          // 차트를 그릴 대상 선택
+      const ctx = document.querySelector(".member-chart");
+      
+      // 차트 생성 코드
+      // new Chart(캔버스태그, {옵션객체});
+      new Chart(ctx, {
+        type: 'bar', // 차트 유형(bar/pie/doughnut/line)
+        data: {// 차트에 표시될 데이터
+
+          //label은 차트에 표시되는 항목(x축)
+          labels: names,
+
+          //실제로 차트에 표시될 값
+          datasets: [{
+            label: '장르', //범례
+            data: values, //데이터
+            borderWidth: 1
+          }
+        ]
+        },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true //차트를 0부터 표기
+          }
+        }
+      }
+    });
+    
+  
+        }
+      });
+    
 
 
      
@@ -101,19 +246,19 @@
       <h1>사원 현황</h1>
     </div>
     <div class="row">
-      <canvas class="poketmon-chart"></canvas>
+      <canvas class="emp-chart"></canvas>
     </div>
     <div class="row center">
       <h1>도서 현황</h1>
     </div>
     <div class="row">
-      <canvas class="poketmon-chart"></canvas>
+      <canvas class="book-chart"></canvas>
     </div>
     <div class="row center">
       <h1>회원 현황</h1>
     </div>
     <div class="row">
-      <canvas class="poketmon-chart"></canvas>
+      <canvas class="member-chart"></canvas>
     </div>
   </div>
 </body>

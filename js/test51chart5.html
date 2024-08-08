@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>데이터베이스 현황</title>
+  <link rel="stylesheet" type="text/css" href="./commons.css">
+  <link rel="stylesheet" type="text/css" href="./test.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+
+  </style>
+
+  <!-- jquery cdn -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="checkbox.js"></script>
+  <script src="confirm-link.js"></script>
+  <script src="multipage.js"></script>
+
+  <!-- chart.js cdn-->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- 자바스크립트 작성 영역 -->
+  <script type="text/javascript">
+    //차트 생성 함수
+    function creatChart(url, selector, legend='', type='bar'){
+      $.ajax({
+        url : url,
+        method : "post",
+        success : function(response){
+          console.log(response);
+
+          //response를 두 개의 배열로 분리
+          var names = []; //title
+          var values = []; //cnt
+
+          for(var i=0; i < response.length; i++){
+            names.push(response[i].title); //title을 names에 추가
+            values.push(response[i].cnt); //cnt를 values에 추가
+          }
+          console.log(names, values);
+
+          //step 2
+          // 차트를 그릴 대상 선택
+      const ctx = document.querySelector(selector);
+      
+      // 차트 생성 코드
+      // new Chart(캔버스태그, {옵션객체});
+      new Chart(ctx, {
+        type: type, // 차트 유형(bar/pie/doughnut/line)
+        data: {// 차트에 표시될 데이터
+
+          //label은 차트에 표시되는 항목(x축)
+          labels: names,
+
+          //실제로 차트에 표시될 값
+          datasets: [{
+            label: legend, //범례
+            data: values, //데이터
+            borderWidth: 1
+          }
+        ]
+        },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true //차트를 0부터 표기
+          }
+        }
+      }
+    });
+    
+  
+        }
+      });
+    }
+
+    $(function(){
+      creatChart("http://localhost:8080/rest/poketmon/status", ".poketmon-chart", "몬스터수", "doughnut");
+      creatChart("http://localhost:8080/rest/emp/status", ".emp-chart", "사원수");
+      creatChart("http://localhost:8080/rest/book/status", ".book-chart");
+      creatChart("http://localhost:8080/rest/member/status", ".member-chart");
+
+    })
+   
+    </script>
+    </head>
+
+<body>
+  <div class="container w-600 my-50">
+    <div class="row center">
+      <h1>포켓몬 현황</h1>
+    </div>
+    <div class="row">
+      <canvas class="poketmon-chart"></canvas>
+    </div>
+    <div class="row center">
+      <h1>사원 현황</h1>
+    </div>
+    <div class="row">
+      <canvas class="emp-chart"></canvas>
+    </div>
+    <div class="row center">
+      <h1>도서 현황</h1>
+    </div>
+    <div class="row">
+      <canvas class="book-chart"></canvas>
+    </div>
+    <div class="row center">
+      <h1>회원 현황</h1>
+    </div>
+    <div class="row">
+      <canvas class="member-chart"></canvas>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiper</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <link rel="stylesheet" type="text/css" href="./test.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        .swiper {
+            width: 480px;
+            height: 300px;
+        }
+        
+    </style>
+    <!-- Swiper cdn-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <style>
+         .swiper-cube .swiper-cube-shadow:before{
+            background-color: blue;
+        }
+    </style>
+    <!-- jquery cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        $(function () {
+            // var swiper = new Swiper(선택자, 옵션객체);
+            var swiper = new Swiper('.swiper', {
+
+                // Optional parameters
+                direction: 'horizontal',
+                loop: true, // 슬라이드 종료지점과 시작지점을 연결 할 것인가
+                autoplay: true,              
+                autoplay : {
+                    delay : 100,
+                    disableOnInteraction:true, // 사용자가 제어중일 경우 자동재생 해제
+                    pauseOnMouseEnter:true,  
+
+
+                },
+                effect: 'cube',
+                cubeEffect:{
+                    shadowScale: 2,
+                    shadowOffset:200,
+
+                },
+                // If we need pagination
+                pagination: {
+                    el: '.swiper-pagination', // 적용대상
+                    clickable:true, //클릭하여 이동 가능
+                    type:'progressbar',
+                },
+
+                // Navigation arrows
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                    hideOnClick: true,
+                },
+
+                // And if we need scrollbar
+                // scrollbar: {
+                //     el: '.swiper-scrollbar',
+                //     enable: false,
+                // },
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container w-600 my-50">
+        <div class="row center">
+            <h1>Swiper</h1>
+        </div>
+        <div class="row">
+            <!-- Slider main container -->
+            <div class="swiper">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide"><a href="#"><img src="images/서운.png"></a></div>
+                    <div class="swiper-slide"><a href="#"><img src="images/썬구리.png"></a></div>
+                    <div class="swiper-slide"><a href="#"><img src="images/번쩍.png"></a></div>
+                    <div class="swiper-slide"><a href="#"><img src="images/우산.png"></a></div>
+                    <div class="swiper-slide"><a href="#"><img src="images/웃음.png"></a></div>
+                    <div class="swiper-slide"><a href="#"><img src="images/화남.png"></a></div>
+                    <div class="swiper-slide"><a href="#"><img src="images/눈물.png"></a></div>
+                    <div class="swiper-slide"><a href="#"><img src="images/당황.png"></a></div>
+                    <div class="swiper-slide"><a href="#"><img src="images/qhshqhsh2.png"></a></div>
+                    
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+
+                <!-- If we need scrollbar -->
+                <!-- <div class="swiper-scrollbar"></div> -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

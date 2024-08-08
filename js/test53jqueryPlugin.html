@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리(jQuery) Score Plugin</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+    </style>
+
+    <!-- jquery cdn -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+     <!-- score jquery plugin cdn-->
+     <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.min.js"></script>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+        
+       $(function(){
+            $(".test-score1").score({
+                editable:false,
+                integerOnly:false,
+                display:{
+                    showNumber:true,
+                },
+            });
+            $(".test-score2").score({
+                editable:true,
+                integerOnly:false,
+                display:{
+                    showNumber:true,
+                    placeLimit:1,
+                },
+            });
+            $(".test-score3").score({
+                editable:true,
+                integerOnly:true,
+                display:{
+                    showNumber:true
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container w-600">
+        <div class="row center">
+            <h2>별점</h2>
+        </div>
+        <div class="row">
+            <div class="test-score1" data-max="5" data-rate="4.5"></div>
+        </div>
+        <div class="row">
+            <div class="test-score2" data-max="5" data-rate="3"></div>
+        </div>    
+        <div class="row">
+            <div class="test-score3" data-max="5"></div>
+        </div>    
+    </div>
+</body>
+</html>
