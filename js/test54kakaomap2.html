@@ -28,7 +28,20 @@
 		// - center : 지도의 중심
 		// - level : 지도의 확대 수준(1~15)
 		var options = {
-			center: new kakao.maps.LatLng(37.456172, 126.632504),
+			center: new kakao.maps.LatLng(37.4562518, 126.6325914),
+			level: 3 //지도의 확대 수준
+		};
+		//태그와 옵션을 이용하여 카카오 지도를 생성한다.
+		var map = new kakao.maps.Map(container, options);
+	   });
+	   $(function(){
+		//지도를 생성하기 위해 태그를 선택한다.
+		var container = document.querySelector(".kakao-map2");
+		//카카오 지도에 대한 옵션 객체를 생성한다.
+		// - center : 지도의 중심
+		// - level : 지도의 확대 수준(1~15)
+		var options = {
+			center: new kakao.maps.LatLng(37.4895317, 126.7243448),
 			level: 3 //지도의 확대 수준
 		};
 		//태그와 옵션을 이용하여 카카오 지도를 생성한다.
@@ -43,6 +56,10 @@
         </div>
         <div class="row">
 			<div class="kakao-map"></div>
+        </div>
+        <div class="row">
+			<h1>2</h1>
+			<div class="kakao-map2"></div>
         </div>
     </div>
 </body>
