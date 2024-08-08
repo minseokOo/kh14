@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제이쿼리(jQuery)</title>
+  <link rel="stylesheet" type="text/css" href="./commons.css">
+  <link rel="stylesheet" type="text/css" href="./test.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+
+  </style>
+
+  <!-- jquery cdn -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="checkbox.js"></script>
+  <script src="confirm-link.js"></script>
+  <script src="multipage.js"></script>
+
+  <!-- chart.js cdn-->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- 자바스크립트 작성 영역 -->
+  <script type="text/javascript">
+    $(function(){
+
+      // 차트를 그릴 대상 선택
+      const ctx = document.querySelector(".my-chart");
+      
+      // 차트 생성 코드
+      // new Chart(캔버스태그, {옵션객체});
+      new Chart(ctx, {
+        type: 'line', // 차트 유형(bar/pie/doughnut/line)
+        data: {// 차트에 표시될 데이터
+
+          //label은 차트에 표시되는 항목(x축)
+          labels: ['1차', '2차', '3차', '4차'],
+
+          //실제로 차트에 표시될 값
+          datasets: [{
+            label: '피카츄', //범례
+            data: [75, 50, 90, 66], //데이터
+            borderWidth: 1
+          }, 
+          {
+            label: '파이리', //범례
+            data: [70, 75, 65, 85], //데이터
+            borderWidth: 1
+          }
+        ]
+        },
+      options: {
+        scales: {
+          y: {
+            //beginAtZero: true //차트를 0부터 표기
+          }
+        }
+      }
+    });
+    
+  });
+    </script>
+    </head>
+
+<body>
+  <div class="container w-600 my-50">
+    <div class="row center">
+      <h1>제목</h1>
+    </div>
+    <div class="row">
+      <canvas class="my-chart"></canvas>
+    </div>
+  </div>
+</body>
+
+</html>
