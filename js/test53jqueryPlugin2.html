@@ -14,7 +14,7 @@
     <!-- jquery cdn -->
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
      <!-- score jquery plugin cdn-->
-     <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.min.js"></script>
+     <script src="score.js"></script>
     <!-- 자바스크립트 작성 영역 -->
     <script type="text/javascript">
         
@@ -22,10 +22,19 @@
             $(".test-score1").score({
                 editable:true,
                 integerOnly:false,
-                backgroundColor: "black",
+                // integerOnly:true,
                 display:{
                     showNumber:true,
+                    placeLimit:1,
                 },
+                send:{
+                    sendable:true, 
+                    name:"reviewScore",
+                },
+                point:{
+                    max:5,
+                    rate:5,
+                }
             });
             $(".test-score2").score({
                 editable:true,
@@ -54,15 +63,18 @@
         <div class="row center">
             <h2>별점</h2>
         </div>
+        <form action="https://www.naver.com" method="get">
+            <div class="row">
+                <div class="test-score1"></div>
+            </div>
+            <div class="row">
+                <label>리뷰내용</label>    
+                <textarea name="reviewContent" class="field w-100"></textarea>
+            </div>    
         <div class="row">
-            <div class="test-score1" data-max="5" data-rate="4.5"></div>
-        </div>
-        <div class="row">
-            <div class="test-score2" ></div>
+            <button type="submit" class="btn btn-positive">등록</button>
         </div>    
-        <div class="row">
-            <div class="test-score3" data-max="5"></div>
-        </div>    
+    </form>
     </div>
 </body>
 </html>
