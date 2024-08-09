@@ -39,7 +39,7 @@
         }
         .link.home-animation:hover {
            
-            transform: rotate(360deg);
+            transform: bounce(360deg);
         }
     </style>
     <!-- 자바스크립트 -->
@@ -48,6 +48,7 @@
      <!-- 내가 만든 jQuery 라이브러리-->
      <script src="/js/checkbox.js"></script>
     <script src="/js/confirm-link.js"></script>
+    
     
 </head>
 <body bgcolor='#dff9fb' style="-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none">

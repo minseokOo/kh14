@@ -12,7 +12,7 @@
     <h2><a class="link link-animation" href= "/admin/member/list">회원검색</a></h2>
     </div>
 	<div class="row">
-    <h2><a class="link link-animation" href= "/admin/status">포켓몬현황</a></h2>
+    <h2><a class="link link-animation" href= "/admin/status">데이터현황</a></h2>
 	</div>
     
     </div>

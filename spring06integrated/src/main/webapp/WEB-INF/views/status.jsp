@@ -4,9 +4,25 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<div class="container w-600">
+<div class="row center">
 <h1>데이터베이스 현황</h1>
+</div>
+<script src="/js/chart.js"></script>
+<script>
+$(function(){
+    creatChart("/rest/poketmon/status", ".poketmon-chart", "몬스터수", "bar");
+    creatChart("/rest/emp/status", ".emp-chart", "사원수");
+    creatChart("/rest/book/status", ".book-chart");
+    creatChart("/rest/member/status", ".member-chart");
 
+  })
+</script>
+<div class="row center">
 <h2>포켓몬스터 현황</h2>
+</div>
+<div class="flex-box w-100">
+<div class="row w-50 center">
 	<table border= "1" width= "300">
 		<thead>
 			<tr>
@@ -24,6 +40,13 @@
 			</c:forEach>
 		</tbody>
 	</table>
+</div>
+<div class="row w-50">
+    <div class="row">
+      <canvas class="poketmon-chart"></canvas>
+    </div>
+</div>
+</div>
 
 <h2>팀별 인원 현황</h2>
 	<table border= "1" width= "300">
@@ -80,4 +103,5 @@
 			</c:forEach>
 		</tbody>
 	</table>
+</div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
