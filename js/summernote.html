@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리(jQuery) 수업</title>
+    <!-- google font cdn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <!-- font awesome icon cdn -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- my css -->
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <link rel="stylesheet" type="text/css" href="./test.css">
+    <style>
+        .note-editable {
+            background-color: white;
+        }
+        
+    </style>
+
+    <!-- jquery cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="checkbox.js"></script>
+    <script src="confirm-link.js"></script>
+    <script src="multipage.js"></script>
+    <!-- summernote cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+    <!-- 자바스크립트 코드 작성 영역 -->
+    <script type="text/javascript">
+        $(function(){
+            //$(선택자).summernote(옵션객체);
+            $("[name=boardContent]").summernote({
+                height: 250,//높이(px)
+                minHeight: 250,//최소높이(px)
+                maxHeight: 400,//최대높이(px)
+                placeholder: "내용 입력",//공란 시 표시될 도움말
+                //메뉴 설정
+                toolbar: [
+                    //['메뉴명', ['버튼명', '버튼명', ...]]
+                    ['area', ['style', 'undo', 'redo']],
+                    ['style', ['bold', 'italic', 'underline', 'strikethrough']],
+                    ['font', ['fontname', 'fontsize', 'forecolor', 'backcolor']],
+                    ['tool', ['ol', 'ul', 'table', 'hr', 'fullscreen']],
+                ],
+            });
+
+            //if(에디터가 비어있으면) {
+            if($("[name=boardContent]").summernote("isEmpty")) {
+                //에디터의 값을 빈 문자열로 재설정하세요
+                $("[name=boardContent]").summernote("code", "");
+            }
+
+        });
+    </script>
+</head>
+<body>
+    <div class="container w-800 my-50">
+        <div class="row center">
+            <h1>게시글 작성</h1>
+        </div>
+        
+        <form action="" method="post">
+        <div class="row">
+            <textarea name="boardContent"></textarea>    
+        </div>
+        <div class="row">
+            <button type="submit" class="btn btn-positive w-100">작성하기</button>
+        </div>
+        </form>
+    </div>
+</body>
+</html>
