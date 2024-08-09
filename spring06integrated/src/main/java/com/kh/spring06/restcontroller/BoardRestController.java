@@ -1,19 +1,25 @@
 package com.kh.spring06.restcontroller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring06.dao.BoardDao;
 import com.kh.spring06.dao.BoardLikeDao;
+import com.kh.spring06.error.TargetNotFoundException;
+import com.kh.spring06.service.AttachmentService;
 import com.kh.spring06.vo.BoardLikeVO;
 
 import jakarta.servlet.http.HttpSession;
 
 //게시글에서 발생하는 비동기통신을 처리하는 컨트롤러
-//@CrossOrigin
+@CrossOrigin(origins = { "http://127.0.0.1:5500" })
 @RestController
 @RequestMapping("/rest/board")
 public class BoardRestController {
@@ -55,4 +61,18 @@ public class BoardRestController {
 		
 		return boardLikeVO;
 	}
+	
+	//글 내부에 포함될 이미지를 업로드하고 번호를 반환하는 기능
+	@Autowired
+	private AttachmentService attachmentService;
+	
+	@PostMapping("/upload")
+	public int upload(@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+		if(attach.isEmpty()) {
+			throw new TargetNotFoundException("파일이 존재하지 않습니다.");
+		}
+		int attachmentNo = attachmentService.save(attach);
+		return attachmentNo;
+	}
+	
 }

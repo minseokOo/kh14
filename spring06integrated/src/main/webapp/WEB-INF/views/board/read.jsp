@@ -46,10 +46,10 @@
 				success: function(response){
 //	 				console.log(response);
 					if(response.checked){
-						$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-solid");
+						$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-solid red");
 					}
 					else{
-						$(".fa-heart").removeClass("fa-solid fa-regular").addClass("fa-regular");
+						$(".fa-heart").removeClass("fa-solid fa-regular red").addClass("fa-regular");
 					}
 					//하트 뒤에 있는 span에 개수 적으세요
 					$(".fa-heart").next("span").text(response.count);
@@ -59,6 +59,7 @@
 	});
 </script>
 </c:if>
+<div class="container w-800">
 <table border= "1">
 	<thead align= "center">
 		<tr>
@@ -101,6 +102,7 @@
 		<td><a href= "#">추천</a></td>
 	</tfoot>
 </table>
+</div>
 		<h2 align= "right"><a href= "/board/list">목록으로</a></h2>
 		
 		<c:set var= "isAdmin" value="$sessionScope.createdLevel == '관리자'}"/>

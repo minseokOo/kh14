@@ -1,5 +1,10 @@
 package com.kh.spring06.controller;
 
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.spring06.dao.BoardDao;
 import com.kh.spring06.dto.BoardDto;
 import com.kh.spring06.error.TargetNotFoundException;
+import com.kh.spring06.service.AttachmentService;
 import com.kh.spring06.vo.PageVO;
 
 import jakarta.servlet.http.HttpSession;
@@ -138,12 +144,26 @@ public class BoardController {
 		return "redirect:read?boardNo="+boardDto.getBoardNo();
 	}
 	
+	@Autowired
+	private AttachmentService attachmentService;
 	//삭제
+	// - 추가) 글 안에 들어가 있는 이미지 파일을 모두 찾아서 삭제한 뒤 글 삭제
 	@RequestMapping("/delete")
 	public String delete(@RequestParam int boardNo) {
 		BoardDto boardDto = boardDao.selectOne(boardNo);
 		if(boardDto == null) throw new TargetNotFoundException("존재하지 않는 글 번호");
-		boardDao.delete(boardNo);
+		
+		String boardContent = boardDto.getBoardContent();//글 내용을 추출
+		//boardContent에 들어있는 내용 중에 <img class="board-attach">를 찾아
+		// -> Jsoup 이라는 라이브러리를 활용하면 HTML 탐색이 쉬워진다
+		Document document = Jsoup.parse(boardContent); //html로 해석
+		Elements elements = document.select(".board-attach"); //찾아
+		for(Element element : elements) {//찾은걸 반복
+			String key = element.attr("data-key"); //data-key 속성을 읽어서
+			int attachmentNo = Integer.parseInt(key);//숫자로 바꿔서
+			attachmentService.delete(attachmentNo);//삭제 (파일 + DB)
+		}
+		boolean result = boardDao.delete(boardNo);
 		return "redirect:list";
 	}
 
