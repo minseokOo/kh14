@@ -1,6 +1,9 @@
 package com.kh.spring06.controller;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -139,7 +142,38 @@ public class BoardController {
 	
 	@PostMapping("/update")
 	public String update(@ModelAttribute BoardDto boardDto) {
-		if(boardDto == null) throw new TargetNotFoundException("존재하지 않는 글 번호");
+		//(+추가) 수정 전/ 후의 첨부파일을 비교하여 삭제할 대상을 찾아 삭제처리
+		// - 이미지는 class가 board-attach이고 data-key 속성에 번호가 있다.
+		BoardDto originDto = boardDao.selectOne(boardDto.getBoardNo());
+		if(originDto == null) throw new TargetNotFoundException("존재하지 않는 글 번호");
+		
+		//수정전
+		Set<Integer> before = new HashSet<>();
+		Document beforeDocument = Jsoup.parse(originDto.getBoardContent());
+		for(Element el : beforeDocument.select(".board-attach")) {//.board-attach를 찾아 반복
+			String keyStr = el.attr("data-key"); //data-key 속성 추출
+			int key = Integer.parseInt(keyStr); //int로 변환
+			before.add(key);//저장소에 추가
+		}
+		
+		// 수정 후
+		Set<Integer> after = new HashSet<>();
+		Document afterDocument = Jsoup.parse(originDto.getBoardContent());
+		for(Element el : afterDocument.select(".board-attach")) {//.board-attach를 찾아 반복
+			String keyStr = el.attr("data-key"); //data-key 속성 추출
+			int key = Integer.parseInt(keyStr); //int로 변환
+			after.add(key);//저장소에 추가
+		}
+		
+		// 수정전 - 수정후 계산
+		before.removeAll(after);
+		
+		// before에 남아있는 번호에 해당하는 파일을 모두 삭제
+		for(int attachmentNo : before) {
+			attachmentService.delete(attachmentNo);
+		}
+		
+		// 수정 처리
 		boardDao.update(boardDto);
 		return "redirect:read?boardNo="+boardDto.getBoardNo();
 	}
