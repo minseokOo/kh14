@@ -42,6 +42,7 @@
     filter:brightness(.5);
     transition: transform 1.25s var(--transition), filter 3s var(--transition), width 1.25s var(--transition);
     will-change: transform, filter, rotateY, width;
+    box-shadow: 10px 15px 10px black;
 }
 
 .item::before, .item::after{
@@ -111,8 +112,6 @@
 }
 
 .items .item:active, .items .item:focus {
-	width: 480px;
-	height: 300px;
 	filter: inherit;
 	z-index: 100;
 	transform: translateZ(calc(var(--index) * 10));
@@ -128,8 +127,9 @@
 }
     </style>	
     
-<div class="row center" style="height: 200px">
-        <div class="items">
+<div class="row" style="height: 200px">
+
+        <div class="row items flex-core">
           <div class="item" tabindex="0" style="background-image: url(images/qhshqhsh2.png)"></div>
           <div class="item" tabindex="0" style="background-image: url(images/당황.png)"></div>
           <div class="item" tabindex="0" style="background-image: url(images/번쩍.png)"></div>
@@ -140,7 +140,6 @@
           <div class="item" tabindex="0" style="background-image: url(images/화남.png)"></div>
             
           </div>
-            
           </div>
 </div>		
 <!-- 			<img src="https://placehold.co/700x400"width="700"height="400"> -->

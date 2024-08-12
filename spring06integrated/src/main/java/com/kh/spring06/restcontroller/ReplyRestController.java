@@ -1,9 +1,12 @@
 package com.kh.spring06.restcontroller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.spring06.dao.ReplyDao;
@@ -33,5 +36,15 @@ public class ReplyRestController {
 		//step 4 - 등록
 		replyDao.insert(replyDto);
 		
+	}
+	
+	@PostMapping("/list")
+	public List<ReplyDto> list(@RequestParam int replyOrigin){
+		return replyDao.selectList(replyOrigin);
+	}
+	
+	@PostMapping("/delete")
+	public void delete(@RequestParam int replyNo){
+		replyDao.delete(replyNo);
 	}
 }

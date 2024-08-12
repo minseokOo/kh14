@@ -1,5 +1,7 @@
 package com.kh.spring06.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -27,5 +29,17 @@ public class ReplyDao {
 				replyDto.getReplyNo(), replyDto.getReplyWriter(), replyDto.getReplyContent(), replyDto.getReplyOrigin()
 		};
 		jdbcTemplate.update(sql, data);
+	}
+	public List<ReplyDto> selectList(int replyOrigin){
+		String sql = "select * from reply where reply_origin = ? "
+				+ "order by reply_no asc";
+		Object[] data = {replyOrigin};
+		return jdbcTemplate.query(sql, replyMapper, data);
+	}
+	
+	public boolean delete(int replyNo) {
+		String sql = "delete reply where reply_no = ?";
+		Object[] data = {replyNo};
+		return jdbcTemplate.update(sql, data) > 0;
 	}
 }

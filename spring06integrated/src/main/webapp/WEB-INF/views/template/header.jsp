@@ -24,8 +24,8 @@
             color: rgb(0, 0, 131);
             border-radius: 3px;
             text-decoration-line: none;
-            margin-top: 10px;
-            padding : 0.5em 0.75em;
+            margin-top: 5px;
+            padding : 0.5em 0.3em;
             cursor: default;
         }
 	.link{
@@ -67,6 +67,10 @@
         }
     </style>
     <!-- 자바스크립트 -->
+    
+<!--     moment js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/locale/ko.min.js" ></script>
     <!-- jquery cdn -->
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
      <!-- 내가 만든 jQuery 라이브러리-->
@@ -198,7 +202,7 @@
 				<label for="ck-sidebar" class="sidebar-toggle">
     <i class ="fa-solid fa-bars fa-2x"></i>
  </label>
-    <input type="checkbox" id="ck-sidebar" >
+    <input type="checkbox" id="ck-sidebar"  checked="checked">
     <div class="sidebar">
 
         <div class="row my-0 flex-box" style="min-height: 400px;">
