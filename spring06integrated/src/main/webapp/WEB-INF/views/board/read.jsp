@@ -4,6 +4,36 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<!-- 댓글 처리를 위한 JS 코드 -->
+<script type="text/javascript">
+	$(function(){
+		// 이 페이지의 파라미터 중에서 boardNo의 값을 알아내는 코드
+		var params = new URLSearchParams(location.search);
+		var boardNo = params.get("boardNo");
+		
+		//댓글 등록 - 등록 버튼(.reply-add-btn)을 클릭하면 정보를 서버로 전송
+		// - 전송할 정보 : 댓글 내용(replyContent), 소속글 번호(replyOrigin)
+		$(".reply-add-btn").click(function(){
+			//step 1 - 작성된 내용을 읽는다.
+			var content = $(".reply-input").val();
+			if(content.length == 0) return;
+			
+			//step 2 - 비동기 통신을 보낸다.
+			$.ajax({
+				url:"/rest/reply/write",
+				method:"post",
+				data:{
+					replyContent: content,
+					replyOrigin: boardNo
+				},
+				success:function(response){
+					console.log("댓글 등록 완료");
+				}
+			});
+		});
+	});
+</script>
+
 <script type="text/javascript">
 	$(function(){
 		// 이 페이지의 파라미터 중에서 boardNo의 값을 알아내는 코드
@@ -58,6 +88,9 @@
 		})
 	});
 </script>
+
+
+
 </c:if>
 <div class="container w-800">
 <table border= "1">
@@ -102,6 +135,16 @@
 		<td><a href= "#">추천</a></td>
 	</tfoot>
 </table>
+<!-- 댓글 목록 -->
+<div class="row">
+	댓글 목록영역
+</div>
+
+<!-- 댓글작성 -->
+<div class="row">
+	<textarea class="field w-100 reply-input"></textarea>
+	<button type="button" class="btn btn-positive w-100 reply-add-btn"><i class="fa-solid fa-pen"></i> 댓글 작성</button>
+</div>
 </div>
 		<h2 align= "right"><a href= "/board/list">목록으로</a></h2>
 		
