@@ -3,7 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
+<style>
+	.btn.btn-neutral {
+		padding: 1px;
+	}
+</style>
 <div class="container w-900 my-50">
 <div class="row">
 <h1>글 목록</h1>
@@ -67,14 +71,16 @@
 <jsp:include page= "/WEB-INF/views/template/navigator.jsp"/>
 
 <%-- 비회원일 때와 회원일 때 다르게 보이도록 처리 --%>
+<div class="row right">
 <c:choose>
 	<c:when test= "${sessionScope.createdUser != null}">
-		<h2><a href= "/board/write">글쓰기</a></h2>
+		<h2><a class="btn btn-neutral" href= "/board/write">글쓰기</a></h2>
 	</c:when>
 	<c:otherwise>
 		<h2><a title= "로그인 후 사용 가능합니다.">글쓰기</a></h2>
 	</c:otherwise>
 </c:choose>	
+</div>
 
 <form action="list" method="get">
 	<select name= "column">

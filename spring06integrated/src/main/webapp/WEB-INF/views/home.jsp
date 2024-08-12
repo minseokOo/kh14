@@ -3,7 +3,7 @@
 
 <!-- header.jsp에 존재하는 내용을 불러오도록 설정 -->
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<div class="container w-700" style="height=400">
+<div class="container w-1000" style="height=400">
 		<div class="row center">
 			<h1>홈페이지에 오신것을 환영합니다.</h1>
 		</div>
@@ -118,9 +118,13 @@
 	transform: translateZ(calc(var(--index) * 10));
     margin: 0 .45vw;
 }
-.itmes.item:focus {
-	width: 100%;
-	height: 100%;
+.items .item:focus {
+    width: 90vw; /* 전체 화면 너비 */
+    height: 50vh; /* 전체 화면 높이 */
+    filter: inherit;
+    transform: none; /* 확대/축소 없이 원래 상태로 */
+    margin: 0; /* 마진 제거 */
+    z-index: 9999; /* 다른 아이템들 위에 표시 */
 }
     </style>	
     

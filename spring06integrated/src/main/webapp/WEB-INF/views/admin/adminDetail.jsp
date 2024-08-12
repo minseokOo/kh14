@@ -2,10 +2,17 @@
     pageEncoding="UTF-8"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<div class="container w-400">
+<div class="row">
 <h1>상세 회원 정보</h1>
+</div>
 
+<div class="row ">
 <img src= "/member/image?memberId=${memberDto.memberId}" width= "100" height= "100">
+</div>
 
+<div class="row ">
 <table border= "1">
 	<tr>
 		<th>회원 ID</th>
@@ -51,6 +58,8 @@
 	</tr>
 	
 </table>
+</div>
 
+</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

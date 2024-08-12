@@ -39,7 +39,31 @@
         }
         .link.home-animation:hover {
            
-            transform: bounce(360deg);
+            transform: rotate(360deg);
+        }
+        .profile-wrapper {
+        	position:relative;
+        	width: 100px;
+        	height: 100px;
+/*         	overflow:hidden; */
+        }
+        .profile-wrapper > label {
+        background-color: rgba(0, 0, 0, 0.3);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        cursor:pointer;
+        
+        display: none;
+        }
+        .profile-wrapper:hover > label {
+        display: flex;
         }
     </style>
     <!-- 자바스크립트 -->
@@ -49,6 +73,41 @@
      <script src="/js/checkbox.js"></script>
     <script src="/js/confirm-link.js"></script>
     
+    <script type="text/javascript">
+    	// 이미지 선택 태그가 변경된 경우 사용자 이미지를 변경하도록 처리 (회원 전용)
+    	$(function(){
+    		$("#change-image").change(function(){
+    			//this == 파일선택태그
+    			console.log(this.files);
+    			if(this.files.length == 0)return;// 파일을 선택하지 않았으면 중단
+    			
+    			//전송 데이터 준비
+    			var form = new FormData();
+    			form.append("attach", this.files[0]);
+    			
+    			//비동기 통신으로 파일 업로드
+    			$.ajax({
+    				processData:false,
+    				contentType:false,
+    				url:"/rest/member/profile",
+    				method:"post",
+    				data:form,
+    				success:function(){
+    					//프로필 이미지 주소를 재설정 한다.
+    					//(문제) 브라우저 캐싱으로 인해서 주소가 같아 바뀐 이미지가 보이지 않음
+    					//(해결) 주소에서 한글자라도 변화를 줘야함(의미없는 파라미터 생성)
+    					
+    					//자바스크립트에서 겹치지 않는 시리얼 번호를 생성하는 코드
+    					var uuid = crypto.randomUUID();
+    					
+    					$(".user-image").attr("src", "")
+    					.attr("src", "/member/myImage?uuid="+uuid);
+    				},
+    			});
+    			
+    		});
+    	});
+    </script>
     
 </head>
 <body bgcolor='#dff9fb' style="-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none">
@@ -144,8 +203,14 @@
 
         <div class="row my-0 flex-box" style="min-height: 400px;">
             <div class="w-200">
-                <div class="row center" style="margin-top:200px">
-                    <img src="image?memberId=memberDto.${sessionScope.createdUser}" class="image image-circle image-lift" width="50%">
+                <div class="row center flex-core" style="margin-top:200px">
+                <div class="profile-wrapper">
+                    <img src="/member/myImage" class="image image-circle image-lift user-image w-100" >
+                    <input type="file" id="change-image" accept="image/*" style="display:none;">
+                    <label for="change-image">변경하기</label>
+                </div>
+                
+                
                 </div>
                 <div class="row center">${sessionScope.createdUser}(${sessionScope.createdLevel})</div>
                 <div class="row center">5,000 point</div>

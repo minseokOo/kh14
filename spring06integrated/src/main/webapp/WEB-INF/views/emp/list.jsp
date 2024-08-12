@@ -3,9 +3,13 @@
 	<%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<style>
+	.btn.btn-neutral {
+		padding: 1px;
+	}
+</style>
 
-
-<div class="container w-1100">
+<div class="container w-800">
 <h1>사원 목록 검색</h1>
 
 <form action="list" method= "get">
@@ -21,7 +25,7 @@
 </form>
 
 <h2>데이터 개수 : ${list.size()}</h2>
-<table border= "1">
+<table class="table table-hover" border="1">
 	<thead>
 		<tr>
 		<th>No.</th>
@@ -50,6 +54,9 @@
 	
 	</tbody>
 </table>
+<div class="row right">
+<a class="btn btn-neutral" href="add">사원 추가하기</a>
+</div>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

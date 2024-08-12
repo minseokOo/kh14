@@ -34,20 +34,28 @@
            //form이 없어도 FormData라는걸 쓰면 같은 효과 발생
            //.append(이름, 파일 또는 값)을 추가한다
            var form = new FormData();
-           form.append("attach", files[0]);
+		   // dnd(drag and drop)한 파일 수 만큼 반복하여 FormData에 첨부
+		   for(var i=0; i < files.length; i++){
+			form.append("attach", files[i]);
+		   }
 
            $.ajax({
              processData: false, /*파일업로드에 꼭 필요한 설정*/
              contentType: false, /*파일업로드에 꼭 필요한 설정*/
-             url:"http://localhost:8080/rest/board/upload",
+             url:"/rest/board/uploads",
              method:"post",
              data: form,
              success:function(response){
-               // response에는 파일번호가 있어야 한다.
-               console.log(response);
+               // response에는 파일번호 목록이 있어야 한다.
+			   for(var i=0; i < response.length; i++){
+			
                // 태그를 만들 때는 선택자에 온전한 태그를 넣는다.
-               var tag = $("<img>").attr("src", "http://localhost:8080/attach/download?attachmentNo=" + response);
-               $("[name=boardContent]").summernote("insertNode", tag[0]);
+			   var tag = $("<img>").addClass("board-attach")
+			                           			.attr("data-key", response[i])
+			                           			.attr("src", "/attach/download?attachmentNo="+response[i]);
+			                           $("[name=boardContent]").summernote("insertNode", tag[0]);
+			   }
+               console.log(response);
              }
            });
          }

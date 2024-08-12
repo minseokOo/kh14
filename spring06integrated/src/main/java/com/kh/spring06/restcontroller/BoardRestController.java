@@ -1,6 +1,8 @@
 package com.kh.spring06.restcontroller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -73,6 +75,19 @@ public class BoardRestController {
 		}
 		int attachmentNo = attachmentService.save(attach);
 		return attachmentNo;
+	}
+	
+	@PostMapping("/uploads")
+	public List<Integer> uploads 
+	(@RequestParam(value= "attach") List<MultipartFile> attachList) throws IllegalStateException, IOException{
+		List<Integer> results = new ArrayList<>(); //번호 담을 저장소 생성
+		for(MultipartFile attach : attachList) {
+			if(!attach.isEmpty()) {
+				int attachmentNo = attachmentService.save(attach);
+				results.add(attachmentNo);
+			}
+		}
+		return results;
 	}
 	
 }

@@ -66,9 +66,6 @@ function account() {
     <div class="fail-feedback">비밀번호는 영어대소문자, 숫자, 특수문자를 반드시 포함한 8~16자로 작성하세요.</div>
     </div>
      <div class="row answerPw"></div>
-=======
-    <div class="row answerPw"></div>
-    <label>비밀번호 확인</label>
     <div class="row">
     <label>비밀번호 확인<i class="fa-beat fa-solid fa-asterisk"></i></label>
     <input class="field field-image w-100 checkPw" type="password"  onblur="checkPw();" required>

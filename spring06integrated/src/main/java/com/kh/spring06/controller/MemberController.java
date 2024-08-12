@@ -231,7 +231,7 @@ public class MemberController {
 	@RequestMapping("/myImage")
 	public String myImage(HttpSession session) {
 		try {
-		String memberId = (String) session.getAttribute("createUser");
+		String memberId = (String) session.getAttribute("createdUser");
 		int attachmentNo = memberDao.findImage(memberId);
 		return "redirect:/attach/download?attachmentNo="  + attachmentNo;
 		}
@@ -252,10 +252,6 @@ public class MemberController {
 		
 		}
 	}
-	
-	
-	
-	
 	
 	
 }

@@ -198,4 +198,5 @@ public class MemberDao {
 		Object[] data = {memberId};
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
+	
 }

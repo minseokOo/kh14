@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<div class="container w-800">
 <h1>도서 목록</h1>
 
 <form action= "list" method= "get">
@@ -12,7 +14,7 @@
 </form>
 
 <h2>데이터 개수 : ${list.size()}</h2>
-<table border= "1">
+<table class="table table-hover" border="1">
 	<thead>
 		<tr>
 			<th>번호</th>
@@ -42,4 +44,5 @@
 </table>
 <jsp:include page= "/WEB-INF/views/template/navigator.jsp"/>
 <h2><a href= "save">추가 등록하기</a></h2>
+</div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

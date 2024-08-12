@@ -3,7 +3,11 @@
     <%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
+<style>
+	.btn.btn-neutral {
+		padding: 1px;
+	}
+</style>
 <div class="container w-500 my-50">
 	<div class="row center">
 <h1>포켓몬 목록</h1>

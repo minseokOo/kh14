@@ -91,7 +91,7 @@
     <div class="row">
         <h2>글 작성</h2>
     </div>
-<form action= "/write"  method= "post">
+<form action= "./write"  method= "post">
 
 	<!-- (추가) 파라미터에 boardTarget이 있으면 답글이 되도록 정보 첨부 -->
 	<c:if test="${param.boardTarget != null}">
