@@ -28,6 +28,8 @@
 				},
 				success:function(response){
 					console.log("댓글 등록 완료");
+					$(".reply-input").val("");//댓글 내용 삭제
+					//목록 다시 불러오기
 				}
 			});
 		});

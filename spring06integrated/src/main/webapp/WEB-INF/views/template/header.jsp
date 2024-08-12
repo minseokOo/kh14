@@ -198,7 +198,7 @@
 				<label for="ck-sidebar" class="sidebar-toggle">
     <i class ="fa-solid fa-bars fa-2x"></i>
  </label>
-    <input type="checkbox" id="ck-sidebar">
+    <input type="checkbox" id="ck-sidebar" >
     <div class="sidebar">
 
         <div class="row my-0 flex-box" style="min-height: 400px;">
