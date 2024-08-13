@@ -4,13 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
+<div class="container w-800">
 <h1>${memberDto.memberId} 님의 개인 정보</h1>
 
-<img src="myImage" width= "100" height= "100">
+<img src="myImage" width= "200" height= "200">
 
 
-<table border="1" width="400">
+<table class="table" border="1" width="400">
 	<tr>
 		<th height= "50">닉네임</th>
 		<td>${memberDto.memberNickname}</td>
@@ -48,12 +48,12 @@
 	<tr>
 		<th height= "50">가입일</th>
 		<td>
-		<fmt:formatDate value="${memberDto.memberJoin}"  pattern="y년-M월-d일 E H시 m분 s초"/>
+		<fmt:formatDate value="${memberDto.memberJoin}"  pattern="y년 M월 d일 E H시 m분 s초"/>
 		 </td>
 	</tr>
 	<tr>
 		<th height= "50">최종로그인</th>
-		<td><fmt:formatDate value="${memberDto.memberLogin}"  pattern="y년-M월-d일 E H시 m분 s초"/> </td>
+		<td><fmt:formatDate value="${memberDto.memberLogin}"  pattern="y년 M월 d일 E H시 m분 s초"/> </td>
 	</tr>
 	
 </table>
@@ -93,6 +93,7 @@
 </table>
 </c:otherwise>
 </c:choose>
+</div>
 
 
 

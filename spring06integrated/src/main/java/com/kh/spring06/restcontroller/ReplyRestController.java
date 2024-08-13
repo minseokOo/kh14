@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.spring06.dao.ReplyDao;
 import com.kh.spring06.dto.ReplyDto;
+import com.kh.spring06.error.TargetNotFoundException;
+import com.kh.spring06.vo.ReplyListVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -38,13 +40,55 @@ public class ReplyRestController {
 		
 	}
 	
-	@PostMapping("/list")
+	@RequestMapping("/list")
 	public List<ReplyDto> list(@RequestParam int replyOrigin){
 		return replyDao.selectList(replyOrigin);
 	}
 	
+	//프론트엔드에게 좀 더 자세한 정보를 전달하여 원활한 더보기 표시가 가능하도록 구현
+	//[1] 표시할 댓글 데이터
+	//[2] 전체 페이지 수
+	//[3] 현재 제공하는 페이지 번호
+	@RequestMapping("/list/paging")
+	public ReplyListVO listByPaging(@RequestParam int replyOrigin, 
+			@RequestParam(required = false, defaultValue = "1") int page, 
+			@RequestParam(required = false, defaultValue = "10") int size){
+		
+		int count = replyDao.count(replyOrigin);
+		int totalPage = (count + size-1) / size;
+		
+		ReplyListVO replyListVO = new ReplyListVO();
+		replyListVO.setList(replyDao.selectList(replyOrigin, page, size));
+		replyListVO.setTotalPage(totalPage);
+		replyListVO.setCurrentPage(page);
+		return replyListVO;
+	}
+	
 	@PostMapping("/delete")
-	public void delete(@RequestParam int replyNo){
+	public void delete(HttpSession session, @RequestParam int replyNo){
+		String memberId = (String)session.getAttribute("createdUser");
+		ReplyDto replyDto = replyDao.selectOne(replyNo);
+		if(replyDto == null) {
+			throw new TargetNotFoundException();
+		}
+		
+		boolean isOwner = memberId.equals(replyDto.getReplyWriter());
+		if(isOwner) {
 		replyDao.delete(replyNo);
+		}
+		
+	}
+	
+	@PostMapping("/edit")
+	public void edit(HttpSession session, @ModelAttribute ReplyDto replyDto) {
+		String memberId = (String) session.getAttribute("createdUser");
+		ReplyDto originDto = replyDao.selectOne(replyDto.getReplyNo());
+		if(originDto == null) {
+			throw new TargetNotFoundException();
+		}
+		boolean isOwner = memberId.equals(originDto.getReplyWriter());
+		if(isOwner) {
+			replyDao.update(replyDto);
+		}
 	}
 }

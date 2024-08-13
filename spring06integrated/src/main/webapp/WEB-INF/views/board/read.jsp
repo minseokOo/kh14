@@ -43,7 +43,7 @@
 		
 		//현재 로그인한 사용자의 아이디를 변수로 저장(안좋은 방법이지만 어쩔수 없이 사용)
 		var currentUser = "${sessionScope.createdUser}";
-		
+		var currentLevel = "${sessionScope.createdLevel}";
 		//댓글 등록 - 등록 버튼(.reply-add-btn)을 클릭하면 정보를 서버로 전송
 		// - 전송할 정보 : 댓글 내용(replyContent), 소속글 번호(replyOrigin)
 		$(".reply-add-btn").click(function(){
@@ -71,18 +71,30 @@
 		
 		//댓글 목록 처리
 		loadList();//최초 1회 호출			
-		function loadList(){
+		function loadList(page=1){
 			
 			//목록 불러오기
 			$.ajax({
-				url:"/rest/reply/list",
+				url:"/rest/reply/list/paging",
 				method:"post",
-				data:{replyOrigin : boardNo},
-				success: function(response){//response는 List<ReplyDto>
+				data:{replyOrigin : boardNo, 
+					page : page 
+				},
+				success: function(response){//response는 ReplyListVO
+			//기존 내용 삭제 전에 이미 작성된 부분을 backup
+			var backup = $(".reply-list-wrapper").html();
+			
 			//기존 내용 삭제
 			$(".reply-list-wrapper").empty();
+			
+			//더보기 버튼을 생성하여 추가하는 시점
+			if(response.currentPage < response.totalPage){
+			$("<button>").addClass("btn btn-positive w-100 my-20 btn-more")
+										.text("이전 댓글 더 보기 (" + response.currentPage + " / " + response.totalPage+")").attr("data-page", page+1).appendTo(".reply-list-wrapper");
+			}
 				//전달된 댓글 개수만큼 반복하여 화면 생성
-					for(var i=0; i < response.length; i++){
+				var list = response.list; 
+					for(var i=0; i < list.length; i++){
 						//[1] 템플릿을 불러온다
 						var template = $("#reply-template").text();
 						
@@ -90,21 +102,25 @@
 						var html = $.parseHTML(template);
 						
 						//[3] 탐색하여 값을 치환
-						$(html).find(".image-wrapper").children("img").attr("src", "/member/image?memberId="+response[i].replyWriter)
-						$(html).find(".reply-title").text(response[i].replyWriter);
-						$(html).find(".reply-content").text(response[i].replyContent);
+						$(html).find(".image-wrapper").children("img").attr("src", "/member/image?memberId="+list[i].replyWriter)
+						$(html).find(".reply-title").text(list[i].replyWriter);
+						$(html).find(".reply-content").text(list[i].replyContent);
 						//(+추가) momentJS를 이용해서 시간을 원하는 형식으로 변경
 // 						var time = moment(response[i].replyWtime).fromNow();
-						var time = moment(response[i].replyWtime).format("YYYY-MM-DD dddd HH:mm:ss");
+						var time = moment(list[i].replyWtime).format("YYYY-MM-DD dddd HH:mm:ss");
 						$(html).find(".reply-info > .time").text(time);
 						
 						//(+추가) 현재 사용자가 작성자인 경우만 버튼을 남기고 나머지는 삭제
 						//- 현재 사용자의 정보는 HttpSession(백엔드)에 있다.
 						
-						if(currentUser == response[i].replyWriter){ //작성자가 현재 사용자와 같으면
+						if(currentUser == list[i].replyWriter){ //작성자가 현재 사용자와 같으면
 						//(+추가) 수정과 삭제버튼에 글 번호를 넣어야 한다.(data-reply-no)
 						$(html).find(".reply-edit-btn, .reply-delete-btn")
-										.attr("data-reply-no", response[i].replyNo);
+										.attr("data-reply-no", list[i].replyNo);
+						}
+						else if(currentLevel == "관리자"){
+							$(html).find(".reply-edit-btn, .reply-delete-btn")
+							.attr("data-reply-no", list[i].replyNo);
 						}
 						else{ //작성자가 남이라면
 							$(html).find(".reply-edit-btn, .reply-delete-btn")
@@ -114,6 +130,10 @@
 						$(".reply-list-wrapper").append(html);
 						
 					}
+				
+				//반복문 끝나고 나서 백업을 영역에 추가
+				$(".reply-list-wrapper").append(backup);
+				
 				}
 			});
 		}
@@ -139,11 +159,8 @@
 				}
 			});
 		});
-	});
-</script>
 
-<script type="text/javascript">
-	$(function(){
+	
 		// 이 페이지의 파라미터 중에서 boardNo의 값을 알아내는 코드
 		var params = new URLSearchParams(location.search);
 		var boardNo = params.get("boardNo");
@@ -165,6 +182,80 @@
 				$(".fa-heart").next("span").text(response.count);
 			}
 		});
+		
+		//수정 버튼 이벤트 처리
+		$(document).on("click", ".reply-edit-btn", function(e){
+			e.preventDefault();//기본 이벤트 차단
+			
+			//기존에 열려있는 수정 화면을 모두 제거
+			$(".reply-wrapper").show();
+			$(".reply-edit-wrapper").remove();
+			
+			//[1] 편집용 화면을 생성
+			var template = $("#reply-edit-template").text();
+			var html = $.parseHTML(template);
+			$(this).parents(".reply-wrapper").after(html);
+			
+			//[2] 표시용 화면을 숨김
+			$(this).parents(".reply-wrapper").hide();
+			
+			//[3] 값을 복사 - 프로필 src, 댓글 작성자, 댓글 내용
+			var src = $(this).parents(".reply-wrapper").find(".image-wrapper > img").attr("src");
+			$(html).find(".image-wrapper > img").attr("src", src);
+			var replyWriter = $(this).parents(".reply-wrapper").find(".reply-title").text();
+			$(html).find(".reply-title").text(replyWriter);
+			var replyContent = $(this).parents(".reply-wrapper").find(".reply-content").text();
+			$(html).find(".reply-edit-input").val(replyContent);
+			
+			//[4] 완료버튼에 글번호 전달
+			var replyNo = $(this).attr("data-reply-no");
+			$(html).find(".reply-done-btn").attr("data-reply-no", replyNo);
+		});
+		
+		//취소 버튼
+		$(document).on("click", ".reply-cancel-btn", function(){
+			//[1] 표시용 화면을 숨김 해제
+			$(this).parents(".reply-edit-wrapper").prev(".reply-wrapper").show();
+			
+			//[2] 편집용 화면을 제거한다.
+			$(this).parents(".reply-edit-wrapper").remove();
+		});
+		
+		//완료 버튼
+		$(document).on("click", ".reply-done-btn", function(){
+			//this를 이용해서 글번호(replyNo)와 글 내용(replyContent)를 알아내야 한다.
+			var replyContent = $(this).parents(".reply-edit-wrapper").find(".reply-edit-input").val();
+			var replyNo = $(this).attr("data-reply-no");
+			
+			//댓글 내용이 없으면 알림 메세지 출력 후 중지
+			if(replyContent.length == 0){
+				window.alert("댓글 내용은 반드시 작성해야 합니다.");
+				return;
+			}
+			
+			//서버로 댓글 수정을 위한 정보를 전송
+			$.ajax({
+				url:"/rest/reply/edit",
+				method:"post",
+				data:{
+					replyNo : replyNo,
+					replyContent : replyContent
+				},
+				success:function(response){
+					loadList();
+					
+				}
+			});
+		});
+		//더보기 버튼 이벤트
+		// - data-page 속성에 적혀있는 페이지로 loadList를 호출
+		// - 한 번 클릭하면 제거 되어야 한다.
+		$(document).on("click", ".btn-more", function(){
+			var page = parseInt($(this).attr("data-page"));
+			$(this).remove();
+			loadList(page);
+		});
+		
 		
 	});
 </script>
@@ -190,6 +281,23 @@
 	</div>
 </div>
 </script>
+<script type="text/template" id="reply-edit-template">
+	<div class="reply-wrapper reply-edit-wrapper">
+<!-- 프로필 영역 -->
+		<div class="image-wrapper">
+			<img src="https://picsum.photos/100">
+		</div>
+		<div class="content-wrapper">
+			<div class="reply-title">댓글 작성자</div>
+			<textarea class="field w-100 reply-edit-input"></textarea>
+			<div class="right">
+				<button class="btn btn-neutral reply-cancel-btn">취소</button>
+				<button class="btn btn-positive reply-done-btn">완료</button>
+			</div>
+		</div>
+	</div>
+</script>
+
 <c:if test="${sessionScope.createdUser != null}">
 <script type="text/javascript">
 	//(회원 전용) 하트를 누르면 좋아요 처리를 수행

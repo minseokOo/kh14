@@ -23,7 +23,7 @@ $(function(){
 </div>
 <div class="flex-box w-100">
 <div class="row w-50 center">
-	<table border= "1" width= "300">
+	<table class="table table-hover" border= "1" width= "300">
 		<thead>
 			<tr>
 				<th>속성</th>
@@ -49,7 +49,7 @@ $(function(){
 </div>
 
 <h2>팀별 인원 현황</h2>
-	<table border= "1" width= "300">
+	<table class="table table-hover" border= "1" width= "300">
 		<thead>
 			<tr>
 				<th>부서</th>
@@ -67,7 +67,7 @@ $(function(){
 		</tbody>
 	</table>
 <h2>직급별 인원 현황</h2>
-	<table border= "1" width= "300">
+	<table class="table table-hover" border= "1" width= "300">
 		<thead>
 			<tr>
 				<th>직급</th>
@@ -86,7 +86,7 @@ $(function(){
 	</table>
 <!-- <h2>장르별 도서 현황</h2> -->
 <h2>등급별 회원 현황</h2>
-<table border= "1" width= "300">
+<table class="table table-hover" border= "1" width= "300">
 		<thead>
 			<tr>
 				<th>등급</th>
