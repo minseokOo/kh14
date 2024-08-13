@@ -50,18 +50,29 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						"/emp/**", //모든 사원 페이지
 						"/book/**", //모든 도서페이지
 						"/member/**", //모든 회원페이지
-						"/board/write"//게시글 작성페이지
+						"/board/write",//게시글 작성페이지
+						"/rest/board/**",//게시글 rest 서비스
+						"/rest/member/profile",//프로필 변경 서비스
+						"/rest/reply/**" //댓글 관련
 								)
 						.excludePathPatterns(
 								"/member/join*", //가입페이지
 //								"/member/joinFinish", //가입 완료 페이지
 								"/member/login", //로그인 페이지
 								"/member/goodbye", //탈퇴완료 페이지
-								"/member/block"
-								);
+								"/member/block", //차단 페이지
+								"/member/image",	//회원 이미지 페이지
+								"/rest/board/check", //좋아요 확인 페이지
+								"/rest/reply/list", //댓글목록
+								"/rest/reply/list/paging"//댓글목록(+페이징)
+							);
 		//관리자 검사 인터셉터 설정
 		registry.addInterceptor(adminInterceptor).addPathPatterns(
-				 "/admin/**" //모든 관리자 페이지
+				 "/admin/**", //모든 관리자 페이지
+				 "/rest/poketmon/status",
+				"/rest/book/status",
+				"/rest/emp/status",
+				"/rest/member/status"
 				)
 		.excludePathPatterns(
 				"/member/join*", //가입페이지
