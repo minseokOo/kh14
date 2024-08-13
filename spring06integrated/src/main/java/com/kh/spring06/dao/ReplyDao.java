@@ -76,4 +76,5 @@ public class ReplyDao {
 		Object[] data = {replyOrigin};
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
+	
 }

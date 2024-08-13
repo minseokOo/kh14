@@ -210,5 +210,12 @@ public class BoardDao {
 		Object[] data = {boardNo, boardNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-	
+	//댓글 숫자 최신화 기능
+	public boolean updateBoardReplies(int boardNo) {
+		String sql = "update board set board_replies = ("
+				+ "select count(*) from reply where reply_origin = ?"
+				+ ") where board_no = ?";
+		Object[] data = {boardNo, boardNo};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
 }

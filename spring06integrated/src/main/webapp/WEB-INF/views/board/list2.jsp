@@ -46,7 +46,11 @@
 				<c:if test= "${boardDto.boardDepth > 0}">
 					<img src= "/images/reply.png" width= "15" height="16">
 				</c:if>
-				<a href= "/board/read?boardNo=${boardDto.boardNo}" >${boardDto.boardTitle}</a> (${boardDto.boardReplies})</td>
+				<a href= "/board/read?boardNo=${boardDto.boardNo}" >${boardDto.boardTitle}</a> 
+				<c:if test="${boardDto.boardReplies > 0}">
+				(${boardDto.boardReplies})
+				</c:if>
+				</td>
 <%-- 				<c:choose> --%>
 <%-- 					<c:when test= "${boardDto.boardWriter == null}"> --%>
 <%-- 						<td>탈퇴한 사용자</td> --%>

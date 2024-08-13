@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.spring06.dao.BoardDao;
 import com.kh.spring06.dao.ReplyDao;
 import com.kh.spring06.dto.ReplyDto;
 import com.kh.spring06.error.TargetNotFoundException;
@@ -22,6 +23,9 @@ public class ReplyRestController {
 
 	@Autowired
 	private ReplyDao replyDao;
+	
+	@Autowired
+	private BoardDao boardDao;
 	
 	@PostMapping("/write")
 	public void write(@ModelAttribute ReplyDto replyDto, HttpSession session){
@@ -37,6 +41,9 @@ public class ReplyRestController {
 		
 		//step 4 - 등록
 		replyDao.insert(replyDto);
+		
+		//step 5 - write가 끝나면 댓글 수 최신화
+		boardDao.updateBoardReplies(replyDto.getReplyOrigin());
 		
 	}
 	
@@ -75,6 +82,7 @@ public class ReplyRestController {
 		boolean isOwner = memberId.equals(replyDto.getReplyWriter());
 		if(isOwner) {
 		replyDao.delete(replyNo);
+		boardDao.updateBoardReplies(replyDto.getReplyOrigin());
 		}
 		
 	}
