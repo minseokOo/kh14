@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
 <!-- 댓글 스타일 -->
 <style>
 	.reply-wrapper{
@@ -11,6 +12,7 @@
 	}
 	.reply-wrapper > .image-wrapper{
 		width: 100px;
+		min-width:100px;
 		padding: 10px;
 		
 	}
@@ -32,10 +34,54 @@
 		font-size: 0.7em;
 		
 	}
+	.note-editable{
+      background-color: white;
+    }
 </style>
 
 <!-- 댓글 처리를 위한 JS 코드 -->
 <script type="text/javascript">
+//에디터 처리
+var editorOptions = {
+		 minHeight: 120,
+	     maxHeight: 120,
+	     toolbar: [
+	          // [menu name, [list of button name]]
+	          ['font', ['fontname', 'fontsize', 'forecolor', 'backcolor']],
+	          
+	        ],
+	   disableDragAndDrop:true,
+	   callbacks:{
+		   onImageUpload:function(files){},
+		   
+		   onKeyup:function(){
+			   console.log("keyup");
+			   var content = $(this).val();
+			   
+			   //입력값을 이용하여 byte 크기를 구하기
+				var byteCount = getByteLength(content);
+			   console.log("바이트 : " + byteCount);
+		   },
+	   },
+};
+
+// 바이트 크기 계산 함수(GPT)
+function getByteLength(str) {
+    let byteLength = 0;
+    for (let i = 0; i < str.length; i++) {
+        const charCode = str.charCodeAt(i);
+        if (charCode <= 0x7F) {
+            byteLength += 1;  // 1 byte for ASCII
+        } else if (charCode <= 0x7FF) {
+            byteLength += 2;  // 2 bytes for characters in the range U+0080 - U+07FF
+        } else if (charCode <= 0xFFFF) {
+            byteLength += 3;  // 3 bytes for characters in the range U+0800 - U+FFFF
+        } else {
+            byteLength += 4;  // 4 bytes for characters in the range U+10000 - U+10FFFF
+        }
+    }
+    return byteLength;
+}
 	$(function(){
 		// 이 페이지의 파라미터 중에서 boardNo의 값을 알아내는 코드
 		var params = new URLSearchParams(location.search);
@@ -61,7 +107,8 @@
 				},
 				success:function(response){
 					console.log("댓글 등록 완료");
-					$(".reply-input").val("");//댓글 내용 삭제
+// 					$(".reply-input").val("");//댓글 내용 삭제
+					$('.reply-input').summernote('code', ''); //댓글 내용 삭제
 					
 					//목록 다시 불러오기
 					loadList();
@@ -82,8 +129,10 @@
 				},
 				success: function(response){//response는 ReplyListVO
 			//기존 내용 삭제 전에 이미 작성된 부분을 backup
-			var backup = $(".reply-list-wrapper").html();
-			
+			var backup; //undefined
+			if(page >= 2){
+				backup = $(".reply-list-wrapper").html();
+			}
 			//기존 내용 삭제
 			$(".reply-list-wrapper").empty();
 			
@@ -104,7 +153,7 @@
 						//[3] 탐색하여 값을 치환
 						$(html).find(".image-wrapper").children("img").attr("src", "/member/image?memberId="+list[i].replyWriter)
 						$(html).find(".reply-title").text(list[i].replyWriter);
-						$(html).find(".reply-content").text(list[i].replyContent);
+						$(html).find(".reply-content").html(list[i].replyContent);
 						//(+추가) momentJS를 이용해서 시간을 원하는 형식으로 변경
 // 						var time = moment(response[i].replyWtime).fromNow();
 						var time = moment(list[i].replyWtime).format("YYYY-MM-DD dddd HH:mm:ss");
@@ -132,8 +181,10 @@
 					}
 				
 				//반복문 끝나고 나서 백업을 영역에 추가
+				if(page >= 2){
 				$(".reply-list-wrapper").append(backup);
 				
+				}
 				}
 			});
 		}
@@ -210,8 +261,12 @@
 			//[4] 완료버튼에 글번호 전달
 			var replyNo = $(this).attr("data-reply-no");
 			$(html).find(".reply-done-btn").attr("data-reply-no", replyNo);
+			
+			//[5] summernote 생성
+			$(html).find(".reply-edit-input").summernote(editorOptions);
 		});
 		
+			
 		//취소 버튼
 		$(document).on("click", ".reply-cancel-btn", function(){
 			//[1] 표시용 화면을 숨김 해제
@@ -256,6 +311,9 @@
 			loadList(page);
 		});
 		
+		//에디터 처리
+		
+		$(".reply-input").summernote(editorOptions);
 		
 	});
 </script>
