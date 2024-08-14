@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri= "http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<div class="container w-500">
 <h1>도서 상세 정보</h1>
 
 <%--(추가) 전달된 도서 이미지(images) 번호를 이용하여 이미지 태그를 생성 --%>
@@ -51,9 +52,11 @@
     	</tr>
     	
     </table>
-    
-    <h2><a href= "list">목록보기</a></h2>
-    <h2><a href="delete?bookId=${dto.bookId}">삭제하기</a></h2>
-    <h2><a href= "edit">수정하기</a></h2>
+    <div class= "row right">
+    <h2><a class="btn btn-neutral" href= "list">목록보기</a></h2>
+    <h2><a class="btn btn-neutral" href="delete?bookId=${dto.bookId}">삭제하기</a></h2>
+    <h2><a class="btn btn-neutral" href= "edit">수정하기</a></h2>
+    </div>
+</div>
     
     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

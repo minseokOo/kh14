@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-   <h2>포켓몬 입력기</h2>
 <!--    <a href="http://localhost:8080/poketmon/list"><button>포켓몬 리스트</button></a> -->
 <!--   <br> -->
 <style>
@@ -41,6 +40,7 @@
 
     </script>
     <div class="container w-500">
+   <h2>포켓몬 입력기</h2>
    <form action="insert" method="post" autocomplete="off" enctype="multipart/form-data" onsubmit="return checkForm();">
             <div class="row">
                 <input type="hidden" name="poketmonNo" class="field">

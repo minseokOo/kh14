@@ -3,6 +3,7 @@
 <%@ taglib prefix= "c" uri= "http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<div class="container w-500">
 <h1>포켓몬스터 상세 정보</h1>
 
 <c:choose>
@@ -38,5 +39,6 @@
 <h2><a class="btn btn-neutral" href= "edit?poketmonNo=${dto.poketmonNo}">이 몬스터 정보 수정</a></h2>
 <h2><a class="btn btn-neutral confirm-link" href= "delete?poketmonNo=${dto.poketmonNo}" data-text="정말 삭제하시겠습니까?" >이 몬스터 삭제하기</a></h2>
 </c:if>
+</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

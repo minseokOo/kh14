@@ -43,6 +43,6 @@
 	</tbody>
 </table>
 <jsp:include page= "/WEB-INF/views/template/navigator.jsp"/>
-<h2><a href= "save">추가 등록하기</a></h2>
+<h2><a class="btn btn-neutral" href= "save">추가 등록하기</a></h2>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
