@@ -17,6 +17,8 @@
     <script type="text/javascript">
        $(function(){
         //이메일 인증 관련 처리
+        var certEmail;
+
         $(".btn-cert-send").click(function(){
             //step 1 - 작성한 이메일을 불러온다
             var email = $("[name = memberEmail]").val();
@@ -32,6 +34,7 @@
                 data:{certEmail : email},
                 beforeSend: function(){
                     console.log("전송 전");
+                    $(".email-wrapper").nextAll(".cert-wrapper").remove();
                     $(".btn-cert-send").prop("disabled", true);
                     $(".btn-cert-send").find(".fa-solid").removeClass("fa-paper-plane").addClass("fa-spinner fa-spin");
                     $(".btn-cert-send").find("span").text("발송중");
@@ -43,12 +46,53 @@
                     $(".btn-cert-send").find("span").text("보내기");
                 },
                 success:function(response){
-                    console.log("완료");
+                    //인증번호 템플릿을 이메일 입력창 뒤에 추가
+                    var template = $("#cert-template").text();
+                    var html = $.parseHTML(template);
+                    $(".email-wrapper").after(html);
+                },
+            });
+        });
+
+        //인증 확인 버튼에 대한 이벤트
+        $(document).on("click", ".btn-cert-check", function(){
+            var currentEmail = $("[name=memberEmail]").val();
+            if(certEmail != currentEmail){
+                window.alert("이메일을 다시 입력해주세요.");
+                $(".cert-wrapper").remove();
+                return;
+            }
+            var certNumber = $(".cert-input").val();
+            var regex = /^[0-9]{6}$/;
+            if(regex.test(certNumber) == false){//인증번호가 형식에 맞지 않으면
+                return; //진행 중지
+            }
+
+            //서버에 검사를 요청
+            $.ajax({
+                url:"http://localhost:8080/rest/cert/check",
+                method:"post",
+                data: {
+                    certEmail : certEmail,
+                    certNumber : certNumber,
+                },
+                success:function(response){
+                    //성공시점의 이메일을 저장
+                    console.log("response", response);
                 },
             });
         });
        });
     </script>
+    <!-- 인증번호 템플릿 -->
+     <script type="text/template" id="cert-template">
+        <div class="flex-box mt-10 cert-wrapper">
+            <input type="text" class="field cert-input" placeholder="인증번호 입력">
+            <button type="button" class="btn btn-neutral btn-cert-check">
+                <span>확인</span>
+            </button>
+        </div>
+     </script>
 </head>
 <body>
     <div class="container w-600 my-50">
@@ -57,13 +101,15 @@
         </div>
         <div class="row">
             <label>이메일</label>
-            <div class="flex-box">
+            <!--입력창-->
+            <div class="flex-box email-wrapper">
                 <input type="email" name="memberEmail" class="field" style="flex-grow: 1;">
                 <button type="button" class="btn btn-neutral btn-cert-send">
                     <i class="fa-solid fa-paper-plane"></i> 
                     <span>보내기</span>
                 </button>
             </div>
+            
         </div>
     </div>
 </body>
