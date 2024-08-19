@@ -10,6 +10,7 @@ import com.kh.spring06.dto.MemberDto;
 import com.kh.spring06.mapper.MemberBlockMapper;
 import com.kh.spring06.mapper.MemberMapper;
 import com.kh.spring06.mapper.StatusMapper;
+import com.kh.spring06.service.RandomService;
 import com.kh.spring06.vo.MemberBlockVO;
 import com.kh.spring06.vo.PageVO;
 import com.kh.spring06.vo.StatusVO;
@@ -24,6 +25,8 @@ public class MemberDao {
 	
 	@Autowired
 	private MemberBlockMapper memberBlockMapper;
+	
+	
 	
 	//필요한 데이터베이스 기능들을 메소드로 구현
 	
@@ -198,5 +201,6 @@ public class MemberDao {
 		Object[] data = {memberId};
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
+	
 	
 }

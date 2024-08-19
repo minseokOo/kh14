@@ -1,6 +1,5 @@
 package com.kh.spring06.controller;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spring06.configuration.CustomCertProperties;
 import com.kh.spring06.dao.BlockDao;
+import com.kh.spring06.dao.CertDao;
 import com.kh.spring06.dao.MemberDao;
 import com.kh.spring06.dto.BlockDto;
+import com.kh.spring06.dto.CertDto;
 import com.kh.spring06.dto.MemberDto;
 import com.kh.spring06.service.AttachmentService;
+import com.kh.spring06.service.EmailService;
 
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -31,6 +35,8 @@ public class MemberController {
 	private BlockDao blockDao;
 	@Autowired
 	private AttachmentService attachmentService;
+	@Autowired
+	private EmailService emailService;
 	
 	//회원가입
 	@GetMapping("/join")
@@ -253,5 +259,76 @@ public class MemberController {
 		}
 	}
 	
+	//비밀번호 찾기(임시 비밀번호)
+	@GetMapping("/findPw")
+	public String findPw() {
+		return "/WEB-INF/views/member/findPw.jsp";
+	}
+	
+	@PostMapping("/findPw")
+	public String findPw(@RequestParam String memberId, 
+											@RequestParam String memberEmail) throws IOException, MessagingException {
+		//회원 정보 조회
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		if(memberDto == null) {
+//			throw new TargetNotFoundException("존재하지 않는 아이디");
+			return "redirect:findPw?error";
+		}
+		
+		//이메일 비교
+		if(!memberEmail.equals(memberDto.getMemberEmail())) {
+			return "redirect:findPw?error";
+		}
+		
+		
+		
+		//이메일 발송
+		emailService.sendTempPw(memberId, memberEmail);
+		
+		//완료 페이지로 redirect
+		return "redirect:findPwFinish";
+	}
+	
+	@RequestMapping("/findPwFinish")
+	public String findPwFinish() {
+		return "/WEB-INF/views/member/findPwFinish.jsp";
+	}
+	//비밀번호 찾기 (재설정 링크 방식)
+	@GetMapping("/findPw2")
+	public String findPw2() {
+		return "/WEB-INF/views/member/findPw2.jsp";
+	}
+	@PostMapping("/findPw2")
+	public String findPw2(@RequestParam String memberId, @RequestParam String memberEmail) {
+		MemberDto memberDto = memberDao.selectOne(memberId);		
+		//이메일 비교
+		if(!memberEmail.equals(memberDto.getMemberEmail())) {
+			return "redirect:find?error";
+		}
+		return "redirect:findPw2Finish";
+	}
+	
+	@RequestMapping("/findPw2Finish")
+	public String findPw2Finish() {
+		
+		
+		return "/WEB-INF/views/member/findPw2Finish.jsp";
+	}
+	@GetMapping("/resetPw")
+	public String resetPw() {
+		return "/WEB-INF/views/member/resetPw.jsp";
+	}
+	
+	@Autowired
+	private CertDao certDao;
+	
+	@Autowired
+	private CustomCertProperties customCertProperties; 
+	
+	@GetMapping("/resetPw")
+	public String resetPw(@ModelAttribute CertDto certDto, @RequestParam String memberId) {
+		boolean isValid = certDao.check(certDto,  0);
+		return "/WEB-INF/views/member/resetPw.jsp";
+	}
 	
 }

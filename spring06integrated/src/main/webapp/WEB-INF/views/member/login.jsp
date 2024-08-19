@@ -71,6 +71,12 @@
         <div class="row center">
             <button class="btn btn-positive w-100 center">로그인</button>
         </div>
+        <div class="row">
+        	<a href="findPw">비밀번호가 기억나지 않습니다.(임시 비밀번호 방식)</a>
+        </div>
+        <div class="row">
+        	<a href="findPw2">비밀번호가 기억나지 않습니다.(링크 방식)</a>
+        </div>
     </div>
     </form>
 <%--error라는 이름의 파라미터가 있으면 오류 메세지를 출력 --%>
