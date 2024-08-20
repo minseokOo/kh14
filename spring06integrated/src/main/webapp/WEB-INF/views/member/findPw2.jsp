@@ -6,7 +6,7 @@
 	<div class= "row center">
 		<h1>비밀번호 찾기</h1>
 	</div>
-	<form action= "findPw" method="post">
+	<form action= "findPw2" method="post">
 	<div class="row">
 		<label>아이디</label>
 		<input type="text" name= "memberId" class="field w-100">
@@ -16,7 +16,7 @@
 		<input type="email" name="memberEmail" class="field w-100">
 	</div>
 	<div class="row">
-		<button type="submit" class="btn btn-positive">임시 비밀번호 발행</button>
+		<button type="submit" class="btn btn-positive w-100">임시 비밀번호 발행</button>
 	</div>
 	</form>
 

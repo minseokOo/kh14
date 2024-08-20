@@ -48,7 +48,90 @@
 
 	}
 </script>
+<script type="text/javascript">
+       $(function(){
+        //이메일 인증 관련 처리
+        var certEmail;
 
+        $(".btn-cert-send").click(function(){
+            //step 1 - 작성한 이메일을 불러온다
+            var email = $("[name = memberEmail]").val();
+
+            //step 2 - 작성한 이메일이 없으면 중단
+            if(email.length == 0) return;
+
+            //step 3 - 서버로 이메일 발송을 요청(ajax)
+            // - 통신 시작과 종료 시점을 찾아 버튼을 비활성화 처리
+            $.ajax({
+                url:"http://localhost:8080/rest/cert/send",
+                method:"post",
+                data:{certEmail : email},
+                beforeSend: function(){
+                    console.log("전송 전");
+                    $(".email-wrapper").nextAll(".cert-wrapper").remove();
+                    $(".btn-cert-send").prop("disabled", true);
+                    $(".btn-cert-send").find(".fa-solid").removeClass("fa-paper-plane").addClass("fa-spinner fa-spin");
+                    $(".btn-cert-send").find("span").text("발송중");
+                },
+                complete:function(){
+                    console.log("전송 후");
+                    $(".btn-cert-send").prop("disabled", false);
+                    $(".btn-cert-send").find(".fa-solid").removeClass("fa-spinner fa-spin").addClass("fa-paper-plane");
+                    $(".btn-cert-send").find("span").text("보내기");
+                },
+                success:function(response){
+                    //성공 시점의 이메일을 저장
+                    certEmail = email;
+
+                    //인증번호 템플릿을 이메일 입력창 뒤에 추가
+                    var template = $("#cert-template").text();
+                    var html = $.parseHTML(template);
+                    $(".email-wrapper").after(html);
+                },
+            });
+        });
+
+        //인증 확인 버튼에 대한 이벤트
+        $(document).on("click", ".btn-cert-check", function(){
+            var currentEmail = $("[name=memberEmail]").val();
+            if(certEmail != currentEmail){
+                window.alert("이메일을 다시 입력해주세요.");
+                $(".cert-wrapper").remove();
+                return;
+            }
+            var certNumber = $(".cert-input").val();
+            var regex = /^[0-9]{6}$/;
+            if(regex.test(certNumber) == false){//인증번호가 형식에 맞지 않으면
+                return; //진행 중지
+            }
+
+            //서버에 검사를 요청
+            $.ajax({
+                url:"http://localhost:8080/rest/cert/check",
+                method:"post",
+                data: {
+                    certEmail : certEmail,
+                    certNumber : certNumber,
+                },
+                success:function(response){
+                    if(response == true){ //인증 성공 - 화면을 제거 + 인증 버튼 제거
+                        $(".cert-wrapper").remove();
+                        //(선택) 이메일 잠금처리 및 보내기 버튼 삭제
+                        $("[name=memberEmail]").prop("readonly", true);
+                        $(".btn-cert-send").remove();
+                        //상태 객체 값을 갱신
+                    }
+                    else{
+                        $(".cert-input").removeClass("success fail").addClass("fail");
+                        //상태 객체 값을 갱신
+                    }
+                    //성공시점의 이메일을 저장
+                    console.log("response", response);
+                },
+            });
+        });
+       });
+    </script>
 <!-- 인증번호 템플릿 -->
 <script type="text/template" id="cert-template">
         <div class="flex-box mt-10 cert-wrapper">

@@ -121,6 +121,55 @@
 </form>
 </div>
 
+<style>
+.modal {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 20px;
+	z-index: 99999;
+}
+</style>
+
+<script type="text/javascript">
+	$(function(){
+		//모달 닫기 버튼 처리
+		$(".modal-close-btn").click(function(e){
+			e.preventDefault();
+			$(this).parents(".modal").remove();
+		});
+		$(".modal-close-day").click(function(e){
+			e.preventDefault();
+			$(this).parents(".modal").remove();
+		});
+	});
+</script>
+
+<div class="modal">
+	<div class="container w-400">
+		<div class="row center">
+			<h1>광고</h1>
+		</div>
+		<div class="row">
+			<h3>포켓몬스터 축제가 열립니다!</h3>
+			<p>궁금하면 연락주세요!</p>
+			<p>010-XXXX-XXXX</p>
+		</div>
+		<div class="flex-box">
+		<div class="w-50">
+		<a href="#" class="link link-animation modal-close-day">오늘 하루 안보기</a>
+		</div>
+		<div class="w-50 right" style="flex-grow">
+			<a href="#" class="link link-animation modal-close-btn">닫기</a>
+		</div>
+		</div>
+		
+	</div>
+
+</div>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 <%-- 	<h3>${dto.poketmonName} / ${dto.poketmonType}</h3> --%>

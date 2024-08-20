@@ -40,4 +40,10 @@ public class CertDao {
 		return list.size() > 0;
 		
 	}
+	//유효시간이 지난 인증번호를 삭제하도록 구현
+		public boolean clean(int minute) {
+			String sql = "delete cert where cert_time < sysdate-?/24/60";
+			Object[] data = {minute};
+			return jdbcTemplate.update(sql, data) > 0;
+		}
 }
