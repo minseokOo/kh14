@@ -70,6 +70,11 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- SHA 암호화를 위한 라이브러리 -->
+		<dependency>
+    		<groupId>commons-codec</groupId>
+    		<artifactId>commons-codec</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
