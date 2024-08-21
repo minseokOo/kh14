@@ -84,7 +84,7 @@ public class PoketmonController {
 	public String list(Model model, @RequestParam(required = false) String column,
 			@RequestParam(required = false) String keyword, 
 			@RequestParam(required = false) String visitPoketmon,
-			HttpSession session, HttpServletResponse response) {
+			HttpSession session) {
 		boolean isSearch = column != null && keyword != null;
 
 		List<PoketmonDto> list = isSearch ? poketmonDao.selectList(column, keyword) : poketmonDao.selectList();
@@ -93,15 +93,6 @@ public class PoketmonController {
 		model.addAttribute("keyword", keyword);// 검색어
 		model.addAttribute("list", list);
 
-		if (visitPoketmon != null) {
-			long term = System.currentTimeMillis() - Long.parseLong(visitPoketmon);
-			boolean modalPeriod = term > 24L * 60 * 60 * 1000;
-			model.addAttribute("modalPeriod", modalPeriod);
-		}
-		long current = System.currentTimeMillis();
-		Cookie ck = new Cookie("visitPoketmon", String.valueOf(current));
-		ck.setMaxAge(Integer.MAX_VALUE);
-		response.addCookie(ck);
 		return "/WEB-INF/views/poketmon/list.jsp";
 
 	}

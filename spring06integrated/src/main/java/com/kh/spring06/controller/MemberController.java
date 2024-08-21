@@ -114,6 +114,7 @@ public class MemberController {
 		if(isBlock) return "redirect:block";
 				
 		//4
+		System.out.println("로그인 성공 : " + memberId);
 		//session.setAttribute("이름", 값);
 		session.setAttribute("createdUser", memberId);
 		session.setAttribute("createdLevel", memberDto.getMemberLevel());
@@ -155,6 +156,7 @@ public class MemberController {
 	public String mypage(HttpSession session, Model model) {
 		String createdUser = (String) session.getAttribute("createdUser");
 		MemberDto memberDto = memberDao.selectOne(createdUser);
+		System.out.println("mypage = " + createdUser);
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("blockList", blockDao.selectList(createdUser));
 		return "/WEB-INF/views/member/mypage.jsp";
@@ -259,6 +261,7 @@ public class MemberController {
 	public String myImage(HttpSession session) {
 		try {
 		String memberId = (String) session.getAttribute("createdUser");
+		
 		int attachmentNo = memberDao.findImage(memberId);
 		return "redirect:/attach/download?attachmentNo="  + attachmentNo;
 		}
