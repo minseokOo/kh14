@@ -19,6 +19,10 @@ import com.kh.spring06.dao.PoketmonDao;
 import com.kh.spring06.dto.PoketmonDto;
 import com.kh.spring06.service.AttachmentService;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/poketmon")
 public class PoketmonController {
@@ -78,7 +82,9 @@ public class PoketmonController {
 	// - DB 조회한 결과를 화면에 전달한 뒤 출력 (Model 필요)
 	@RequestMapping("/list")
 	public String list(Model model, @RequestParam(required = false) String column,
-			@RequestParam(required = false) String keyword) {
+			@RequestParam(required = false) String keyword, 
+			@RequestParam(required = false) String visitPoketmon,
+			HttpSession session) {
 		boolean isSearch = column != null && keyword != null;
 
 		List<PoketmonDto> list = isSearch ? poketmonDao.selectList(column, keyword) : poketmonDao.selectList();
@@ -86,6 +92,7 @@ public class PoketmonController {
 		model.addAttribute("column", column);// 검색분류
 		model.addAttribute("keyword", keyword);// 검색어
 		model.addAttribute("list", list);
+
 		return "/WEB-INF/views/poketmon/list.jsp";
 
 	}
@@ -153,4 +160,5 @@ public class PoketmonController {
 			return "redirect:https://placehold.co/150";
 		}
 	}
+
 }

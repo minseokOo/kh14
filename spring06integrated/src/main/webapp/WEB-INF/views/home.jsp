@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- header.jsp에 존재하는 내용을 불러오도록 설정 -->
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <div class="container w-1000" style="height=400">
@@ -8,6 +8,7 @@
 			<h1>홈페이지에 오신것을 환영합니다.</h1>
 		</div>
 <style>
+	
         * {
     margin: 0;
     padding: 0;
@@ -126,7 +127,48 @@
     z-index: 9999; /* 다른 아이템들 위에 표시 */
 }
     </style>	
-    
+		<c:if test="${isLongTimeNoSee}">
+<style>
+.modal{
+		position:fixed;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		background-color: white;
+		padding:20px;
+		z-index: 99999;
+	}
+
+</style>	
+
+<script type="text/javascript">
+	$(function(){
+		//모달 닫기 버튼 처리
+		$(".modal-close-btn").click(function(e){
+			e.preventDefault();//기본 이벤트 차단
+			$(this).parents(".modal").remove();
+		});
+	});
+</script>
+
+
+<!-- 오랫만에 방문했을 경우 표시할 모달(modal)을 생성 -->
+<div class="modal">
+	<div class="container w-400">
+		<div class="row center">
+			<h1>왜 이렇게 오랜만에 왔어</h1>
+		</div>
+		<div class="row center">
+			와줘서 고마워
+		</div>
+		<div class="row right">
+			<a href="#" class="link link-animation modal-close-btn">닫기</a>
+		</div>
+	</div>
+</div>
+		</c:if>
+
+
 <div class="row" style="height: 200px">
 
         <div class="row items flex-core">
@@ -142,6 +184,7 @@
           </div>
           </div>
 </div>		
+
 <!-- 			<img src="https://placehold.co/700x400"width="700"height="400"> -->
 	
 <!-- footer.jsp에 존재하는 내용을 불러오도록 설정 -->

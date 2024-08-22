@@ -62,6 +62,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 								"/member/goodbye", //탈퇴완료 페이지
 								"/member/block", //차단 페이지
 								"/member/image",	//회원 이미지 페이지
+								"/member/findPw*",
+								"/member/findPw2*",
+								"/member/resetPw*",
 								"/rest/board/check", //좋아요 확인 페이지
 								"/rest/reply/list", //댓글목록
 								"/rest/reply/list/paging"//댓글목록(+페이징)

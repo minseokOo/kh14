@@ -5,6 +5,9 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.kh.spring09.dao.CertDao;
+import com.kh.spring09.dto.CertDto;
+
 @Service
 public class EmailService {
 
@@ -13,6 +16,9 @@ public class EmailService {
 	
 	@Autowired
 	private RandomService randomService;
+	
+	@Autowired
+	private CertDao certDao;
 	
 	//인증 메일 발송 서비스
 	public void sendCert(String email){
@@ -27,6 +33,13 @@ public class EmailService {
 		
 		//전송
 		sender.send(message);
+		
+		//DB 기록 남기기
+		certDao.delete(email);
+		CertDto certDto = new CertDto();
+		certDto.setCertEmail(email);
+		certDto.setCertNumber(value);
+		certDao.insert(certDto);
 	}
 	
 }

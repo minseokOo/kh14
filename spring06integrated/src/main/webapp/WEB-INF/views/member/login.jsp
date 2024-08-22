@@ -61,15 +61,44 @@
 <div class="row center">
     <h1>로그인</h1>
 </div>
-        <div class="row center">
-            <input class="field" type="text" name="memberId" required placeholder= "아이디">
+        <div class="row ">
+        	<label>아이디</label>
+        	
+        	<%--
+        	JSP에서는 EL을 이용하여 쿠키에 접근할 수 있다. 
+        	key에 대한 접근은 ${cookie.쿠키명.name},
+        	value에 대한 접근은 ${cookie.쿠키명.value}으로 접근 가능
+        	
+        	--%>
+            <input class="field" type="text" name="memberId"  value="${cookie.saveId.value}">
         </div>
-        <div class="row center">
-            <input class="field" type="password" name="memberPw"  required placeholder="비밀번호">
+        <div class="row">
+        	<label>비밀번호</label>
+            <input class="field" type="password" name="memberPw" >
         </div>
-        <hr>
+
+		<%--
+			쿠키를 이용한 아이디 저장하기 체크박스 구현
+			- saveId라는 쿠키 유무에 따라 체크 상태가 달라야한다.
+			- 로그인 시 아이디 저장하기에 체크를 했는지 여부를 백엔드에서 알 수 있어야 한다.
+			- 즉, 체크박스 값도 전송이 되어야 한다. (name과 value를 부여)
+		 --%>
+		<div class="row">
+			<label>
+				<input type="checkbox" name="remember" 
+					<c:if test="${cookie.saveId != null}">checked</c:if>>
+				<span>아이디 저장하기</span>
+			</label>
+		</div>
+
         <div class="row center">
             <button class="btn btn-positive w-100 center">로그인</button>
+        </div>
+        <div class="row">
+        	<a href="findPw">비밀번호가 기억나지 않습니다.(임시 비밀번호 방식)</a>
+        </div>
+        <div class="row">
+        	<a href="findPw2">비밀번호가 기억나지 않습니다.(링크 방식)</a>
         </div>
     </div>
     </form>
