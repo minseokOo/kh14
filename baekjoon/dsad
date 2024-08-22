@@ -1,0 +1,295 @@
+CREATE TABLE orders (
+	orders_no	number		NOT NULL,
+	orders_member_id	varchar2(20)		NOT NULL,
+	orders_cart_no	number		NOT NULL,
+	orders_price	number	DEFAULT 0	NOT NULL,
+	orders_day	Date	DEFAULT sysdate	NOT NULL,
+	orders_status	varchar2(12)		NOT NULL
+);
+
+COMMENT ON COLUMN orders.orders_no IS 'primary key';
+
+COMMENT ON COLUMN orders.orders_member_id IS '회원 member 테이블에 member_id 외래키
+
+on delete cascade 추가';
+
+COMMENT ON COLUMN orders.orders_cart_no IS '기본키
+on delete cascade';
+
+COMMENT ON COLUMN orders.orders_price IS 'not null
+기본 0';
+
+COMMENT ON COLUMN orders.orders_day IS '기본 sysdate not null';
+
+COMMENT ON COLUMN orders.orders_status IS 'not null';
+
+CREATE TABLE item (
+	item_no	number		NULL,
+	cate_no	number		NULL,
+	item_name	varchar2(300)		NOT NULL,
+	item_price	number		NOT NULL,
+	item_sale_price	number		NOT NULL,
+	item_date	Date	DEFAULT sysdate	NOT NULL,
+	item_cnt	number	DEFAULT 1	NULL,
+	item_size	varchar2(3)		NOT NULL
+);
+
+COMMENT ON COLUMN item.item_no IS '기본키';
+
+COMMENT ON COLUMN item.cate_no IS '필수입력항목';
+
+COMMENT ON COLUMN item.item_name IS '필수입력항목';
+
+COMMENT ON COLUMN item.item_price IS '필수입력항목
+미입력시 최소 값 0원 이상';
+
+COMMENT ON COLUMN item.item_sale_price IS '필수입력항목
+미입력시 최소 값 0원 이상';
+
+COMMENT ON COLUMN item.item_date IS '필수입력항목
+미입력시 현재시각으로 설정';
+
+COMMENT ON COLUMN item.item_cnt IS '미입력 시 최소 값 1개 이상';
+
+COMMENT ON COLUMN item.item_size IS '필수(not null)
+사이즈(S, M, L, XL)';
+
+CREATE TABLE category (
+	cate_no	number		NULL,
+	cate_no2	number		NULL,
+	cate_name	varchar2(30)		NOT NULL
+);
+
+COMMENT ON COLUMN category.cate_no IS '기본키';
+
+COMMENT ON COLUMN category.cate_no2 IS '필수입력항목';
+
+COMMENT ON COLUMN category.cate_name IS '중복불가
+필수입력항목';
+
+CREATE TABLE order_detail (
+	order_detail_no	number		NOT NULL,
+	order_detail_item_no	number		NOT NULL,
+	order_detail_order_no	number		NOT NULL,
+	order_detail_price	number		NOT NULL,
+	order_detail_cnt	number	DEFAULT 1	NOT NULL
+);
+
+COMMENT ON COLUMN order_detail.order_detail_no IS 'primary key';
+
+COMMENT ON COLUMN order_detail.order_detail_item_no IS '상품  item 테이블  상품번호 item_no 외래키
+on delete cascade 붙이기';
+
+COMMENT ON COLUMN order_detail.order_detail_order_no IS '주문 order 테이블 order_no 왜래키
+on delete cascade 붙이기';
+
+COMMENT ON COLUMN order_detail.order_detail_price IS '가격은 0 이상  not null';
+
+COMMENT ON COLUMN order_detail.order_detail_cnt IS '기본 1 ( > 0)  not null';
+
+CREATE TABLE member (
+	member_id	varchar2(20)		NOT NULL,
+	member_pw	varchar2(16)		NULL,
+	member_name	varchar2(21)		NOT NULL,
+	member_nickname	varchar2(30)		NOT NULL,
+	member_block	char(1)		NULL,
+	member_rank	varchar2(12)	DEFAULT '일반회원'	NOT NULL,
+	member_point	number	DEFAULT 0	NULL,
+	member_join	date	DEFAULT sysdate	NULL,
+	member_login	date		NULL,
+	member_post	number		NOT NULL,
+	member_address1	varchar2(300)		NOT NULL,
+	member_address2	varchar2(300)		NOT NULL,
+	member_height	number		NULL,
+	member_weight	number		NULL
+);
+
+COMMENT ON COLUMN member.member_id IS '기본키';
+
+COMMENT ON COLUMN member.member_pw IS '필수입력항목';
+
+COMMENT ON COLUMN member.member_name IS '필수입력항목';
+
+COMMENT ON COLUMN member.member_nickname IS '필수입력항목
+한글,숫자,영어(대소문자) 가능
+중복불가(unique)';
+
+COMMENT ON COLUMN member.member_rank IS '필수입력항목
+'일반회원', '우수회원', '관리자'로 구분
+미입력시 '일반회원'';
+
+COMMENT ON COLUMN member.member_point IS '필수입력항목
+미입력시 기본값 0
+포인트는 0 이상';
+
+COMMENT ON COLUMN member.member_join IS '필수입력항목
+미입력시 현재시각으로 설정';
+
+COMMENT ON COLUMN member.member_post IS '필수입력항목
+숫자 5-6글자';
+
+COMMENT ON COLUMN member.member_address1 IS '필수입력항목';
+
+COMMENT ON COLUMN member.member_address2 IS '필수입력항목';
+
+COMMENT ON COLUMN member.member_height IS '선택항목';
+
+COMMENT ON COLUMN member.member_weight IS '선택항목';
+
+CREATE TABLE cart (
+	cart_no	number		NOT NULL,
+	cart_item_no	number		NULL,
+	cart_count	number	DEFAULT 1	NOT NULL,
+	item_attach_no	number		NOT NULL,
+	cart_total_price	number		NOT NULL
+);
+
+COMMENT ON COLUMN cart.cart_no IS '기본키';
+
+COMMENT ON COLUMN cart.cart_item_no IS '기본키
+on delete cascade';
+
+COMMENT ON COLUMN cart.cart_count IS '필수입력항목
+1이상';
+
+COMMENT ON COLUMN cart.item_attach_no IS '필수 입력항목';
+
+COMMENT ON COLUMN cart.cart_total_price IS 'not null
+0 이하 금액 불가';
+
+CREATE TABLE attach (
+	attach_no	number		NULL,
+	attach_name	varchar2(255)		NOT NULL,
+	attach_type	varchar2(90)		NOT NULL,
+	arrach_size	number		NOT NULL
+);
+
+COMMENT ON COLUMN attach.attach_no IS '기본키';
+
+COMMENT ON COLUMN attach.attach_name IS '필수입력항목
+unique';
+
+COMMENT ON COLUMN attach.attach_type IS '필수입력항목';
+
+COMMENT ON COLUMN attach.arrach_size IS '필수입력항목';
+
+CREATE TABLE image (
+	item_no	number		NULL,
+	attach_no	number		NULL
+);
+
+COMMENT ON COLUMN image.item_no IS '필수입력항목';
+
+COMMENT ON COLUMN image.attach_no IS '필수입력항목';
+
+CREATE TABLE block (
+	block_no	number		NOT NULL,
+	block_member_id	varchar2(20)		NOT NULL,
+	block_type	char(6)		NOT NULL,
+	block_memo	varchar2(300)		NOT NULL,
+	block_time	date	DEFAULT sysdate	NOT NULL
+);
+
+COMMENT ON COLUMN block.block_no IS '기본키';
+
+COMMENT ON COLUMN block.block_member_id IS '회원 탈퇴시  차단내역에서도 삭제';
+
+COMMENT ON COLUMN block.block_type IS '필수입력항목
+'차단,' 해제'로 구분';
+
+COMMENT ON COLUMN block.block_memo IS '필수입력항목';
+
+COMMENT ON COLUMN block.block_time IS '필수입력항목
+미입력시 현재시각으로 설정';
+
+CREATE TABLE refund (
+	refund_order_no	number		NOT NULL,
+	refund_memo	varchar2(300)		NOT NULL,
+	refund_date	date		NOT NULL
+);
+
+COMMENT ON COLUMN refund.refund_order_no IS 'primary key';
+
+COMMENT ON COLUMN refund.refund_date IS '필수입력항목
+미입력시 현재 시각으로 설정';
+
+CREATE TABLE qna (
+	qna_no	number		NOT NULL,
+	qna_writer	varchar2(20)		NOT NULL,
+	qna_title	varchar2(90)		NOT NULL,
+	qna_content	varchar2(3000)		NOT NULL,
+	qna_time	date	DEFAULT sysdate	NOT NULL
+);
+
+COMMENT ON COLUMN qna.qna_no IS '기본키';
+
+COMMENT ON COLUMN qna.qna_writer IS '외래키
+작성자가 탈퇴시 on delete cascade';
+
+COMMENT ON COLUMN qna.qna_title IS '필수 입력';
+
+COMMENT ON COLUMN qna.qna_content IS '필수입력';
+
+CREATE TABLE review (
+	review_no	number		NOT NULL,
+	review_item_no	number		NULL,
+	review_writer	varchar2(20)		NOT NULL,
+	review_content	varchar2(1500)		NOT NULL,
+	review_score	number		NOT NULL
+);
+
+COMMENT ON COLUMN review.review_item_no IS '기본키';
+
+COMMENT ON COLUMN review.review_writer IS '기본키';
+
+COMMENT ON COLUMN review.review_content IS '필수입력항목';
+
+COMMENT ON COLUMN review.review_score IS '필수 입력항목';
+
+CREATE TABLE review_image (
+	review_no	number		NOT NULL,
+	attach_no	number		NULL
+);
+
+COMMENT ON COLUMN review_image.attach_no IS '기본키';
+
+ALTER TABLE orders ADD CONSTRAINT PK_ORDERS PRIMARY KEY (
+	orders_no
+);
+
+ALTER TABLE item ADD CONSTRAINT PK_ITEM PRIMARY KEY (
+	item_no
+);
+
+ALTER TABLE category ADD CONSTRAINT PK_CATEGORY PRIMARY KEY (
+	cate_no
+);
+
+ALTER TABLE order_detail ADD CONSTRAINT PK_ORDER_DETAIL PRIMARY KEY (
+	order_detail_no
+);
+
+ALTER TABLE member ADD CONSTRAINT PK_MEMBER PRIMARY KEY (
+	member_id
+);
+
+ALTER TABLE cart ADD CONSTRAINT PK_CART PRIMARY KEY (
+	cart_no
+);
+
+ALTER TABLE attach ADD CONSTRAINT PK_ATTACH PRIMARY KEY (
+	attach_no
+);
+
+ALTER TABLE block ADD CONSTRAINT PK_BLOCK PRIMARY KEY (
+	block_no
+);
+
+ALTER TABLE qna ADD CONSTRAINT PK_QNA PRIMARY KEY (
+	qna_no
+);
+
+ALTER TABLE review ADD CONSTRAINT PK_REVIEW PRIMARY KEY (
+	review_no
+);
+

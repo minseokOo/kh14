@@ -1,0 +1,633 @@
+@charset "UTF-8";
+
+
+/*
+    앞으로 자주 사용할 디자인 코드들을 보관해두는 파일
+*/
+
+
+/*
+    모든 태그에 폭 설정 기준을 "테두리"로 지정
+*/
+*{
+    box-sizing: border-box;
+}
+
+/*
+    화면을 만들기 위한 컨테이너(container)와 행(row)에 대한 디자인
+    - 컨테이너는 가운데 정렬 되도록 구현
+    - 폭은 다른 클래스로 지정하도록 구현
+*/
+
+.container {
+    /* 좌우 여백을 자동으로 설정하여 가운데 정렬 */
+    margin-left: auto;
+    margin-right: auto;
+}
+.row{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/*
+    내용물 정렬과 관련된 클래스
+    주로 row에 추가하여 내부 요소들을 정렬할 때 사용
+    (TMI)
+    - left, right는 차별적인 단어라서 사용을 자제
+    - left 대신 start를 사용
+    - right 대신 end를 사용
+*/
+.left{
+    text-align: left !important;
+}
+.center {
+    text-align: center !important;
+}
+.right {
+    text-align: right !important;
+}
+
+.field{
+    font-size: 16px;
+    padding: 0.5em 0.75em;
+    outline: none; /* 브라우저에서 제공하는 자동 강조효과 제거 */
+    border: 1px solid rgb(129, 129, 129);
+    border-radius: 0.1em;
+    line-height: 1.2;
+}
+.field:not(textarea), 
+.btn { /* class=field 중에서 textarea 빼고 선택 */
+    height: 2.5em !important;
+    vertical-align: middle;
+}
+.field:focus { /* focus : 선택하여 커서가 위치할 때만 적용되는 스타일*/
+    border-color: rgb(39, 39, 39);
+}
+/* textarea는 크기 변경이 수직으로만 가능하도록 구현 */
+textarea.field {
+    resize: vertical;
+    min-height: 120px;
+}
+/*
+입력창 확장 클래스 (.field-underline)
+*/
+.field.field-underline{
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+/* 이미지가 있는 입력 필드 */
+.field.field-image {
+    background-size: 1em;
+    background-repeat: no-repeat;
+    background-position-x: 0.5em;
+    background-position-y: center;
+    padding-left: 2em;
+}
+
+ /*
+            폭을 제어하는 클래스
+            - 자주 사용하는 폭을 클래스로 미리 정의해서 사용하도록 구현
+            - 단위는 50px로 하고 최소 200px부터 1200px 사이로 구현
+            - w-??? 과 같은 클래스로 정의
+            - 비율로 설정할 수도 있도록 구현
+        */
+        .w-20 {width:20% !important;}
+        .w-25 {width:25% !important;}
+        .w-33 {width:33.3333% !important;}
+        .w-50 {width:50% !important;}
+        .w-66 {width:66% !important;}
+        .w-75 {width:75% !important;}
+        .w-80 {width:80% !important;}
+        .w-100 {width:100% !important;}
+
+        .w-200 {width: 200px !important;}
+        .w-250 {width: 250px !important;}
+        .w-300 {width: 300px !important;}
+        .w-350 {width: 350px !important;}
+        .w-400 {width: 400px !important;}
+        .w-450 {width: 450px !important;}
+        .w-500 {width: 500px !important;}
+        .w-550 {width: 550px !important;}
+        .w-600 {width: 600px !important;}
+        .w-650 {width: 650px !important;}
+        .w-700 {width: 700px !important;}
+        .w-750 {width: 750px !important;}
+        .w-800 {width: 800px !important;}
+        .w-850 {width: 850px !important;}
+        .w-900 {width: 900px !important;}
+        .w-950 {width: 950px !important;}
+        .w-1000 {width: 1000px !important;}
+        .w-1050 {width: 1050px !important;}
+        .w-1100 {width: 1100px !important;}
+        .w-1150 {width: 1150px !important;}
+        .w-1200 {width: 1200px !important;}
+
+        /*
+            여백 스타일 (margin, padding)
+            - 여백의 종류와 방향에 따라 단위별로 디자인을 미리 구현
+            - 방향의 종류 - top / bottom / start(left) / end(right) / x / y
+        */
+        .mt-0 {margin-top: 0px !important;}
+        .mt-10 {margin-top: 10px !important;}
+        .mt-20 {margin-top: 20px !important;}
+        .mt-30 {margin-top: 30px !important;}
+        .mt-40 {margin-top: 40px !important;}
+        .mt-50 {margin-top: 50px !important;}
+
+        .mb-0 {margin-bottom: 0px !important;}
+        .mb-10 {margin-bottom: 10px !important;}
+        .mb-20 {margin-bottom: 20px !important;}
+        .mb-30 {margin-bottom: 30px !important;}
+        .mb-40 {margin-bottom: 40px !important;}
+        .mb-50 {margin-bottom: 50px !important;}
+
+        .ms-0 {margin-left: 0px !important;}
+        .ms-10 {margin-left: 10px !important;}
+        .ms-20 {margin-left: 20px !important;}
+        .ms-30 {margin-left: 30px !important;}
+        .ms-40 {margin-left: 40px !important;}
+        .ms-50 {margin-left: 50px !important;}
+
+        .me-0 {margin-right: 0px !important;}
+        .me-10 {margin-right: 10px !important;}
+        .me-20 {margin-right: 20px !important;}
+        .me-30 {margin-right: 30px !important;}
+        .me-40 {margin-right: 40px !important;}
+        .me-50 {margin-right: 50px !important;}
+
+        .mx-0 {margin-left: 0px !important; margin-right: 0px !important;}
+        .mx-10 {margin-left: 10px !important; margin-right: 10px !important;}
+        .mx-20 {margin-left: 20px !important; margin-right: 20px !important;}
+        .mx-30 {margin-left: 30px !important; margin-right: 30px !important;}
+        .mx-40 {margin-left: 40px !important; margin-right: 40px !important;}
+        .mx-50 {margin-left: 50px !important; margin-right: 50px !important;}
+
+        .my-0 {margin-top: 0px !important; margin-bottom: 0px !important;}
+        .my-10 {margin-top: 10px !important; margin-bottom: 10px !important;}
+        .my-20 {margin-top: 20px !important; margin-bottom: 20px !important;}
+        .my-30 {margin-top: 30px !important; margin-bottom: 30px !important;}
+        .my-40 {margin-top: 40px !important; margin-bottom: 40px !important;}
+        .my-50 {margin-top: 50px !important; margin-bottom: 50px !important;}
+
+        .p-0 {padding: 0px !important;}
+        .p-10 {padding: 10px !important;}
+        .p-20 {padding: 20px !important;}
+        .p-30 {padding: 30px !important;}
+        .p-40 {padding: 40px !important;}
+        .p-50 {padding: 50px !important;}
+
+        .pt-0 {padding-top: 0px !important;}
+        .pt-10 {padding-top: 10px !important;}
+        .pt-20 {padding-top: 20px !important;}
+        .pt-30 {padding-top: 30px !important;}
+        .pt-40 {padding-top: 40px !important;}
+        .pt-50 {padding-top: 50px !important;}
+
+        .pb-0 {padding-bottom: 0px !important;}
+        .pb-10 {padding-bottom: 10px !important;}
+        .pb-20 {padding-bottom: 20px !important;}
+        .pb-30 {padding-bottom: 30px !important;}
+        .pb-40 {padding-bottom: 40px !important;}
+        .pb-50 {padding-bottom: 50px !important;}
+
+        .ps-0 {padding-left: 0px !important;}
+        .ps-10 {padding-left: 10px !important;}
+        .ps-20 {padding-left: 20px !important;}
+        .ps-30 {padding-left: 30px !important;}
+        .ps-40 {padding-left: 40px !important;}
+        .ps-50 {padding-left: 50px !important;}
+
+        .pe-0 {padding-right: 0px !important;}
+        .pe-10 {padding-right: 10px !important;}
+        .pe-20 {padding-right: 20px !important;}
+        .pe-30 {padding-right: 30px !important;}
+        .pe-40 {padding-right: 40px !important;}
+        .pe-50 {padding-right: 50px !important;}
+
+        .px-0 {padding-left: 0px !important; padding-right: 0px !important;}
+        .px-10 {padding-left: 10px !important; padding-right: 10px !important;}
+        .px-20 {padding-left: 20px !important; padding-right: 20px !important;}
+        .px-30 {padding-left: 30px !important; padding-right: 30px !important;}
+        .px-40 {margin-left: 40px !important; padding-right: 40px !important;}
+        .px-50 {padding-left: 50px !important; padding-right: 50px !important;}
+
+        .py-0 {padding-top: 0px !important; padding-bottom: 0px !important;}
+        .py-10 {padding-top: 10px !important; padding-bottom: 10px !important;}
+        .py-20 {padding-top: 20px !important; padding-bottom: 20px !important;}
+        .py-30 {padding-top: 30px !important; padding-bottom: 30px !important;}
+        .py-40 {padding-top: 40px !important; padding-bottom: 40px !important;}
+        .py-50 {padding-top: 50px !important; padding-bottom: 50px !important;}
+
+        
+        .btn:hover{
+            filter: brightness(120%);
+        }
+       
+        /* 긍정 버튼 디자인 */
+        .btn.btn-positive{
+            border-color: green;
+            background-color: rgb(8, 167, 114);
+            color: white;
+            line-height: 1.2;
+            padding: 0.5em 0.75em;
+        }
+        /* 부정 버튼 디자인 */
+        .btn.btn-negative{
+            border-color: rgb(139, 0, 0);
+            background-color: red;
+            color: white;
+            line-height: 1.2;
+            padding: 0.5em 0.75em;
+        }
+        /* 중립 버튼 디자인 */
+        .btn.btn-neutral{
+            border-color: #b2bec3;
+            background-color: #b2bec3;
+            color: white;
+            
+        }
+
+         /* 
+    테이블디자인 
+    - 테이블은 여러 태그가 조합된 형태
+    - 클래스를 하나만 붙이고 탐색하여 원하는 대상을 찾는다.
+    - 자식선택자, 후손선택자(띄어쓰기)를 사용
+    - 후손선택자는 안에 포함된 모든 대상 중에서 탐색하여 선택
+    - 자식선택자는 바로 아래 대상 중에서 선택
+    */
+    .table{
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 16px;
+    }
+    .table > thead > tr > th, 
+    .table > thead > tr > td, 
+    .table > tbody > tr > th,
+    .table > tbody > tr > td,
+    .table > tfoot > tr > th,
+    .table > tfoot > tr > td
+    {
+        text-align: center;
+        padding: 0.25em;
+    }
+
+    /*확장스타일 - 테두리가 있는 테이블 */
+    .table.table-border,
+    .table.table-border > thead > tr > th, 
+    .table.table-border > thead > tr > td, 
+    .table.table-border > tbody > tr > th,
+    .table.table-border > tbody > tr > td,
+    .table.table-border > tfoot > tr > th,
+    .table.table-border > tfoot > tr > td{
+        border: 1px solid black;
+    }
+    
+    /*확장스타일 - 줄무늬 테이블 */
+    .table.table-stripe > tbody > tr:nth-child(2n-1) {
+        background-color: rgb(223, 223, 255);
+    }
+    /* 확장스타일 - 마우스에 반응하는 테이블 */
+    .table.table-hover > tbody > tr:hover {
+        background-color: antiquewhite;
+    }
+    /* 확장스타일 - 가로선만 있는 테이블 */
+    .table.table-horizontal {
+        border-top: 3px solid black;
+        border-bottom: 3px solid black;
+    }
+    .table.table-horizontal > thead {
+        border-bottom: 1px solid black;
+    }
+    .table.table-horizontal > tfoot {
+        border-top: 1px solid black;
+    }
+    .pagination {
+        text-align: center;
+    }
+    .pagination > a {
+        color: #636e72;
+        text-decoration: none;
+        display: inline-block;
+
+        
+        padding: 0.5em;
+        min-width: 1.5em;
+        
+        font-size: inherit; /* 외부의 글자 크기를 따른다. */
+    }
+    .pagination > a:hover, /* 마우스가 올라간 경우 */
+    .pagination > a.on /* 활성화 된 경우 */
+    {
+        /* box-shadow : x위치 y위치 번짐 퍼짐 색상; */
+        box-shadow: 0px 0px 0px 1px rgb(206, 206, 206);
+        color: blueviolet;
+    }
+
+     /*
+            float 관련 스타일
+            가상 선택자(virtual selector) 
+            - 존재하지 않는 영역을 선택하여 디자인
+            - ::before는 태그의 가장 첫 지점을 의미
+            - ::after는 태그의 가장 마지막 지점을 의미
+
+        */
+        .float-box::after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .float-box > .float-left {
+            float:left;
+        }
+        .float-box > .float-right {
+            float:right;
+        }
+
+         /* flexible layout 스타일 */
+         .flex-box{
+            display: flex;
+            flex-wrap: nowrap;
+        }
+        .flex-box.column-2 > * {width: 50% !important;} 
+        .flex-box.column-3 > * {width: 33.3333% !important; }
+        .flex-box.column-4 > * { width: 25% !important; }
+
+        .flex-core {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        * {
+            word-break: break-all; /*글자 줄 바꿈*/
+        }
+         /* 
+        말줄임표 스타일
+        - (조건) 글자가 소속된 영역의 폭이 확정되어 있을 것! (폭이 늘어날 수 있으면 안됨)
+    */
+    .text-ellipsis{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .image {
+
+    }
+
+    .image.image-round{
+        border-radius: 5px;
+    }
+    .image.image-circle{
+        border-radius: 50%;
+    }
+    .image.image-shadow{
+        /*box-shadow : x y blur spread color*/
+        box-shadow: 2px 2px 2px 1px black;
+    }
+    .image.image-lift{
+        box-shadow: 0 0 5px 1px black
+    }
+    .image.image-blur{
+        filter: blur(5px);
+    }
+    .image.image-blur.image-hover:hover{
+        filter: blur(0px);
+        transition: 1s;
+    }
+    .image.image-grayscale{
+        filter: grayscale(100%);
+    }
+    .image.image-grayscale.image-hover:hover{
+        filter: grayscale(0%);
+        transition: 1s;
+    }
+    .image.image-fade{
+        opacity: 0.1;
+    }
+    .image.image-fade.image-hover:hover{
+    opacity: 1;
+    transition: 2s;
+    }
+    .image.image-scale {
+        transition: transform 0.2s linear;
+    }
+    .image.image-scale.image-hover:hover {
+        transform: scale(1.5);
+        box-shadow: 0 0 5px 1px black;
+    }
+    .image.image-scale2{
+        overflow: hidden;
+    }
+    .image.image-scale2 > img {
+        transition: transform 0.2s linear;
+        transform: scale(1);
+        width: 100%;
+        height: 100%;
+    }
+    .image.image-scale2.image-hover > img:hover {
+        transform: scale(1.5);
+    }
+    .link {
+        color: #2d3436;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .link:hover {
+        filter: brightness(150%);
+    }
+    .link.link-animation {
+        /* transition : 항목 시간 타이밍 */
+        transition: transform 0.1s ease-out;
+    }
+    .link.link-animation:hover {
+        transform: scale(1.02);
+    }
+    /* 화면 보호기 */
+    .screen-wrapper {
+        /* background-color: rgba(0, 0, 0, 0.3); */
+        background-color: black;
+        opacity: 0.3;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        z-index: 9999;
+    }
+
+    /* 체크박스 */
+    /* 사이드 바 */
+    #ck-sidebar{
+        display: none;
+    }
+    #ck-sidebar + .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 200px;
+        background-color: lightblue;
+        z-index: 9998;
+        transition: transform 0.2s ease-out;
+    }
+    #ck-sidebar:checked +.sidebar {
+        /* margin-left: -200px; */
+        transform: translate(-100%, 0);
+    }
+    .sidebar-toggle{
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 9999;
+        background-color: lightblue;
+        cursor: pointer;
+        padding: 0.5em;
+        box-shadow: 0 0 1px 1px black;
+    }
+    /*
+            메뉴와 같은 계층형(tree) 구조는 ul 또는 ol 로 구현한다 (리스트 태그)
+            1. 태그에 존재하는 기본 여백과 모양을 제거(리셋)
+            2. 1차 메뉴의 배치를 가로로 변경
+            3. 메뉴별 크기를 지정하고 a태그를 영역에 꽉 채우도록 설정
+            4. (중요) 1차메뉴항목을 기준으로 2차메뉴항목 위치가 정해지도록 구현(2차 이상도 마찬가지)
+            5. 하위메뉴(2차이상)을 숨김 처리하고 항목에 마우스가 올라가면 하위메뉴를 표시
+            6. 1차메뉴 중에서 오른쪽에 배치되는 메뉴를 처리하도록 구현
+                - 오른쪽 메뉴 항목 중 가장 왼쪽 항목에 margin-left를 auto로 부여
+            7. 3차메뉴 이상부터는 좌/우로 펼쳐지도록 구현
+            8. 배경색상 및 hover 상태 색상 설정
+            9. 홈페이지에 적용
+        */
+
+        /* 1 */
+        .menu,      /*1차메뉴*/
+        .menu ul    /*2차메뉴이상*/
+        {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .menu a /* 메뉴안의 모든 a태그 */
+        {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* 2 */
+        .menu {
+            display: flex;
+        }
+
+        /* 3 */
+        .menu li /* 메뉴안에 있는 모든 항목 */
+        {
+            width: 120px;
+        }
+        .menu a /* 메뉴안에 있는 모든 a태그 */
+        {
+            display: block;
+            width: 100%;
+            padding: 0.5em;
+            text-align: center;
+        }
+
+        /* 4 */
+        .menu li /* 모든 메뉴의 항목 */
+        {
+            position: relative;
+        }
+        .menu ul /* 2차 이상 메뉴 */
+        {
+            position: absolute;
+            top:100%;
+            left:0;
+        }
+
+        /* 5 */
+        .menu ul {
+            display: none;
+        }
+        .menu li:hover > ul /* 모든 항목에 마우스가 올라가면 바로아래 메뉴 */
+        {
+            display: block;
+        }
+        
+        /* 6 */
+        .right-menu {
+            margin-left: auto;
+        }
+
+        /* 7 */
+        .menu > li > ul ul /* 3차 이상의 모든 메뉴 */
+        {
+            top: 0;
+            left: 100%;
+        }
+        .menu > li.right-menu > ul ul, 
+        .menu > li.right-menu ~ li > ul ul/* 3차 이상의 오른쪽 메뉴 */
+        {
+            top: 0;
+            left: -100%;
+        }
+
+        /* 색상 관련 스타일 */
+.blue { color:#0984e3 !important; }
+.red { color:#d63031 !important; }
+.black { color:#2d3436 !important; }
+.gray { color:#b2bec3 !important; }
+.white { color:white !important; }
+.green { color:#00b894 !important; }
+.orange { color:#e17055 !important; }
+.purple { color:#6c5ce7 !important; }
+.yellow { color:#fdcb6e !important; }
+
+/* 
+            입력창 피드백 디자인
+            - 입력창이 success가 되면 .success-feedback을 표시
+            - 입력창이 .fail이 되면 .fail-feedback을 표시
+            - 실패와 관련된 클래스를 증가 (.fail / .fail2 / .fail3)
+            - 그에 따른 피드백을 추가
+        */
+        .success-feedback{
+            color: green;
+        }
+        .fail-feedback,
+        .fail2-feedback,
+        .fail3-feedback
+        {
+            color: red;
+        }
+        .success{
+            border-color: green;
+        }
+        .fail, .fail2, .fail3{
+            border-color:red;
+        }
+        .success-feedback, 
+        .fail-feedback,
+        .fail2-feedback,
+        .fail3-feedback
+        {
+            display: none;
+        }
+        .success ~ .success-feedback, /* .success 뒤에 있는 피드백 */
+        .fail ~ .fail-feedback, /* .fail 뒤에 있는 피드백 */
+        .fail2 ~ .fail2-feedback, /* .fail 뒤에 있는 피드백 */
+        .fail3 ~ .fail3-feedback /* .fail 뒤에 있는 피드백 */
+        {
+            display: block;
+        }
+
+        /* 프로그레스바(progressbar) 디자인 */
+.progressbar {
+
+}        
+.progressbar > .guage {
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    width: 0%;
+    height: 5px;
+    transition: width 0.1s linear;
+}
