@@ -57,7 +57,7 @@
 }
 .field:not(textarea), 
 .btn { /* class=field 중에서 textarea 빼고 선택 */
-    height: 2.5em !important;
+    
     vertical-align: middle;
 }
 .field:focus { /* focus : 선택하여 커서가 위치할 때만 적용되는 스타일*/
