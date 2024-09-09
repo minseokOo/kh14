@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Category Select</title>
+    <style>
+        .field { width: 10em; }
+        .row { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <h3>카테고리</h3>
+        <select name="itemCate1" id="cate1-select" class="field">
+            <option value="">상위 카테고리 선택</option>
+            <option value="11">상의</option>
+            <option value="33">하의</option>
+            <option value="55">신발</option>
+            <option value="77">아우터</option>
+        </select>
+    </div>
+    <div class="row">
+        <select name="itemCate2" id="cate2-select" class="field">
+            <option value="">하위 카테고리 선택</option>
+        </select>
+    </div>
+    <div class="row">
+        <select name="itemCate3" id="cate3-select" class="field">
+            <option value="">세부 카테고리 선택</option>
+        </select>
+    </div>
+
+    <script>
+        const cate2Options = {
+            11: [
+                { value: "", text: "---상의---" },
+                { value: "10", text: "티셔츠" },
+                { value: "11", text: "셔츠" }
+            ],
+            33: [
+                { value: "", text: "---하의---" },
+                { value: "30", text: "슬랙스" },
+                { value: "31", text: "데님" },
+                { value: "32", text: "트레이닝" },
+                { value: "33", text: "반바지" }
+            ],
+            55: [
+                { value: "", text: "---신발---" },
+                { value: "50", text: "스니커즈" },
+                { value: "51", text: "로퍼/슬립온" },
+                { value: "52", text: "구두" },
+                { value: "53", text: "워커/부츠" },
+                { value: "54", text: "샌들/슬리퍼" },
+                { value: "55", text: "깔창/기타" }
+            ],
+            77: [
+                { value: "", text: "---아우터---" },
+                { value: "70", text: "가디건" },
+                { value: "71", text: "블루종" },
+                { value: "72", text: "집업" },
+                { value: "73", text: "바람막이" },
+                { value: "74", text: "블레이저" },
+                { value: "75", text: "청재킷" }
+            ]
+        };
+
+        const cate3Options = {
+            10: [
+                { value: "", text: "---티셔츠---" },
+                { value: "10", text: "7부" },
+                { value: "11", text: "민소매" },
+                { value: "12", text: "긴팔" },
+                { value: "13", text: "반팔" },
+                { value: "14", text: "맨투맨" },
+                { value: "15", text: "후드" },
+                { value: "16", text: "니트/스웨터" }
+            ],
+            11: [
+                { value: "", text: "---셔츠---" },
+                { value: "17", text: "반팔셔츠" },
+                { value: "18", text: "7부 셔츠" },
+                { value: "19", text: "긴팔셔츠" },
+                { value: "20", text: "베이직/심플" },
+                { value: "21", text: "스트라이프" },
+                { value: "22", text: "체크" }
+            ],
+            30: [
+                { value: "", text: "--슬랙스--" },
+                { value: "30", text: "스트레이트핏" },
+                { value: "31", text: "테이퍼드핏" },
+                { value: "32", text: "와이드핏" }
+            ],
+            31: [
+                { value: "", text: "---데님---" },
+                { value: "35", text: "스트레이트핏" },
+                { value: "36", text: "테이퍼드핏" },
+                { value: "37", text: "와이드핏" }
+            ],
+            32: [
+                { value: "", text: "--트레이닝--" },
+                { value: "38", text: "트레이닝" },
+                { value: "39", text: "조거" }
+            ],
+            33: [
+                { value: "", text: "---반바지---" },
+                { value: "33", text: "일반 반바지" },
+                { value: "34", text: "데님 반바지" }
+            ]
+        };
+
+        document.getElementById('cate1-select').addEventListener('change', function () {
+            const cate1Value = this.value;
+            const cate2Select = document.getElementById('cate2-select');
+            const cate3Select = document.getElementById('cate3-select');
+            
+            // Update cate2 options based on cate1 selection
+            updateSelectOptions(cate2Select, cate2Options[cate1Value] || []);
+            // Clear cate3 options
+            updateSelectOptions(cate3Select, []);
+        });
+
+        document.getElementById('cate2-select').addEventListener('change', function () {
+            const cate2Value = this.value;
+            const cate3Select = document.getElementById('cate3-select');
+            
+            // Update cate3 options based on cate2 selection
+            updateSelectOptions(cate3Select, cate3Options[cate2Value] || []);
+        });
+
+        function updateSelectOptions(selectElement, options) {
+            // Clear existing options
+            selectElement.innerHTML = '';
+            // Add new options
+            options.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option.value;
+                opt.text = option.text;
+                selectElement.add(opt);
+            });
+        }
+    </script>
+</body>
+</html>

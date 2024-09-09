@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+	<link rel="stylesheet" type="text/css" href="./test.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+
+       
+</head>
+<body>
+    <div class="container w-600 center">
+        <div class="row center">
+            <h2>상품등록</h2>
+        </div>
+        <form action="insert" method="post" autocomplete="off">
+            <div class="row">
+                <label>상품명</label>
+                <input type="text" name="itemName" class="field">
+            </div>
+            <div class="row">
+                <label>가격</label>
+                <input type="number" name="itemPrice" class="field">
+            </div>
+            <div class="row">
+                <label>할인가</label>
+                <input type="number" name="itemSalePrice" class="field">
+            </div>
+            <div class="row">
+                <label>재고 수</label>
+                <input type="number" name="itemCnt" class="field">
+            </div>
+            <div class="row">
+                <label>사이즈</label>
+                <input type="text" name="itemSize" class="field">
+            </div>
+            <div class="row">
+                <label>카테고리</label>
+                <select name="itemCate1" id="cate1-select" class="field">
+                    <option value="11">상의</option>
+                    <option value="33">하의</option>
+                    <option value="55">신발</option>
+                    <option value="77">아우터</option>
+                </select>
+            </div>
+            <div class="row">
+                
+                <select name="itemCate2" class="field cate2">
+                    <option value="10">티셔츠</option>
+                    <option value="11">셔츠</option>
+                    <option value="30">슬랙스</option>
+                    <option value="31">데님</option>
+                    <option value="32">트레이닝</option>
+                    <option value="33">반바지</option>
+                    <option value="50">스니커즈</option>
+                    <option value="51">로퍼/슬립온</option>
+                    <option value="52">구두</option>
+                    <option value="53">워커/부츠</option>
+                    <option value="54">샌들/슬리퍼</option>
+                    <option value="55">깔창/기타</option>
+                    <option value="70">가디건</option>
+                    <option value="71">블루종</option>
+                    <option value="72">집업</option>
+                    <option value="73">바람막이</option>
+                    <option value="74">블레이저</option>
+                    <option value="75">청재킷</option>
+                </select>
+            </div>
+            <div class="row">
+                <select name="itemCate3"  class="field">
+                    <option value="10">7부</option>
+                    <option value="11">민소매</option>
+                    <option value="12">긴팔</option>
+                    <option value="13">반팔</option>
+                    <option value="14">맨투맨</option>
+                    <option value="15">후드</option>
+                    <option value="16">니트/스웨터</option>
+                    <option value="17">반팔셔츠</option>
+                    <option value="18">7부 셔츠</option>
+                    <option value="19">긴팔셔츠</option>
+                    <option value="20">베이직/심플</option>
+                    <option value="21">스트라이프</option>
+                    <option value="22">체크</option>
+                    <option value="30">스트레이트핏</option>
+                    <option value="31">테이퍼드핏</option>
+                    <option value="32">와이드핏</option>
+                    <option value="35">스트레이트핏</option>
+                    <option value="36">테이퍼드핏</option>
+                    <option value="37">와이드핏</option>
+                    <option value="38">트레이닝</option>
+                    <option value="39">조거</option>
+                    <option value="33">일반 반바지</option>
+                    <option value="34">데님 반바지</option>
+                    <option value="">null</option>
+                </select>
+            </div>
+            <div class="row">
+                <label>할인율</label>
+                <input type="number" name="itemDiscountRate" class="field">
+            </div>
+        </form>
+        <div class="right">
+        <button type="submit" class="btn btn-positive">등록</button>
+    </div>
+           
+    </div>
+</body>
+</html>

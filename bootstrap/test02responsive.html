@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반응형 디자인</title>
+<!--
+    다양한 기기에 따라 h1 태그의 크기를 그에 맞게 조정
+    단, 모바일로 들어오는 사람을 대상으로 디자인 하고 나머지 기기는 약간씩 조정    
+-->
+<style>
+    *{
+        box-sizing: border-box;
+    }
+    h1{
+        font-size: 24px;
+    }
+    /* 폭이 500px 이상일 경우는 h1의 글자크기를 36px 설정 */
+    @media screen and (min-width: 500px) {
+        h1{
+            font-size: 36px;
+        }
+    }
+    /* 폭이 700px 이상일 경우에는 h1의 글자크기를 24px로 설정 */
+    @media screen and (min-width: 700px){
+        h1{
+            font-size:50px;
+        }
+    }
+</style>
+
+</head>
+
+
+<body>
+    <h1>Hello Bootstrap Design!</h1>
+</body>
+</html>

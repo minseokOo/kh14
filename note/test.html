@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화면 구현 평가</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .container {
+            margin: 50px auto;
+            width: 500px;
+        }
+        .row {
+            margin: 10px 0px;
+        }        
+        .center {
+            text-align: center;
+        }
+        .field {
+            border: 1px solid black;
+            outline: none;
+            padding: 0.5em;
+            font-size: 24px;
+            width: 100%;
+        }
+        .success-feedback {
+            color: #0984e3;
+        }
+        .fail-feedback {
+            color: #d63031;
+        }
+        .field ~ .success-feedback, 
+        .field ~ .fail-feedback 
+        {
+            display: none;
+        }
+        .field.success {
+            border-color: #0984e3;
+        }
+        .field.fail {
+            border-color: #d63031;
+        }
+        .field.success ~ .success-feedback,
+        .field.fail ~ .fail-feedback
+        {
+            display: block;
+        }
+    </style>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("[name=memberId]").blur(function(){
+                var memberId = $(this).val();
+                console.log = memberId;
+                var regex = /^[a-z][a-z0-9]{7,19}$/;
+                var isValid = regex.test(memberId);
+                $(this).removeClass("success fail").addClass(isValid ? "success" : "fail");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row center">
+            <h1>아이디 입력</h1>
+        </div>        
+        <div class="row">
+            <input type="text" name="memberId" class="field" autocomplete="off">
+            <div class="success-feedback">올바른 형식의 아이디입니다</div>
+            <div class="fail-feedback">영문 소문자로 시작하고 숫자 포함 8~20자로 작성하세요</div>
+            <button class="btn" type="submit">등록</button>
+        </div>
+        <div class="row">
+        </div>
+    </div>
+</body>
+</html>
