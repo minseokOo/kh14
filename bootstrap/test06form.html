@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+
+    <link rel="stylesheet" type="text/css" href="./test.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.3/zephyr/bootstrap.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" ></script>
+  </head>
+
+  <body>
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1">
+                <div class="bg-dark text-light p-4 rounded">
+                    <h1>Form 디자인</h1>
+                    <p>전송폼과 입력창에 대한 디자인</p>
+                </div>
+                <!-- 원하는 내용을 작성 -->
+                <div class="row my-4">
+                    <div class="col">
+                        <h2>입력창 종류별 배치</h2>
+                    </div>
+                </div>
+                
+                <!-- bs5에서는 입력창에 .form-control을 붙인다. -->
+                <div class="row mt-2">
+                    <div class="col">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col">
+                        <textarea class="form-control" rows="5"></textarea>
+                    </div>
+                </div>
+
+                <!-- select는 .form-select라고 써도 된다 -->
+                <div class="row mt-2">
+                    <div class="col">
+                        <select class="form-select">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <hr>
+
+                <!-- 라벨과 합쳐진 형태의 입력창 -->
+
+                <!-- 이 입력창은 폭의 변화에 반응하지 않는다. -->
+                <div class="row mt-2">
+                    <label class="col-3 col-form-label">
+                        아이디
+                    </label>
+                    <div class="col-9">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+                <!-- 이 입력창은 폭이 변하면 라벨과 입력창이 펼쳐진다. -->
+                <div class="row mt-2">
+                    <label class="col-md-3 col-form-label">
+                        아이디
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+                <hr>
+
+                <!--
+                    부트스트랩에도 입력창의 상태에 따른 피드백 시스템이 존재
+                    - ''.is-valid'와 ''.valid-feedback'이 한 세트
+                    - ''.is-invalid'와 ''.invalid-feedback'이 한 세트
+                    - 입력창 뒤에 피드백을 놓고 입력창에 클래스를 부여하여 표시 
+                -->
+                <div class="row mt-2">
+                    <label class="col-md-3 col-form-label">
+                        아이디
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control is-valid">
+                        <div class="valid-feedback">멋진아이디 입니다.</div>
+                        <div class="invalid-feedback">아이디를 올바른 형식으로 작성해주세요.</div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <label class="col-md-3 col-form-label">
+                        아이디
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control is-invalid">
+                        <div class="valid-feedback">멋진아이디 입니다.</div>
+                        <div class="invalid-feedback">아이디를 올바른 형식으로 작성해주세요.</div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- 플로팅(floating) 입력창 -->
+                <div class="row mt-2">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="안보여도 써야합니다.">
+                            <label>아이디</label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+  </body>
+
+</html>

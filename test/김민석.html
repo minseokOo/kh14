@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0910평가</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .w-200 {width: 200px !important;}
+        .w-250 {width: 250px !important;}
+        .w-300 {width: 300px !important;}
+        .w-350 {width: 350px !important;}
+        .w-400 {width: 400px !important;}
+        .w-450 {width: 450px !important;}
+        .w-500 {width: 500px !important;}
+        .w-550 {width: 550px !important;}
+        .w-600 {width: 600px !important;}
+        .my-50 {margin-top: 50px !important; margin-bottom: 50px !important;}
+        .w-33 {width:33.3333% !important;}
+        .w-100 {width:100% !important;}
+        .row {
+            /* margin-top: 10px;
+            margin-bottom: 10px; */
+        }
+        .center {
+        text-align: center !important;
+        }
+        .btn {
+            padding: 20px 40px 20px 40px;
+            border-style: none;
+        }
+        .field{
+    font-size: 16px;
+    padding: 0.5em 0.75em;
+    outline: none; /* 브라우저에서 제공하는 자동 강조효과 제거 */
+    border: 1px solid rgb(129, 129, 129);
+    border-radius: 0.1em;
+    line-height: 1.2;
+}
+    </style>
+    <!-- 자바스크립트 작성 영역 -->
+    <script type="text/javascript">
+
+        function one() {
+            var target = document.querySelector(".display");
+            target.value += "1";
+        }
+        function two() {
+            var target = document.querySelector(".display");
+            target.value += "2";
+        }
+        function three() {
+            var target = document.querySelector(".display");
+            target.value += "3";
+        }
+        function four() {
+            var target = document.querySelector(".display");
+            target.value += "4";
+        }
+        function five() {
+            var target = document.querySelector(".display");
+            target.value += "5";
+        }
+        function six() {
+            var target = document.querySelector(".display");
+            target.value += "6";
+        }
+        function seven() {
+            var target = document.querySelector(".display");
+            target.value += "7";
+        }
+        function eight() {
+            var target = document.querySelector(".display");
+            target.value += "8";
+        }
+        function nine() {
+            var target = document.querySelector(".display");
+            target.value += "9";
+        }
+        function zero() {
+            var target = document.querySelector(".display");
+            target.value += "0";
+        }
+        function erase() {
+            var target = document.querySelector(".display");
+            var lastNum = target.value;
+            target.value = lastNum.slice(0, -1);
+        }
+        function numberClear() {
+            var target = document.querySelector(".display");
+            target.value = "";
+        }
+         
+         $(document).ready(function() {
+            $(".field-show").change(function() {
+                var checked = $(this).prop("checked");
+            $("[name=password]")
+                .attr("type", checked ? "text" : "password");
+    });
+});
+    </script>
+</head>
+
+<body>
+    <div class="container w-300 my-50 center">
+        <div class="row">
+            <h2>비밀번호 입력</h2>
+        </div>
+        <div class="row">
+            <input type="password" name="password" class="display field w-100" readonly>
+        </div>
+        <div class="row" style="text-align: left">
+            <input type="checkbox" class="field-show"> 비밀번호 표시
+        </div>
+        <div class="row">
+            <button class="btn w-33" onclick="one()">1</button><button class="btn w-33" onclick="two()">2</button><button
+                class="btn w-33" onclick="three()">3</button>
+        </div>
+        <div class="row">
+            <button class="btn w-33" onclick="four()">4</button><button class="btn w-33" onclick="five()">5</button><button
+                class="btn w-33" onclick="six()">6</button>
+        </div>
+        <div class="row">
+            <button class="btn w-33" onclick="seven()">7</button><button class="btn w-33" onclick="eight()">8</button><button
+                class="btn w-33" onclick="nine()">9</button>
+        </div>
+        <div class="row">
+            <button class="btn w-33" onclick="erase()"><i class="fa-solid fa-delete-left"></i></button><button class="btn w-33" onclick="zero()">0</button><button class="btn w-33" onclick="numberClear()"><i class="fa-solid fa-eraser"></i></button>
+        </div>
+    </div>
+
+</body>
+
+</html>
