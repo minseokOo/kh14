@@ -15,7 +15,7 @@
 
     <style>
         /* 줄바꿈을 금지하여 반응형 테이블이 되도록 추가 설정 */
-        .table-responsive > .table {
+        .table-responsive>.table {
             white-space: nowrap;
         }
     </style>
@@ -86,49 +86,69 @@
                 </div>
 
                 <div class="row my-4"></div>
-                    <div class="col">
-                        <!-- 내용에 의해서 아래로 늘어나는 것을 방지하기 위한 설정 -->
-                        <div class="table-responsive">
-                            <table class="table table-hover table-bordered table-dark">
-                                <thead>
-                                    <tr>
-                                        <th>번호</th>
-                                        <th>이름</th>
-                                        <th>속성</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>이상해씨이상해씨이상해씨이상해씨</td>
-                                        <td>풀</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>파이리</td>
-                                        <td>불</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>꼬부기</td>
-                                        <td>물</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>치코리타</td>
-                                        <td>풀</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>치코리타</td>
-                                        <td>풀</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="col">
+                    <!-- 내용에 의해서 아래로 늘어나는 것을 방지하기 위한 설정 -->
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered table-dark">
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>이름</th>
+                                    <th>속성</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>이상해씨이상해씨이상해씨이상해씨</td>
+                                    <td>풀</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>파이리</td>
+                                    <td>불</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>꼬부기</td>
+                                    <td>물</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>치코리타</td>
+                                    <td>풀</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>치코리타</td>
+                                    <td>풀</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
+                <!-- 
+                    Pagination
+                -->
+                <div class="row mt-4">
+                    <div class="col">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                            <li class="page-item"><a class="page-link" href="#">6</a></li>
+                            <li class="page-item"><a class="page-link" href="#">7</a></li>
+                            <li class="page-item"><a class="page-link" href="#">8</a></li>
+                            <li class="page-item"><a class="page-link" href="#">9</a></li>
+                            <li class="page-item"><a class="page-link" href="#">10</a></li>
+                            <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
