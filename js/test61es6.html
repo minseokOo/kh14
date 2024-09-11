@@ -1,0 +1,29 @@
+<script>
+    //배열 합치기
+
+    //(Q) 아래의 두 배열을 새로운 하나의 배열로 합쳐서 출력하세요
+    const a = [10, 20, 40, 50];
+    const b = [30, 50, 60];
+
+    const c = [];
+
+    var totalLength = a.length + b.length;
+
+    for(var i = 0; i < a.length; i++){
+        c.push(a[i]); //java에서 add와 동일
+    };
+    for(var i = 0; i < b.length; i++){
+    c.push(b[i]);
+    };
+    for(var i = 0; i < totalLength; i++){
+    console.log(c[i]);
+    };
+
+    //ES6 - concat 명령 사용
+    const d = a.concat(b);
+    d.forEach(n=>console.log(n));
+    //ES6 - spread 연산자 사용 (...a 는 a의 모든 요소를 풀어헤쳐 배칠하라는 의미)
+    const e = [...a, ...b];
+    e.forEach(n=>console.log(n));
+
+</script>
