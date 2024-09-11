@@ -1,0 +1,57 @@
+<script type="text/javascript">
+    //배열과 객체를 다루는 방식의 변화
+
+    var a = [10, 20, 30, 40, 50];
+
+    //ES5
+    var b = [];
+    for (var i = 0; i < a.length; i++) {
+        if (a[i] <= 30) {
+            b.push(a[i]);
+        }
+    }
+    for (var i = 0; i < b.length; i++) {
+        console.log(b[i]);
+    }
+    console.log("------------");
+    //중간 해석 코드 - 1
+
+    const c = a.filter(function (number) {
+        if (number <= 30) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    });
+    c.forEach(function (number) {
+        console.log(number);
+    });
+
+    console.log("------------");
+
+    //중간 해석 코드 - 2
+    // - 함수 내부의 코드를 조건 없이 최대한 간소하게 작성
+    a.filter(function (number) {
+        return number <= 30;
+    }).forEach(function (number) {
+        console.log(number);
+    });
+
+    console.log("------------");
+
+    //중간 해석 코드 - 3
+    // - function 키워드 대신 arrow(=>)를 사용
+    // - 매개변수가 한 개일 때는 ()를 생략 할 수 있음
+    a.filter((number) =>
+        number <= 30
+    ).forEach((number) => {
+        console.log(number);
+    });
+
+    console.log("------------");
+
+    //ES6 - 최종
+    // - 중괄호를 없애면 return을 자동 삽입해준다. 대신 코드는 단 한줄만 작성 가능
+    a.filter(number => number <= 30).forEach(number => console.log(number));
+</script>
