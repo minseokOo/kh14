@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+
+  <link rel="stylesheet" type="text/css" href="./test.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.3/zephyr/bootstrap.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        //.btn-manual-open을 클릭하면 #modal01을 수동으로 표시
+        $(".btn-manual-open").click(function(){
+            //jQuery 스타일
+            // $("#modal01").modal("show");
+
+            //VanillaJS(Pure Javascript) 스타일
+            // var target = document.getElementById("modal01");
+            var target = document.querySelector("#modal01");
+            var modal = bootstrap.Modal.getOrCreateInstance(target);
+            modal.show();
+        });
+        //#modal02에 있는 .btn-menual- close를 클릭하면 #modal02를 숨김
+        $("#modal02").find("btn-menual-close".click(function(){
+            //jQuery 스타일
+            $("#modal02").modal("hide");
+
+            //Vanilla 타입
+            var target = document.querySelector("#modal02");
+            var modal = bootstrap.Modal.getOrCreateInstance(target);
+            modal.show();               
+            }));
+
+    });
+</script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1">
+
+        <!-- 점보트론 -->
+        <div class="row mt-4">
+          <div class="col">
+            <div class="bg-dark text-light p-4 rounded">
+              <h1>모달</h1>
+              <p>모달을 자동/수동으로 연결하여 사용하는 방법</p>
+            </div>
+          </div>
+        </div>
+        <!-- 
+        #modal01을 클릭하여 열 수 있는 버튼 배치(자동/수동)
+        - 자동인 경우
+            - 자바스크립트 코드가 없어도 되는 장점 존재
+            - 앞/뒤로 추가작업을 구현하거나 커스터마이징 불가
+        - 수동인 경우
+            -  
+        -->
+        <div class="row my-4">
+          <div class="col">
+            <button type="button" 
+                            class="btn btn-primary" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#modal01">자동</button>
+            <button type="button" class="btn btn-success btn-manual-open">수동</button>
+          </div>
+        </div>
+        <!-- #modal02를 열기 위한 버튼을 구현-->
+         <div class="row mt-4">
+            <div class="col">
+                <button type="button" class="btn btn-primary" 
+                data-bs-target="#modal02" data-bs-toggle="modal">자동</button>
+
+            </div>
+         </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- 
+        모달 배치 
+        - tabindex를 -1로 설정하면 탭키로는 선택이 불가능하다라는 의미
+        - 버튼을 클릭하거나 특정 상황에서 실행할 수 있도록 구성해야 한다.
+        - data-bs-dismiss="modal"로 지정된 버튼을 누르면 자동으로 닫힌다.
+        - 아무 설정이 없으면 backdrop을 눌러도 자동으로 닫힌다.
+    -->
+  <div class="modal fade" id="modal02" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- 모달 헤더 - 제목, x버튼 -->
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button"></button>
+        </div>
+        <!-- 모달 본문-->
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <!-- 모달 푸터 - 종료, 확인, 저장 등 각종 버튼-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-close" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 
+    자동으로 닫히지 않는 모달 생성
+    - data-dismiss 모두 제거
+    - modaldrop data-bs-backdrop="static"으로 작성
+  -->
+  <div class="modal fade" id="modal01" tabindex="-1" data-bs-backdrop="static"></div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- 모달 헤더 - 제목, x버튼 -->
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close btn-menual-close" data-bs-dismiss="modal"></button>
+        </div>
+        <!-- 모달 본문-->
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <!-- 모달 푸터 - 종료, 확인, 저장 등 각종 버튼-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn_close btn-menual-close"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+        // ES5의 문제점과 이를 해결한 ES6의 문법
+        // - 변수의 범위(scope) 문제
+        // - ES5의 var 변수선언방식은 함수 범위(function scope)를 가짐
+        // - 일반적인 프로그래밍은 블록을 범위(block scope)로 가짐
+
+        var number = 5;
+        if(number % 2 != 0){
+            var text = "홀수";
+        }
+        console.log(text);
+
+        // - ES6부터는 변수를 두 가지 방법으로 생성하도록 변경
+        // - const와 let 키워드를 사용하여 처리
+        // - 블록을 범위로 가짐(block scope)
+        // - const는 불변 변수를 생성할 때 사용, let은 가변 변수를 생성할 때 사용
+        if(number % 2 != 0){
+            // const text2 = "홀수";
+            let text2 = "홀수";
+        }
+        console.log(text2)
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
