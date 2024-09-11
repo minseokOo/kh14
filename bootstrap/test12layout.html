@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+
+    <link rel="stylesheet" type="text/css" href="./test.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.3/zephyr/bootstrap.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+    <!-- 메뉴 -->
+    <nav class="navbar navbar-expand-lg bg-primary fixed-top" data-bs-theme="dark">
+        <!-- 100%를 차지하는 컨테이너-->
+        <div class="container-fluid">
+            <!-- 메인 로고 또는 텍스트가 존재하는 위치 -->
+            <a class="navbar-brand" href="#">KH정보교육원</a>
+            <!-- 폭이 좁은 경우 메뉴를 숨겼다 펼쳤다 하는 버튼(햄버거 버튼)-->
+            <button class="navbar-toggler" type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#top-menu" 
+                aria-controls="top-menu" 
+                aria-expanded="false" 
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--
+                실제 메뉴 영역
+                - 폭이 충분할 경우에는 상단 메뉴바에 표시
+                - 폭이 충분하지 않을 경우에는 접이식으로 표시
+            -->
+            <div class="collapse navbar-collapse" id="top-menu">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">데이터</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">포켓몬스터</a>
+                            <a class="dropdown-item" href="#">사원사원</a>
+                            <a class="dropdown-item" href="#">도서정보</a>
+                            <!-- <div class="dropdown-divider"></div> -->
+                            <a class="dropdown-item" href="#">기타</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">회원가입</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            로그인</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 컨테이너 : fixed 메뉴를 피해서 상단 여백을 부여 -->
+    <div class="container mt-5 pt-5">
+        <div class="row mt-4">
+            <div class="col-md-8 offset-md-2">
+
+                <!-- 점보트론 -->
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="bg-dark text-light p-4 rounded">
+                            <h1>홈페이지 레이아웃</h1>
+                            <p>홈페이지에서 사용할 레이아웃 샘플입니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 
+
+        -->
+                <div class="row my-4">
+                    <div class="col">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
