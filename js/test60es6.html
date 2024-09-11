@@ -1,0 +1,47 @@
+<script>
+    //배열 전용 명령
+    // - filter
+    // - forEach
+    // - map
+
+    // (Q) data에 들어있는 모든 값을 자리별로 제곱한 배열을 만드세요
+    const data = [1, 2, 3, 4, 5];
+
+
+    // 시작 (ES5)
+    const datas = [];
+    for(var i = 0; i < data.length; i++){
+        const target = data[i];
+        // console.log(target);
+        const targetSquare = target * target;
+        datas.push(targetSquare);
+    }
+    for(var i = 0; i < data.length; i++){
+        console.log(datas[i]);
+    }
+    // console.log(datas);
+    console.log("-------------");
+    
+    // 중간 과정
+    data.map(function(number) {
+        return number * number;
+    }).forEach(function(number){
+        console.log(number);
+    });
+    
+    console.log("-------------");
+   
+   
+    // 중간 과정 - 2
+    data.map((number) => {
+        return number * number;
+    }).forEach((number) =>{
+        console.log(number);
+    });
+    
+    console.log("-------------");
+    
+    //ES6
+    data.map((number)=>number*number).forEach((number)=>console.log(number));
+
+</script>
