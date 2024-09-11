@@ -1,0 +1,35 @@
+<script>
+    //객체를 다루는 방식의 변화
+    // - 중요한건 "원본"은 바꾸지 않고 "사본"을 만드는 것
+
+    const a = {
+        no : 1,
+        name : "피카츄",
+        type : "전기"
+    };
+
+    // (Q) 피카츄의 번호를 1번이 아닌 25번으로 고치기
+    
+    //참조 복사 (얕은 복사, shallow-copy, 원본이 바뀜)
+    // const b = a;
+    // b.no = 25;
+    // console.log(a);
+
+    //깊은 복사 - 노가다(비추천)
+    const c = {
+        no : 25,
+        name : a.name,
+        type : a.type
+    };
+    console.log(a);
+    console.log(c);
+
+    //깊은 복사 - 전개 연산자 사용(순서 중요)
+    const d = {
+        ...a,  // a의 모든 항목을 먼저 풀어헤쳐 설정하고
+        no : 25 //no는 25로 재설정을 하든 신규설정을 하든 니 맘대로 해라.
+    };
+    console.log(d);
+
+
+</script>
