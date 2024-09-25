@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -179,6 +180,49 @@ public class BookRestController {
 //		bookDao.update(bookDto);
 	}
 	
+	@Operation(
+			description = "도서 삭제",
+			responses = {
+					@ApiResponse(
+						responseCode = "200",//상태 코드
+						description = "삭제 완료",
+						content = @Content( //결과 메세지의 형태와 샘플
+							schema = @Schema(implementation = Void.class)//없는 경우(void)
+						)
+					),
+					@ApiResponse(responseCode = "404", //상태 코드 
+					description = "대상을 찾을 수 없음", // 설명
+					content = @Content(//결과 메세지의 형태와 샘플
+						mediaType = "text/plain", //결과 메세지의 MIME 타입
+						schema = @Schema(implementation = String.class),//자바의 자료형
+						examples = @ExampleObject("target not found")//예시 데이터
+					)
+			),
+					@ApiResponse(
+							responseCode = "500", //상태 코드 
+							description = "서버 오류", // 설명
+							content = @Content(//결과 메세지의 형태와 샘플
+								mediaType = "text/plain", //결과 메세지의 MIME 타입
+								schema = @Schema(implementation = String.class),//자바의 자료형
+								examples = @ExampleObject("server error") //예시 데이터
+							)
+					)
+			}
+		)
+	@DeleteMapping("/{bookId}")//삭제
+	public void delete(
+		@Parameter(example = "1", description = "도서 번호")
+		@PathVariable int bookId) {
+		//[1] 삭제 후 결과를 이용하여 404 처리
+		boolean result = bookDao.delete(bookId);
+		if(result == false) throw new TargetNotFoundException();
+		
+		//[2] 선 조회 후 삭제 처리
+//		BookDto bookDto = bookDao.selectOne(bookId);
+//		if(bookDto == null) throw new TargetNotFoundException();
+//		bookDao.delete(bookId);
+	}
+		
 	
 	
 }
