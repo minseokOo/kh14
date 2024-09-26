@@ -43,6 +43,14 @@ public class BookDao {
 		String sql = "select * from book order by book_id asc";
 		return jdbcTemplate.query(sql, mapper);
 	}
+	public List<BookDto> selectList(String column, String keyword){
+		String sql = "select * from book "
+				+ "where instr(#1, ?) > 0 "
+				+ "order by #1 asc, book_id asc";
+		sql = sql.replace("#1", column);
+		Object[] data = {keyword};
+		return jdbcTemplate.query(sql, mapper, data);
+	}
 	public List<StatusVO> selectListByGanre(){
 		String sql = "select book_genre title, count(*) cnt from book "
 				+ "group by book_genre "

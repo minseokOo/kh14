@@ -69,6 +69,12 @@ public class BookRestController {
 		return bookDao.selectList();
 	
 	}
+	
+	@GetMapping("/column/{column}/keyword/{keyword}")
+	public List<BookDto> search(@PathVariable String column, @PathVariable String keyword){
+		List<BookDto> list = bookDao.selectList(column, keyword);
+		return list;
+	}
 
 	@Operation(
 		description = "도서 정보 상세 조회",

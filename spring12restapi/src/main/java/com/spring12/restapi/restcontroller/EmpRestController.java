@@ -30,7 +30,7 @@ public class EmpRestController {
 		return empDao.selectList();
 	}
 	
-	@GetMapping("/column/{column}/keywore/{keyword}")
+	@GetMapping("/column/{column}/keyword/{keyword}")
 	public List<EmpDto> search(
 			@PathVariable String column, 
 			@PathVariable String keyword){
