@@ -29,4 +29,39 @@
   		</if>
   	</select>
   	
+  	
+	<!-- 
+		복합 검색 (complex search)
+		- 다양한 항목들이 있거나 없을 수 있다는 전제 조건하에 구현하는 검색
+		- 꼭 컬럼명이 아니더라도 여러가지 형태로 개조하여 사용할 수 있다	
+  	 -->
+  	 <select id="complexSearch" resultType="MemberDto">
+  		select * from member
+	<!--  		
+		조건절을 태그로 만들어서 조건이 존재할 때만 where가 등장하도록 처리 
+		모든 조건은 and 또는 or로 시작해야 한다.
+	-->
+  		<where>
+	  		<if test="memberId != null">
+	  			and member_id like #{memberId} || '%'
+	  		</if> 	
+	  		<if test="memberNickname != null">
+	  			and member_nickname like #{memberNickname} || '%'
+	  		</if>
+	  		<if test="memberBirth != null">
+	  			and member_birth = #{memberBirth} || '%'
+	  		</if>
+	  		<if test="memberName != null">
+	  			and member_name like #{memberName} || '%'
+	  		</if>
+	  		<if test="memberPhone != null">
+	  			and instr(member_phone, #{memberPhone}) > 0'
+	  		</if>
+	  		<if test="memberEmail != null">
+	  			and instr(member_email, #{memberEmail}) > 0
+	  		</if>
+	  		
+  		</where>
+  	 </select>
+  	 
   </mapper>
