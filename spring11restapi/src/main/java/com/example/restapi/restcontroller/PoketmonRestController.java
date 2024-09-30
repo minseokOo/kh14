@@ -39,6 +39,14 @@ public class PoketmonRestController {
 		return poketmonDao.selectList();
 	}
 	
+	//(구)http://localhost:8080/poketmon/list?column=poketmon_name&keyword=OOO
+	//(신)http://localhost:8080/poketmon/column/poketmon_name/keyword/OOO
+	@GetMapping("/column/{column}/keyword/{keyword}")
+	public List<PoketmonDto> search(
+			@PathVariable String column, @PathVariable String keyword){
+		return poketmonDao.selectList(column, keyword);
+	}
+	
 	//(구) http://localhost:8080/poketmon/detail?poketmonNo=1
 	//(신) http://localhost:8080/poketmon/1 [GET]
 	@GetMapping("/{poketmonNo}") 

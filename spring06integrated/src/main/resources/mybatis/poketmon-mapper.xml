@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--다운로드 주소가 에러날 경우
+		- 이클립스에서 Windows-preperences-XML(Wild Web Developer) 탭 이동
+		- Download external resources like referenced DTD, XSD 체크
+-->
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<!--  테이블마다 Mapper를 하나씩 만들고 구분을 위해 namespace에 테이블명을 작성-->
+  <mapper namespace="poketmon">
+  
+  	<!-- 조회 구문 -->
+  	<select id="list" resultType="PoketmonDto">
+  		select * from poketmon
+  	</select>
+  	
+  	<select id="find" resultType="PoketmonDto">
+  		select * from poketmon where poketmon_no = #{poketmonNo}
+  	</select>  	
+  	
+  	<!-- insert -->
+  	<insert id="add">
+  		insert into poketmon(poketmon_no, poketmon_name, poketmon_type) 
+  		values(poketmon_seq.nextval, #{poketmonName}, #{poketmonType})
+  	</insert> 
+  	
+  	<delete id="del">
+  		delete poketmon where poketmon_no = #{poketmonNo}
+  	</delete>
+  	
+  	<!-- 수정 구문 -->
+  	<update id="fix">
+  		update poketmon set poketmon_name = #{poketmonName}, poketmon_type =
+  		#{poketmonType} where poketmon_no = #{poketmonNo}
+  	</update>
+  
+  </mapper>

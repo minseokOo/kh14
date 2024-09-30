@@ -2,6 +2,7 @@ package com.kh.spring06.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -21,40 +22,30 @@ public class PoketmonDao {
 	private PoketmonMapper poketmonMapper;
 	@Autowired
 	private StatusMapper statusMapper;
+	
+	//mybatis에서 사용하는 도구
+	@Autowired
+	private SqlSession sqlSession;
 
 	//입력
 	public void insert(PoketmonDto dto) {
-		String sql = "insert into poketmon("
-				+ "poketmon_no, poketmon_name, poketmon_type"
-				+ ") "
-				+ "values(poketmon_seq.nextval, ?, ?)";
-		Object[] data = {dto.getPoketmonName(), dto.getPoketmonType()};
-		jdbcTemplate.update(sql, data);
+		sqlSession.insert("poketmon.add", dto);
 	}
 	
 	//수정
 	public boolean update(PoketmonDto dto) {
-		String sql = "update poketmon "
-				+ "set poketmon_name = ?, poketmon_type = ? "
-				+ "where poketmon_no = ?";
-		Object[] data = {
-				dto.getPoketmonName(), dto.getPoketmonType(),
-				dto.getPoketmonNo()
-		};
-		return jdbcTemplate.update(sql, data) > 0;
+		int result = sqlSession.update("poketmon.fix", dto);
+		return  result > 0;
 	}
 	
 	//삭제
 	public boolean delete(int poketmonNo) {
-		String sql = "delete poketmon where poketmon_no = ?";
-		Object[] data = {poketmonNo};
-		return jdbcTemplate.update(sql,data) > 0;
+		return sqlSession.delete("poketmon.del", poketmonNo) > 0;
 	}
 	
 	//조회
 		public List<PoketmonDto> selectList() {
-			String sql = "select * from poketmon order by poketmon_no asc";
-			return jdbcTemplate.query(sql, poketmonMapper);
+			return sqlSession.selectList("poketmon.list");
 		}
 		
 		//검색
@@ -74,10 +65,7 @@ public class PoketmonDao {
 		}
 		//상세
 		public PoketmonDto selectOne(int poketmonNo) {
-			String sql = "select * from poketmon where poketmon_no = ?";
-			Object[] data = {poketmonNo};
-			List<PoketmonDto> list = jdbcTemplate.query(sql, poketmonMapper, data);
-			return list.isEmpty() ? null : list.get(0);
+			return sqlSession.selectOne("poketmon.find", poketmonNo);
 		}
 		
 		//포켓몬 통계 현황 조회 기능
