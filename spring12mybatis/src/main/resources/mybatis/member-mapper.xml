@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="member">
+  	
+  	<!--  
+		데이터 조회(Read)
+		1. 전체조회
+		2. 상세조회
+		3. 검색
+			- column & keyword 검색
+			- 복합 검색 (모든 항목이 있을 수도 없을 수도 있는 검색)
+	-->
+	<select id="list" resultType="MemberDto">
+		select * from member
+	</select>
+	<select id="search" resultType="MemberDto">
+		select * from member where instr(${column}, #{keyword}) > 0
+	</select>
+	
+	<!-- 조건을 이용하여 list와 search를 합쳐보자! -->
+  	<select id="listSearch" resultType="MemberDto">
+  		select * from member 
+  		<if test="column != null and keyword != null">
+			where instr(${column}, #{keyword}) > 0
+  		</if>
+  	</select>
+  	
+  </mapper>
