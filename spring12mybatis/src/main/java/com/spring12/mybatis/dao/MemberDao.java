@@ -18,4 +18,9 @@ public class MemberDao {
 	public List<MemberDto> complexSearch(MemberComplexRequestVO vo){
 		return sqlSession.selectList("member.complexSearch", vo);
 	}
+	
+	//복합검색 카운트 메소드
+	public int complexSearchCount(MemberComplexRequestVO vo) {
+		return sqlSession.selectOne("member.complexSearchCount", vo);
+	}
 }
