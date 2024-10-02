@@ -23,4 +23,8 @@ public class MemberDao {
 	public int complexSearchCount(MemberComplexRequestVO vo) {
 		return sqlSession.selectOne("member.complexSearchCount", vo);
 	}
+	
+	public MemberDto selectOne(String memberId) {
+		return sqlSession.selectOne("member.find", memberId);
+	}
 }

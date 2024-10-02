@@ -346,5 +346,8 @@
 
 		</where>
 	</select>
+	<select id="find" resultType="MemberDto">
+		select * from member where member_id = #{memberId}
+	</select>
 	
 </mapper>
