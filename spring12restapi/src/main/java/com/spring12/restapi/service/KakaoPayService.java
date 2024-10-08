@@ -52,8 +52,19 @@ public class KakaoPayService {
 	}
 	
 	// 결제 승인(approve)
-	public KakaoPayApproveResponseVO approve(KakaoPayApproveRequestVO request) {
-		return null;
+	public KakaoPayApproveResponseVO approve(KakaoPayApproveRequestVO request) throws URISyntaxException {
+		URI uri = new URI("https://open-api.kakaopay.com/online/v1/payment/approve");
+		Map<String, String> body = new HashMap<>();
+		body.put("cid", kakaoPayProperties.getCid());
+		body.put("partner_order_id", request.getPartnerOrderId());
+		body.put("partner_user_id", request.getPartnerUserId());
+		body.put("tid", request.getTid());
+		body.put("pg_token", request.getPgToken());
+HttpEntity entity = new HttpEntity(body, headers);
+		
+		KakaoPayApproveResponseVO response = template.postForObject(uri, entity, KakaoPayApproveResponseVO.class);
+		
+		return response;
 	}
 	
 }
