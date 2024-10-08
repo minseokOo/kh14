@@ -40,9 +40,9 @@ public class KakaoPayService {
 		body.put("quantity", "1");
 		body.put("total_amount", String.valueOf(request.getTotalAmount()));
 		body.put("tax_free_amount", "0");
-		body.put("approval_url", "http://localhost:8080/success");
-		body.put("cancel_url", "http://localhost:8080/cancel");
-		body.put("fail_url", "http://localhost:8080/fail");
+		body.put("approval_url", request.getApprovalUrl());
+		body.put("cancel_url", request.getCancelUrl());
+		body.put("fail_url", request.getFailUrl());
 		
 		HttpEntity entity = new HttpEntity(body, headers);
 		

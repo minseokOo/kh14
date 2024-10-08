@@ -9,5 +9,8 @@ public class KakaoPayReadyRequestVO {
 	private String partnerUserId;
 	private String ItemName;
 	private int totalAmount;
+	private String approvalUrl;
+	private String cancelUrl;
+	private String failUrl;
 
 }

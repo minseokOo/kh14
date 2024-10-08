@@ -1,4 +1,4 @@
-package com.spring12.mybatis.vo;
+package com.spring12.restapi.vo;
 
 import lombok.Data;
 
