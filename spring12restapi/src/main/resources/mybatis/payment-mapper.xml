@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--(주의) 결제와 결제상세를 같은곳에서 처리 -->  
+<mapper namespace="payment">
+  
+  <!-- 등록 -->
+  <select id="paymentSequence" resultType="int">
+  	select payment_seq.nextval from dual
+  </select>
+  <select id="paymentDetailSequence" resultType="int">
+  	select payment_detail_seq.nextval from dual
+  </select>
+  
+  <insert id="paymentInsert">
+  	insert into payment(
+		payment_no, payment_tid, payment_name, payment_total, payment_remain, member_id
+	) values(
+		#{paymentNo}, #{paymentTid}, #{paymentName}, #{paymentTotal}, #{paymentRemain}, #{memberId}
+	)
+  </insert>
+  <insert id="paymentDetailInsert">
+  	insert into payment_detail(
+		payment_detail_no, payment_detail_name, payment_detail_price, payment_detail_qty, payment_detail_item, 
+		payment_detail_origin, payment_detail_status
+	) values(
+		#{paymentDetailNo}, #{paymentDetailName}, #{paymentDetailPrice}, #{paymentDetailQty}, 
+		#{paymentDetailItem}, #{paymentDetailOrigin}, '승인'
+	)
+  </insert>
+  
+  <!-- 특정 회원의 결제 대표 정보를 조회하는 구문 -->
+  <select id="list" resultType="PaymentDto">
+		select * from payment 
+		where member_id = #{memberId}
+		order by payment_no desc
+	</select>
+	<select id="find" resultType="PaymentDto">
+		select * from payment where payment_no = #{paymentNo}
+	</select>
+	<select id="findDetail" resultType="PaymentDetailDto">
+		select * from payment_detail where payment_detail_origin = #{paymentNo} 
+		order by payment_detail_no asc
+	</select>
+	
+	<!-- 
+	mybatis에서 특정 목적에 맞는 데이터를 수동으로 조회
+  	- 계층형 조회에서 많이 사용
+  	- resultMap을 이용해서 내가 직접 정의한 형태를 알려줘야한다
+  	- mybatis는 뎁스1 까지만 자동 매핑이 가능
+  	 -->
+  	 
+  	 <!-- type은 실제 자료형, id는 매퍼 내에서 부를 별칭 -->
+  	 <resultMap id="paymentTotalVO" type="PaymentTotalVO">
+  	 <!-- 필드가 객체라면 association을 사용 -->
+  	 	<association property="paymentDto" >
+  	 	<!-- result의 column은 DB의 column명, property는 클래스 필드명-->
+  	 		<result column="payment_no" property="paymentNo"/>
+  	 		<result column="payment_name" property="paymentName"/>
+  	 		<result column="payment_total" property="paymentTotal"/>
+  	 		<result column="payment_tid" property="paymentTid"/>
+  	 		<result column="payment_remain" property="paymentRemain"/>
+  	 		<result column="payment_time" property="paymentTime" javaType="java.sql.Date"/>
+  	 		<result column="member_id" property="memberId"/>
+  	 	</association>
+  	 <!-- 
+		필드가 컬렉션이라면 collection을 사용 
+  	 	- javaType : 저장소 자료형
+  	 	- ofType : 내부 데이터의 자료형
+  	 	- select : 데이터를 채우기 위해 실행해야할 구문
+  	 	- column : 구문을 실행하는데 필요한 값의 컬럼명
+  	 -->
+  	 	<collection property="paymentDetailList"
+  	 	 	javaType="java.util.List" ofType="PaymentDetailDto" 
+  	 	 	select="findDetail" column="payment_no">
+  	 	 	<result column="payment_detail_no" property="paymentDetailNo"/>
+  	 	 	<result column="payment_detail_name" property="paymentDetailName"/>
+  	 	 	<result column="payment_detail_price" property="paymentDetailPrice"/>
+  	 	 	<result column="payment_detail_qty" property="paymentDetailQty"/>
+  	 	 	<result column="payment_detail_item" property="paymentDetailItem"/>
+  	 	 	<result column="payment_detail_origin" property="paymentDetailOrigin"/>
+  	 	 	<result column="payment_detail_status" property="paymentDetailStatus"/>	
+  	 	 </collection>
+  	 </resultMap>
+  	 <!-- 내가 만든 resultMap을 이용하여 조회하고 싶다면 select에 resultMap을 작성 -->
+  	 <select id="findTotal" resultMap="paymentTotalVO">
+  	 	select * from payment 
+  	 	where member_id = #{memberId} 
+  	 	order by payment_no desc
+  	 </select>
+  	 
+  	 
+</mapper>

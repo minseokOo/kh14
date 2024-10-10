@@ -32,7 +32,6 @@ public class KakaoPayService {
 	public KakaoPayReadyResponseVO ready(KakaoPayReadyRequestVO request) throws URISyntaxException {
 		URI uri = new URI("https://open-api.kakaopay.com/online/v1/payment/ready");
 		Map<String, String> body = new HashMap<>();
-		//body.put("key", "value");
 		body.put("cid", kakaoPayProperties.getCid());
 		body.put("partner_order_id", request.getPartnerOrderId());
 		body.put("partner_user_id", request.getPartnerUserId());
@@ -40,15 +39,17 @@ public class KakaoPayService {
 		body.put("quantity", "1");
 		body.put("total_amount", String.valueOf(request.getTotalAmount()));
 		body.put("tax_free_amount", "0");
-		body.put("approval_url", request.getApprovalUrl());
+		body.put("approval_url", request.getApprovalUrl() + "/" + request.getPartnerOrderId());
 		body.put("cancel_url", request.getCancelUrl());
 		body.put("fail_url", request.getFailUrl());
 		
 		HttpEntity entity = new HttpEntity(body, headers);
 		
-		KakaoPayReadyResponseVO response = template.postForObject(uri, entity, KakaoPayReadyResponseVO.class);
+		KakaoPayReadyResponseVO response = 
+				template.postForObject(uri, entity, KakaoPayReadyResponseVO.class);
 		
 		return response;
+		
 	}
 	
 	// 결제 승인(approve)
