@@ -68,4 +68,7 @@ HttpEntity entity = new HttpEntity(body, headers);
 		return response;
 	}
 	
+	//결제 조회(order)
+	
+	//결제 취소(cancel)
 }
