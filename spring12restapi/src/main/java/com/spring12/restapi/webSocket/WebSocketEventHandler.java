@@ -13,6 +13,7 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.messaging.SessionConnectEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
+import org.springframework.web.socket.messaging.SessionSubscribeEvent;
 
 import com.spring12.restapi.service.TokenService;
 import com.spring12.restapi.vo.MemberClaimVO;
@@ -49,11 +50,21 @@ public class WebSocketEventHandler {
 		userList.put(sessionId, claimVO.getMemberId());
 		log.info("사용자 접속 인원수 = {} , 세션 = {} , 아이디 = {}", userList.size(), sessionId, claimVO.getMemberId());
 		
-		//채널 /users에 전파
-		Set<String> values = new TreeSet<>(userList.values());
-		messagingTemplate.convertAndSend("/public/users", values);
+		
+		
 	}
-
+	
+	@EventListener
+	public void whenUserSubscribe(SessionSubscribeEvent event) {
+		StompHeaderAccessor accessor = StompHeaderAccessor.wrap(event.getMessage());
+		if("/public/users".equals(accessor.getDestination())) {
+			//채널 /users에 전파
+			Set<String> values = new TreeSet<>(userList.values());
+			messagingTemplate.convertAndSend("/public/users", values);
+		}
+	}
+	
+	
 	@EventListener
 	public void whenUserLeave(SessionDisconnectEvent event) {
 		StompHeaderAccessor accessor = StompHeaderAccessor.wrap(event.getMessage()); // 분석
