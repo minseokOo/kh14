@@ -59,6 +59,39 @@
 		<include refid="top-n-footer"></include>
 	</select>
 	
+	<!-- react에 보내기 쉽게 조회 -->
+	<select id="listMemberComplete" resultType="WebsocketMessageVO">
+	<include refid="top-n-header"></include>
+		select
+			 WM.websocket_message_type "type",
+			 WM.websocket_message_sender "sender_member_id",
+			 M.member_level "sender_member_level",
+			 WM.websocket_message_receiver "receiver_member_id",
+			 WM.websocket_message_content "content",
+			 WM.websocket_message_time "time" 
+		from 
+			websocket_message WM 
+				left outer join member M 
+					on WM.websocket_message_sender = M.member_id
+					
+			where 
+			websocket_message_type = 'chat' 
+			or
+			websocket_message_type = 'system'
+			or 
+			(
+				websocket_message_type = 'dm'
+				and
+				(
+					websocket_message_sender = #{memberId}
+					or
+					websocket_message_receiver = #{memberId}
+				)
+			)
+			order by websocket_message_no asc
+			<include refid="top-n-footer"></include>
+	</select>
+	
 	<sql id="top-n-header">
 		<if test="beginRow != null and endRow != null">
 		select * from (

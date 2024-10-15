@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring12.restapi.dto.WebsocketMessageDto;
+import com.spring12.restapi.vo.WebsocketMessageVO;
 
 @Repository
 public class WebsocketMessageDao {
@@ -33,4 +34,12 @@ public class WebsocketMessageDao {
 		params.put("endRow", endRow);
 		return sqlSession.selectList("websocketMessage.listMember", params);
 	}
+	
+	public List<WebsocketMessageVO> selectListMemberComplete(String memberId, int beginRow, int endRow){
+		Map<String, Object> params = new HashMap<>();
+		params.put("memberId", memberId);
+		params.put("beginRow", beginRow);
+		params.put("endRow", endRow);
+		return sqlSession.selectList("websocketMessage.listMemberComplete", params);
+	};
 }

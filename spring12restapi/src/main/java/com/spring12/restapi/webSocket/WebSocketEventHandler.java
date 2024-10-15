@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
@@ -20,6 +21,9 @@ import com.spring12.restapi.dao.WebsocketMessageDao;
 import com.spring12.restapi.dto.WebsocketMessageDto;
 import com.spring12.restapi.service.TokenService;
 import com.spring12.restapi.vo.MemberClaimVO;
+import com.spring12.restapi.vo.WebSocketDMResponseVO;
+import com.spring12.restapi.vo.WebSocketResponseVO;
+import com.spring12.restapi.vo.WebsocketMessageVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -72,7 +76,27 @@ public class WebSocketEventHandler {
 			String memberId = accessor.getDestination().substring("/public/db/".length());
 			//DB 조회 - 이 회원이 볼 수 있는 메세지를 100개 조회하여 전송
 			List<WebsocketMessageDto> messageList = websocketMessageDao.selectListMember(memberId, 1, 100);
-			messagingTemplate.convertAndSend("/public/db/"+memberId, messageList);
+			List<Object> convertList = messageList.stream().map(messageDto->{
+				if(messageDto.getWebsocketMessageType().equals("dm")) {
+					WebSocketDMResponseVO response = new WebSocketDMResponseVO();
+					response.setSenderMemberId(messageDto.getWebsocketMessageSender());
+					response.setReceiverMemberId(messageDto.getWebsocketMessageReceiver());
+					response.setContent(messageDto.getWebsocketMessageContent());
+					response.setTime(messageDto.getWebsocketMessageTime().toLocalDateTime());
+					return response;
+				}
+				//일반
+				WebSocketResponseVO response = new WebSocketResponseVO();
+				response.setSenderMemberId(messageDto.getWebsocketMessageSender());
+				response.setContent(messageDto.getWebsocketMessageContent());
+				response.setTime(messageDto.getWebsocketMessageTime().toLocalDateTime());
+				return response;
+			})
+			.collect(Collectors.toList());
+			messagingTemplate.convertAndSend("/public/db/"+memberId, convertList);
+			
+//			List<WebsocketMessageVO> messageList = websocketMessageDao.selectListMemberComplete(memberId, 1, 10);
+//			messagingTemplate.convertAndSend("/public/db/"+memberId, messageList);
 		}
 	}
 	
