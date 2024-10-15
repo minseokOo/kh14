@@ -2,6 +2,7 @@ package com.spring12.restapi.webSocket;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -15,6 +16,8 @@ import org.springframework.web.socket.messaging.SessionConnectEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 import org.springframework.web.socket.messaging.SessionSubscribeEvent;
 
+import com.spring12.restapi.dao.WebsocketMessageDao;
+import com.spring12.restapi.dto.WebsocketMessageDto;
 import com.spring12.restapi.service.TokenService;
 import com.spring12.restapi.vo.MemberClaimVO;
 
@@ -32,6 +35,9 @@ public class WebSocketEventHandler {
 	
 	@Autowired
 	private SimpMessagingTemplate messagingTemplate;
+	
+	@Autowired
+	private WebsocketMessageDao websocketMessageDao;
 	
 //	private Map<String, String> userList = new HashMap<>();//non thread-safe(다중 접속 환경에서 위험함)
 //	private Map<String, String> userList = new ConcurrentHashMap<>(); //thread-safe
@@ -61,6 +67,12 @@ public class WebSocketEventHandler {
 			//채널 /users에 전파
 			Set<String> values = new TreeSet<>(userList.values());
 			messagingTemplate.convertAndSend("/public/users", values);
+		}
+		else if(accessor.getDestination().startsWith("/public/db")) {
+			String memberId = accessor.getDestination().substring("/public/db/".length());
+			//DB 조회 - 이 회원이 볼 수 있는 메세지를 100개 조회하여 전송
+			List<WebsocketMessageDto> messageList = websocketMessageDao.selectListMember(memberId, 1, 100);
+			messagingTemplate.convertAndSend("/public/db/"+memberId, messageList);
 		}
 	}
 	

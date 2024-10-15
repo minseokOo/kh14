@@ -1,18 +1,23 @@
 package com.spring12.restapi.webSocket;
 
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+import com.spring12.restapi.dao.WebsocketMessageDao;
+import com.spring12.restapi.dto.WebsocketMessageDto;
 import com.spring12.restapi.service.TokenService;
 import com.spring12.restapi.vo.MemberClaimVO;
+import com.spring12.restapi.vo.WebSocketDMResponseVO;
 import com.spring12.restapi.vo.WebSocketRequestVO;
 import com.spring12.restapi.vo.WebSocketResponseVO;
 
@@ -22,7 +27,7 @@ import com.spring12.restapi.vo.WebSocketResponseVO;
  	- @Controller 를 이용하여 메세지를 매핑하고 채널에 전송 할 수 있다.
  	- 이 컨트롤러에서는 stomp client가 publish한 정보만 받을  수 있다.
  */
-
+@CrossOrigin
 @Controller
 public class WebSocketController {
 
@@ -42,13 +47,18 @@ public class WebSocketController {
 	
 	//업그레이드 후
 	
+	
+	
 	//전송 도구 생성
 	@Autowired
 	private SimpMessagingTemplate messagingTemplate;
+	
+	
 	@Autowired
 	private TokenService tokenService;
 	
-	
+	@Autowired
+	private WebsocketMessageDao websocketMessageDao;
 	
 	
 	//사용자가 보내는 내용뿐 아니라 헤더 등 모든 정보를 얻고 싶다면 수신 형태를 바꿔야한다.
@@ -72,21 +82,62 @@ public class WebSocketController {
 		WebSocketResponseVO response = new WebSocketResponseVO();
 		response.setContent(request.getContent());
 		response.setTime(LocalDateTime.now());
-		response.setMemberId(claimVO.getMemberId());
-		response.setMemberLevel(claimVO.getMemberLevel());
+		response.setSenderMemberId(claimVO.getMemberId());
+		response.setSenderMemberLevel(claimVO.getMemberLevel());
 
 		//수동으로 직접 전송
 //		messagingTemplate.convertAndSend("채널", 데이터);
 		messagingTemplate.convertAndSend("/public/chat", response);
-	}
 	
+	//DB에 등록
+	int websocketMessageNo = websocketMessageDao.sequence();
+	WebsocketMessageDto websocketMessageDto = new WebsocketMessageDto();
+	websocketMessageDto.setWebsocketMessageType("chat");
+	websocketMessageDto.setWebsocketMessageNo(websocketMessageNo);
+	websocketMessageDto.setWebsocketMessageSender(claimVO.getMemberId());
+	websocketMessageDto.setWebsocketMessageReceiver(null);//전체채팅이므로 수신자 없음
+	websocketMessageDto.setWebsocketMessageContent(request.getContent());
+	websocketMessageDto.setWebsocketMessageTime(Timestamp.valueOf(response.getTime()));
+	websocketMessageDao.insert(websocketMessageDto);
+	}
 	//DM과 관련된 처리
 	@MessageMapping("/dm/{receiverId}")
 //	@SendTo("/public/dm/{receiverId")
-	public void dm(@PathVariable String receiverId, Message<WebSocketRequestVO> message) {
+	public void dm(@DestinationVariable String receiverId, Message<WebSocketRequestVO> message) {
 		
-		WebSocketResponseVO response = new WebSocketResponseVO();
+		StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
+		String accessToken = accessor.getFirstNativeHeader("accessToken");
+//		String refreshToken = accessor.getFirstNativeHeader("refreshToken");
+		//(추가) 자신에게 보내는 메세지면 차단(허용도 가능)
+		if(accessToken == null) { //비회원이 채팅을 보냈으면
+			return; 
+		}
+		MemberClaimVO claimVO = tokenService.check(tokenService.removeBearer(accessToken));
+		if(claimVO.getMemberId().equals(receiverId)) {
+			return;
+		}
+
+		WebSocketRequestVO request = message.getPayload();//메세지 수신
 		
-		messagingTemplate.convertAndSend("/public/dm/" +receiverId, response);
+		WebSocketDMResponseVO response = new WebSocketDMResponseVO();
+		response.setContent(request.getContent());
+		response.setTime(LocalDateTime.now());
+		response.setSenderMemberId(claimVO.getMemberId());
+		response.setSenderMemberLevel(claimVO.getMemberLevel());
+		response.setReceiverMemberId(receiverId);//수신자 회원 아이디
+		
+		messagingTemplate.convertAndSend("/public/dm/"+response.getSenderMemberId(), response);//발신자
+		messagingTemplate.convertAndSend("/public/dm/"+response.getReceiverMemberId(), response);//수신자
+		
+		//DB에 등록
+		int websocketMessageNo = websocketMessageDao.sequence();
+		WebsocketMessageDto websocketMessageDto = new WebsocketMessageDto();
+		websocketMessageDto.setWebsocketMessageType("dm");
+		websocketMessageDto.setWebsocketMessageNo(websocketMessageNo);
+		websocketMessageDto.setWebsocketMessageSender(response.getSenderMemberId());
+		websocketMessageDto.setWebsocketMessageReceiver(response.getReceiverMemberId());//전체채팅이므로 수신자 없음
+		websocketMessageDto.setWebsocketMessageContent(response.getContent());
+		websocketMessageDto.setWebsocketMessageTime(Timestamp.valueOf(response.getTime()));
+		websocketMessageDao.insert(websocketMessageDto);
 	}
 }

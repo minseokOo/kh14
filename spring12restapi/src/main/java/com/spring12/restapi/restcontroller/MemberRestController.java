@@ -21,7 +21,8 @@ import com.spring12.restapi.vo.MemberComplexResponseVO;
 import com.spring12.restapi.vo.MemberLoginRequestVO;
 import com.spring12.restapi.vo.MemberLoginResponseVO;
 
-@CrossOrigin(origins = { "http://localhost:3000" })
+//@CrossOrigin(origins = { "http://localhost:3000" })
+@CrossOrigin
 @RestController
 @RequestMapping("/member")
 public class MemberRestController {
