@@ -9,6 +9,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.spring12.restapi.service.TokenService;
 import com.spring12.restapi.vo.MemberClaimVO;
@@ -79,4 +80,13 @@ public class WebSocketController {
 		messagingTemplate.convertAndSend("/public/chat", response);
 	}
 	
+	//DM과 관련된 처리
+	@MessageMapping("/dm/{receiverId}")
+//	@SendTo("/public/dm/{receiverId")
+	public void dm(@PathVariable String receiverId, Message<WebSocketRequestVO> message) {
+		
+		WebSocketResponseVO response = new WebSocketResponseVO();
+		
+		messagingTemplate.convertAndSend("/public/dm/" +receiverId, response);
+	}
 }
