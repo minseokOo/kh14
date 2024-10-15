@@ -63,6 +63,7 @@
 	<select id="listMemberComplete" resultType="WebsocketMessageVO">
 	<include refid="top-n-header"></include>
 		select
+			WM.websocket_message_no "no",
 			 WM.websocket_message_type "type",
 			 WM.websocket_message_sender "sender_member_id",
 			 M.member_level "sender_member_level",
@@ -88,8 +89,11 @@
 					websocket_message_receiver = #{memberId}
 				)
 			)
-			order by websocket_message_no asc
+			order by websocket_message_no desc
 			<include refid="top-n-footer"></include>
+			
+			<!-- top n query로 만들어진 최종 결과를 다시 정렬(테이블 별칭 사용 불가) -->
+			order by "no" asc
 	</select>
 	
 	<sql id="top-n-header">

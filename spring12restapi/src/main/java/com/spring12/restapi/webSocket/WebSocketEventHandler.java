@@ -75,28 +75,28 @@ public class WebSocketEventHandler {
 		else if(accessor.getDestination().startsWith("/public/db")) {
 			String memberId = accessor.getDestination().substring("/public/db/".length());
 			//DB 조회 - 이 회원이 볼 수 있는 메세지를 100개 조회하여 전송
-			List<WebsocketMessageDto> messageList = websocketMessageDao.selectListMember(memberId, 1, 100);
-			List<Object> convertList = messageList.stream().map(messageDto->{
-				if(messageDto.getWebsocketMessageType().equals("dm")) {
-					WebSocketDMResponseVO response = new WebSocketDMResponseVO();
-					response.setSenderMemberId(messageDto.getWebsocketMessageSender());
-					response.setReceiverMemberId(messageDto.getWebsocketMessageReceiver());
-					response.setContent(messageDto.getWebsocketMessageContent());
-					response.setTime(messageDto.getWebsocketMessageTime().toLocalDateTime());
-					return response;
-				}
-				//일반
-				WebSocketResponseVO response = new WebSocketResponseVO();
-				response.setSenderMemberId(messageDto.getWebsocketMessageSender());
-				response.setContent(messageDto.getWebsocketMessageContent());
-				response.setTime(messageDto.getWebsocketMessageTime().toLocalDateTime());
-				return response;
-			})
-			.collect(Collectors.toList());
-			messagingTemplate.convertAndSend("/public/db/"+memberId, convertList);
+//			List<WebsocketMessageDto> messageList = websocketMessageDao.selectListMember(memberId, 1, 100);
+//			List<Object> convertList = messageList.stream().map(messageDto->{
+//				if(messageDto.getWebsocketMessageType().equals("dm")) {
+//					WebSocketDMResponseVO response = new WebSocketDMResponseVO();
+//					response.setSenderMemberId(messageDto.getWebsocketMessageSender());
+//					response.setReceiverMemberId(messageDto.getWebsocketMessageReceiver());
+//					response.setContent(messageDto.getWebsocketMessageContent());
+//					response.setTime(messageDto.getWebsocketMessageTime().toLocalDateTime());
+//					return response;
+//				}
+//				//일반
+//				WebSocketResponseVO response = new WebSocketResponseVO();
+//				response.setSenderMemberId(messageDto.getWebsocketMessageSender());
+//				response.setContent(messageDto.getWebsocketMessageContent());
+//				response.setTime(messageDto.getWebsocketMessageTime().toLocalDateTime());
+//				return response;
+//			})
+//			.collect(Collectors.toList());
+//			messagingTemplate.convertAndSend("/public/db/"+memberId, convertList);
 			
-//			List<WebsocketMessageVO> messageList = websocketMessageDao.selectListMemberComplete(memberId, 1, 10);
-//			messagingTemplate.convertAndSend("/public/db/"+memberId, messageList);
+			List<WebsocketMessageVO> messageList = websocketMessageDao.selectListMemberComplete(memberId, 1, 10);
+			messagingTemplate.convertAndSend("/public/db/"+memberId, messageList);
 		}
 	}
 	

@@ -7,6 +7,7 @@ import lombok.Data;
 //DB에서 불러온 메세지를 저장할 VO
 @Data
 public class WebsocketMessageVO {
+	private int no;
 	private final String type;
 	private String senderMemberId;//발신자
 	private String senderMemberLevel;
