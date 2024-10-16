@@ -34,12 +34,20 @@ public class WebsocketMessageDao {
 		params.put("endRow", endRow);
 		return sqlSession.selectList("websocketMessage.listMember", params);
 	}
-	
 	public List<WebsocketMessageVO> selectListMemberComplete(String memberId, int beginRow, int endRow){
 		Map<String, Object> params = new HashMap<>();
 		params.put("memberId", memberId);
 		params.put("beginRow", beginRow);
 		params.put("endRow", endRow);
 		return sqlSession.selectList("websocketMessage.listMemberComplete", params);
-	};
+	}
+	
+	public List<WebsocketMessageVO> selectListMemberComplete(String memberId, int beginRow, int endRow, int firstMessageNo){
+		Map<String, Object> params = new HashMap<>();
+		params.put("memberId", memberId);
+		params.put("beginRow", beginRow);
+		params.put("endRow", endRow);
+		params.put("firstMessageNo", firstMessageNo);
+		return sqlSession.selectList("websocketMessage.listMemberComplete", params);
+	}
 }

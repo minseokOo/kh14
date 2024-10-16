@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
@@ -17,12 +16,11 @@ import org.springframework.web.socket.messaging.SessionConnectEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 import org.springframework.web.socket.messaging.SessionSubscribeEvent;
 
+import com.spring12.restapi.dao.RoomMessageDao;
 import com.spring12.restapi.dao.WebsocketMessageDao;
-import com.spring12.restapi.dto.WebsocketMessageDto;
 import com.spring12.restapi.service.TokenService;
 import com.spring12.restapi.vo.MemberClaimVO;
-import com.spring12.restapi.vo.WebSocketDMResponseVO;
-import com.spring12.restapi.vo.WebSocketResponseVO;
+import com.spring12.restapi.vo.WebsocketMessageMoreVO;
 import com.spring12.restapi.vo.WebsocketMessageVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +40,9 @@ public class WebSocketEventHandler {
 	
 	@Autowired
 	private WebsocketMessageDao websocketMessageDao;
+	
+	@Autowired
+	private RoomMessageDao roomMessageDao;
 	
 //	private Map<String, String> userList = new HashMap<>();//non thread-safe(다중 접속 환경에서 위험함)
 //	private Map<String, String> userList = new ConcurrentHashMap<>(); //thread-safe
@@ -72,7 +73,20 @@ public class WebSocketEventHandler {
 			Set<String> values = new TreeSet<>(userList.values());
 			messagingTemplate.convertAndSend("/public/users", values);
 		}
-		else if(accessor.getDestination().startsWith("/public/db")) {
+		else if(accessor.getDestination().equals("/public/db")) {//비회원
+			List<WebsocketMessageVO> messageList = websocketMessageDao.selectListMemberComplete(null, 1, 100);
+			if(messageList.isEmpty()) return;
+			
+			List<WebsocketMessageVO> prevMessageList = websocketMessageDao.selectListMemberComplete(null, 1, 100, messageList.get(0).getNo());
+			
+			WebsocketMessageMoreVO moreVO = new WebsocketMessageMoreVO();
+			moreVO.setMessageList(messageList);
+			moreVO.setLast(prevMessageList.isEmpty());
+
+			messagingTemplate.convertAndSend("/public/db/"+moreVO);
+		
+		}
+		else if(accessor.getDestination().startsWith("/public/db")) {//회원
 			String memberId = accessor.getDestination().substring("/public/db/".length());
 			//DB 조회 - 이 회원이 볼 수 있는 메세지를 100개 조회하여 전송
 //			List<WebsocketMessageDto> messageList = websocketMessageDao.selectListMember(memberId, 1, 100);
@@ -95,8 +109,36 @@ public class WebSocketEventHandler {
 //			.collect(Collectors.toList());
 //			messagingTemplate.convertAndSend("/public/db/"+memberId, convertList);
 			
-			List<WebsocketMessageVO> messageList = websocketMessageDao.selectListMemberComplete(memberId, 1, 10);
-			messagingTemplate.convertAndSend("/public/db/"+memberId, messageList);
+			List<WebsocketMessageVO> messageList = websocketMessageDao.selectListMemberComplete(memberId, 1, 100);
+			if(messageList.isEmpty()) return;
+			
+			List<WebsocketMessageVO> prevMessageList = websocketMessageDao.selectListMemberComplete(memberId, 1, 100, messageList.get(0).getNo());
+			
+			WebsocketMessageMoreVO moreVO = new WebsocketMessageMoreVO();
+			moreVO.setMessageList(messageList);
+			moreVO.setLast(prevMessageList.isEmpty());
+
+			messagingTemplate.convertAndSend("/public/db/"+memberId, moreVO);
+		}
+		else if(accessor.getDestination().startsWith("/private/db")) {
+			//주소의 형태는 /private/db/방번호/아이디
+			String removeStr = accessor.getDestination().substring("/private/db/".length());
+			int slash = removeStr.indexOf("/");
+			int roomNo = Integer.parseInt(removeStr.substring(0, slash)); //슬래시 앞부분
+			String memberId = removeStr.substring(slash + 1);//슬래시 뒷부분
+			
+			//전달할 정보를 조회
+			List<WebsocketMessageVO> messageList = roomMessageDao.selectListMemberComplete(memberId, 1, 100, roomNo);
+			
+			WebsocketMessageMoreVO moreVO = new WebsocketMessageMoreVO();
+			moreVO.setMessageList(messageList);
+			if(messageList.size() > 0) { //메세지가 존재한다면
+				List<WebsocketMessageVO> prevMessageList = roomMessageDao.selectListMemberComplete(memberId, 1, 100, roomNo, messageList.get(0).getNo());
+				moreVO.setLast(prevMessageList.isEmpty());
+			}
+			
+			//전송
+			messagingTemplate.convertAndSend("/private/db/"+roomNo+"/"+memberId, moreVO);
 		}
 	}
 	

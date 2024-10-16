@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="roomMember">
+  	
+  	<!-- 입장(C) -->
+  	<insert id="enter">
+  		insert into room_member(room_no, member_id)
+  		values(#{roomNo}, #{memberId})
+  	</insert>
+  	
+  	<!-- 퇴장(D) -->
+  	<delete id="leave">
+  		delete room_member
+  		where room_no = #{roomNo} and member_id = #{memberId}
+  	</delete>
+  </mapper>

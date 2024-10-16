@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="room">
+	
+	<!-- 등록 -->
+	<select id="sequence" resultType="int">
+		select room_seq.nextval from dual
+	</select>
+	
+	<insert id="insert">
+		insert into room(room_no, room_name, room_created)
+		values(#{roomNo}, #{roomName}, systimestamp)
+	</insert>
+	
+	<!-- 목록 -->  
+  	<select id="list" resultType="RoomDto">
+  		select * from room order by room_no asc
+  	</select>
+  	
+  	<!-- 상세 -->
+  	<select id="find" resultType="RoomDto">
+  		select * from room where room_no = #{roomNo}
+  	</select>
+  	
+  	<!-- 수정 -->
+  	<update id="update">
+  		update room 
+  		set room_name = #{roomName} 
+  		where room_no #{roomNo}
+  	</update>
+  	
+  	<!-- 삭제 -->
+  	<delete id="delete">
+  		delete room where room_no = #{roomNo}
+  	</delete>
+  	
+  	<!-- 추가 : 특정 회원의 접속 여부가 포함된 방 목록 -->
+  	<select id="listByMember" resultType="RoomVO">
+  		select 
+    		R.*, nvl2(RM.member_id, 'Y', 'N') "join"
+		from 
+    		room R left outer join (
+        select * from room_member where member_id = #{memberId}
+    		) RM
+        on R.room_no = RM.room_no
+  	</select>
+  	
+</mapper>

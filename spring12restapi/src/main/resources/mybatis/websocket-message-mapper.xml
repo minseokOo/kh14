@@ -79,6 +79,8 @@
 			websocket_message_type = 'chat' 
 			or
 			websocket_message_type = 'system'
+			<!-- DM은 회원만(memberID !=null) 조회-->
+			<if test="memberId != null">
 			or 
 			(
 				websocket_message_type = 'dm'
@@ -89,6 +91,14 @@
 					websocket_message_receiver = #{memberId}
 				)
 			)
+			</if>
+			
+			<!-- 더보기를 위한 조건 추가 - firstMessageNo가 있으면 -->
+			<if test="firstMessageNo != null">
+			<![CDATA[ 
+			and websocket_message_no < #{firstMessageNo}
+			]]>
+			</if>
 			order by websocket_message_no desc
 			<include refid="top-n-footer"></include>
 			
