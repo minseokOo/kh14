@@ -31,5 +31,10 @@
 		)
 	</insert>
 	
+	<select id="check" resultType="int">
+        select count(*) from room_member
+        where member_id = #{memberId} and room_no = #{roomNo}
+    </select>
+	
 		
 </mapper>

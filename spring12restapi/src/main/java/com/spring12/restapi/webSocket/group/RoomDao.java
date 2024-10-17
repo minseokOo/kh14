@@ -49,4 +49,8 @@ public class RoomDao {
 		return sqlSession.delete("roomMember.leave", roomMemberDto) > 0;
 	}
 
+	public boolean check(RoomMemberDto roomMemberDto) {
+		int result = sqlSession.selectOne("roomMember.check", roomMemberDto);
+		return result > 0;
+	}
 }

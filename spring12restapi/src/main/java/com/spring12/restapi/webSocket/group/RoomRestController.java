@@ -75,4 +75,18 @@ public class RoomRestController {
 				roomDao.leave(roomMemberDto);//등록
 	}
 	
+	@GetMapping("/check/{roomNo}")
+	public boolean check(@PathVariable int roomNo, @RequestHeader("Authorization") String token) {
+		
+		//토큰 해석
+		MemberClaimVO claimVO = tokenService.check(tokenService.removeBearer(token));
+		//DB 검사
+		RoomMemberDto roomMemberDto = new RoomMemberDto();
+		roomMemberDto.setMemberId(claimVO.getMemberId());
+		roomMemberDto.setRoomNo(roomNo);
+		boolean canEnter = roomDao.check(roomMemberDto);
+		
+		return canEnter;
+	}
+	
 }

@@ -27,6 +27,8 @@ public class RoomMessageController {
 	private TokenService tokenService;
 	@Autowired
 	private RoomMessageDao roomMessageDao;
+	@Autowired
+	private RoomDao roomDao;
 	
 	@MessageMapping("/room/{roomNo}")
 	public void chat(@DestinationVariable int roomNo, Message<WebSocketRequestVO> message) {
@@ -36,6 +38,12 @@ public class RoomMessageController {
 		if(accessToken == null) return;
 		
 		MemberClaimVO claimVO = tokenService.check(tokenService.removeBearer(accessToken));
+		
+		//검사 추가(선택적 사용)
+		RoomMemberDto roomMemberDto = new RoomMemberDto();
+		roomMemberDto.setMemberId(claimVO.getMemberId());
+		roomMemberDto.setRoomNo(roomNo);
+		boolean canEnter = roomDao.check(roomMemberDto);
 		
 		WebSocketRequestVO request = message.getPayload(); //메세지 추출
 		
